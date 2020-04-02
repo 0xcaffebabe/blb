@@ -746,7 +746,7 @@
           "remark": "骑手信息表"
         },
         {
-          "title": "tb_evaluation",
+          "title": "tb_rider_evaluation",
           "fields": [
             {
               "name": "eval_id",
@@ -850,7 +850,7 @@
               "relationNoShow": true
             }
           ],
-          "chnname": "tb_evaluation",
+          "chnname": "tb_rider_evaluation",
           "remark": "骑手评价表"
         },
         {
@@ -960,19 +960,19 @@
           },
           {
             "shape": "table",
-            "title": "tb_evaluation",
-            "moduleName": false,
-            "x": 1040,
-            "y": 210,
-            "id": "292395e4"
-          },
-          {
-            "shape": "table",
             "title": "tb_rider_order",
             "moduleName": false,
             "x": 1040,
             "y": 410,
             "id": "e5323b04"
+          },
+          {
+            "shape": "table",
+            "title": "tb_rider_evaluation",
+            "moduleName": false,
+            "x": -354.3999938964844,
+            "y": 206.1999969482422,
+            "id": "ea9cc9dc"
           }
         ],
         "edges": [
@@ -985,7 +985,7 @@
             "controlPoints": [
               {
                 "x": 332.5478515625,
-                "y": 152.19736842105263
+                "y": 142.17857142857144
               },
               {
                 "x": 254.32009887695312,
@@ -999,31 +999,12 @@
             "shape": "erdRelation",
             "relation": "0,n:1",
             "source": "138bffe9",
-            "target": "292395e4",
-            "id": "1c927ebf",
-            "controlPoints": [
-              {
-                "x": 707.4521484375,
-                "y": 152.19736842105263
-              },
-              {
-                "x": 863.8798828125,
-                "y": 152.19736842105263
-              }
-            ],
-            "sourceAnchor": 1,
-            "targetAnchor": 0
-          },
-          {
-            "shape": "erdRelation",
-            "relation": "0,n:1",
-            "source": "138bffe9",
             "target": "e5323b04",
             "id": "6d429055",
             "controlPoints": [
               {
-                "x": 707.4521484375,
-                "y": 292.9342105263158
+                "x": 332.5478515625,
+                "y": 302.94047619047615
               },
               {
                 "x": 863.8798828125,
@@ -1051,18 +1032,7 @@
           "relation": "0,n:1",
           "from": {
             "entity": "tb_rider",
-            "field": "rider_id"
-          },
-          "to": {
-            "entity": "tb_evaluation",
-            "field": "eval_id"
-          }
-        },
-        {
-          "relation": "0,n:1",
-          "from": {
-            "entity": "tb_rider",
-            "field": "create_time"
+            "field": "update_time"
           },
           "to": {
             "entity": "tb_rider_order",
@@ -1323,7 +1293,7 @@
           "remark": "店铺信息表"
         },
         {
-          "title": "tb_category",
+          "title": "tb_shop_category",
           "fields": [
             {
               "name": "category_id",
@@ -1426,7 +1396,7 @@
               "relationNoShow": true
             }
           ],
-          "chnname": "tb_category",
+          "chnname": "tb_shop_category",
           "remark": "商铺目录表"
         }
       ],
@@ -1450,11 +1420,11 @@
           },
           {
             "shape": "table",
-            "title": "tb_category",
+            "title": "tb_shop_category",
             "moduleName": false,
-            "x": 120,
-            "y": 230,
-            "id": "91db2acf"
+            "x": 100,
+            "y": 240,
+            "id": "16785fe9"
           }
         ],
         "edges": [
@@ -1481,16 +1451,16 @@
             "shape": "erdRelation",
             "relation": "0,n:1",
             "source": "58e92f57",
-            "target": "91db2acf",
-            "id": "a01d693f",
+            "target": "16785fe9",
+            "id": "788195dd",
             "controlPoints": [
               {
                 "x": 374.5458984375,
                 "y": 192.25
               },
               {
-                "x": 311.791015625,
-                "y": 172.19736842105263
+                "x": 291.791015625,
+                "y": 182.19736842105263
               }
             ],
             "sourceAnchor": 0,
@@ -1517,7 +1487,7 @@
             "field": "shop_id"
           },
           "to": {
-            "entity": "tb_category",
+            "entity": "tb_shop_category",
             "field": "category_id"
           }
         }
@@ -1792,6 +1762,1674 @@
           }
         }
       ]
+    },
+    {
+      "name": "order",
+      "chnname": "订单",
+      "entities": [
+        {
+          "title": "tb_order",
+          "fields": [
+            {
+              "name": "order_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "订单ID",
+              "pk": true,
+              "notNull": true
+            },
+            {
+              "name": "shop_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "订单所属店铺",
+              "notNull": true
+            },
+            {
+              "name": "consumer_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "订餐者",
+              "notNull": true
+            },
+            {
+              "name": "consumer_delivery_info",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "收货人地址信息"
+            },
+            {
+              "name": "order_amount",
+              "type": "Money",
+              "remark": "",
+              "chnname": "订单总金额",
+              "notNull": true
+            },
+            {
+              "name": "order_status",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "订单状态0：未处理，1：已处理，2：配送中，3：已完结，4：已作废",
+              "notNull": true
+            },
+            {
+              "name": "pay_status",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "支付状态，0为未支付，1为已支付，2为已取消",
+              "notNull": true
+            },
+            {
+              "name": "order_note",
+              "type": "Intro",
+              "remark": "",
+              "chnname": "订单备注"
+            },
+            {
+              "name": "is_delete",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "逻辑删除N为正常，Y为删除"
+            },
+            {
+              "name": "create_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "update_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "tb_order",
+          "remark": "订单主表"
+        },
+        {
+          "title": "tb_order_detail",
+          "fields": [
+            {
+              "name": "detail_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "订单详情ID",
+              "pk": true,
+              "notNull": true
+            },
+            {
+              "name": "order_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "",
+              "notNull": true
+            },
+            {
+              "name": "product_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "订单商品ID",
+              "notNull": true
+            },
+            {
+              "name": "product_name",
+              "type": "Name",
+              "remark": "",
+              "chnname": "商品名称",
+              "notNull": true
+            },
+            {
+              "name": "product_img",
+              "type": "MiddleString",
+              "remark": "",
+              "chnname": "商品图片地址"
+            },
+            {
+              "name": "product_quantity",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "商品数量",
+              "notNull": true
+            },
+            {
+              "name": "product_price",
+              "type": "Money",
+              "remark": "",
+              "chnname": "商品单价"
+            },
+            {
+              "name": "is_delete",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "逻辑删除N为正常，Y为删除"
+            },
+            {
+              "name": "create_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "update_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "tb_order_detail",
+          "remark": "订单详细表"
+        }
+      ],
+      "graphCanvas": {
+        "edges": [],
+        "nodes": []
+      },
+      "associations": []
+    },
+    {
+      "name": "product",
+      "chnname": "商品",
+      "entities": [
+        {
+          "title": "tb_product",
+          "fields": [
+            {
+              "name": "product_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "商品ID",
+              "pk": true,
+              "notNull": true
+            },
+            {
+              "name": "product_category",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "商品所属分类",
+              "notNull": true
+            },
+            {
+              "name": "product_name",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "商品名称",
+              "notNull": true
+            },
+            {
+              "name": "product_desc",
+              "type": "MiddleString",
+              "remark": "",
+              "chnname": "商品详情"
+            },
+            {
+              "name": "product_img",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "商品图片"
+            },
+            {
+              "name": "is_delete",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "逻辑删除N为正常，Y为删除"
+            },
+            {
+              "name": "create_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "update_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "tb_product",
+          "remark": "商品信息主表"
+        },
+        {
+          "title": "tb_product_category",
+          "fields": [
+            {
+              "name": "category_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "商品分类ID",
+              "pk": true,
+              "notNull": true
+            },
+            {
+              "name": "shop_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "商品分类所属店铺",
+              "notNull": true
+            },
+            {
+              "name": "category_name",
+              "type": "Name",
+              "remark": "",
+              "chnname": "目录名",
+              "notNull": true
+            },
+            {
+              "name": "category_desc",
+              "type": "Intro",
+              "remark": "",
+              "chnname": "目录描述"
+            },
+            {
+              "name": "is_delete",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "逻辑删除N为正常，Y为删除"
+            },
+            {
+              "name": "create_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "update_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "tb_product_category"
+        },
+        {
+          "title": "tb_product_stock",
+          "fields": [
+            {
+              "name": "product_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "商品ID",
+              "pk": true,
+              "notNull": true
+            },
+            {
+              "name": "stock",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "商品库存",
+              "notNull": true
+            },
+            {
+              "name": "is_delete",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "逻辑删除N为正常，Y为删除"
+            },
+            {
+              "name": "create_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "update_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "tb_product_stock",
+          "remark": "商品库存表，库存一般是写入热点，独立出表方便后期优化"
+        },
+        {
+          "title": "tb_product_evaluation",
+          "fields": [
+            {
+              "name": "eval_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "评价ID"
+            },
+            {
+              "name": "product_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "评价商品ID"
+            },
+            {
+              "name": "consumer_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "订餐者"
+            },
+            {
+              "name": "shop_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "评价所属店铺"
+            },
+            {
+              "name": "ranking",
+              "type": "Double",
+              "remark": "",
+              "chnname": "评价分数"
+            },
+            {
+              "name": "content",
+              "type": "Intro",
+              "remark": "",
+              "chnname": "评价内容"
+            },
+            {
+              "name": "is_delete",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "逻辑删除N为正常，Y为删除"
+            },
+            {
+              "name": "create_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "update_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "tb_product_evaluation",
+          "remark": "商品评价表"
+        },
+        {
+          "title": "tb_product_spec",
+          "fields": [
+            {
+              "name": "spec_id",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "spec"
+            },
+            {
+              "name": "spec_name",
+              "type": "Name",
+              "remark": "",
+              "chnname": "规格名称"
+            },
+            {
+              "name": "package_fee",
+              "type": "Money",
+              "remark": "",
+              "chnname": "包装费"
+            },
+            {
+              "name": "price",
+              "type": "Money",
+              "remark": "",
+              "chnname": "价格"
+            },
+            {
+              "name": "is_delete",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "逻辑删除N为正常，Y为删除"
+            },
+            {
+              "name": "create_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "update_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "tb_product_spec",
+          "remark": "商品规格表"
+        }
+      ],
+      "graphCanvas": {
+        "nodes": [
+          {
+            "shape": "table",
+            "title": "tb_product",
+            "moduleName": false,
+            "x": 447.1999816894531,
+            "y": 261.1999969482422,
+            "id": "491eab2b"
+          },
+          {
+            "shape": "table",
+            "title": "tb_product_category",
+            "moduleName": false,
+            "x": 964.1999816894531,
+            "y": 245.1999969482422,
+            "id": "8c76630c"
+          },
+          {
+            "shape": "table",
+            "title": "tb_product_evaluation",
+            "moduleName": false,
+            "x": 0,
+            "y": 390,
+            "id": "0ee436af"
+          },
+          {
+            "shape": "table",
+            "title": "tb_product_stock",
+            "moduleName": false,
+            "x": -10,
+            "y": 150,
+            "id": "58a1188a"
+          },
+          {
+            "shape": "table",
+            "title": "tb_product_spec",
+            "moduleName": false,
+            "x": 950,
+            "y": 450,
+            "id": "10796ed9"
+          }
+        ],
+        "edges": [
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "491eab2b",
+            "target": "0ee436af",
+            "id": "6514a6fe",
+            "controlPoints": [
+              {
+                "x": 247.05642700195312,
+                "y": 223.50262852718956
+              },
+              {
+                "x": 162.4697265625,
+                "y": 322.17857142857144
+              }
+            ],
+            "sourceAnchor": 2,
+            "targetAnchor": 1
+          },
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "491eab2b",
+            "target": "10796ed9",
+            "id": "ef735c6e",
+            "controlPoints": [
+              {
+                "x": 647.3435363769531,
+                "y": 324.0289443166632
+              },
+              {
+                "x": 778.6181640625,
+                "y": 402.22058823529414
+              }
+            ],
+            "sourceAnchor": 13,
+            "targetAnchor": 0
+          }
+        ]
+      },
+      "associations": [
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "tb_product",
+            "field": "product_category"
+          },
+          "to": {
+            "entity": "tb_product_evaluation",
+            "field": "eval_id"
+          }
+        },
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "tb_product",
+            "field": "create_time"
+          },
+          "to": {
+            "entity": "tb_product_spec",
+            "field": "spec_id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "cart",
+      "chnname": "购物车",
+      "entities": [
+        {
+          "title": "tb_cart",
+          "fields": [
+            {
+              "name": "cart_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "购物车ID",
+              "pk": true,
+              "notNull": true
+            },
+            {
+              "name": "consumer_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "购物车所属订餐者",
+              "notNull": true
+            },
+            {
+              "name": "is_delete",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "逻辑删除N为正常，Y为删除"
+            },
+            {
+              "name": "create_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "update_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "tb_cart"
+        },
+        {
+          "title": "tb_cart_product",
+          "fields": [
+            {
+              "name": "cart_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "所属购物车",
+              "pk": true,
+              "notNull": true
+            },
+            {
+              "name": "product_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "商品ID",
+              "notNull": true
+            },
+            {
+              "name": "product_spec",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "该商品规格",
+              "notNull": true
+            },
+            {
+              "name": "quantity",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "商品数量",
+              "notNull": true
+            },
+            {
+              "name": "is_delete",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "逻辑删除N为正常，Y为删除"
+            },
+            {
+              "name": "create_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "update_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "tb_cart_product"
+        }
+      ],
+      "graphCanvas": {
+        "nodes": [
+          {
+            "shape": "table",
+            "title": "tb_cart",
+            "moduleName": false,
+            "x": 167.19998168945312,
+            "y": 226.1999969482422,
+            "id": "f2e96c7a"
+          },
+          {
+            "shape": "table",
+            "title": "tb_cart_product",
+            "moduleName": false,
+            "x": 677.1999816894531,
+            "y": 210.1999969482422,
+            "id": "3a005a18"
+          }
+        ],
+        "edges": [
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "f2e96c7a",
+            "target": "3a005a18",
+            "id": "8054fcdc",
+            "controlPoints": [
+              {
+                "x": 353.9812316894531,
+                "y": 198.48845848670373
+              },
+              {
+                "x": 498.0798645019531,
+                "y": 182.53823224235984
+              }
+            ],
+            "sourceAnchor": 1,
+            "targetAnchor": 2
+          }
+        ]
+      },
+      "associations": [
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "tb_cart",
+            "field": "cart_id"
+          },
+          "to": {
+            "entity": "tb_cart_product",
+            "field": "product_id"
+          }
+        }
+      ]
+    },
+    {
+      "name": "admin",
+      "chnname": "管理员",
+      "entities": [
+        {
+          "title": "tb_admin",
+          "fields": [
+            {
+              "name": "user_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "",
+              "pk": true,
+              "notNull": true
+            },
+            {
+              "name": "username",
+              "type": "Name",
+              "remark": "",
+              "chnname": "",
+              "notNull": true
+            },
+            {
+              "name": "phone",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "",
+              "notNull": true
+            },
+            {
+              "name": "email",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": "",
+              "notNull": true
+            },
+            {
+              "name": "real_name",
+              "type": "IdOrKey",
+              "remark": "",
+              "chnname": ""
+            },
+            {
+              "name": "role",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "",
+              "notNull": true
+            },
+            {
+              "name": "is_enable",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "",
+              "notNull": true
+            },
+            {
+              "name": "is_delete",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "逻辑删除N为正常，Y为删除"
+            },
+            {
+              "name": "create_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "update_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "tb_admin",
+          "remark": "管理员信息表"
+        },
+        {
+          "title": "tb_role",
+          "fields": [
+            {
+              "name": "role_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "",
+              "pk": true,
+              "notNull": true
+            },
+            {
+              "name": "role_name",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "",
+              "notNull": true
+            },
+            {
+              "name": "role_desc",
+              "type": "Intro",
+              "remark": "",
+              "chnname": ""
+            },
+            {
+              "name": "is_delete",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "逻辑删除N为正常，Y为删除"
+            },
+            {
+              "name": "create_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "update_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "tb_role",
+          "remark": "管理员角色表"
+        },
+        {
+          "title": "tb_permission",
+          "fields": [
+            {
+              "name": "permission_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "权限ID",
+              "pk": true,
+              "notNull": true
+            },
+            {
+              "name": "parent_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "父权限ID"
+            },
+            {
+              "name": "permission_level",
+              "type": "Integer",
+              "remark": "",
+              "chnname": "权限级别(一级二级三级)",
+              "notNull": true
+            },
+            {
+              "name": "permission_name",
+              "type": "Name",
+              "remark": "",
+              "chnname": "权限名称",
+              "notNull": true
+            },
+            {
+              "name": "permission_desc",
+              "type": "Intro",
+              "remark": "",
+              "chnname": "权限描述"
+            },
+            {
+              "name": "permission_url",
+              "type": "MiddleString",
+              "remark": "",
+              "chnname": "受控URL"
+            },
+            {
+              "name": "is_delete",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "逻辑删除N为正常，Y为删除"
+            },
+            {
+              "name": "create_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "update_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "tb_permission",
+          "remark": "管理员权限表"
+        },
+        {
+          "title": "tb_admin_role",
+          "fields": [
+            {
+              "name": "admin_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "",
+              "pk": true,
+              "notNull": true
+            },
+            {
+              "name": "role_id",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "",
+              "pk": true,
+              "notNull": true
+            },
+            {
+              "name": "is_delete",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "逻辑删除N为正常，Y为删除"
+            },
+            {
+              "name": "create_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "update_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "tb_admin_role",
+          "remark": "管理员-角色联系表"
+        },
+        {
+          "title": "tb_role_permission",
+          "fields": [
+            {
+              "name": "role_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "",
+              "pk": true,
+              "notNull": true
+            },
+            {
+              "name": "permission_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "",
+              "pk": true,
+              "notNull": true
+            },
+            {
+              "name": "is_delete",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "逻辑删除N为正常，Y为删除"
+            },
+            {
+              "name": "create_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "update_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "tb_role_permission",
+          "remark": "角色-权限关系表"
+        }
+      ],
+      "graphCanvas": {
+        "nodes": [
+          {
+            "shape": "table",
+            "title": "tb_admin",
+            "moduleName": false,
+            "x": 180.19998168945312,
+            "y": 268.1999969482422,
+            "id": "65c2a068"
+          },
+          {
+            "shape": "table",
+            "title": "tb_admin_role",
+            "moduleName": false,
+            "x": 575.1999816894531,
+            "y": 259.1999969482422,
+            "id": "c716fedd"
+          },
+          {
+            "shape": "table",
+            "title": "tb_role",
+            "moduleName": false,
+            "x": 990,
+            "y": 240,
+            "id": "c42b05da"
+          },
+          {
+            "shape": "table",
+            "title": "tb_role_permission",
+            "moduleName": false,
+            "x": 1423.1999816894531,
+            "y": 239.1999969482422,
+            "id": "fad52a97"
+          },
+          {
+            "shape": "table",
+            "title": "tb_permission",
+            "moduleName": false,
+            "x": 1860,
+            "y": 220,
+            "id": "c402a50f"
+          }
+        ],
+        "edges": []
+      },
+      "associations": []
     }
   ],
   "dataTypeDomains": {
