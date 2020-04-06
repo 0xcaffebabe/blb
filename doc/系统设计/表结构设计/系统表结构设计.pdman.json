@@ -1210,6 +1210,13 @@
               "notNull": true
             },
             {
+              "name": "location",
+              "type": "LongKey",
+              "remark": "",
+              "chnname": "店铺所在经纬度",
+              "notNull": true
+            },
+            {
               "name": "business_hour",
               "type": "Name",
               "remark": "",
@@ -1447,7 +1454,7 @@
               },
               {
                 "x": 829.1220703125,
-                "y": 102.11363636363636
+                "y": 92.10714285714286
               }
             ],
             "sourceAnchor": 1,
@@ -1621,12 +1628,6 @@
               "chnname": ""
             },
             {
-              "name": "avatar",
-              "type": "MiddleString",
-              "remark": "",
-              "chnname": "商家头像"
-            },
-            {
               "name": "concat_number",
               "type": "DefaultString",
               "remark": "",
@@ -1747,7 +1748,7 @@
               },
               {
                 "x": 592.306640625,
-                "y": 202.19736842105263
+                "y": 212.22058823529412
               }
             ],
             "sourceAnchor": 1,
@@ -1946,10 +1947,11 @@
               "notNull": true
             },
             {
-              "name": "product_price",
-              "type": "Money",
+              "name": "product_spec",
+              "type": "BigInt",
               "remark": "",
-              "chnname": "商品单价"
+              "chnname": "商品规格",
+              "notNull": true
             },
             {
               "name": "is_delete",
@@ -2490,6 +2492,12 @@
               "chnname": "spec"
             },
             {
+              "name": "product_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "规格所属商品"
+            },
+            {
               "name": "spec_name",
               "type": "Name",
               "remark": "",
@@ -2629,11 +2637,11 @@
             "id": "6514a6fe",
             "controlPoints": [
               {
-                "x": 247.05642700195312,
+                "x": 257.7409973144531,
                 "y": 223.50262852718956
               },
               {
-                "x": 162.4697265625,
+                "x": 160.685546875,
                 "y": 322.17857142857144
               }
             ],
@@ -2648,12 +2656,12 @@
             "id": "ef735c6e",
             "controlPoints": [
               {
-                "x": 647.3435363769531,
+                "x": 636.6589660644531,
                 "y": 324.0289443166632
               },
               {
-                "x": 778.6181640625,
-                "y": 402.22058823529414
+                "x": 789.302734375,
+                "y": 392.1973684210526
               }
             ],
             "sourceAnchor": 13,
