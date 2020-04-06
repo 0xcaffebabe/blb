@@ -324,6 +324,12 @@
               "notNull": true
             },
             {
+              "name": "is_default",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "是否是默认收货信息"
+            },
+            {
               "name": "is_delete",
               "type": "YesNo",
               "remark": "",
@@ -460,7 +466,7 @@
               },
               {
                 "x": 524.7890625,
-                "y": 182.28846153846155
+                "y": 172.25
               }
             ],
             "sourceAnchor": 0,
@@ -479,7 +485,7 @@
               },
               {
                 "x": 155.2109375,
-                "y": 182.28846153846155
+                "y": 172.25
               }
             ],
             "sourceAnchor": 1,
@@ -2016,10 +2022,59 @@
         }
       ],
       "graphCanvas": {
-        "edges": [],
-        "nodes": []
+        "nodes": [
+          {
+            "shape": "table",
+            "title": "tb_order",
+            "moduleName": false,
+            "x": 700,
+            "y": 170,
+            "id": "e712bd50"
+          },
+          {
+            "shape": "table",
+            "title": "tb_order_detail",
+            "moduleName": false,
+            "x": 130,
+            "y": 160,
+            "id": "b5ec3c89"
+          }
+        ],
+        "edges": [
+          {
+            "shape": "erdRelation",
+            "relation": "0,n:1",
+            "source": "e712bd50",
+            "target": "b5ec3c89",
+            "id": "0b79e8e1",
+            "controlPoints": [
+              {
+                "x": 383.1875,
+                "y": 102.23
+              },
+              {
+                "x": 317.4609375,
+                "y": 102.25
+              }
+            ],
+            "sourceAnchor": 2,
+            "targetAnchor": 3
+          }
+        ]
       },
-      "associations": []
+      "associations": [
+        {
+          "relation": "0,n:1",
+          "from": {
+            "entity": "tb_order",
+            "field": "shop_id"
+          },
+          "to": {
+            "entity": "tb_order_detail",
+            "field": "order_id"
+          }
+        }
+      ]
     },
     {
       "name": "product",
@@ -3733,10 +3788,10 @@
         "code": "YesNo",
         "apply": {
           "JAVA": {
-            "type": "String"
+            "type": "Boolean"
           },
           "MYSQL": {
-            "type": "VARCHAR(1)"
+            "type": "tinyint(1)"
           },
           "ORACLE": {
             "type": "VARCHAR2(1)"
