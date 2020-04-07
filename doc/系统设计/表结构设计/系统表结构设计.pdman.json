@@ -3493,6 +3493,137 @@
         "edges": []
       },
       "associations": []
+    },
+    {
+      "name": "pay",
+      "chnname": "支付",
+      "entities": [
+        {
+          "title": "tb_pay",
+          "fields": [
+            {
+              "name": "pay_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "支付ID",
+              "notNull": true,
+              "pk": true
+            },
+            {
+              "name": "third_part_id",
+              "type": "ShortString",
+              "remark": "",
+              "chnname": "第三方支付系统ID"
+            },
+            {
+              "name": "pay_type",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "支付类型",
+              "notNull": true
+            },
+            {
+              "name": "order_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "所属订单",
+              "notNull": true
+            },
+            {
+              "name": "consumer_id",
+              "type": "BigInt",
+              "remark": "",
+              "chnname": "所属订餐者",
+              "notNull": true
+            },
+            {
+              "name": "pay_amount",
+              "type": "Money",
+              "remark": "",
+              "chnname": "实际支付金额",
+              "notNull": true
+            },
+            {
+              "name": "pay_status",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "支付状态，0为未支付，1为已支付，2为已取消",
+              "notNull": true
+            },
+            {
+              "name": "is_delete",
+              "type": "YesNo",
+              "remark": "",
+              "chnname": "逻辑删除N为正常，Y为删除"
+            },
+            {
+              "name": "create_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "创建时间"
+            },
+            {
+              "name": "update_time",
+              "type": "DateTime",
+              "remark": "",
+              "chnname": "更新时间"
+            }
+          ],
+          "indexs": [],
+          "headers": [
+            {
+              "fieldName": "chnname",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "name",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "type",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "dataType",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "remark",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "pk",
+              "relationNoShow": false
+            },
+            {
+              "fieldName": "notNull",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "autoIncrement",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "defaultValue",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "relationNoShow",
+              "relationNoShow": true
+            },
+            {
+              "fieldName": "uiHint",
+              "relationNoShow": true
+            }
+          ],
+          "chnname": "tb_pay"
+        }
+      ],
+      "graphCanvas": {
+        "edges": [],
+        "nodes": []
+      },
+      "associations": []
     }
   ],
   "dataTypeDomains": {
