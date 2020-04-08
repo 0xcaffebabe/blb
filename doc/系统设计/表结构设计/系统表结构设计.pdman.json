@@ -60,13 +60,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": ""
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": ""
             }
@@ -152,13 +152,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": ""
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": ""
             }
@@ -245,13 +245,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -337,13 +337,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -680,7 +680,7 @@
               "name": "gender",
               "type": "YesNo",
               "remark": "",
-              "chnname": "骑手性别"
+              "chnname": "骑手性别T为男，F为女"
             },
             {
               "name": "is_delete",
@@ -798,13 +798,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -884,13 +884,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -1084,13 +1084,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -1244,13 +1244,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -1351,13 +1351,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -1557,13 +1557,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -1653,13 +1653,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -1840,13 +1840,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -1961,13 +1961,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -2127,13 +2127,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -2227,13 +2227,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -2313,13 +2313,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -2421,13 +2421,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -2523,13 +2523,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -2724,13 +2724,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -2824,13 +2824,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -3004,13 +3004,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -3097,13 +3097,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -3209,13 +3209,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -3297,13 +3297,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -3385,13 +3385,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -3558,13 +3558,13 @@
             },
             {
               "name": "create_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "创建时间"
             },
             {
               "name": "update_time",
-              "type": "DateTime",
+              "type": "LocalDateTime",
               "remark": "",
               "chnname": "更新时间"
             }
@@ -3987,7 +3987,7 @@
       },
       {
         "name": "日期时间",
-        "code": "DateTime",
+        "code": "LocalDateTime",
         "apply": {
           "JAVA": {
             "type": "Date"

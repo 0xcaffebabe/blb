@@ -1,0 +1,1 @@
+mvn test -f ../parent/pom.xml

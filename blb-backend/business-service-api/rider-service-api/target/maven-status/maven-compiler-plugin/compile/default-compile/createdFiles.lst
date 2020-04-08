@@ -1,0 +1,15 @@
+wang\ismy\blb\api\rider\pojo\entity\RiderOrderDO.class
+wang\ismy\blb\api\rider\RiderOrderApi.class
+wang\ismy\blb\api\rider\RiderApi.class
+wang\ismy\blb\api\rider\pojo\dto\eval\RiderEvalItemDTO.class
+wang\ismy\blb\api\rider\pojo\dto\order\RiderHistoryOrderItemDTO.class
+wang\ismy\blb\api\rider\pojo\dto\eval\RiderEvalSubmitDTO.class
+wang\ismy\blb\api\rider\pojo\dto\eval\RiderEvalInfoDTO.class
+wang\ismy\blb\api\rider\pojo\dto\eval\RiderEvalResultDTO.class
+wang\ismy\blb\api\rider\pojo\dto\LoginResultDTO.class
+wang\ismy\blb\api\rider\pojo\entity\RiderDO.class
+wang\ismy\blb\api\rider\pojo\entity\RiderInfoDO.class
+wang\ismy\blb\api\rider\pojo\dto\OrderRiderDTO.class
+wang\ismy\blb\api\rider\pojo\dto\RegisterDTO.class
+wang\ismy\blb\api\rider\pojo\entity\RiderEvaluationDO.class
+wang\ismy\blb\api\rider\RiderEvaluationApi.class
