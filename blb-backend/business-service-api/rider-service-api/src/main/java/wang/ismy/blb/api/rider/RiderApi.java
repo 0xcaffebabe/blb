@@ -6,7 +6,6 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.rider.pojo.dto.LoginResultDTO;
-import wang.ismy.blb.api.rider.pojo.dto.OrderRiderDTO;
 import wang.ismy.blb.api.rider.pojo.dto.RegisterDTO;
 import wang.ismy.blb.common.Result;
 
@@ -36,8 +35,8 @@ public interface RiderApi {
      */
     @PostMapping("login")
     @ApiImplicitParams({
-            @ApiImplicitParam(paramType = "body", name = "loginStr", dataType = "String", required = true, value = "登录字符串"),
-            @ApiImplicitParam(paramType = "body", name = "password", dataType = "String", required = true, value = "登录密码")
+            @ApiImplicitParam(paramType = "query", name = "loginStr", dataType = "String", required = true, value = "登录字符串"),
+            @ApiImplicitParam(paramType = "query", name = "password", dataType = "String", required = true, value = "登录密码")
     })
     @ApiOperation("骑手登录接口")
     Result<LoginResultDTO> login(@RequestParam("loginStr") String loginStr,

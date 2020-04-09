@@ -3,16 +3,21 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>parent</artifactId>
+        <artifactId>business-service-api</artifactId>
         <groupId>wang.ismy.blb</groupId>
         <version>1.0</version>
-        <relativePath>../parent/pom.xml</relativePath>
     </parent>
-
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>common</artifactId>
-
+    <artifactId>order-service-api</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>wang.ismy.blb</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
     <build>
         <plugins>
             <plugin>
@@ -26,5 +31,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>

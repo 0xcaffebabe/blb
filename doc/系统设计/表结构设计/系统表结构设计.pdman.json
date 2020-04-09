@@ -1947,6 +1947,13 @@
               "notNull": true
             },
             {
+              "name": "product_price",
+              "type": "Money",
+              "remark": "",
+              "chnname": "购买时的商品单价",
+              "notNull": true
+            },
+            {
               "name": "product_spec",
               "type": "BigInt",
               "remark": "",
@@ -2056,7 +2063,7 @@
               },
               {
                 "x": 317.4609375,
-                "y": 102.25
+                "y": 92.23
               }
             ],
             "sourceAnchor": 2,
@@ -3906,7 +3913,7 @@
         "code": "Money",
         "apply": {
           "JAVA": {
-            "type": "Double"
+            "type": "BigDecimal"
           },
           "MYSQL": {
             "type": "DECIMAL(32,8)"
