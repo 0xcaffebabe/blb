@@ -10,14 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>order-service-api</artifactId>
-    <dependencies>
-        <dependency>
-            <groupId>wang.ismy.blb</groupId>
-            <artifactId>common</artifactId>
-            <version>1.0</version>
-            <scope>compile</scope>
-        </dependency>
-    </dependencies>
+
     <build>
         <plugins>
             <plugin>

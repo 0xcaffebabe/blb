@@ -16,6 +16,7 @@
         <module>rider-service-api</module>
         <module>order-service-api</module>
         <module>pay-service-api</module>
+        <module>shop-service-api</module>
     </modules>
 
     <dependencies>
@@ -31,7 +32,12 @@
             <groupId>javax.persistence</groupId>
             <artifactId>javax.persistence-api</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>wang.ismy.blb</groupId>
+            <artifactId>common</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
 </project>

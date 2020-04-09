@@ -1223,7 +1223,7 @@
               "chnname": "营业时间"
             },
             {
-              "name": "bussiness_license",
+              "name": "business_license",
               "type": "MiddleString",
               "remark": "",
               "chnname": "营业执照图片地址",
