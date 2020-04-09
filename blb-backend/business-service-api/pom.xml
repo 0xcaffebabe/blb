@@ -15,6 +15,7 @@
     <modules>
         <module>rider-service-api</module>
         <module>order-service-api</module>
+        <module>pay-service-api</module>
     </modules>
 
     <dependencies>
