@@ -32,4 +32,6 @@ public class RiderDO  extends BaseDO implements Serializable {
     private String password ;
     /** 账户状态Y为正常N为不可用 */
     private Boolean enable ;
+    /** 骑手详细信息 */
+    private RiderInfoDO riderInfo;
 }
