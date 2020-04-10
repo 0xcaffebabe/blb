@@ -18,6 +18,7 @@
         <module>pay-service-api</module>
         <module>shop-service-api</module>
         <module>consumer-service-api</module>
+        <module>product-service-api</module>
     </modules>
 
     <dependencies>
