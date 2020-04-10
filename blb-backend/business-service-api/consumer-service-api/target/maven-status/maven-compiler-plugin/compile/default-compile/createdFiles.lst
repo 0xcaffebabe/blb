@@ -1,0 +1,11 @@
+wang\ismy\blb\api\consumer\pojo\DeliveryInfoDO.class
+wang\ismy\blb\api\consumer\pojo\dto\ConsumerUpdateDTO.class
+wang\ismy\blb\api\consumer\pojo\dto\DeliveryDTO.class
+wang\ismy\blb\api\consumer\pojo\dto\RegisterResultDTO.class
+wang\ismy\blb\api\consumer\pojo\ConsumerDO.class
+wang\ismy\blb\api\consumer\pojo\ConsumerInfoDO.class
+wang\ismy\blb\api\consumer\pojo\dto\ConsumerDTO.class
+wang\ismy\blb\api\consumer\pojo\dto\LoginResultDTO.class
+wang\ismy\blb\api\consumer\ConsumerDeliveryApi.class
+wang\ismy\blb\api\consumer\ConsumerApi.class
+wang\ismy\blb\api\consumer\pojo\dto\RegisterDTO.class

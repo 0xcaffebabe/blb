@@ -1,0 +1,10 @@
+wang\ismy\blb\api\shop\ShopCategoryApi.class
+wang\ismy\blb\api\shop\pojo\dto\ShopInfoDTO.class
+wang\ismy\blb\api\shop\pojo\dto\ShopItemDTO.class
+wang\ismy\blb\api\shop\pojo\ShopCategoryDO.class
+wang\ismy\blb\api\shop\pojo\dto\ShopCreateDTO.class
+wang\ismy\blb\api\shop\pojo\ShopDO.class
+wang\ismy\blb\api\shop\ShopApi.class
+wang\ismy\blb\api\shop\pojo\dto\ShopInfoUpdateDTO.class
+wang\ismy\blb\api\shop\pojo\dto\ShopCategoryDTO.class
+wang\ismy\blb\api\shop\pojo\ShopInfoDO.class

@@ -1,0 +1,17 @@
+wang\ismy\blb\api\product\pojo\dto\ShopProductDTO.class
+wang\ismy\blb\api\product\pojo\ProductCategoryDO.class
+wang\ismy\blb\api\product\ProductCategoryApi.class
+wang\ismy\blb\api\product\pojo\ProductDO.class
+wang\ismy\blb\api\product\pojo\dto\eval\ShopEvalInfo.class
+wang\ismy\blb\api\product\pojo\dto\ProductDTO.class
+wang\ismy\blb\api\product\pojo\ProductEvaluationDO.class
+wang\ismy\blb\api\product\pojo\dto\ProductSpecDTO.class
+wang\ismy\blb\api\product\pojo\ProductSpecDO.class
+wang\ismy\blb\api\product\pojo\dto\ProductCategoryDTO.class
+wang\ismy\blb\api\product\pojo\dto\eval\ConsumerEvalItem.class
+wang\ismy\blb\api\product\pojo\dto\CartProductGetDTO.class
+wang\ismy\blb\api\product\pojo\dto\ProductCreateDTO.class
+wang\ismy\blb\api\product\ProductSellerApi.class
+wang\ismy\blb\api\product\ProductApi.class
+wang\ismy\blb\api\product\ProductEvaluationApi.class
+wang\ismy\blb\api\product\pojo\dto\eval\EvalCreateDTO.class
