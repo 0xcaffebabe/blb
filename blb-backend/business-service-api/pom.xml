@@ -17,6 +17,7 @@
         <module>order-service-api</module>
         <module>pay-service-api</module>
         <module>shop-service-api</module>
+        <module>consumer-service-api</module>
     </modules>
 
     <dependencies>
