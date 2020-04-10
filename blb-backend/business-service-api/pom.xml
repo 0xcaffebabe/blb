@@ -21,6 +21,7 @@
         <module>product-service-api</module>
         <module>seller-service-api</module>
         <module>location-service-api</module>
+        <module>cart-service-api</module>
     </modules>
 
     <dependencies>
