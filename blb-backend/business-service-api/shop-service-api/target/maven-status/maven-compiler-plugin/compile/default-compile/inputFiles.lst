@@ -1,2 +1,10 @@
-D:\project\blb\blb-backend\business-service-api\shop-service-api\src\main\java\wang\ismy\blb\api\shop\ShopService.java
+D:\project\blb\blb-backend\business-service-api\shop-service-api\src\main\java\wang\ismy\blb\api\shop\pojo\dto\ShopItemDTO.java
+D:\project\blb\blb-backend\business-service-api\shop-service-api\src\main\java\wang\ismy\blb\api\shop\pojo\dto\ShopCreateDTO.java
+D:\project\blb\blb-backend\business-service-api\shop-service-api\src\main\java\wang\ismy\blb\api\shop\pojo\dto\ShopCategoryDTO.java
+D:\project\blb\blb-backend\business-service-api\shop-service-api\src\main\java\wang\ismy\blb\api\shop\pojo\dto\ShopInfoDTO.java
+D:\project\blb\blb-backend\business-service-api\shop-service-api\src\main\java\wang\ismy\blb\api\shop\pojo\ShopCategoryDO.java
+D:\project\blb\blb-backend\business-service-api\shop-service-api\src\main\java\wang\ismy\blb\api\shop\ShopCategoryApi.java
+D:\project\blb\blb-backend\business-service-api\shop-service-api\src\main\java\wang\ismy\blb\api\shop\pojo\ShopInfoDO.java
 D:\project\blb\blb-backend\business-service-api\shop-service-api\src\main\java\wang\ismy\blb\api\shop\pojo\ShopDO.java
+D:\project\blb\blb-backend\business-service-api\shop-service-api\src\main\java\wang\ismy\blb\api\shop\ShopApi.java
+D:\project\blb\blb-backend\business-service-api\shop-service-api\src\main\java\wang\ismy\blb\api\shop\pojo\dto\ShopInfoUpdateDTO.java
