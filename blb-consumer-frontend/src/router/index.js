@@ -1,10 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Index from '../views/Index.vue'
+import Home from '../views/Home.vue'
+import Takeaway from '../views/Takeaway'
 Vue.use(VueRouter)
 
 const routes = [
-  { path: '/', component: Index }
+  {
+    path: '/',
+    component: Home,
+    redirect: 'takeaway',
+    children: [
+      { path: 'takeaway', component: Takeaway }
+    ]
+  }
 ]
 
 const router = new VueRouter({
