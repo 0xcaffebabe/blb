@@ -16,6 +16,7 @@
         <module>cache-service-api</module>
         <module>message-service-api</module>
         <module>auth-service-api</module>
+        <module>upload-service-api</module>
     </modules>
 
     <dependencies>
