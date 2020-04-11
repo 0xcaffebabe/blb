@@ -14,9 +14,14 @@
     <packaging>pom</packaging>
     <modules>
         <module>cache-service-api</module>
+        <module>message-service-api</module>
     </modules>
 
     <dependencies>
+        <dependency>
+            <groupId>wang.ismy.blb</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
