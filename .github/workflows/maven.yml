@@ -26,6 +26,6 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: cache-service
-        path: ./blb-backend/artifact.cache-service-1.0.jar
+        path: ./blb-backend/artifact/cache-service-1.0.jar
     - name: 构建整个项目
       run: mvn package -f ./blb-backend/parent/pom.xml
