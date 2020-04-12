@@ -22,6 +22,7 @@ jobs:
         java-version: 13
     - name: 构建缓存服务
       run: mvn package -f ./blb-backend/parent/pom.xml -pl :cache-service-impl -am
+    - name: 保留缓存服务构建物
       uses: actions/upload-artifact@v1
       with:
         name: cache-service
