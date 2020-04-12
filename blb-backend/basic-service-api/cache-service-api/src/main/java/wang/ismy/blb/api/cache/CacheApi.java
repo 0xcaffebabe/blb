@@ -13,6 +13,7 @@ import wang.ismy.blb.common.Result;
  * @date 2020/4/11 11:45
  */
 @Api(tags = "缓存服务接口")
+@RequestMapping("v1/api")
 public interface CacheApi {
     /**
      * 缓存存入
@@ -24,8 +25,8 @@ public interface CacheApi {
     @ApiOperation("缓存存入")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "path", name = "key", dataType = "String", required = true, value = "缓存键"),
-            @ApiImplicitParam(paramType = "query", name = "ttl", dataType = "Long", required = true, value = "缓存有效时间"),
-            @ApiImplicitParam(paramType = "body", dataType = "String", required = true, value = "缓存值")
+            @ApiImplicitParam(paramType = "query", name = "ttl", dataType = "Long", required = true, value = "缓存有效时间")
+//            @ApiImplicitParam(paramType = "body", dataType = "String", required = true, value = "缓存值")
     })
     @PutMapping("{key}")
     Result<Void> put(@PathVariable("key") String key,
