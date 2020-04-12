@@ -1,0 +1,21 @@
+server:
+  port: 9100
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  application:
+    name: cache-service
+  redis:
+    host: 127.0.0.1
+swagger:
+  base-package: wang.ismy.blb.impl.cache
+  base-path: /**
+  contact:
+    email: admin@ismy.wang
+  description: 缓存服务api
+  enabled: true
+  exclude-path: /error, /ops/**
+  title: 缓存服务文档
+  version: 1.0
