@@ -1,4 +1,4 @@
-package wang.ismy.blb.common;
+package wang.ismy.blb.common.result;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;

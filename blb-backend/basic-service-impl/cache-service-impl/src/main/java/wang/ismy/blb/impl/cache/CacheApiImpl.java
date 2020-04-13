@@ -3,9 +3,8 @@ package wang.ismy.blb.impl.cache;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 import wang.ismy.blb.api.cache.CacheApi;
-import wang.ismy.blb.common.Result;
+import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.impl.cache.service.CacheService;
-import wang.ismy.blb.impl.cache.service.CacheServiceImpl;
 
 /**
  * @author MY

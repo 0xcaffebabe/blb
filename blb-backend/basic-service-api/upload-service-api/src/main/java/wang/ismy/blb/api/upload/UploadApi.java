@@ -4,7 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.multipart.MultipartFile;
-import wang.ismy.blb.common.Result;
+import wang.ismy.blb.common.result.Result;
 
 /**
  * @author MY

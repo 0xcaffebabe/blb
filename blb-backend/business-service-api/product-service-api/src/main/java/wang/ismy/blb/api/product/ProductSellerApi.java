@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCreateDTO;
 import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
-import wang.ismy.blb.common.Pageable;
-import wang.ismy.blb.common.Result;
+import wang.ismy.blb.common.result.Pageable;
+import wang.ismy.blb.common.result.Result;
 
 import java.util.List;
 

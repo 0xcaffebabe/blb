@@ -8,9 +8,9 @@ import wang.ismy.blb.api.rider.pojo.dto.eval.RiderEvalInfoDTO;
 import wang.ismy.blb.api.rider.pojo.dto.eval.RiderEvalItemDTO;
 import wang.ismy.blb.api.rider.pojo.dto.eval.RiderEvalResultDTO;
 import wang.ismy.blb.api.rider.pojo.dto.eval.RiderEvalSubmitDTO;
-import wang.ismy.blb.common.Page;
-import wang.ismy.blb.common.Pageable;
-import wang.ismy.blb.common.Result;
+import wang.ismy.blb.common.result.Page;
+import wang.ismy.blb.common.result.Pageable;
+import wang.ismy.blb.common.result.Result;
 
 /**
  * @author MY

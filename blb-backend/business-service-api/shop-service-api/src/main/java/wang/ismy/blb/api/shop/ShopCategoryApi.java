@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import wang.ismy.blb.api.shop.pojo.dto.ShopCategoryDTO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopItemDTO;
-import wang.ismy.blb.common.Page;
-import wang.ismy.blb.common.Pageable;
-import wang.ismy.blb.common.Result;
+import wang.ismy.blb.common.result.Page;
+import wang.ismy.blb.common.result.Pageable;
+import wang.ismy.blb.common.result.Result;
 
 import java.util.List;
 

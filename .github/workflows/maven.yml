@@ -27,5 +27,12 @@ jobs:
       with:
         name: cache-service
         path: ./blb-backend/artifact/cache-service-1.0.jar
+    - name: 构建认证服务
+      run: mvn package -f ./blb-backend/parent/pom.xml -pl :auth-service-impl -am
+    - name: 保留认证服务构建物
+      uses: actions/upload-artifact@v1
+      with:
+        name: auth-service
+        path: ./blb-backend/artifact/auth-service-1.0.jar
     - name: 构建整个项目
       run: mvn package -f ./blb-backend/parent/pom.xml

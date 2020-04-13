@@ -9,7 +9,7 @@ import wang.ismy.blb.api.seller.pojo.SellerInfoDTO;
 import wang.ismy.blb.api.seller.pojo.dto.LoginResultDTO;
 import wang.ismy.blb.api.seller.pojo.dto.SellerCreateDTO;
 import wang.ismy.blb.api.seller.pojo.dto.SellerRegisterResultDTO;
-import wang.ismy.blb.common.Result;
+import wang.ismy.blb.common.result.Result;
 
 /**
  * @author MY

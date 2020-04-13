@@ -2,7 +2,7 @@ package wang.ismy.blb.api.cache;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import wang.ismy.blb.common.Result;
+import wang.ismy.blb.common.result.Result;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;

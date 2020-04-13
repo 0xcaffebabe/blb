@@ -1,4 +1,4 @@
-package wang.ismy.blb.common;
+package wang.ismy.blb.common.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -49,7 +49,11 @@ public enum ResultCode {
     INTERFACE_EXCEED_LOAD(60006, "接口负载过高"),
 
     /* 权限错误：70001-79999 */
-    PERMISSION_NO_ACCESS(70001, "无访问权限");
+    PERMISSION_NO_ACCESS(70001, "无访问权限"),
+
+    /* 缓存服务状态码 80001-89999 */
+    /* 认证服务状态码 90001-99999 */
+    AUTH_ERROR(80001,"认证失败");
 
     private Integer code;
     private String msg;

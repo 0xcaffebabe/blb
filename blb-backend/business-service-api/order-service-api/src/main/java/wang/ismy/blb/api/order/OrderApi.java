@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.order.pojo.dto.OrderCreateDTO;
 import wang.ismy.blb.api.order.pojo.dto.OrderResultDTO;
 import wang.ismy.blb.api.order.pojo.dto.OrderValidCode;
-import wang.ismy.blb.common.Result;
+import wang.ismy.blb.common.result.Result;
 
 import java.math.BigDecimal;
 

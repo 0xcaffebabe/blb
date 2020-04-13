@@ -1,0 +1,5 @@
+spring:
+  profiles:
+    active: dev
+auth:
+  token-ttl: 36000 # 用户token过期时间，单位为秒

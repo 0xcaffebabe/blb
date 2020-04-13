@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.rider.pojo.dto.LoginResultDTO;
 import wang.ismy.blb.api.rider.pojo.dto.RegisterDTO;
-import wang.ismy.blb.common.Result;
+import wang.ismy.blb.common.result.Result;
 
 /**
  * @author MY

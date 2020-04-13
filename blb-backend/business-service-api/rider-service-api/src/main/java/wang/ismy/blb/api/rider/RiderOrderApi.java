@@ -6,9 +6,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.rider.pojo.dto.OrderRiderDTO;
 import wang.ismy.blb.api.rider.pojo.dto.order.RiderHistoryOrderItemDTO;
-import wang.ismy.blb.common.Page;
-import wang.ismy.blb.common.Pageable;
-import wang.ismy.blb.common.Result;
+import wang.ismy.blb.common.result.Page;
+import wang.ismy.blb.common.result.Pageable;
+import wang.ismy.blb.common.result.Result;
 
 /**
  * @author MY

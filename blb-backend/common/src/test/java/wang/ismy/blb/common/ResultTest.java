@@ -2,6 +2,8 @@ package wang.ismy.blb.common;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import wang.ismy.blb.common.enums.ResultCode;
+import wang.ismy.blb.common.result.Result;
 
 import static org.junit.jupiter.api.Assertions.*;
 

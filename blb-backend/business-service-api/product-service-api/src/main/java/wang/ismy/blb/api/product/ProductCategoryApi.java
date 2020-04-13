@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
 import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
-import wang.ismy.blb.common.Result;
+import wang.ismy.blb.common.result.Result;
 
 import java.util.List;
 

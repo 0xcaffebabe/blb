@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import wang.ismy.blb.api.order.pojo.dto.OrderQuery;
 import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderDetailDTO;
 import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderItemDTO;
-import wang.ismy.blb.common.Page;
-import wang.ismy.blb.common.Pageable;
-import wang.ismy.blb.common.Result;
+import wang.ismy.blb.common.result.Page;
+import wang.ismy.blb.common.result.Pageable;
+import wang.ismy.blb.common.result.Result;
 
 /**
  * @author MY

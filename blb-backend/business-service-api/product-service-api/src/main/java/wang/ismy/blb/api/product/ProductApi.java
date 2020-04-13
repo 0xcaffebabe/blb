@@ -5,11 +5,8 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.product.pojo.dto.CartProductGetDTO;
-import wang.ismy.blb.api.product.pojo.dto.ProductCreateDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductDTO;
-import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
-import wang.ismy.blb.common.Pageable;
-import wang.ismy.blb.common.Result;
+import wang.ismy.blb.common.result.Result;
 
 import java.util.List;
 

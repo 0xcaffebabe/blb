@@ -3,17 +3,18 @@ package wang.ismy.blb.api.auth;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import wang.ismy.blb.common.Result;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import wang.ismy.blb.common.result.Result;
+
+import javax.validation.Valid;
 
 /**
  * @author MY
  * @date 2020/4/11 15:09
  */
 @Api(tags = "认证服务接口")
+@RequestMapping("v1/api")
 public interface AuthApi {
 
     /**
@@ -22,8 +23,8 @@ public interface AuthApi {
      * @return
      */
     @ApiOperation("认证")
-    @PutMapping("")
-    Result<String> auth(@RequestBody User user);
+    @PutMapping(value = "",consumes = MediaType.APPLICATION_JSON_VALUE)
+    Result<String> auth(@RequestBody @Valid User user);
 
     /**
      * 鉴权

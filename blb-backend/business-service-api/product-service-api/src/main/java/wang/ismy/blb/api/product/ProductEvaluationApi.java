@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.product.pojo.dto.eval.ConsumerEvalItem;
 import wang.ismy.blb.api.product.pojo.dto.eval.EvalCreateDTO;
 import wang.ismy.blb.api.product.pojo.dto.eval.ShopEvalInfo;
-import wang.ismy.blb.common.Page;
-import wang.ismy.blb.common.Result;
+import wang.ismy.blb.common.result.Page;
+import wang.ismy.blb.common.result.Result;
 
 import java.math.BigDecimal;
 

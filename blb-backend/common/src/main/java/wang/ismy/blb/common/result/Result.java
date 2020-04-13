@@ -1,6 +1,7 @@
-package wang.ismy.blb.common;
+package wang.ismy.blb.common.result;
 
 import lombok.Data;
+import wang.ismy.blb.common.enums.ResultCode;
 
 /**
  * 所有接口统一返回结果

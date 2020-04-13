@@ -2,9 +2,8 @@ package wang.ismy.blb.api.cache;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import wang.ismy.blb.common.Result;
+import wang.ismy.blb.common.result.Result;
 
 import java.util.concurrent.TimeUnit;
 

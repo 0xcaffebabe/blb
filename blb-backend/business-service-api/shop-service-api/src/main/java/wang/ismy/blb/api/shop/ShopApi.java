@@ -4,14 +4,13 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
-import wang.ismy.blb.api.shop.pojo.ShopInfoDO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopCreateDTO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopInfoDTO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopInfoUpdateDTO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopItemDTO;
-import wang.ismy.blb.common.Page;
-import wang.ismy.blb.common.Pageable;
-import wang.ismy.blb.common.Result;
+import wang.ismy.blb.common.result.Page;
+import wang.ismy.blb.common.result.Pageable;
+import wang.ismy.blb.common.result.Result;
 
 import java.util.List;
 
