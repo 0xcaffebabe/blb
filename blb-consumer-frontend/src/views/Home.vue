@@ -4,7 +4,7 @@
       <main-header></main-header>
     </el-header>
     <el-container>
-      <el-aside :width="isCollapse ? '80px':'200px'">
+      <el-aside :width="isCollapse ? '80px':'200px'" style="overflow:hidden">
          <main-aside :is-collapse="isCollapse" @toggle="handleSideToggle"></main-aside>
       </el-aside>
       <el-container>

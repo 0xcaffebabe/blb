@@ -7,7 +7,9 @@
           <el-tab-pane label="商品" name="product">
             <shop-product></shop-product>
           </el-tab-pane>
-          <el-tab-pane label="评价" name="second">评价</el-tab-pane>
+          <el-tab-pane label="评价" name="eval">
+            <shop-eval></shop-eval>
+          </el-tab-pane>
           <el-tab-pane label="商家" name="third">商家</el-tab-pane>
         </el-tabs>
     </el-card>
@@ -27,15 +29,16 @@
 import ShopHeader from '../components/shop/ShopHeader'
 import ShopProduct from '../components/shop/ShopProduct'
 import ShopCart from '../components/shop/ShopCart'
+import ShopEval from '../components/shop/ShopEval'
 export default {
   data () {
     return {
-      activeName: 'product',
+      activeName: 'eval',
       cartShow: true
     }
   },
   components: {
-    ShopHeader, ShopProduct, ShopCart
+    ShopHeader, ShopProduct, ShopCart, ShopEval
   }
 }
 </script>

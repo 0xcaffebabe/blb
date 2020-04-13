@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Takeaway from '../views/Takeaway'
 import Shop from '../views/Shop'
+import Search from '../views/Search'
 Vue.use(VueRouter)
 
 const routes = [
@@ -12,7 +13,8 @@ const routes = [
     redirect: 'takeaway',
     children: [
       { path: 'takeaway', component: Takeaway },
-      { path: 'shop', component: Shop }
+      { path: 'shop', component: Shop },
+      { path: 'search', component: Search }
     ]
   }
 ]
