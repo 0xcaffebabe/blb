@@ -20,16 +20,24 @@
           </el-menu>
         </el-col>
         <el-col :span="4">
-            <span class="el-icon-location location"> 漳州漳浦 <span class="el-icon-caret-bottom"></span></span>
+            <span class="el-icon-location location" @click="$store.commit('toggleLocationChooser')"> 漳州漳浦
+              <span class="el-icon-caret-bottom" v-if="!$store.state.locationChooserShow"></span>
+              <span class="el-icon-caret-top" v-else></span>
+            </span>
         </el-col>
       </el-row>
+      <location-chooser></location-chooser>
     </div>
 </template>
 
 <script>
+import LocationChooser from './LocationChooser'
 export default {
   data () {
     return {}
+  },
+  components: {
+    LocationChooser
   }
 }
 </script>

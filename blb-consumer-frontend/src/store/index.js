@@ -6,7 +6,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     cartShow: false,
-    orderDetailShow: true
+    orderDetailShow: false,
+    locationChooserShow: true
   },
   mutations: {
     toggleCart () {
@@ -14,6 +15,9 @@ export default new Vuex.Store({
     },
     toggleOrderDetail () {
       this.state.orderDetailShow = !this.state.orderDetailShow
+    },
+    toggleLocationChooser () {
+      this.state.locationChooserShow = !this.state.locationChooserShow
     }
   },
   actions: {
