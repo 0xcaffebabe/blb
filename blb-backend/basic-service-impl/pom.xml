@@ -16,6 +16,7 @@
         <module>cache-service-impl</module>
         <module>auth-service-impl</module>
         <module>message-service-impl</module>
+        <module>upload-service-impl</module>
     </modules>
     <dependencies>
         <dependency>

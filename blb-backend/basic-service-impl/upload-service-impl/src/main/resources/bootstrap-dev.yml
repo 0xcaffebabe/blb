@@ -1,0 +1,33 @@
+fdfs:
+  so-timeout: 1501 # 超时时间
+  connect-timeout: 601 # 连接超时时间
+  thumb-image: # 缩略图
+    width: 60
+    height: 60
+  tracker-list: # tracker地址
+    - 192.168.1.105:22122
+image:
+  address: http://192.168.1.105:8888/
+server:
+  port: 9400
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+  application:
+    name: upload-service
+swagger:
+  base-package: wang.ismy.blb.impl.upload
+  base-path: /**
+  contact:
+    email: admin@ismy.wang
+  description: 上传服务api
+  enabled: true
+  exclude-path: /error, /ops/**
+  title: 上传服务文档
+  version: 1.0

@@ -1,0 +1,1 @@
+mvn package -f ../parent/pom.xml -pl :upload-service-impl -am

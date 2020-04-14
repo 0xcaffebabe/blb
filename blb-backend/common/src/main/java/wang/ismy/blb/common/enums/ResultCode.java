@@ -53,8 +53,9 @@ public enum ResultCode {
 
     /* 缓存服务状态码 80001-89999 */
     /* 认证服务状态码 90001-99999 */
-    AUTH_ERROR(80001,"认证失败");
-
+    AUTH_ERROR(80001,"认证失败"),
+    /* 文件上传服务状态码: 100001-109999*/
+    FILE_EXTENSION_NAME_NOT_EXISTS(100001,"文件扩展名为空");
     private Integer code;
     private String msg;
 }
