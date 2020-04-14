@@ -10,10 +10,8 @@ on:
     branches: [ master ]
 
 jobs:
-  build:
-
+  cache-service-build:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up JDK 13
@@ -27,6 +25,14 @@ jobs:
       with:
         name: cache-service
         path: ./blb-backend/artifact/cache-service-1.0.jar
+  auth-service-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 13
+      uses: actions/setup-java@v1
+      with:
+        java-version: 13
     - name: 构建认证服务
       run: mvn package -f ./blb-backend/parent/pom.xml -pl :auth-service-impl -am
     - name: 保留认证服务构建物
@@ -34,5 +40,33 @@ jobs:
       with:
         name: auth-service
         path: ./blb-backend/artifact/auth-service-1.0.jar
-    - name: 构建整个项目
-      run: mvn package -f ./blb-backend/parent/pom.xml
+  message-service-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 13
+      uses: actions/setup-java@v1
+      with:
+        java-version: 13
+    - name: 构建消息服务
+      run: mvn package -f ./blb-backend/parent/pom.xml -pl :message-service-impl -am
+    - name: 保留消息服务构建物
+      uses: actions/upload-artifact@v1
+      with:
+        name: auth-service
+        path: ./blb-backend/artifact/message-service-1.0.jar
+  upload-service-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 13
+      uses: actions/setup-java@v1
+      with:
+        java-version: 13
+    - name: 构建上传服务
+      run: mvn package -f ./blb-backend/parent/pom.xml -pl :upload-service-impl -am
+    - name: 保留上传服务构建物
+      uses: actions/upload-artifact@v1
+      with:
+        name: auth-service
+        path: ./blb-backend/artifact/upload-service-1.0.jar
