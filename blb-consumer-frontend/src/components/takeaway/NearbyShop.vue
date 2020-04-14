@@ -7,7 +7,11 @@
       <ul class="shop-list">
         <li class="shop-item-wrapper" v-for="item in 8" :key="item" @click="handleShopItemClick">
           <div class="shop-item">
-            <img src="https://p1.meituan.net/waimaipoi/23d94486b3882b8eb6101aa251bbd45030720.jpg" alt="">
+            <el-image src="https://p1.meituan.net/waimaipoi/23d94486b3882b8eb6101aa251bbd45030720.jpg" alt="">
+              <div slot="error" class="image-slot">
+                <i class="el-icon-picture-outline"></i>
+              </div>
+            </el-image>
             <h1>小康烘焙</h1>
             <el-rate
               :value="3.7"

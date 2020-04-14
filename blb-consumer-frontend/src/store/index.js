@@ -5,11 +5,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    cartShow: false
+    cartShow: false,
+    orderDetailShow: true
   },
   mutations: {
     toggleCart () {
       this.state.cartShow = !this.state.cartShow
+    },
+    toggleOrderDetail () {
+      this.state.orderDetailShow = !this.state.orderDetailShow
     }
   },
   actions: {

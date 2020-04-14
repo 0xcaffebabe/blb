@@ -53,7 +53,7 @@ jobs:
     - name: 保留消息服务构建物
       uses: actions/upload-artifact@v1
       with:
-        name: auth-service
+        name: message-service
         path: ./blb-backend/artifact/message-service-1.0.jar
   upload-service-build:
     runs-on: ubuntu-latest
@@ -68,5 +68,5 @@ jobs:
     - name: 保留上传服务构建物
       uses: actions/upload-artifact@v1
       with:
-        name: auth-service
+        name: upload-service
         path: ./blb-backend/artifact/upload-service-1.0.jar
