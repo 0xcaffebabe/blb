@@ -53,7 +53,7 @@
           <el-card class="order-detail-header">
             <el-avatar :size="80"></el-avatar>
             <h2>支付超时</h2>
-            <el-button type="primary" size="mini">再来一单</el-button>
+            <el-button type="primary" size="mini" @click="$router.push('shop')">再来一单</el-button>
           </el-card>
         </el-col>
       </el-row>
