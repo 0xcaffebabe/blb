@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     cartShow: false,
     orderDetailShow: false,
-    locationChooserShow: true
+    locationChooserShow: false
   },
   mutations: {
     toggleCart () {

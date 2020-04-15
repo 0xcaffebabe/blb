@@ -5,6 +5,7 @@ import Takeaway from '../views/Takeaway'
 import Shop from '../views/Shop'
 import Search from '../views/Search'
 import Order from '../views/Order'
+import My from '../views/My'
 Vue.use(VueRouter)
 
 const routes = [
@@ -16,7 +17,8 @@ const routes = [
       { path: 'takeaway', component: Takeaway },
       { path: 'shop', component: Shop },
       { path: 'search', component: Search },
-      { path: 'order', component: Order }
+      { path: 'order', component: Order },
+      { path: 'my', component: My }
     ]
   }
 ]

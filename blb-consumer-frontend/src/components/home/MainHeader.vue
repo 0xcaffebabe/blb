@@ -6,7 +6,7 @@
           </span>
         </el-col>
         <el-col :span="16">
-          <el-menu :default-active="'order'"
+          <el-menu :default-active="'my'"
                     mode="horizontal"
                     background-color="#3190e8"
                     text-color="#fff"
@@ -16,7 +16,7 @@
             <el-menu-item index="takeaway" class="el-icon-eleme"> 外卖</el-menu-item>
             <el-menu-item index="search" class="el-icon-search"> 搜索</el-menu-item>
             <el-menu-item index="order" class="el-icon-s-order"> 订单</el-menu-item>
-            <el-menu-item index="4" class="el-icon-user"> 我的</el-menu-item>
+            <el-menu-item index="my" class="el-icon-user"> 我的</el-menu-item>
           </el-menu>
         </el-col>
         <el-col :span="4">
