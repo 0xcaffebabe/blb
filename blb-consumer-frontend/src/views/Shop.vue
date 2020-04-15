@@ -51,7 +51,7 @@ export default {
     top: 50%;
     transform: translateY(-50%);
     right: 0;
-    height: 200px;
+    height: 150px;
     width: 40px;
     background-color: #3d3d3f;
     border-top-left-radius: 5px;

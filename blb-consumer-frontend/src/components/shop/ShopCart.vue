@@ -62,16 +62,19 @@ export default {
         height: 64px;
       }
       h3 {
+        font-size: 14px;
         margin: 0;
+        margin-bottom: 10px;
       }
       span {
-        font-size: 14px;
+        font-size: 12px;
         color: #666;
       }
       .product-price {
         margin: 0;
+        margin-top: 10px;
         color: #f60;
-        font-size: 20px;
+        font-size: 18px;
       }
     }
   }

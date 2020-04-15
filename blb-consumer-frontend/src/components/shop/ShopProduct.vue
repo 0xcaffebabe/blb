@@ -19,7 +19,7 @@
               </el-col>
               <el-col :span="6">
                 <h1 class="product-price">￥20</h1>
-                <el-button type="primary" icon="el-icon-plus" circle size="small"></el-button>
+                <el-button type="primary" icon="el-icon-plus" circle size="mini"></el-button>
               </el-col>
             </el-row>
             <el-divider></el-divider>
@@ -44,10 +44,12 @@ export default {
   .product-cate-title {
     h2 {
       display: inline;
+      font-size: 16px;
       margin: 0;
       padding: 0;
     }
     span {
+      font-size: 14px;
       color: #666;
     }
   }
@@ -64,6 +66,7 @@ export default {
       box-shadow: 2px 2px 13px rgba(0,0,0,.5);
     }
     h2 {
+      font-size: 18px;
       margin: 0;
     }
     .product-detail {
@@ -71,16 +74,16 @@ export default {
       color: #666;
     }
     .product-sales {
-      font-size: 16px;
+      font-size: 14px;
     }
     .product-price {
       margin: 0;
       margin-bottom: 40px;
-      font-size: 36px;
+      font-size: 24px;
       color: #f60;
     }
     .el-button {
-      margin-left: 40px;
+      margin-left: 30px;
     }
   }
 </style>
