@@ -1,0 +1,20 @@
+server:
+  port: 9500
+swagger:
+  base-package: wang.ismy.blb.impl.cart
+  base-path: /**
+  contact:
+    email: admin@ismy.wang
+  description: 购物车服务api
+  enabled: true
+  exclude-path: /error, /ops/**
+  title: 购物车服务文档
+  version: 1.0
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848
+feign:
+  hystrix:
+    enabled: true

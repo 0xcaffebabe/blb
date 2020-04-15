@@ -17,4 +17,6 @@ public class ProductCategoryDTO {
     private String categoryName;
     @ApiModelProperty("目录描述")
     private String categoryDesc;
+    @ApiModelProperty("所属店铺")
+    private Long shopId;
 }

@@ -1,5 +1,5 @@
 server:
-  port: 9200
+  port: 9210
 swagger:
   base-package: wang.ismy.blb.impl.auth
   base-path: /**

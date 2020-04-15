@@ -11,7 +11,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  * @author MY
  * @date 2020/4/13 11:47
  */
-@Configuration
+//@Configuration
 @Slf4j
 public class MyWebMvcRegistrations implements WebMvcRegistrations {
 

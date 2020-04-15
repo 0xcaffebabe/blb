@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.product.pojo.dto.CartProductGetDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductDTO;
+import wang.ismy.blb.api.product.pojo.dto.ProductSpecDTO;
 import wang.ismy.blb.common.result.Result;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import java.util.List;
  * @date 2020/4/10 8:40
  */
 @Api(tags = "商品服务接口")
+@RequestMapping("v1/api")
 public interface ProductApi {
 
     /**
@@ -26,7 +28,7 @@ public interface ProductApi {
     @ApiOperation("根据商品ID拉取详细信息")
     @ApiImplicitParam(paramType = "path", name = "productId", dataType = "Long", required = true, value = "商品ID")
     @GetMapping("{productId}")
-    Result<ProductDTO> getProduct(@PathVariable("productId") String productId);
+    Result<ProductDTO> getProduct(@PathVariable("productId") Long productId);
 
     /**
      * 根据商品ID批量拉取商品详细信息
@@ -49,5 +51,13 @@ public interface ProductApi {
     @GetMapping("spec/list")
     Result<List<ProductDTO>> getListByProductAndSpecList(@RequestBody List<CartProductGetDTO> list);
 
-
+    /**
+     * 根据规格ID查询规格信息
+     * @param specId
+     * @return
+     */
+    @ApiOperation("根据规格ID查询规格信息")
+    @ApiImplicitParam(paramType = "path", name = "specId", dataType = "Long", required = true, value = "规格ID")
+    @GetMapping("spec/{specId}")
+    Result<ProductSpecDTO> getProductSpec(@PathVariable("specId") Long specId);
 }
