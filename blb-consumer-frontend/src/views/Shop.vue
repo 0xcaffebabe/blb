@@ -20,7 +20,7 @@
       <el-badge :value="12">
         <el-button icon="el-icon-shopping-cart-2" circle class="cart-button" @click="$store.commit('toggleCart')"></el-button>
       </el-badge>
-      <el-button type="success" class="pay-button">结算</el-button>
+      <el-button type="success" class="pay-button" @click="$router.push('pay')">结算</el-button>
     </div>
   </div>
 </template>
