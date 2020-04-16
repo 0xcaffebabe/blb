@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.common.SystemConstant;
 import wang.ismy.blb.common.result.Result;
@@ -15,7 +16,7 @@ import java.util.List;
  * @date 2020/4/10 10:52
  */
 @Api(tags = "购物车服务接口")
-@RequestMapping("v1/api")
+@RequestMapping(value = "v1/api",produces = MediaType.APPLICATION_JSON_VALUE)
 public interface CartApi {
 
     /**
