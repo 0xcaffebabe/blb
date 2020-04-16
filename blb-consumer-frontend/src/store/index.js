@@ -6,9 +6,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     cartShow: false,
-    orderDetailShow: false,
+    orderDetailShow: true,
     locationChooserShow: false,
-    loginPanelShow: true
+    loginPanelShow: false
   },
   mutations: {
     toggleCart () {

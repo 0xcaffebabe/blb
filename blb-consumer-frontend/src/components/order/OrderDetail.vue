@@ -84,6 +84,12 @@
               <li>创建时间：2020-03-28 20::07</li>
             </ul>
           </el-card>
+          <el-card style="margin-top:10px">
+            <div slot="header">地图</div>
+            <el-amap class="amap-box" :vid="'amap-vue'" :zoom="10" :center="[117.5,24]">
+              <el-amap-marker vid="component-marker" :position="[117.5,24]"></el-amap-marker>
+            </el-amap>
+          </el-card>
         </el-col>
       </el-row>
   </el-dialog>
@@ -93,12 +99,16 @@
 export default {
   props: ['show'],
   data () {
-    return {}
+    return { }
   }
 }
 </script>
 
 <style lang="less" scoped>
+  .amap-box {
+    width: 100%;
+    height: 200px;
+  }
   ul {
     margin: 0;
     padding: 0;
