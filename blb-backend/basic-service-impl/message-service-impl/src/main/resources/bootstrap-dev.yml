@@ -4,12 +4,12 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: local:8848
       config:
-        server-addr: 127.0.0.1:8848
+        server-addr: local:8848
         file-extension: yaml
   rabbitmq:
-    addresses: 192.168.1.105
+    addresses: local
     username: blb
     password: blb
     virtual-host: blb

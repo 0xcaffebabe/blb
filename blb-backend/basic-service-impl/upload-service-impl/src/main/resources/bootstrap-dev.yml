@@ -5,16 +5,18 @@ fdfs:
     width: 60
     height: 60
   tracker-list: # tracker地址
-    - 192.168.1.105:22122
+    - local:22122
 image:
-  address: http://192.168.1.105:8888/
+  address: http://local:8888/
 server:
   port: 9400
 spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848
+        server-addr: local:8848
+      config:
+        server-addr: local:8848
   servlet:
     multipart:
       max-file-size: 50MB
