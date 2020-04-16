@@ -13,12 +13,14 @@
         </el-main>
       </el-container>
     </el-container>
+    <login/>
   </el-container>
 </template>
 
 <script>
 import MainHeader from '../components/home/MainHeader'
 import MainAside from '../components/home/MainAside'
+import Login from '../components/Login'
 export default {
   data () {
     return {
@@ -31,7 +33,7 @@ export default {
     }
   },
   components: {
-    MainHeader, MainAside
+    MainHeader, MainAside, Login
   }
 }
 </script>

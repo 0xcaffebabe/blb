@@ -20,6 +20,7 @@
           </el-menu>
         </el-col>
         <el-col :span="4">
+            <span class="login-tip" @click="$store.commit('toggleLoginPanel')">登录/注册</span>
             <span class="el-icon-location location" @click="$store.commit('toggleLocationChooser')"> 漳州漳浦
               <span class="el-icon-caret-bottom" v-if="!$store.state.locationChooserShow"></span>
               <span class="el-icon-caret-top" v-else></span>
@@ -43,6 +44,12 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  .login-tip {
+    font-size:14px;
+    color:white;
+    margin-right:20px;
+    cursor: pointer;
+  }
   .logo {
     height: 56px;
     line-height: 56px;

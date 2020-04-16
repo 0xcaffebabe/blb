@@ -7,7 +7,8 @@ export default new Vuex.Store({
   state: {
     cartShow: false,
     orderDetailShow: false,
-    locationChooserShow: false
+    locationChooserShow: false,
+    loginPanelShow: true
   },
   mutations: {
     toggleCart () {
@@ -18,6 +19,9 @@ export default new Vuex.Store({
     },
     toggleLocationChooser () {
       this.state.locationChooserShow = !this.state.locationChooserShow
+    },
+    toggleLoginPanel () {
+      this.state.loginPanelShow = !this.state.loginPanelShow
     }
   },
   actions: {
