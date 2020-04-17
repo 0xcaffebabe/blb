@@ -99,4 +99,4 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: product-service
-        path: ./blb-backend/artifact/prodcut-service-1.0.jar
+        path: ./blb-backend/artifact/product-service-1.0.jar
