@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class BaseDO {
 
     /** 逻辑删除N为正常，Y为删除 */
-    private Boolean delete ;
+    private Boolean removed ;
     /** 创建时间 */
     private LocalDateTime createTime ;
     /** 更新时间 */

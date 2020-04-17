@@ -1,0 +1,6 @@
+spring:
+  profiles:
+    active: dev
+logging:
+  level:
+    wang.ismy.blb.impl.product.mapper: debug

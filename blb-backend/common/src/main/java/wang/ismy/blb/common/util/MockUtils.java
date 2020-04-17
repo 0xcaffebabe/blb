@@ -3,6 +3,8 @@ package wang.ismy.blb.common.util;
 import java.lang.reflect.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.UUID;
 
@@ -47,6 +49,14 @@ public class MockUtils {
         } catch (Throwable t) {
             throw new RuntimeException(t);
         }
+    }
+
+    public static <T> List<T> create(Class<T> klass,int number){
+        List<T> list = new ArrayList<>();
+        for (int i = 0; i < number; i++) {
+            list.add(create(klass));
+        }
+        return list;
     }
 
     private static String randomStr(int bound){

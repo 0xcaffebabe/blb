@@ -4,6 +4,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +25,15 @@ public class ProductDTO {
     @ApiModelProperty("商品图片")
     private String productImg ;
     @ApiModelProperty("商品库存")
-    private Long stock;
+    private Integer stock;
     @ApiModelProperty("商品规格列表")
     private List<ProductSpecDTO> productSpecList;
+
+    public ProductDTO appendSpec(ProductSpecDTO spec){
+        if (productSpecList == null){
+            productSpecList = new ArrayList<>();
+        }
+        productSpecList.add(spec);
+        return this;
+    }
 }

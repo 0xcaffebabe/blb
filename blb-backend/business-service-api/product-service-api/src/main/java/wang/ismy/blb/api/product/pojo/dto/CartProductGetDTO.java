@@ -4,6 +4,8 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
+import java.awt.*;
+
 /**
  * @author MY
  * @date 2020/4/10 9:08
@@ -15,4 +17,11 @@ public class CartProductGetDTO {
     private Long productId;
     @ApiModelProperty("规格ID")
     private Long specId;
+
+    public static CartProductGetDTO create(Long productId,Long specId){
+        CartProductGetDTO dto = new CartProductGetDTO();
+        dto.productId = productId;
+        dto.specId = specId;
+        return dto;
+    }
 }

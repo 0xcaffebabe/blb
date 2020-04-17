@@ -55,7 +55,11 @@ public enum ResultCode {
     /* 认证服务状态码 90001-99999 */
     AUTH_ERROR(80001,"认证失败"),
     /* 文件上传服务状态码: 100001-109999*/
-    FILE_EXTENSION_NAME_NOT_EXISTS(100001,"文件扩展名为空");
-    private Integer code;
-    private String msg;
+    FILE_EXTENSION_NAME_NOT_EXISTS(100001,"文件扩展名为空"),
+    /* 商品服务状态码 110001-119999*/
+    PRODUCT_NOT_EXIST(110001,"商品不存在"),
+    PRODUCT_OR_SPEC_NOT_EXIST(110002,"商品或商品规格不存在"),
+    PRODUCT_SPEC_NOT_EXIST(110003,"商品规格不存在");
+    private final Integer code;
+    private final String msg;
 }
