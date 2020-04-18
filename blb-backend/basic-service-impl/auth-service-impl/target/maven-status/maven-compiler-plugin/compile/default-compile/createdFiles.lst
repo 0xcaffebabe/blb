@@ -1,0 +1,10 @@
+wang\ismy\blb\impl\auth\AuthApiImpl.class
+wang\ismy\blb\impl\auth\client\CacheApiClient.class
+wang\ismy\blb\impl\auth\config\AuthConfigProperties.class
+wang\ismy\blb\impl\auth\service\AuthService.class
+wang\ismy\blb\impl\auth\config\AuthServiceConfig.class
+wang\ismy\blb\impl\auth\client\CacheApiClient$CacheApiFallback.class
+wang\ismy\blb\impl\auth\service\AuthServiceImpl.class
+wang\ismy\blb\impl\auth\AuthApp.class
+wang\ismy\blb\impl\auth\config\MyWebMvcRegistrations$1.class
+wang\ismy\blb\impl\auth\config\MyWebMvcRegistrations.class

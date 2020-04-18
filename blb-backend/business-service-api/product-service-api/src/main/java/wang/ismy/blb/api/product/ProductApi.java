@@ -3,6 +3,7 @@ package wang.ismy.blb.api.product;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.product.pojo.dto.CartProductGetDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductDTO;
@@ -16,7 +17,7 @@ import java.util.List;
  * @date 2020/4/10 8:40
  */
 @Api(tags = "商品服务接口")
-@RequestMapping("v1/api")
+@RequestMapping(value = "v1/api",produces = MediaType.APPLICATION_JSON_VALUE)
 public interface ProductApi {
 
     /**

@@ -1,0 +1,68 @@
+package wang.ismy.blb.impl.product.client;
+
+import org.springframework.cloud.openfeign.FeignClient;
+import org.springframework.stereotype.Component;
+import wang.ismy.blb.api.order.OrderApi;
+import wang.ismy.blb.api.order.pojo.dto.OrderCreateDTO;
+import wang.ismy.blb.api.order.pojo.dto.OrderResultDTO;
+import wang.ismy.blb.api.order.pojo.dto.OrderValidCode;
+import wang.ismy.blb.common.enums.ServiceName;
+import wang.ismy.blb.common.result.Result;
+
+import java.math.BigDecimal;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * @author MY
+ * @date 2020/4/18 9:16
+ */
+@FeignClient(value = ServiceName.ORDER_SERVICE,fallback = OrderApiClient.Fallback.class)
+public interface OrderApiClient extends OrderApi {
+
+    // TODO 等待订单服务开发完成
+    /** mock 实现*/
+    @Component
+    class Fallback implements OrderApiClient{
+
+        @Override
+        public Result<OrderResultDTO> getOrder(Long orderId) {
+            return null;
+        }
+
+        @Override
+        public Result<Long> addOrder(OrderCreateDTO orderCreateDTO) {
+            return null;
+        }
+
+        @Override
+        public Result<Void> updateOrderStatus(Long orderId, Integer status) {
+            return null;
+        }
+
+        @Override
+        public Result<Void> updatePayStatus(Long orderId, Integer status) {
+            return null;
+        }
+
+        @Override
+        public Result<OrderValidCode> getOrderValidCode() {
+            return null;
+        }
+
+        @Override
+        public Result<Void> updateOrderAmount(Long orderId, BigDecimal amount) {
+            return null;
+        }
+
+        @Override
+        public Result<Map<Long,Long>> getProductSales(List<Long> productIdList) {
+            Map<Long,Long> map = new HashMap<>();
+            for (Long aLong : productIdList) {
+                map.put(aLong,100L);
+            }
+            return Result.success(map);
+        }
+    }
+}

@@ -21,3 +21,11 @@ spring:
     generate-ddl: false
     database: mysql
     show-sql: true
+  datasource:
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://local:3306/blb_product
+feign:
+  sentinel:
+    enabled: true

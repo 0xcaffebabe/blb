@@ -1,4 +1,14 @@
 -------------------------------------------------------------------------------
 Test set: wang.ismy.blb.impl.auth.service.AuthServiceImplTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 4.383 s - in wang.ismy.blb.impl.auth.service.AuthServiceImplTest
+Tests run: 2, Failures: 0, Errors: 2, Skipped: 0, Time elapsed: 5.91 s <<< FAILURE! - in wang.ismy.blb.impl.auth.service.AuthServiceImplTest
+testValid  Time elapsed: 0 s  <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [wang.ismy.blb.impl.auth.AuthApp]; nested exception is org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name 'authApiImpl' for bean class [wang.ismy.blb.impl.product.auth.AuthApiImpl] conflicts with existing, non-compatible bean definition of same name and class [wang.ismy.blb.impl.auth.AuthApiImpl]
+Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name 'authApiImpl' for bean class [wang.ismy.blb.impl.product.auth.AuthApiImpl] conflicts with existing, non-compatible bean definition of same name and class [wang.ismy.blb.impl.auth.AuthApiImpl]
+
+testAuth  Time elapsed: 0 s  <<< ERROR!
+java.lang.IllegalStateException: Failed to load ApplicationContext
+Caused by: org.springframework.beans.factory.BeanDefinitionStoreException: Failed to parse configuration class [wang.ismy.blb.impl.auth.AuthApp]; nested exception is org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name 'authApiImpl' for bean class [wang.ismy.blb.impl.product.auth.AuthApiImpl] conflicts with existing, non-compatible bean definition of same name and class [wang.ismy.blb.impl.auth.AuthApiImpl]
+Caused by: org.springframework.context.annotation.ConflictingBeanDefinitionException: Annotation-specified bean name 'authApiImpl' for bean class [wang.ismy.blb.impl.product.auth.AuthApiImpl] conflicts with existing, non-compatible bean definition of same name and class [wang.ismy.blb.impl.auth.AuthApiImpl]
+

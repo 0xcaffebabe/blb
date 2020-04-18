@@ -72,4 +72,14 @@ public interface ShopApi {
     @PutMapping("info/{shopId}")
     Result<Void> updateShopInfo(@PathVariable("shopId") String shopId,
                                 @RequestBody ShopInfoUpdateDTO shopInfoUpdateDTO);
+
+    /**
+     * 根据商家ID获取店铺信息
+     * @param sellerId
+     * @return
+     */
+    @ApiOperation("根据商家ID获取店铺信息")
+    @ApiImplicitParam(paramType = "path", name = "sellerId", dataType = "Long", required = true, value = "商家ID")
+    @GetMapping("seller/{sellerId}")
+    Result<ShopInfoDTO> getShopBySeller(@PathVariable("sellerId") Long sellerId);
 }

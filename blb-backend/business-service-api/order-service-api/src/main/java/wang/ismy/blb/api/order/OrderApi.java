@@ -11,6 +11,8 @@ import wang.ismy.blb.api.order.pojo.dto.OrderValidCode;
 import wang.ismy.blb.common.result.Result;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author MY
@@ -86,5 +88,13 @@ public interface OrderApi {
     @PutMapping("amount/{orderId}")
     Result<Void> updateOrderAmount(@PathVariable("orderId") Long orderId,
                                    @RequestParam("amount")BigDecimal amount);
+
+    /**
+     * 根据商品ID列表批量计算商品销量
+     * @param productIdList
+     * @return 商品ID，商品销量 KV对
+     */
+    @GetMapping("sales/list")
+    Result<Map<Long,Long>> getProductSales(@RequestParam("productIdList")List<Long> productIdList);
 
 }

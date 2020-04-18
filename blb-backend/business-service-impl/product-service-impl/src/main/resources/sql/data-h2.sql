@@ -19,7 +19,8 @@ INSERT INTO tb_product_category
  removed,
  create_time,
  update_time)
-VALUES (1, 1, '1号店铺招牌菜', '黄焖系列', 0, CURRENT_TIME, CURRENT_TIME);
+VALUES (1, 1, '1号店铺招牌菜', '黄焖系列', 0, CURRENT_TIME, CURRENT_TIME),
+       (2, 1, '1号店铺兼职', '沙县小吃系列', 0, CURRENT_TIME, CURRENT_TIME);
 
 INSERT INTO tb_product_spec
 (spec_id,
