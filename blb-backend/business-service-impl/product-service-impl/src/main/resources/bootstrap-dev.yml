@@ -26,6 +26,9 @@ spring:
     password: root
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://local:3306/blb_product
+  elasticsearch:
+    rest:
+      uris: http://local:9200
 feign:
   sentinel:
     enabled: true

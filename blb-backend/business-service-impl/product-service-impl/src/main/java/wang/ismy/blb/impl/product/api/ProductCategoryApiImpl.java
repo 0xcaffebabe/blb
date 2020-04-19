@@ -1,4 +1,4 @@
-package wang.ismy.blb.impl.product;
+package wang.ismy.blb.impl.product.api;
 
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;

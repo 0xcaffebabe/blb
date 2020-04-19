@@ -14,6 +14,7 @@ import wang.ismy.blb.common.util.MockUtils;
 import wang.ismy.blb.impl.product.client.AuthApiClient;
 import wang.ismy.blb.impl.product.client.ShopApiClient;
 import wang.ismy.blb.impl.product.repository.ProductCategoryRepository;
+import wang.ismy.blb.impl.product.service.impl.ProductCategoryServiceImpl;
 
 import java.math.BigDecimal;
 import java.util.List;

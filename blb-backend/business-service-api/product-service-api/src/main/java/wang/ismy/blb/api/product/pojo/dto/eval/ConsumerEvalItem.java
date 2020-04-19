@@ -1,5 +1,6 @@
 package wang.ismy.blb.api.product.pojo.dto.eval;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -21,5 +22,6 @@ public class ConsumerEvalItem {
     @ApiModelProperty("评价内容")
     private String content;
     @ApiModelProperty("评价时间")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 }

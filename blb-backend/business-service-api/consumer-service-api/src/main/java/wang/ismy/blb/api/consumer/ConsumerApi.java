@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.consumer.pojo.dto.*;
 import wang.ismy.blb.common.result.Result;
 
+import java.util.List;
+import java.util.Map;
+
 /**
  * @author MY
  * @date 2020/4/9 20:45
@@ -57,6 +60,17 @@ public interface ConsumerApi {
     @ApiImplicitParam(paramType = "path", name = "consumerId", dataType = "Long", required = true, value = "订餐者ID")
     @GetMapping("{consumerId}")
     Result<ConsumerDTO> getInfo(@PathVariable String consumerId);
+
+
+    /**
+     * 根据订餐者ID批量获取订餐者信息
+     * @param consumerIdList
+     * @return
+     */
+    @ApiOperation("根据订餐者ID批量获取订餐者信息")
+    @ApiImplicitParam(paramType = "query", name = "consumerIdList", dataType = "List", required = true, value = "订餐者ID列表")
+    @GetMapping("list")
+    Result<Map<Long,ConsumerDTO>> getInfo(@RequestParam("consumerIdList")List<Long> consumerIdList);
 
     /**
      * 修改订餐者自己的信息

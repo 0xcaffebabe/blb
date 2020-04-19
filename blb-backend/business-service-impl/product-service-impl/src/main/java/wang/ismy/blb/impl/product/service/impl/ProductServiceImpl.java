@@ -1,4 +1,4 @@
-package wang.ismy.blb.impl.product.service;
+package wang.ismy.blb.impl.product.service.impl;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -16,6 +16,7 @@ import wang.ismy.blb.impl.product.repository.ProductCategoryRepository;
 import wang.ismy.blb.impl.product.repository.ProductRepository;
 import wang.ismy.blb.impl.product.repository.ProductSpecRepository;
 import wang.ismy.blb.impl.product.repository.ProductStockRepository;
+import wang.ismy.blb.impl.product.service.ProductService;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -13,7 +13,15 @@ import lombok.Data;
 @ApiModel("分页信息")
 public class Pageable {
     @ApiModelProperty("页码")
+    /** 从1开始 */
     private Long page;
     @ApiModelProperty("每页展示数")
     private Long size;
+
+    public static Pageable of(Long page,Long size){
+        Pageable pageable = new Pageable();
+        pageable.page = page;
+        pageable.size = size;
+        return pageable;
+    }
 }

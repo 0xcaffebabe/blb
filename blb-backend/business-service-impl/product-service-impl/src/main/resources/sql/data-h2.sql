@@ -45,3 +45,20 @@ INSERT INTO tb_product_stock
 VALUES (1, 100, 0, CURRENT_TIME, CURRENT_TIME),
        (2, 100,0, CURRENT_TIME, CURRENT_TIME),
        (3, 100, 0, CURRENT_TIME, CURRENT_TIME);
+
+INSERT INTO tb_product_evaluation
+(
+    eval_id,
+    product_id,
+    consumer_id,
+    shop_id,
+    ranking,
+    content,
+    removed,
+    create_time,
+    update_time
+)
+VALUES ( 1,1,1,1,3.5,'黄焖鸡评价1',0,CURRENT_TIME,CURRENT_TIME ),
+       ( 2,1,2,1,3.5,'黄焖鸡评价2',0,CURRENT_TIME,CURRENT_TIME ),
+       ( 3,1,3,1,3.5,'黄焖鸡评价3',0,CURRENT_TIME,CURRENT_TIME ),
+       ( 4,1,4,1,3.5,'黄焖鸡评价4',0,CURRENT_TIME,CURRENT_TIME )

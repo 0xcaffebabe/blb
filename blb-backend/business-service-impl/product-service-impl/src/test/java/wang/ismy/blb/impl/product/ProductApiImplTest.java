@@ -12,6 +12,7 @@ import wang.ismy.blb.api.product.pojo.dto.ProductSpecDTO;
 import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.MockUtils;
+import wang.ismy.blb.impl.product.api.ProductApiImpl;
 import wang.ismy.blb.impl.product.service.ProductService;
 
 import java.util.ArrayList;

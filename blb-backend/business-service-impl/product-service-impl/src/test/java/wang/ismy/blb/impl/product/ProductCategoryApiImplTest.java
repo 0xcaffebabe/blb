@@ -1,7 +1,6 @@
 package wang.ismy.blb.impl.product;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
@@ -11,11 +10,11 @@ import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
 import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
 import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.MockUtils;
+import wang.ismy.blb.impl.product.api.ProductCategoryApiImpl;
 import wang.ismy.blb.impl.product.service.ProductCategoryService;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;

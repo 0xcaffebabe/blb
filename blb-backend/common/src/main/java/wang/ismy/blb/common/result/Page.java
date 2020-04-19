@@ -2,7 +2,9 @@ package wang.ismy.blb.common.result;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
@@ -13,6 +15,8 @@ import java.util.List;
  */
 @Data
 @ApiModel("分页结果展示")
+@AllArgsConstructor
+@NoArgsConstructor
 public class Page<T> {
 
     @ApiModelProperty("结果总数")

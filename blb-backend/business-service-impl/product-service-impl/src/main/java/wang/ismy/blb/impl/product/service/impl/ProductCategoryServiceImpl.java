@@ -1,4 +1,4 @@
-package wang.ismy.blb.impl.product.service;
+package wang.ismy.blb.impl.product.service.impl;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,6 +18,9 @@ import wang.ismy.blb.impl.product.client.OrderApiClient;
 import wang.ismy.blb.impl.product.client.ShopApiClient;
 import wang.ismy.blb.impl.product.repository.ProductCategoryRepository;
 import wang.ismy.blb.impl.product.repository.ProductRepository;
+import wang.ismy.blb.impl.product.service.ProductCategoryService;
+import wang.ismy.blb.impl.product.service.ProductEvalService;
+import wang.ismy.blb.impl.product.service.ProductService;
 
 import java.time.LocalDateTime;
 import java.util.List;

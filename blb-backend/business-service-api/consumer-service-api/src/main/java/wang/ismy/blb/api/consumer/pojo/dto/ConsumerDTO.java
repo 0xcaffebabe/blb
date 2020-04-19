@@ -13,6 +13,8 @@ import lombok.Data;
 public class ConsumerDTO {
     @ApiModelProperty("头像")
     private String avatar;
+    @ApiModelProperty("用户名")
+    private String username;
     @ApiModelProperty("真实姓名")
     private String realName;
     @ApiModelProperty("手机")
