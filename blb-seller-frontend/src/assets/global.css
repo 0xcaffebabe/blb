@@ -1,0 +1,19 @@
+body,html {
+  margin: 0;
+  padding: 0;
+}
+.primary {
+  color: #409EFF!important;
+}
+.success {
+  color: #67C23A!important;
+}
+.warning {
+  color: #E6A23C!important;
+}
+.danger {
+  color: #F56C6C!important;
+}
+.info {
+  color: #909399!important;
+}
