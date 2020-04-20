@@ -1,5 +1,7 @@
 package wang.ismy.blb.impl.product.repository;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import wang.ismy.blb.api.product.pojo.ProductDO;
 
@@ -16,4 +18,12 @@ public interface ProductRepository extends JpaRepository<ProductDO,Long> {
      * @return
      */
     List<ProductDO> findAllByProductCategory(Long category);
+
+    /**
+     * 根据商品分类分页查询
+     * @param productIdList
+     * @param pagable
+     * @return
+     */
+    Page<ProductDO> findAllByProductCategoryIn(List<Long> productIdList, Pageable pagable);
 }

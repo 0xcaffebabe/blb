@@ -3,7 +3,9 @@ package wang.ismy.blb.impl.product.client;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import wang.ismy.blb.api.order.OrderApi;
+import wang.ismy.blb.api.order.enums.OrderStatusEnum;
 import wang.ismy.blb.api.order.pojo.dto.OrderCreateDTO;
+import wang.ismy.blb.api.order.pojo.dto.OrderDetailItemDTO;
 import wang.ismy.blb.api.order.pojo.dto.OrderResultDTO;
 import wang.ismy.blb.api.order.pojo.dto.OrderValidCode;
 import wang.ismy.blb.common.enums.ServiceName;
@@ -28,7 +30,21 @@ public interface OrderApiClient extends OrderApi {
 
         @Override
         public Result<OrderResultDTO> getOrder(Long orderId) {
-            return null;
+            OrderResultDTO order = new OrderResultDTO();
+            order.setOrderStatus(OrderStatusEnum.DONE.getCode());
+            order.setConsumerId(1L);
+            order.setShopId(1L);
+            OrderDetailItemDTO detail1 = new OrderDetailItemDTO();
+            detail1.setProductId(1L);
+            detail1.setProductSpec(1L);
+            OrderDetailItemDTO detail2 = new OrderDetailItemDTO();
+            detail2.setProductId(1L);
+            detail2.setProductSpec(2L);
+            OrderDetailItemDTO detail3 = new OrderDetailItemDTO();
+            detail3.setProductId(2L);
+            detail3.setProductSpec(3L);
+            order.setOrderDetailList(List.of(detail1,detail2,detail3));
+            return Result.success(order);
         }
 
         @Override

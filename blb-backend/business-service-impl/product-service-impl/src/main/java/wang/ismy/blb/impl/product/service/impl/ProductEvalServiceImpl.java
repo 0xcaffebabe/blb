@@ -73,7 +73,7 @@ public class ProductEvalServiceImpl implements ProductEvalService {
         for (ProductEvaluationDO eval : evalList) {
             total = total.add(eval.getRanking());
         }
-        total = total.divide(new BigDecimal(evalList.size())).setScale(1, RoundingMode.CEILING);
+        total = total.divide(new BigDecimal(evalList.size()),RoundingMode.CEILING).setScale(1, RoundingMode.CEILING);
 
         // 写入缓存
         cacheService.put(getKey(shopId), total, ProductConstant.CACHE_TTL);
@@ -175,10 +175,6 @@ public class ProductEvalServiceImpl implements ProductEvalService {
                         .map(OrderDetailItemDTO::getProductId)
                         .collect(Collectors.toList())
         ).size();
-        if (productSize != order.getOrderDetailList().size()){
-            log.error("订单详情商品数量中的部分商品不存在");
-            return;
-        }
         for (OrderDetailItemDTO orderDetail : order.getOrderDetailList()) {
             ProductEvaluationDO eval = new ProductEvaluationDO();
             eval.setConsumerId(user.getUserId());

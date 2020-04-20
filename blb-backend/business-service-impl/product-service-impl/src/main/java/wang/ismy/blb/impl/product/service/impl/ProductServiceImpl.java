@@ -76,11 +76,11 @@ public class ProductServiceImpl implements ProductService {
     public List<ProductDTO> getProductList(List<Long> productIdList) {
         // 根据商品ID列表获取商品列表
         List<ProductDO> productList = productRepository.findAllById(productIdList);
-        Map<Long,ProductDTO> productMap = new HashMap<>(productIdList.size());
+        Map<Long, ProductDTO> productMap = new HashMap<>(productIdList.size());
         for (ProductDO productDO : productList) {
             ProductDTO dto = new ProductDTO();
-            BeanUtils.copyProperties(productDO,dto);
-            productMap.put(productDO.getProductId(),dto);
+            BeanUtils.copyProperties(productDO, dto);
+            productMap.put(productDO.getProductId(), dto);
         }
         // 根据商品列表获取商品目录列表
         List<ProductCategoryDO> categoryList = productCategoryRepository
@@ -89,11 +89,11 @@ public class ProductServiceImpl implements ProductService {
                                 .map(ProductDO::getProductCategory)
                                 .collect(Collectors.toList())
                 );
-        Map<Long,ProductCategoryDTO> categoryMap = new HashMap<>();
+        Map<Long, ProductCategoryDTO> categoryMap = new HashMap<>();
         for (ProductCategoryDO categoryDO : categoryList) {
             ProductCategoryDTO categoryDTO = new ProductCategoryDTO();
-            BeanUtils.copyProperties(categoryDO,categoryDTO);
-            categoryMap.put(categoryDO.getCategoryId(),categoryDTO);
+            BeanUtils.copyProperties(categoryDO, categoryDTO);
+            categoryMap.put(categoryDO.getCategoryId(), categoryDTO);
         }
         // 将商品目录项赋值给product
         for (ProductDO productDO : productList) {
@@ -106,7 +106,7 @@ public class ProductServiceImpl implements ProductService {
         for (ProductSpecDO specDO : specList) {
             ProductDTO productDTO = productMap.get(specDO.getProductId());
             ProductSpecDTO specDTO = new ProductSpecDTO();
-            BeanUtils.copyProperties(specDO,specDTO);
+            BeanUtils.copyProperties(specDO, specDTO);
             productDTO.appendSpec(specDTO);
         }
         // 根据商品ID列表获取商品库存列表
@@ -126,21 +126,26 @@ public class ProductServiceImpl implements ProductService {
                         .map(CartProductGetDTO::getProductId).collect(Collectors.toList())
         );
         // 根据参数格式对返回结果重新排列
-        Map<Long, ProductDTO> productMap =
-                list.stream().collect(Collectors.toMap(ProductDTO::getProductId, productDTO -> productDTO));
-        Map<Long,ProductSpecDTO> specMap = new HashMap<>();
+        Map<Long, ProductSpecDTO> specMap = new HashMap<>();
         for (ProductDTO productDTO : list) {
-            if (CollectionUtils.isEmpty(productDTO.getProductSpecList())){
+            if (CollectionUtils.isEmpty(productDTO.getProductSpecList())) {
                 continue;
             }
             for (ProductSpecDTO specDTO : productDTO.getProductSpecList()) {
-                specMap.put(specDTO.getSpecId(),specDTO);
+                specMap.put(specDTO.getSpecId(), specDTO);
             }
         }
+        Map<Long, ProductDTO> productMap =
+                list.stream().collect(Collectors.toMap(
+                        ProductDTO::getProductId,
+                        productDTO -> productDTO)
+                );
         List<ProductDTO> resultList = new ArrayList<>();
         for (CartProductGetDTO dto : cartGetList) {
-            ProductDTO product = productMap.get(dto.getProductId());
-            product.getProductSpecList().clear();
+            ProductDTO tmp = productMap.get(dto.getProductId());
+            ProductDTO product = new ProductDTO();
+            BeanUtils.copyProperties(tmp,product);
+            product.setProductSpecList(new ArrayList<>());
             product.appendSpec(specMap.get(dto.getSpecId()));
             resultList.add(product);
         }
@@ -150,11 +155,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductSpecDTO getProductSpec(Long specId) {
         ProductSpecDO productSpecDO = productSpecRepository.findById(specId).orElse(null);
-        if (productSpecDO == null){
+        if (productSpecDO == null) {
             return null;
         }
         ProductSpecDTO dto = new ProductSpecDTO();
-        BeanUtils.copyProperties(productSpecDO,dto);
+        BeanUtils.copyProperties(productSpecDO, dto);
         return dto;
     }
 }

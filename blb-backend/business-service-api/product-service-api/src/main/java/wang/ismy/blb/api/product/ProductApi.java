@@ -3,6 +3,7 @@ package wang.ismy.blb.api.product;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.product.pojo.dto.CartProductGetDTO;
@@ -38,9 +39,8 @@ public interface ProductApi {
      * @return
      */
     @ApiOperation("根据商品ID批量拉取商品详细信息")
-    @ApiImplicitParam(paramType = "query", name = "productIdList", dataType = "List", required = true, value = "商品ID列表")
     @GetMapping("list")
-    Result<List<ProductDTO>> getProductList(@RequestParam("productIdList") List<Long> productIdList);
+    Result<List<ProductDTO>> getProductList(@RequestParam("productIdList") @ApiParam(name = "productIdList", required = true, value = "商品ID列表") List<Long> productIdList);
 
     /**
      * 根据商品ID与规格ID列表拉取商品信息
@@ -49,7 +49,7 @@ public interface ProductApi {
      * @return
      */
     @ApiOperation("根据商品ID与规格ID列表拉取商品信息")
-    @GetMapping("spec/list")
+    @PutMapping("spec/list")
     Result<List<ProductDTO>> getListByProductAndSpecList(@RequestBody List<CartProductGetDTO> list);
 
     /**

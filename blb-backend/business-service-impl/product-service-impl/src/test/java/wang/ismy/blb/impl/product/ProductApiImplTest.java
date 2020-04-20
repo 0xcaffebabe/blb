@@ -85,7 +85,7 @@ class ProductApiImplTest {
         when(productService.getProductAndSpecList(argThat(a ->
                 a.size() == 3
         ))).thenReturn(resultList);
-        mockMvc.perform(get("/v1/api/spec/list").contentType(MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsBytes(list)))
+        mockMvc.perform(put("/v1/api/spec/list").contentType(MediaType.APPLICATION_JSON).content(new ObjectMapper().writeValueAsBytes(list)))
                 .andExpect(status().isOk())
                 .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.success(resultList))));
     }

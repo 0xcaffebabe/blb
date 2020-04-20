@@ -17,6 +17,8 @@ spring:
         server-addr: local:8848
       config:
         server-addr: local:8848
+  application:
+    name: cart-service
 feign:
   sentinel:
     enabled: true

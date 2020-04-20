@@ -22,6 +22,7 @@ import java.util.List;
 @FeignClient(value = ServiceName.SHOP_SERVICE,fallback = ShopApiClient.Fallback.class)
 public interface ShopApiClient extends ShopApi {
 
+    /** mock todo*/
     @Component
     class Fallback implements ShopApiClient {
 

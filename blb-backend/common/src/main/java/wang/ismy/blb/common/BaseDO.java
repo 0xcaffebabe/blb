@@ -3,6 +3,7 @@ package wang.ismy.blb.common;
 import lombok.Data;
 import lombok.ToString;
 
+import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
 
 /**
@@ -11,6 +12,7 @@ import java.time.LocalDateTime;
  * @date 2020/4/8 11:28
  */
 @Data
+@MappedSuperclass
 public class BaseDO {
 
     /** 逻辑删除N为正常，Y为删除 */

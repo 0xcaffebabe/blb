@@ -37,7 +37,7 @@ public interface ProductCategoryApi {
      * @return
      */
     @ApiOperation("根据店铺ID获取目录列表")
-    @ApiImplicitParam(paramType = "path", name = "categoryId", dataType = "Long", required = true, value = "商品分类ID")
+    @ApiImplicitParam(paramType = "path", name = "shopId", dataType = "Long", required = true, value = "店铺ID")
     @GetMapping("shop/{shopId}")
     Result<List<ProductCategoryDTO>> getCategoryList(@PathVariable("shopId") Long shopId);
 

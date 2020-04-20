@@ -6,9 +6,11 @@ import wang.ismy.blb.api.consumer.ConsumerApi;
 import wang.ismy.blb.api.consumer.pojo.dto.*;
 import wang.ismy.blb.common.enums.ServiceName;
 import wang.ismy.blb.common.result.Result;
+import wang.ismy.blb.common.util.MockUtils;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author MY
@@ -17,6 +19,7 @@ import java.util.Map;
 @FeignClient(value = ServiceName.CONSUMER_SERVICE,fallback = ConsumerApiClient.Fallback.class)
 public interface ConsumerApiClient extends ConsumerApi {
 
+    /** mock 等待消费者服务 todo*/
     @Component
     class Fallback implements ConsumerApiClient{
         @Override
@@ -41,7 +44,8 @@ public interface ConsumerApiClient extends ConsumerApi {
 
         @Override
         public Result<Map<Long, ConsumerDTO>> getInfo(List<Long> consumerIdList) {
-            return null;
+            var map = consumerIdList.stream().collect(Collectors.toMap(l->l, l->MockUtils.create(ConsumerDTO.class)));
+            return Result.success(map);
         }
 
         @Override
