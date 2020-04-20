@@ -19,7 +19,7 @@
               <i class="el-icon-s-order"></i>
               <span slot="title">订单</span>
             </el-menu-item>
-            <el-menu-item index="3">
+            <el-menu-item index="/product">
               <i class="el-icon-goods"></i>
               <span slot="title">商品</span>
             </el-menu-item>
