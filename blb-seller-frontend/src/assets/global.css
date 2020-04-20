@@ -17,3 +17,14 @@ body,html {
 .info {
   color: #909399!important;
 }
+ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.fr {
+  float: right;
+}
+.fl {
+  float: left;
+}

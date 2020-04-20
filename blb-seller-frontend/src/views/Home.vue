@@ -11,11 +11,11 @@
             default-active="order"
             router
             >
-            <el-menu-item index="index">
+            <el-menu-item index="/index">
               <i class="el-icon-house"></i>
               <span slot="title">首页</span>
             </el-menu-item>
-            <el-menu-item index="order">
+            <el-menu-item index="/order">
               <i class="el-icon-s-order"></i>
               <span slot="title">订单</span>
             </el-menu-item>

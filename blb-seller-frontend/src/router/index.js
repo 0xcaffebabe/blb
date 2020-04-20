@@ -3,7 +3,8 @@ import '../assets/global.css'
 import VueRouter from 'vue-router'
 import Home from '../views/Home'
 import Index from '../views/Index'
-import Order from '../views/Order'
+import Order from '../views/order/Order'
+import NewOrder from '../views/order/NewOrder'
 Vue.use(VueRouter)
 
 const routes = [
@@ -13,7 +14,14 @@ const routes = [
     redirect: '/index',
     children: [
       { path: 'index', component: Index },
-      { path: 'order', component: Order }
+      {
+        path: 'order',
+        component: Order,
+        redirect: '/order/new',
+        children: [
+          { path: 'new', component: NewOrder }
+        ]
+      }
     ]
   }
 ]
