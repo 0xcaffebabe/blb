@@ -2,7 +2,7 @@
   <div>
     <el-card>
       <div slot="header">
-        附近商家
+        {{title}}
       </div>
       <ul class="shop-list">
         <li class="shop-item-wrapper" v-for="item in 8" :key="item">
@@ -34,6 +34,7 @@
 
 <script>
 export default {
+  props: ['title'],
   data () {
     return {}
   },
@@ -56,6 +57,7 @@ export default {
     .shop-item {
       padding: 20px 20px 0 20px;
       width: 208px;
+      box-sizing: border-box;
     }
     .shop-item:hover {
       box-shadow: 2px 2px 13px rgb(217, 236, 255);
@@ -77,7 +79,7 @@ export default {
       font-size: 12px;
     }
     .distance {
-      font-size: 14px;
+      font-size: 12px;
       span {
         color: #3190e8;
         font-weight: 550;

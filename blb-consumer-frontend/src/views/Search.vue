@@ -11,12 +11,12 @@
         clearable
       ></el-autocomplete>
     </el-card>
-    <nearby-shop style="margin-top:10px"></nearby-shop>
+    <shop-list style="margin-top:10px" :title="'搜索结果'"></shop-list>
   </div>
 </template>
 
 <script>
-import NearbyShop from '../components/takeaway/NearbyShop'
+import ShopList from '../components/takeaway/ShopList'
 export default {
   data () {
     return {
@@ -25,7 +25,7 @@ export default {
     }
   },
   components: {
-    NearbyShop
+    ShopList
   },
   methods: {
     querySearch (queryString, cb) {
