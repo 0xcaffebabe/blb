@@ -29,6 +29,4 @@ public class ProductDO extends BaseDO implements Serializable {
     private String productDesc ;
     /** 商品图片 */
     private String productImg ;
-    /** 商品库存 */
-    private transient Long stock;
 }

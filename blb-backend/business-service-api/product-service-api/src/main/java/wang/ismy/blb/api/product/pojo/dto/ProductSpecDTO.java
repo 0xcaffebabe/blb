@@ -21,4 +21,6 @@ public class ProductSpecDTO {
     private BigDecimal packageFee ;
     @ApiModelProperty("价格")
     private BigDecimal price ;
+    @ApiModelProperty("库存")
+    private Long stock;
 }

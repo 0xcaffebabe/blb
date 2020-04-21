@@ -32,7 +32,6 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductCategoryRepository productCategoryRepository;
     private final ProductSpecRepository productSpecRepository;
-    private final ProductStockRepository productStockRepository;
 
     @Override
     public ProductDTO getProduct(Long productId) {
@@ -46,8 +45,6 @@ public class ProductServiceImpl implements ProductService {
                 productCategoryRepository.findById(product.getProductCategory()).orElse(null);
         // 获取商品规格信息
         List<ProductSpecDO> productSpecList = productSpecRepository.findAllByProductId(productId);
-        // 获取商品库存
-        ProductStockDO stock = productStockRepository.findById(productId).orElse(null);
 
         ProductDTO productDTO = new ProductDTO();
         ProductCategoryDTO productCategoryDTO = new ProductCategoryDTO();
@@ -55,11 +52,6 @@ public class ProductServiceImpl implements ProductService {
         productDTO.setProductCategory(productCategoryDTO);
         if (productCategory != null) {
             BeanUtils.copyProperties(productCategory, productCategoryDTO);
-        }
-        if (stock != null) {
-            productDTO.setStock(stock.getStock());
-        } else {
-            productDTO.setStock(0);
         }
         productDTO.setProductSpecList(
                 productSpecList.stream()
@@ -108,13 +100,6 @@ public class ProductServiceImpl implements ProductService {
             ProductSpecDTO specDTO = new ProductSpecDTO();
             BeanUtils.copyProperties(specDO, specDTO);
             productDTO.appendSpec(specDTO);
-        }
-        // 根据商品ID列表获取商品库存列表
-        List<ProductStockDO> stockList = productStockRepository.findAllById(productIdList);
-        // 将库存项分配给product
-        for (ProductStockDO stockDO : stockList) {
-            ProductDTO productDTO = productMap.get(stockDO.getProductId());
-            productDTO.setStock(stockDO.getStock());
         }
         return new ArrayList<>(productMap.values());
     }

@@ -26,8 +26,8 @@ class ProductServiceImplTest {
         ProductDTO product = productService.getProduct(1L);
         assertEquals("黄焖鸡米饭",product.getProductName());
         assertEquals("1号店铺招牌菜",product.getProductCategory().getCategoryName());
-        assertEquals(100,product.getStock());
         assertEquals(2,product.getProductSpecList().size());
+        assertEquals(100,product.getProductSpecList().get(0).getStock());
     }
 
     @Test void testGetProductList(){
@@ -36,20 +36,20 @@ class ProductServiceImplTest {
         var product = productList.get(0);
         assertEquals("黄焖鸡米饭",product.getProductName());
         assertEquals("1号店铺招牌菜",product.getProductCategory().getCategoryName());
-        assertEquals(100,product.getStock());
         assertEquals(2,product.getProductSpecList().size());
+        assertEquals(100,product.getProductSpecList().get(0).getStock());
 
         product = productList.get(1);
         assertEquals("黄焖猪脚米饭",product.getProductName());
         assertEquals("1号店铺招牌菜",product.getProductCategory().getCategoryName());
-        assertEquals(100,product.getStock());
         assertEquals(1,product.getProductSpecList().size());
+        assertEquals(100,product.getProductSpecList().get(0).getStock());
 
         product = productList.get(2);
         assertEquals("黄焖鸭米饭",product.getProductName());
         assertEquals("1号店铺招牌菜",product.getProductCategory().getCategoryName());
-        assertEquals(100,product.getStock());
         assertEquals(1,product.getProductSpecList().size());
+        assertEquals(100,product.getProductSpecList().get(0).getStock());
     }
 
     @Test void testGetProductAndSpecList(){
@@ -66,26 +66,26 @@ class ProductServiceImplTest {
         var product = productList.get(0);
         assertEquals("黄焖鸡米饭",product.getProductName());
         assertEquals("1号店铺招牌菜",product.getProductCategory().getCategoryName());
-        assertEquals(100,product.getStock());
         assertEquals(1,product.getProductSpecList().size());
+        assertEquals(100,product.getProductSpecList().get(0).getStock());
 
         product = productList.get(1);
         assertEquals("黄焖猪脚米饭",product.getProductName());
         assertEquals("1号店铺招牌菜",product.getProductCategory().getCategoryName());
-        assertEquals(100,product.getStock());
         assertEquals(1,product.getProductSpecList().size());
+        assertEquals(100,product.getProductSpecList().get(0).getStock());
 
         product = productList.get(2);
         assertEquals("黄焖鸭米饭",product.getProductName());
         assertEquals("1号店铺招牌菜",product.getProductCategory().getCategoryName());
-        assertEquals(100,product.getStock());
         assertEquals(1,product.getProductSpecList().size());
+        assertEquals(100,product.getProductSpecList().get(0).getStock());
 
         product = productList.get(3);
         assertEquals("黄焖鸡米饭",product.getProductName());
         assertEquals("1号店铺招牌菜",product.getProductCategory().getCategoryName());
-        assertEquals(100,product.getStock());
         assertEquals(1,product.getProductSpecList().size());
+        assertEquals(100,product.getProductSpecList().get(0).getStock());
     }
 
     @Test void testGetSpec(){

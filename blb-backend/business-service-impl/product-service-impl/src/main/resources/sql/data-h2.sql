@@ -28,23 +28,14 @@ INSERT INTO tb_product_spec
  spec_name,
  package_fee,
  price,
+ stock,
  removed,
  create_time,
  update_time)
-VALUES (1, 1, '黄焖鸡-大份', 2, 18, 0, CURRENT_TIME, CURRENT_TIME),
-       (2, 1, '黄焖鸡-小份', 2, 13, 0, CURRENT_TIME, CURRENT_TIME),
-       (3, 2, '黄焖猪脚-正常规格', 2, 13, 0, CURRENT_TIME, CURRENT_TIME),
-       (4, 3, '黄焖鸭-正常规格', 2, 13, 0, CURRENT_TIME, CURRENT_TIME);
-
-INSERT INTO tb_product_stock
-(product_id ,
- stock      ,
- removed    ,
- create_time,
- update_time)
-VALUES (1, 100, 0, CURRENT_TIME, CURRENT_TIME),
-       (2, 100,0, CURRENT_TIME, CURRENT_TIME),
-       (3, 100, 0, CURRENT_TIME, CURRENT_TIME);
+VALUES (1, 1, '黄焖鸡-大份', 2, 18,100, 0, CURRENT_TIME, CURRENT_TIME),
+       (2, 1, '黄焖鸡-小份', 2, 13, 100,0, CURRENT_TIME, CURRENT_TIME),
+       (3, 2, '黄焖猪脚-正常规格', 2, 13,100, 0, CURRENT_TIME, CURRENT_TIME),
+       (4, 3, '黄焖鸭-正常规格', 2, 13, 100,0, CURRENT_TIME, CURRENT_TIME);
 
 INSERT INTO tb_product_evaluation
 (

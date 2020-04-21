@@ -75,6 +75,7 @@ public class SellerServiceImpl implements ProductSellerService {
             spec.setProductId(product.getProductId());
             spec.setCreateTime(LocalDateTime.now());
             spec.setUpdateTime(LocalDateTime.now());
+            spec.setStock(specDTO.getStock());
             specRepository.save(spec);
         }
     }
@@ -104,7 +105,6 @@ public class SellerServiceImpl implements ProductSellerService {
         product.setProductDesc(productCreateDTO.getProductDesc());
         product.setProductName(productCreateDTO.getProductName());
         product.setProductImg(productCreateDTO.getProductImg());
-        product.setStock(productCreateDTO.getStock());
         product.setUpdateTime(LocalDateTime.now());
         // 写入商品主信息
         productRepository.save(product);

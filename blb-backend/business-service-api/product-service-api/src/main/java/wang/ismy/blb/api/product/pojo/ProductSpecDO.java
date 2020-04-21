@@ -30,4 +30,6 @@ public class ProductSpecDO extends BaseDO implements Serializable {
     private BigDecimal packageFee ;
     /** 价格 */
     private BigDecimal price ;
+    /** 库存 */
+    private Long stock;
 }

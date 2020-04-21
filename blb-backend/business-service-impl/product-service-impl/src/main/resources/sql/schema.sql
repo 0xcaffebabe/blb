@@ -23,16 +23,6 @@ CREATE TABLE tb_product_category
     PRIMARY KEY (category_id)
 ) ENGINE = InnoDB,COMMENT = 'tb_product_category ';
 
-CREATE TABLE tb_product_stock
-(
-    product_id  BIGINT NOT NULL COMMENT '商品ID',
-    stock       INT    NOT NULL COMMENT '商品库存',
-    removed     tinyint(1) COMMENT '逻辑删除N为正常，Y为删除',
-    create_time DATETIME COMMENT '创建时间',
-    update_time DATETIME COMMENT '更新时间',
-    PRIMARY KEY (product_id)
-) ENGINE = InnoDB,COMMENT = 'tb_product_stock 商品库存表，库存一般是写入热点，独立出表方便后期优化';;
-
 CREATE TABLE tb_product_evaluation
 (
     eval_id     BIGINT COMMENT '评价ID',
@@ -53,6 +43,7 @@ CREATE TABLE tb_product_spec
     spec_name   VARCHAR(128) COMMENT '规格名称',
     package_fee DECIMAL(32, 8) COMMENT '包装费',
     price       DECIMAL(32, 8) COMMENT '价格',
+    stock       BIGINT COMMENT '规格库存',
     removed     tinyint(1) COMMENT '逻辑删除N为正常，Y为删除',
     create_time DATETIME COMMENT '创建时间',
     update_time DATETIME COMMENT '更新时间'

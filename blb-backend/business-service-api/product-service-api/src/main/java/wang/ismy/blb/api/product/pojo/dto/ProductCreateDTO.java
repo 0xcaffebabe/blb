@@ -23,8 +23,6 @@ public class ProductCreateDTO {
     private String productDesc ;
     @ApiModelProperty("商品图片")
     private String productImg ;
-    @ApiModelProperty("商品库存")
-    private Long stock;
     @ApiModelProperty("商品规格列表")
     private List<ProductSpecDTO> productSpecList;
 }
