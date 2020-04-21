@@ -15,6 +15,7 @@
     <modules>
         <module>cart-service-impl</module>
         <module>product-service-impl</module>
+        <module>consumer-service-impl</module>
     </modules>
 
     <dependencies>

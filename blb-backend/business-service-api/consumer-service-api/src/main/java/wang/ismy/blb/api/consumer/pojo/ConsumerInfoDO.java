@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import wang.ismy.blb.common.BaseDO;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Table(name="tb_consumer_info")
+@Entity
 public class ConsumerInfoDO extends BaseDO implements Serializable {
     /**  */
     @Id
@@ -23,7 +25,6 @@ public class ConsumerInfoDO extends BaseDO implements Serializable {
     private String avatar ;
     /** 用户的真实姓名 */
     private String realName ;
-    private Boolean isDelete ;
     /** 用户性别Y为男，N为女 */
     private Boolean gender ;
 }

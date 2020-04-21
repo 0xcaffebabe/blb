@@ -1,0 +1,10 @@
+swagger:
+  base-package: wang.ismy.blb.impl.cart
+  base-path: /**
+  contact:
+    email: admin@ismy.wang
+  description: 消费者服务api
+  enabled: true
+  exclude-path: /error, /ops/**
+  title: 消费者服务文档
+  version: 1.0

@@ -13,6 +13,6 @@ import lombok.Data;
 public class RegisterResultDTO {
     @ApiModelProperty("注册完成提示语")
     private String greeting;
-    @ApiModelProperty("注册订单者数")
+    @ApiModelProperty("注册订餐者数")
     private Long userNumber;
 }

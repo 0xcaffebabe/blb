@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.consumer.pojo.dto.*;
 import wang.ismy.blb.common.result.Result;
@@ -16,6 +17,7 @@ import java.util.Map;
  * @date 2020/4/9 20:45
  */
 @Api(tags = "消费者主服务接口")
+@RequestMapping(value = "v1/api",produces = MediaType.APPLICATION_JSON_VALUE)
 public interface ConsumerApi {
 
     /**
@@ -59,7 +61,7 @@ public interface ConsumerApi {
     @ApiOperation("根据订餐者ID获取订餐者信息")
     @ApiImplicitParam(paramType = "path", name = "consumerId", dataType = "Long", required = true, value = "订餐者ID")
     @GetMapping("{consumerId}")
-    Result<ConsumerDTO> getInfo(@PathVariable String consumerId);
+    Result<ConsumerDTO> getInfo(@PathVariable Long consumerId);
 
 
     /**

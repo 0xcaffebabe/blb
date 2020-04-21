@@ -97,7 +97,6 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
         <!-- junit 5 -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>

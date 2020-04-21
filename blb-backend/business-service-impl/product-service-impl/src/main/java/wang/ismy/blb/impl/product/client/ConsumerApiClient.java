@@ -38,7 +38,7 @@ public interface ConsumerApiClient extends ConsumerApi {
         }
 
         @Override
-        public Result<ConsumerDTO> getInfo(String consumerId) {
+        public Result<ConsumerDTO> getInfo(Long consumerId) {
             return null;
         }
 

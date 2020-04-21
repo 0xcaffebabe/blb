@@ -100,3 +100,18 @@ jobs:
       with:
         name: product-service
         path: ./blb-backend/artifact/product-service-1.0.jar
+  consumer-service-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 13
+      uses: actions/setup-java@v1
+      with:
+        java-version: 13
+    - name: 构建订餐者服务
+      run: mvn package -f ./blb-backend/parent/pom.xml -pl :consumer-service-impl -am
+    - name: 保留订餐者服务构建物
+      uses: actions/upload-artifact@v1
+      with:
+        name: consumer-service
+        path: ./blb-backend/artifact/consumer-service-1.0.jar
