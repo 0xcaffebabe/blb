@@ -148,8 +148,11 @@ public class ConsumerServiceImpl implements ConsumerService {
         return consumerIdList.stream()
                 .collect(Collectors.toMap(l->l,l->{
                     ConsumerDTO dto = new ConsumerDTO();
-                    BeanUtils.copyProperties(consumerInfoMap.get(l),dto);
-                    dto.setUsername(consumerMap.get(l).getUsername());
+                    ConsumerInfoDO source = consumerInfoMap.get(l);
+                    if (source != null){
+                        BeanUtils.copyProperties(source,dto);
+                        dto.setUsername(consumerMap.get(l).getUsername());
+                    }
                     return dto;
                 }));
     }
