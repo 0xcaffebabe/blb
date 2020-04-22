@@ -20,8 +20,9 @@
           </el-menu>
         </el-col>
         <el-col :span="4">
-            <span class="login-tip" @click="$store.commit('toggleLoginPanel')">登录/注册</span>
-            <span class="el-icon-location location" @click="$store.commit('toggleLocationChooser')"> 漳州漳浦
+            <span class="login-tip" @click="$store.commit('toggleLoginPanel')" v-if="!$store.state.user.login">登录/注册</span>
+            <el-avatar v-else class="avatar"></el-avatar>
+            <span class="el-icon-location location" @click="$store.commit('toggleLocationChooser')"> {{$store.state.location}}
               <span class="el-icon-caret-bottom" v-if="!$store.state.locationChooserShow"></span>
               <span class="el-icon-caret-top" v-else></span>
             </span>
@@ -48,6 +49,11 @@ export default {
     font-size:14px;
     color:white;
     margin-right:20px;
+    cursor: pointer;
+  }
+  .avatar {
+    vertical-align: middle;
+    margin-right: 10px;
     cursor: pointer;
   }
   .logo {
