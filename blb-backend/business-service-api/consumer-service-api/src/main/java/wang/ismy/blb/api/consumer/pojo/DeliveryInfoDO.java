@@ -25,4 +25,5 @@ public class DeliveryInfoDO extends BaseDO implements Serializable {
     private String building ;
     /** 详细地址 如门牌号 */
     private String detail ;
+
 }

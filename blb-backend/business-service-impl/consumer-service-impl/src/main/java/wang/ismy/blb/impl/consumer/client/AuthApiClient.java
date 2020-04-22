@@ -4,6 +4,7 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import wang.ismy.blb.api.auth.AuthApi;
 import wang.ismy.blb.api.auth.User;
+import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.enums.ServiceName;
 import wang.ismy.blb.common.result.Result;
 
@@ -20,7 +21,7 @@ public interface AuthApiClient extends AuthApi {
 
         @Override
         public Result<String> auth(@Valid User user) {
-            return Result.success("token");
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR);
         }
 
         @Override

@@ -25,3 +25,29 @@ INSERT INTO tb_consumer_info
 )
 VALUES (1,'cxk avatar','蔡徐坤',0,0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP ),
 (2,'xxl avatar','徐雪莉',0,0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP );
+
+INSERT INTO tb_delivery_info
+(
+    delivery_info_id,
+    building,
+    detail,
+    removed,
+    create_time,
+    update_time
+)
+VALUES (1,'翻斗大街42栋','3602',0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP ),
+        (2,'爱情公寓A楼','3601',0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP ),
+        (3,'泉州软件学院','305',0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP );
+
+INSERT INTO tb_consumer_delivery
+(
+    delivery_info_id,
+    user_id,
+    default_delivery,
+    removed,
+    create_time,
+    update_time
+)
+VALUES (1,1,0,0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP ),
+        (2,1,1,0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP ),
+        (3,2,1,0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP );

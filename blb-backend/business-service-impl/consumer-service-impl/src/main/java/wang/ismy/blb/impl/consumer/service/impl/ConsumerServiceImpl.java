@@ -186,7 +186,7 @@ public class ConsumerServiceImpl implements ConsumerService {
 
         if (!consumerDO.getPassword().equals(DigestUtils.md5Hex(oldPassword))){
             log.warn("修改密码 密码不一致");
-            return;
+            throw new BlbException("旧密码不正确");
         }
         consumerDO.setPassword(DigestUtils.md5Hex(newPassword));
         consumerRepository.save(consumerDO);

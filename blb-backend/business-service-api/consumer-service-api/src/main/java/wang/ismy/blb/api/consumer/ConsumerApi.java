@@ -1,9 +1,6 @@
 package wang.ismy.blb.api.consumer;
 
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
-import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.*;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.consumer.pojo.dto.*;
@@ -70,9 +67,8 @@ public interface ConsumerApi {
      * @return
      */
     @ApiOperation("根据订餐者ID批量获取订餐者信息")
-    @ApiImplicitParam(paramType = "query", name = "consumerIdList", dataType = "List", required = true, value = "订餐者ID列表")
     @GetMapping("list")
-    Result<Map<Long,ConsumerDTO>> getInfo(@RequestParam("consumerIdList")List<Long> consumerIdList);
+    Result<Map<Long,ConsumerDTO>> getInfo(@RequestParam("consumerIdList") @ApiParam("consumerIdList") List<Long> consumerIdList);
 
     /**
      * 修改订餐者自己的信息

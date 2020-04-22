@@ -2,6 +2,7 @@ package wang.ismy.blb.common;
 
 import lombok.Data;
 import lombok.ToString;
+import org.springframework.cglib.core.Local;
 
 import javax.persistence.MappedSuperclass;
 import java.time.LocalDateTime;
@@ -21,4 +22,9 @@ public class BaseDO {
     private LocalDateTime createTime ;
     /** 更新时间 */
     private LocalDateTime updateTime ;
+
+    public void initTime(){
+        this.createTime = LocalDateTime.now();
+        this.updateTime = LocalDateTime.now();
+    }
 }

@@ -15,6 +15,9 @@ public class BlbExceptionHandler {
 
     @ExceptionHandler(BlbException.class)
     public Result<Object> handle(BlbException e){
+        if (e.getResultCode() == null){
+            return Result.failure(ResultCode.SPECIFIED_QUESTIONED_USER_NOT_EXIST.getCode(),e.getMsg());
+        }
         return Result.failure(e.getResultCode());
     }
 

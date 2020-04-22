@@ -324,7 +324,7 @@
               "notNull": true
             },
             {
-              "name": "is_default",
+              "name": "default_address",
               "type": "YesNo",
               "remark": "",
               "chnname": "是否是默认收货信息"

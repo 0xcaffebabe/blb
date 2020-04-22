@@ -3,6 +3,7 @@ package wang.ismy.blb.api.consumer;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.consumer.pojo.dto.DeliveryDTO;
 import wang.ismy.blb.common.result.Result;
@@ -14,7 +15,7 @@ import java.util.List;
  * @date 2020/4/9 20:57
  */
 @Api(tags = "消费者收货信息服务")
-@RequestMapping("delivery")
+@RequestMapping(value = "v1/api/delivery",produces = MediaType.APPLICATION_JSON_VALUE)
 public interface ConsumerDeliveryApi {
 
     /**
@@ -35,7 +36,7 @@ public interface ConsumerDeliveryApi {
     @ApiOperation("消费者更新收货信息")
     @ApiImplicitParam(paramType = "path", name = "deliveryId", dataType = "Long", required = true, value = "收货信息ID")
     @PutMapping("{deliveryId}")
-    Result<Void> updateDelivery(@PathVariable("deliveryId") String deliveryId,
+    Result<Void> updateDelivery(@PathVariable("deliveryId") Long deliveryId,
                                 @RequestBody DeliveryDTO deliveryDTO);
 
     /**
