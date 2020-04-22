@@ -14,26 +14,5 @@ import wang.ismy.blb.common.result.Result;
 public interface CacheApiClient extends CacheApi {
 
     @Component
-    class Fallback implements CacheApiClient{
-
-        @Override
-        public Result<Void> put(String key, String data, Long ttl) {
-            return null;
-        }
-
-        @Override
-        public Result<String> get(String key) {
-            return null;
-        }
-
-        @Override
-        public Result<Boolean> exits(String key) {
-            return null;
-        }
-
-        @Override
-        public Result<Void> delete(String key) {
-            return null;
-        }
-    }
+    class Fallback extends CacheApi.Fallback implements CacheApiClient{}
 }

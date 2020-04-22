@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+import wang.ismy.blb.api.auth.User;
 import wang.ismy.blb.api.product.pojo.ProductCategoryDO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
 import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
 import wang.ismy.blb.common.SnowFlake;
+import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.MockUtils;
 import wang.ismy.blb.impl.product.client.AuthApiClient;
 import wang.ismy.blb.impl.product.client.ShopApiClient;
@@ -22,6 +24,7 @@ import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
+
 @SpringBootTest
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
@@ -33,32 +36,43 @@ class ProductCategoryServiceImplTest {
     @Autowired
     AuthApiClient authApiClient;
 
+
     @Autowired
     ShopApiClient shopApiClient;
 
     @Autowired
     SnowFlake snowFlake;
 
-    @Test void testGetProductByCategory(){
+    @Test
+    void testGetProductByCategory() {
         Long categoryId = 1L;
         List<ShopProductDTO> list = productCategoryService.getProductByCategory(categoryId);
-        assertEquals(3,list.size());
+        assertEquals(3, list.size());
         for (ShopProductDTO dto : list) {
-            assertEquals(100L,dto.getSales());
-            assertEquals(new BigDecimal(10L),dto.getPositiveRate());
+            assertEquals(100L, dto.getSales());
+            assertEquals(new BigDecimal(10L), dto.getPositiveRate());
         }
     }
 
-    @Test void testGetCategoryList(){
-        Long shopId  = 1L;
+    @Test
+    void testGetCategoryList() {
+        Long shopId = 1L;
         var list = productCategoryService.getCategoryList(shopId);
-        assertEquals(2,list.size());
-        assertEquals("1号店铺招牌菜",list.get(0).getCategoryName());
-        assertEquals("1号店铺兼职",list.get(1).getCategoryName());
+        assertEquals(2, list.size());
+        assertEquals("1号店铺招牌菜", list.get(0).getCategoryName());
+        assertEquals("1号店铺兼职", list.get(1).getCategoryName());
     }
 
-    @Test void testAddCategory(){
+    @Test
+    void testAddCategory() {
         String token = "token";
+
+        AuthApiClient authApiClient = mock(AuthApiClient.class);
+        User user = new User();
+        user.setUserId(1L);
+        user.setUserType("商家");
+        when(authApiClient.valid(eq(token))).thenReturn(Result.success(user));
+
         Long nextId = 11L;
         var categoryDTO = MockUtils.create(ProductCategoryDTO.class);
         SnowFlake mockSnowFlake = mock(SnowFlake.class);
@@ -66,17 +80,25 @@ class ProductCategoryServiceImplTest {
         ProductCategoryRepository mockRepository = mock(ProductCategoryRepository.class);
         ProductCategoryServiceImpl categoryService =
                 new ProductCategoryServiceImpl(mockRepository, null, null, null, null, authApiClient, shopApiClient, mockSnowFlake);
-        categoryService.addCategory(token,categoryDTO);
+        categoryService.addCategory(token, categoryDTO);
         verify(mockRepository).save(argThat(categoryDO ->
-            categoryDO.getCategoryId().equals(nextId)
-                    && categoryDO.getCategoryDesc().equals(categoryDTO.getCategoryDesc())
-                    && categoryDO.getCategoryName().equals(categoryDTO.getCategoryName())
-                && categoryDO.getShopId().equals(1L)
+                categoryDO.getCategoryId().equals(nextId)
+                        && categoryDO.getCategoryDesc().equals(categoryDTO.getCategoryDesc())
+                        && categoryDO.getCategoryName().equals(categoryDTO.getCategoryName())
+                        && categoryDO.getShopId().equals(1L)
         ));
     }
 
-    @Test void testUpdate(){
+    @Test
+    void testUpdate() {
         String token = "token";
+
+        AuthApiClient authApiClient = mock(AuthApiClient.class);
+        User user = new User();
+        user.setUserId(1L);
+        user.setUserType("商家");
+        when(authApiClient.valid(eq(token))).thenReturn(Result.success(user));
+
         Long cateId = 11L;
         var categoryDTO = MockUtils.create(ProductCategoryDTO.class);
         categoryDTO.setCategoryId(cateId);
@@ -88,7 +110,7 @@ class ProductCategoryServiceImplTest {
 
         ProductCategoryServiceImpl categoryService =
                 new ProductCategoryServiceImpl(mockRepository, null, null, null, null, authApiClient, shopApiClient, null);
-        categoryService.update(token,categoryDTO);
+        categoryService.update(token, categoryDTO);
         verify(mockRepository).save(argThat(categoryDO ->
                 categoryDO.getCategoryId().equals(cateId)
                         && categoryDO.getCategoryDesc().equals(categoryDTO.getCategoryDesc())
@@ -96,8 +118,16 @@ class ProductCategoryServiceImplTest {
         ));
     }
 
-    @Test void testDelete(){
+    @Test
+    void testDelete() {
         String token = "token";
+
+        AuthApiClient authApiClient = mock(AuthApiClient.class);
+        User user = new User();
+        user.setUserId(1L);
+        user.setUserType("商家");
+        when(authApiClient.valid(eq(token))).thenReturn(Result.success(user));
+
         Long cateId = 11L;
         var categoryDTO = MockUtils.create(ProductCategoryDTO.class);
         categoryDTO.setCategoryId(cateId);
@@ -109,7 +139,7 @@ class ProductCategoryServiceImplTest {
 
         ProductCategoryServiceImpl categoryService =
                 new ProductCategoryServiceImpl(mockRepository, null, null, null, null, authApiClient, shopApiClient, null);
-        categoryService.delete(token,cateId);
+        categoryService.delete(token, cateId);
         verify(mockRepository).deleteById(eq(cateId));
     }
 }

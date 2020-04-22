@@ -17,21 +17,6 @@ import javax.validation.Valid;
 @FeignClient(value = ServiceName.AUTH_SERVICE,fallback = AuthApiClient.Fallback.class)
 public interface AuthApiClient extends AuthApi {
 
-    // TODO
     @Component
-    class Fallback implements AuthApiClient{
-
-        @Override
-        public Result<String> auth(@Valid User user) {
-            return null;
-        }
-
-        @Override
-        public Result<User> valid(String token) {
-            User user = new User();
-            user.setUserId(1L);
-            user.setUserType(UserTypeEnum.SELLER.getType());
-            return Result.success(user);
-        }
-    }
+    class Fallback extends AuthApi.Fallback implements AuthApiClient{ }
 }

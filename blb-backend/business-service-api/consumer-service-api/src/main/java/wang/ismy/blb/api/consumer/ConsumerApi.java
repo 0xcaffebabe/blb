@@ -4,6 +4,7 @@ import io.swagger.annotations.*;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.consumer.pojo.dto.*;
+import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Result;
 
 import java.util.List;
@@ -87,4 +88,42 @@ public interface ConsumerApi {
     @PutMapping("password")
     Result<Void> updatePassword(@RequestParam("oldPassword") String oldPasword,
                                 @RequestParam("newPassword") String newPassword);
+
+    class Fallback implements ConsumerApi{
+
+        @Override
+        public Result<RegisterResultDTO> register(RegisterDTO registerDTO) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 消费者服务 注册接口失败");
+        }
+
+        @Override
+        public Result<LoginResultDTO> login(String loginStr, String password) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 消费者服务 登录接口失败");
+        }
+
+        @Override
+        public Result<ConsumerDTO> getInfo() {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 消费者服务 获取消费者信息接口失败");
+        }
+
+        @Override
+        public Result<ConsumerDTO> getInfo(Long consumerId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 消费者服务 获取消费者信息接口失败");
+        }
+
+        @Override
+        public Result<Map<Long, ConsumerDTO>> getInfo(List<Long> consumerIdList) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 消费者服务 获取消费者信息接口失败");
+        }
+
+        @Override
+        public Result<Void> updateInfo(ConsumerUpdateDTO consumerUpdateDTO) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 消费者服务 更新消费者信息接口失败");
+        }
+
+        @Override
+        public Result<Void> updatePassword(String oldPasword, String newPassword) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 消费者服务 更新消费者密码接口失败");
+        }
+    }
 }

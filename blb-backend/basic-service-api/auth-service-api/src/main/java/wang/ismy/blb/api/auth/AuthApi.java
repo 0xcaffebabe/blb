@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Result;
 
 import javax.validation.Valid;
@@ -35,4 +36,17 @@ public interface AuthApi {
     @ApiImplicitParam(paramType = "path", name = "token", dataType = "String", required = true, value = "令牌")
     @GetMapping("{token}")
     Result<User> valid(@PathVariable("token") String token);
+
+    class Fallback implements AuthApi{
+
+        @Override
+        public Result<String> auth(@Valid User user) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用认证服务认证接口失败");
+        }
+
+        @Override
+        public Result<User> valid(String token) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用认证服务鉴权接口失败");
+        }
+    }
 }

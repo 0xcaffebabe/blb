@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
+import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Result;
 
 
@@ -59,4 +60,26 @@ public interface CacheApi {
     @DeleteMapping("{key}")
     Result<Void> delete(@PathVariable("key") String key);
 
+    class Fallback implements CacheApi {
+
+        @Override
+        public Result<Void> put(String key, String data, Long ttl) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用缓存服务存缓存接口失败");
+        }
+
+        @Override
+        public Result<String> get(String key) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用缓存服务取缓存接口失败");
+        }
+
+        @Override
+        public Result<Boolean> exits(String key) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用缓存服务缓存是否存在接口失败");
+        }
+
+        @Override
+        public Result<Void> delete(String key) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用缓存服务删除缓存接口失败");
+        }
+    }
 }
