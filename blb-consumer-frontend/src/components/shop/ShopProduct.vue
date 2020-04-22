@@ -1,9 +1,8 @@
 <template>
-  <el-tabs tab-position="left" type="border-card" :value="categoryActiveName">
+  <el-tabs tab-position="left"  :value="categoryActiveName">
     <!-- 商品分类选项栏 -->
-    <el-tab-pane label="好吃的🍔" :name="item+''" v-for="item in 6" :key="item">
-      <el-card>
-        <div slot="header" class="clearfix product-cate-title">
+    <el-tab-pane label="好吃的🍔" :name="item+''" v-for="item in 8" :key="item">
+        <div class="clearfix product-cate-title">
           <h2>好吃的🍔</h2><span> 香香甜甜的烤面筋</span>
         </div>
         <ul class="product-list">
@@ -25,7 +24,6 @@
             <el-divider></el-divider>
           </li>
         </ul>
-      </el-card>
     </el-tab-pane>
   </el-tabs>
 </template>
@@ -41,6 +39,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  .el-tabs__item .is-left {
+    height: 48px!important;
+  }
   .product-cate-title {
     h2 {
       display: inline;
@@ -54,16 +55,13 @@ export default {
     }
   }
   .product-list {
+    padding: 0;
     .el-image {
       max-height: 150px;
       max-width: 150px;
     }
     li :hover {
       cursor: pointer;
-    }
-    li:hover .el-divider {
-      cursor: pointer;
-      box-shadow: 2px 2px 13px rgba(0,0,0,.5);
     }
     h2 {
       font-size: 18px;

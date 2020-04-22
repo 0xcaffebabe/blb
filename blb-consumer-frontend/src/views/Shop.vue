@@ -5,10 +5,10 @@
     <el-card>
         <el-tabs v-model="activeName">
           <el-tab-pane label="商品" name="product">
-            <shop-product></shop-product>
+            <shop-product/>
           </el-tab-pane>
           <el-tab-pane label="评价" name="eval">
-            <shop-eval></shop-eval>
+            <shop-eval/>
           </el-tab-pane>
           <el-tab-pane label="商家" name="third">商家</el-tab-pane>
         </el-tabs>
@@ -20,7 +20,7 @@
       <el-badge :value="12">
         <el-button icon="el-icon-shopping-cart-2" circle class="cart-button" @click="$store.commit('toggleCart')"></el-button>
       </el-badge>
-      <el-button type="success" class="pay-button" @click="$router.push('pay')">结算</el-button>
+      <el-button type="success" class="pay-button" @click="$router.push('confirmOrder')">结算</el-button>
     </div>
   </div>
 </template>

@@ -7,6 +7,7 @@
     <el-card class="cart-card">
       <div slot="header" class="cart-header">
         <h2>购物车</h2>
+        <span class="amount">￥ 120.00</span>
         <el-button icon="el-icon-delete" type="danger" size="mini">清空</el-button>
       </div>
       <ul class="cart-list">
@@ -77,5 +78,9 @@ export default {
         font-size: 18px;
       }
     }
+  }
+  .amount {
+    margin-left: 5px;
+    font-weight: 600;
   }
 </style>

@@ -5,7 +5,7 @@
         {{title}}
       </div>
       <ul class="shop-list">
-        <li class="shop-item-wrapper" v-for="item in 8" :key="item">
+        <li class="shop-item-wrapper" v-for="item in shopList" :key="item">
           <div class="shop-item" @click="handleShopItemClick">
             <el-image src="https://p1.meituan.net/waimaipoi/23d94486b3882b8eb6101aa251bbd45030720.jpg" alt="">
               <div slot="error" class="image-slot">
@@ -34,7 +34,7 @@
 
 <script>
 export default {
-  props: ['title'],
+  props: ['title', 'shopList'],
   data () {
     return {}
   },

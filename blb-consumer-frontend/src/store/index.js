@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     cartShow: false,
     orderDetailShow: true,
-    locationChooserShow: true,
+    locationChooserShow: false,
     loginPanelShow: false,
     user: {
       login: false

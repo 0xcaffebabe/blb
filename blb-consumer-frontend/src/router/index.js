@@ -7,6 +7,7 @@ import Search from '../views/Search'
 import Order from '../views/Order'
 import My from '../views/My'
 import Pay from '../views/Pay'
+import ConfirmOrder from '../views/ConfirmOrder'
 Vue.use(VueRouter)
 
 const routes = [
@@ -20,7 +21,8 @@ const routes = [
       { path: 'search', component: Search },
       { path: 'order', component: Order },
       { path: 'my', component: My },
-      { path: 'pay', component: Pay }
+      { path: 'pay', component: Pay },
+      { path: 'confirmOrder', component: ConfirmOrder }
     ]
   }
 ]
