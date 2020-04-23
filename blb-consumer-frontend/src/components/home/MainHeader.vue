@@ -6,7 +6,7 @@
           </span>
         </el-col>
         <el-col :span="16">
-          <el-menu :default-active="'my'"
+          <el-menu :default-active="'takeaway'"
                     mode="horizontal"
                     background-color="#3190e8"
                     text-color="#fff"
@@ -37,6 +37,8 @@ import LocationChooser from './LocationChooser'
 export default {
   data () {
     return {}
+  },
+  created () {
   },
   components: {
     LocationChooser

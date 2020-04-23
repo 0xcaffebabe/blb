@@ -25,6 +25,7 @@
               <li>送货地址：漳浦三中 旧镇镇城外村</li>
               <li>收货人：蔡徐坤</li>
               <li>手机：1731111111</li>
+              <li>备注：芋圆波波奶茶不要芋圆不要奶茶</li>
             </ul>
             <el-divider></el-divider>
             <el-timeline>

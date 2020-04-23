@@ -40,6 +40,14 @@
                   </el-col>
                 </el-row>
               </li>
+              <li class="order-detail-item">
+                <el-row>
+                  <el-col :span="4" :offset="20">
+                    <el-tag style="margin-right:20px" size="small" type="danger">实付</el-tag>
+                    <span>￥25.09</span>
+                  </el-col>
+                </el-row>
+              </li>
             </ul>
           </el-card>
   </div>
