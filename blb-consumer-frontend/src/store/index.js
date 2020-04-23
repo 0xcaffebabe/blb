@@ -9,6 +9,7 @@ export default new Vuex.Store({
     orderDetailShow: true,
     locationChooserShow: false,
     loginPanelShow: false,
+    userEditPanelShow: true,
     user: {
       login: false
     },
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     },
     toggleLoginPanel () {
       this.state.loginPanelShow = !this.state.loginPanelShow
+    },
+    toggleUserEditPanel () {
+      this.state.userEditPanelShow = !this.state.userEditPanelShow
     }
   },
   actions: {

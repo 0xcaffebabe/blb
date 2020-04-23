@@ -2,7 +2,7 @@
   <div>
     <el-card class="my">
       <div slot="header">我的</div>
-      <el-row>
+      <el-row :gutter="20">
         <el-col :span="8" class="my-left">
           <el-row>
             <el-col :span="6">
@@ -14,25 +14,34 @@
             </el-col>
           </el-row>
           <el-card class="info-card">
-            <div><span class="el-icon-arrow-right" style="float:right"></span> 收货地址</div>
+            <div @click="$store.commit('toggleUserEditPanel')"><span class="el-icon-arrow-right" style="float:right"></span> 收货地址</div>
             <el-divider></el-divider>
             <div><span class="el-icon-arrow-right" style="float:right"></span> 登录密码</div>
+            <el-divider></el-divider>
+            <div><span class="el-icon-arrow-right" style="float:right"></span> 手机号码</div>
           </el-card>
         </el-col>
         <el-col :span="16" class="my-right">
-          xxx
+          <el-card>
+            <div slot="header">任务中心</div>
+          </el-card>
         </el-col>
       </el-row>
     </el-card>
+    <user-edit-pane></user-edit-pane>
   </div>
 </template>
 
 <script>
+import UserEditPane from '../components/my/UserEditPane'
 export default {
   data () {
     return {
       nickNameShow: true
     }
+  },
+  components: {
+    UserEditPane
   }
 }
 </script>
@@ -47,5 +56,8 @@ export default {
   .info-card {
     margin-top: 10px;
     font-size: 14px;
+    div {
+      cursor: pointer;
+    }
   }
 </style>
