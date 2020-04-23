@@ -14,6 +14,7 @@ import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.MockUtils;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author MY
@@ -37,17 +38,17 @@ public interface ShopApiClient extends ShopApi {
         }
 
         @Override
-        public Result<ShopInfoDTO> getShopInfo(List<Long> shopIdList) {
+        public Result<Map<Long,ShopInfoDTO>> getShopInfo(List<Long> shopIdList) {
             return null;
         }
 
         @Override
-        public Result<Void> addShop(ShopCreateDTO shopCreateDTO) {
+        public Result<Long> addShop(ShopCreateDTO shopCreateDTO) {
             return null;
         }
 
         @Override
-        public Result<Void> updateShopInfo(String shopId, ShopInfoUpdateDTO shopInfoUpdateDTO) {
+        public Result<Void> updateShopInfo(Long shopId, ShopInfoUpdateDTO shopInfoUpdateDTO) {
             return null;
         }
 

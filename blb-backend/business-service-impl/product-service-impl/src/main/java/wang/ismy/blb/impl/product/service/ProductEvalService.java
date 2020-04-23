@@ -52,4 +52,11 @@ public interface ProductEvalService {
      * @param evalCreateDTO
      */
     void createEval(String token, EvalCreateDTO evalCreateDTO);
+
+    /**
+     * 批量获取店铺评分
+     * @param shopIdList
+     * @return
+     */
+    Map<Long,BigDecimal> getShopEval(List<Long> shopIdList);
 }

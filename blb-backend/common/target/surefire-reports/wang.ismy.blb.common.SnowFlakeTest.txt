@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: wang.ismy.blb.common.SnowFlakeTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.611 s - in wang.ismy.blb.common.SnowFlakeTest
+Tests run: 2, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.002 s - in wang.ismy.blb.common.SnowFlakeTest

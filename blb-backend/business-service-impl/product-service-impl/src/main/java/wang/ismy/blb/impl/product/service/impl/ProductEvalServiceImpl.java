@@ -73,7 +73,12 @@ public class ProductEvalServiceImpl implements ProductEvalService {
         for (ProductEvaluationDO eval : evalList) {
             total = total.add(eval.getRanking());
         }
-        total = total.divide(new BigDecimal(evalList.size()),RoundingMode.CEILING).setScale(1, RoundingMode.CEILING);
+        if (evalList.size() != 0){
+            total = total.divide(new BigDecimal(evalList.size()),RoundingMode.CEILING).setScale(1, RoundingMode.CEILING);
+        }else {
+            total = BigDecimal.ZERO;
+        }
+
 
         // 写入缓存
         cacheService.put(getKey(shopId), total, ProductConstant.CACHE_TTL);
@@ -187,6 +192,11 @@ public class ProductEvalServiceImpl implements ProductEvalService {
             eval.setUpdateTime(LocalDateTime.now());
             evaluationRepository.save(eval);
         }
+    }
+
+    @Override
+    public Map<Long, BigDecimal> getShopEval(List<Long> shopIdList) {
+        return shopIdList.stream().collect(Collectors.toMap(id->id, this::getShopEval));
     }
 
     private String getKey(Long shopId) {

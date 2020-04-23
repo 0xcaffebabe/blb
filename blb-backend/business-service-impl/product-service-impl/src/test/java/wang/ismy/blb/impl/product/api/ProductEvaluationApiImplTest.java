@@ -1,5 +1,6 @@
 package wang.ismy.blb.impl.product.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -21,6 +22,8 @@ import wang.ismy.blb.common.util.MockUtils;
 import wang.ismy.blb.impl.product.service.ProductEvalService;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -48,6 +51,20 @@ class ProductEvaluationApiImplTest {
         when(productEvalService.getShopEval(eq(shopId)))
                 .thenReturn(score);
         mockMvc.perform(get("/v1/api/eval/shop/" + shopId))
+                .andExpect(status().isOk())
+                .andExpect(content().json(jsonStr));
+    }
+
+    @Test
+    void  testGetShopEvalBatch() throws Exception {
+        var idList = List.of(1L,2L);
+        var map = Map.of(1L,new BigDecimal("3.5"),2L,new BigDecimal("3.6"));
+        String jsonStr = new ObjectMapper().writeValueAsString(Result.success(map));
+        when(productEvalService.getShopEval(eq(idList)))
+                .thenReturn(map);
+        mockMvc.perform(get("/v1/api/eval/shop/list")
+                .param("shopIdList",idList.get(0).toString(),idList.get(1).toString())
+        )
                 .andExpect(status().isOk())
                 .andExpect(content().json(jsonStr));
     }

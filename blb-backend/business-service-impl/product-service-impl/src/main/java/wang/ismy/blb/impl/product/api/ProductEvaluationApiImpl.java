@@ -12,6 +12,8 @@ import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.impl.product.service.ProductEvalService;
 
 import java.math.BigDecimal;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author MY
@@ -25,6 +27,11 @@ public class ProductEvaluationApiImpl implements ProductEvaluationApi {
     public Result<BigDecimal> getShopEval(Long shopId) {
         BigDecimal evalScore = productEvalService.getShopEval(shopId);
         return Result.success(evalScore);
+    }
+
+    @Override
+    public Result<Map<Long,BigDecimal>> getShopEval(List<Long> shopIdList) {
+        return Result.success(productEvalService.getShopEval(shopIdList));
     }
 
     @Override

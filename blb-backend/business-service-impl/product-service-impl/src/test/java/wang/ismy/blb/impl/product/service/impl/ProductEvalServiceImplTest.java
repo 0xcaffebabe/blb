@@ -47,6 +47,9 @@ class ProductEvalServiceImplTest {
     @Autowired
     ProductRepository productRepository;
 
+    @Autowired
+    ProductEvalServiceImpl evalService;
+
     @Test void testGetShopEvalHitCache(){
         Long shopId = 1L;
         CacheService cacheService = mock(CacheService.class);
@@ -67,6 +70,13 @@ class ProductEvalServiceImplTest {
         verify(cacheService).put(eq("shop-eval-"+ shopId),eq(new BigDecimal("3.5")),eq(ProductConstant.CACHE_TTL));
 
         assertEquals(new BigDecimal("3.5"),shopEval);
+    }
+
+    @Test void testGetShopEvalBatch(){
+        var list = List.of(1L,2L);
+        var map = evalService.getShopEval(list);
+        assertEquals(2,map.size());
+        assertEquals(new BigDecimal("3.5"),map.get(1L));
     }
 
     @Test void testGetShopEvalInfoHitCache(){

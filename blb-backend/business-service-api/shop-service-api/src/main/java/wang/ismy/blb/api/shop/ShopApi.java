@@ -3,6 +3,8 @@ package wang.ismy.blb.api.shop;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.shop.pojo.dto.ShopCreateDTO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopInfoDTO;
@@ -13,12 +15,14 @@ import wang.ismy.blb.common.result.Pageable;
 import wang.ismy.blb.common.result.Result;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author MY
  * @date 2020/4/9 11:38
  */
 @Api(tags = "店铺主服务接口")
+@RequestMapping(value = "v1/api",produces = MediaType.APPLICATION_JSON_VALUE)
 public interface ShopApi {
 
     /**
@@ -49,18 +53,17 @@ public interface ShopApi {
      * @return 店铺信息DTO列表
      */
     @ApiOperation("根据店铺ID列表批量获取店铺信息")
-    @ApiImplicitParam(paramType = "path", name = "shopIdList", dataType = "List", required = true, value = "店铺ID列表")
     @GetMapping("info/list")
-    Result<ShopInfoDTO> getShopInfo(@RequestParam("shopIdList") List<Long> shopIdList);
+    Result<Map<Long,ShopInfoDTO>> getShopInfo(@RequestParam("shopIdList") @ApiParam("shopIdList") List<Long> shopIdList);
 
     /**
      * 添加店铺
      * @param shopCreateDTO
-     * @return 成功失败结果写入result
+     * @return 返回创建后的店铺ID
      */
     @ApiOperation("添加店铺")
     @PostMapping("")
-    Result<Void> addShop(@RequestBody ShopCreateDTO shopCreateDTO);
+    Result<Long> addShop(@RequestBody ShopCreateDTO shopCreateDTO);
 
     /**
      * 更新店铺信息
@@ -70,7 +73,7 @@ public interface ShopApi {
      */
     @ApiOperation("更新店铺信息")
     @PutMapping("info/{shopId}")
-    Result<Void> updateShopInfo(@PathVariable("shopId") String shopId,
+    Result<Void> updateShopInfo(@PathVariable("shopId") Long shopId,
                                 @RequestBody ShopInfoUpdateDTO shopInfoUpdateDTO);
 
     /**

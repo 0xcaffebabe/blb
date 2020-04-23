@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import wang.ismy.blb.common.BaseDO;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Table(name="tb_shop")
+@Entity
 public class ShopDO extends BaseDO implements Serializable {
     /** 店铺ID */
     @Id
@@ -24,5 +26,5 @@ public class ShopDO extends BaseDO implements Serializable {
     /** 店铺所属分类 */
     private Long categoryId ;
     /** 店铺详细信息 */
-    private ShopInfoDO shopInfo;
+    private transient ShopInfoDO shopInfo;
 }

@@ -9,6 +9,7 @@ import wang.ismy.blb.api.seller.pojo.SellerInfoDTO;
 import wang.ismy.blb.api.seller.pojo.dto.LoginResultDTO;
 import wang.ismy.blb.api.seller.pojo.dto.SellerCreateDTO;
 import wang.ismy.blb.api.seller.pojo.dto.SellerRegisterResultDTO;
+import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Result;
 
 /**
@@ -52,4 +53,22 @@ public interface SellerApi {
     @ApiOperation("商家登录接口")
     Result<LoginResultDTO> login(@RequestParam("loginStr") String loginStr,
                                  @RequestParam("password") String password);
+
+    class Fallback implements SellerApi {
+
+        @Override
+        public Result<SellerInfoDTO> getSellerInfo(Long sellerId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商家服务 获取商家信息接口失败");
+        }
+
+        @Override
+        public Result<SellerRegisterResultDTO> register(SellerCreateDTO sellerCreateDTO) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商家服务 注册接口失败");
+        }
+
+        @Override
+        public Result<LoginResultDTO> login(String loginStr, String password) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商家服务 登录接口失败");
+        }
+    }
 }

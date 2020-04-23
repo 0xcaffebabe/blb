@@ -18,6 +18,9 @@ public interface ServiceName {
     long PRODUCT_SERVICE_ID = 4L;
     String ORDER_SERVICE = "order-service";
     String SHOP_SERVICE = "shop-service";
+    long SHOP_SERVICE_ID=6L;
     String CONSUMER_SERVICE = "consumer-service";
     long CONSUMER_SERVICE_ID = 7L;
+    String SELLER_SERVICE = "seller-service";
+    long SELLER_SERVICE_ID = 8L;
 }
