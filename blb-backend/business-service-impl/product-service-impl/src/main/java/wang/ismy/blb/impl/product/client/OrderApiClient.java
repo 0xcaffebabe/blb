@@ -63,7 +63,7 @@ public interface OrderApiClient extends OrderApi {
         }
 
         @Override
-        public Result<OrderValidCode> getOrderValidCode() {
+        public Result<OrderValidCode> getOrderValidCode(Long orderId) {
             return null;
         }
 
