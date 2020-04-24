@@ -17,6 +17,7 @@
         <module>product-service-impl</module>
         <module>consumer-service-impl</module>
         <module>shop-service-impl</module>
+        <module>order-service-impl</module>
     </modules>
 
     <dependencies>

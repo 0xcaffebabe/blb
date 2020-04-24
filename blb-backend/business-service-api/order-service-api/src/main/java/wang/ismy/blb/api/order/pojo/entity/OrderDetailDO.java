@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import wang.ismy.blb.common.BaseDO;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -16,6 +17,7 @@ import java.math.BigDecimal;
 @Table(name="tb_order_detail")
 @Data
 @EqualsAndHashCode(callSuper = true)
+@Entity
 public class OrderDetailDO extends BaseDO implements Serializable {
     /** 订单详情ID */
     @Id

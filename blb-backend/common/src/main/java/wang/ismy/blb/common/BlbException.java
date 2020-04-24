@@ -17,6 +17,7 @@ public class BlbException extends RuntimeException {
     }
 
     public BlbException(String msg){
+        super(msg);
         this.msg = msg;
     }
 

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.product.pojo.dto.CartProductGetDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductSpecDTO;
+import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Result;
 
 import java.util.List;
@@ -61,4 +62,27 @@ public interface ProductApi {
     @ApiImplicitParam(paramType = "path", name = "specId", dataType = "Long", required = true, value = "规格ID")
     @GetMapping("spec/{specId}")
     Result<ProductSpecDTO> getProductSpec(@PathVariable("specId") Long specId);
+
+    class Fallback implements ProductApi{
+
+        @Override
+        public Result<ProductDTO> getProduct(Long productId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商品服务 获取商品接口失败");
+        }
+
+        @Override
+        public Result<List<ProductDTO>> getProductList(List<Long> productIdList) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商品服务 获取商品列表接口失败");
+        }
+
+        @Override
+        public Result<List<ProductDTO>> getListByProductAndSpecList(List<CartProductGetDTO> list) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商品服务 获取商品与商品规格接口失败");
+        }
+
+        @Override
+        public Result<ProductSpecDTO> getProductSpec(Long specId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商品服务 获取商品规格接口失败");
+        }
+    }
 }

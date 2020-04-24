@@ -20,8 +20,12 @@ public class OrderResultDTO {
     private Long shopId ;
     @ApiModelProperty("订餐者")
     private Long consumerId ;
-    @ApiModelProperty("收货人地址信息")
-    private Long consumerDeliveryInfo ;
+    /** 收货人 */
+    private String consumerName ;
+    /** 收货人手机 */
+    private String consumerPhone ;
+    /** 收货地址 */
+    private String consumerAddress ;
     @ApiModelProperty("订单总金额")
     private BigDecimal orderAmount ;
     @ApiModelProperty("订单状态")

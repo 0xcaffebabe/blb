@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import wang.ismy.blb.common.BaseDO;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -17,6 +18,7 @@ import java.util.List;
 @Table(name="tb_order")
 @Data
 @EqualsAndHashCode(callSuper = true)
+@Entity
 public class OrderDO extends BaseDO implements Serializable {
     /** 订单ID */
     @Id

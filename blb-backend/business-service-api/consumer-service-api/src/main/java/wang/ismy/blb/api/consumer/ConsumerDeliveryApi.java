@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.consumer.pojo.dto.DeliveryDTO;
+import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Result;
 
 import java.util.List;
@@ -74,4 +75,37 @@ public interface ConsumerDeliveryApi {
     @ApiImplicitParam(paramType = "path", name = "deliveryId", dataType = "Long", required = true, value = "收货信息ID")
     @GetMapping("{deliveryId}")
     Result<DeliveryDTO> getDeliveryInfo(@PathVariable Long deliveryId);
+
+    class Fallback implements ConsumerDeliveryApi{
+
+        @Override
+        public Result<Void> addDelivery(DeliveryDTO deliveryDTO) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 消费者收货信息服务 增加收货信息接口失败");
+        }
+
+        @Override
+        public Result<Void> updateDelivery(Long deliveryId, DeliveryDTO deliveryDTO) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 消费者收货信息服务 更新收货信息接口失败");
+        }
+
+        @Override
+        public Result<List<DeliveryDTO>> getDeliveryInfoList() {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 消费者收货信息服务 查询收货信息列表接口失败");
+        }
+
+        @Override
+        public Result<DeliveryDTO> getDefaultDeliveryInfo() {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 消费者收货信息服务 获取默认收货信息接口失败");
+        }
+
+        @Override
+        public Result<DeliveryDTO> getDefaultDeliveryInfo(Long consumerId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 消费者收货信息服务 获取默认收货信息接口失败");
+        }
+
+        @Override
+        public Result<DeliveryDTO> getDeliveryInfo(Long deliveryId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 消费者收货信息服务 获取收货信息接口失败");
+        }
+    }
 }
