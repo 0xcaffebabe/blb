@@ -25,8 +25,12 @@ public class OrderDO extends BaseDO implements Serializable {
     private Long shopId ;
     /** 订餐者 */
     private Long consumerId ;
-    /** 收货人地址信息 */
-    private Long consumerDeliveryInfo ;
+    /** 收货人 */
+    private String consumerName ;
+    /** 收货人手机 */
+    private String consumerPhone ;
+    /** 收货地址 */
+    private String consumerAddress ;
     /** 订单总金额 */
     private BigDecimal orderAmount ;
     /** 订单状态0：未处理，1：已处理，2：配送中，3：已完结，4：已作废 */
@@ -36,5 +40,5 @@ public class OrderDO extends BaseDO implements Serializable {
     /** 订单备注 */
     private String orderNote ;
     /** 订单详情列表 */
-    private List<OrderDetailDO> orderDetailList;
+    private transient List<OrderDetailDO> orderDetailList;
 }

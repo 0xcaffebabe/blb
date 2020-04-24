@@ -1800,10 +1800,22 @@
               "notNull": true
             },
             {
-              "name": "consumer_delivery_info",
-              "type": "BigInt",
+              "name": "consumer_name",
+              "type": "Name",
               "remark": "",
-              "chnname": "收货人地址信息"
+              "chnname": "收货人"
+            },
+            {
+              "name": "consumer_phone",
+              "type": "DefaultString",
+              "remark": "",
+              "chnname": "收货人手机"
+            },
+            {
+              "name": "consumer_address",
+              "type": "MiddleString",
+              "remark": "",
+              "chnname": "收货地址"
             },
             {
               "name": "order_amount",
