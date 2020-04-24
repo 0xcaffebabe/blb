@@ -5,8 +5,21 @@
       <el-row :gutter="20">
         <el-col :span="8" class="my-left">
           <el-row>
-            <el-col :span="6">
+            <el-col :span="6" style="text-align:center">
               <el-avatar circle :size="50"></el-avatar>
+              <el-upload
+  class="upload-demo"
+  action="https://jsonplaceholder.typicode.com/posts/"
+  :on-preview="handlePreview"
+  :on-remove="handleRemove"
+  :before-remove="beforeRemove"
+  multiple
+  :limit="3"
+  :on-exceed="handleExceed"
+  :file-list="fileList">
+  <el-button size="small" type="primary">点击上传头像</el-button>
+  <div slot="tip" class="el-upload__tip">只支持jpg/png</div>
+</el-upload>
             </el-col>
             <el-col :span="18">
               <h3 v-show="nickNameShow" @click="nickNameShow = !nickNameShow">0xcaffebabe</h3>
