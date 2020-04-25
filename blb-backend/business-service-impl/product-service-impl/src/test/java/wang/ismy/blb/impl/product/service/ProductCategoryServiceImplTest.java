@@ -7,6 +7,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import wang.ismy.blb.api.auth.User;
+import wang.ismy.blb.api.order.OrderApi;
 import wang.ismy.blb.api.product.pojo.ProductCategoryDO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
 import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
@@ -14,12 +15,14 @@ import wang.ismy.blb.common.SnowFlake;
 import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.MockUtils;
 import wang.ismy.blb.impl.product.client.AuthApiClient;
+import wang.ismy.blb.impl.product.client.OrderApiClient;
 import wang.ismy.blb.impl.product.client.ShopApiClient;
 import wang.ismy.blb.impl.product.repository.ProductCategoryRepository;
 import wang.ismy.blb.impl.product.service.impl.ProductCategoryServiceImpl;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -31,7 +34,7 @@ import static org.mockito.Mockito.*;
 class ProductCategoryServiceImplTest {
 
     @Autowired
-    ProductCategoryService productCategoryService;
+    ProductCategoryServiceImpl productCategoryService;
 
     @Autowired
     AuthApiClient authApiClient;
@@ -46,6 +49,10 @@ class ProductCategoryServiceImplTest {
     @Test
     void testGetProductByCategory() {
         Long categoryId = 1L;
+        OrderApiClient orderApiClient = mock(OrderApiClient.class);
+        when(orderApiClient.getProductSales(anyList()))
+                .thenReturn(Result.success(Map.of(1L,100L,2L,100L,3L,100L)));
+        productCategoryService.setOrderApiClient(orderApiClient);
         List<ShopProductDTO> list = productCategoryService.getProductByCategory(categoryId);
         assertEquals(3, list.size());
         for (ShopProductDTO dto : list) {

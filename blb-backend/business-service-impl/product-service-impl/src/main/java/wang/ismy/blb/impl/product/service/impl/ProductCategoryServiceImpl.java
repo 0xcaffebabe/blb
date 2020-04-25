@@ -1,6 +1,7 @@
 package wang.ismy.blb.impl.product.service.impl;
 
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -34,12 +35,13 @@ import java.util.stream.Collectors;
 @Service
 @AllArgsConstructor
 @Slf4j
+@Setter
 public class ProductCategoryServiceImpl implements ProductCategoryService {
 
     private final ProductCategoryRepository categoryRepository;
     private final ProductRepository productRepository;
     private final ProductService productService;
-    private final OrderApiClient orderApiClient;
+    private OrderApiClient orderApiClient;
     private final ProductEvalService evalService;
     private final AuthApiClient authApiClient;
     private final ShopApiClient shopApiClient;

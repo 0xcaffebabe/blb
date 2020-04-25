@@ -22,41 +22,6 @@ import java.util.Map;
  */
 @FeignClient(value = ServiceName.SHOP_SERVICE,fallback = ShopApiClient.Fallback.class)
 public interface ShopApiClient extends ShopApi {
-
-    /** mock todo*/
     @Component
-    class Fallback implements ShopApiClient {
-
-        @Override
-        public Result<Page<ShopItemDTO>> getNearbyShop(String location, Pageable pageable) {
-            return null;
-        }
-
-        @Override
-        public Result<ShopInfoDTO> getShopInfo(Long shopId) {
-            return null;
-        }
-
-        @Override
-        public Result<Map<Long,ShopInfoDTO>> getShopInfo(List<Long> shopIdList) {
-            return null;
-        }
-
-        @Override
-        public Result<Long> addShop(ShopCreateDTO shopCreateDTO) {
-            return null;
-        }
-
-        @Override
-        public Result<Void> updateShopInfo(Long shopId, ShopInfoUpdateDTO shopInfoUpdateDTO) {
-            return null;
-        }
-
-        @Override
-        public Result<ShopInfoDTO> getShopBySeller(Long sellerId) {
-            var ret = MockUtils.create(ShopInfoDTO.class);
-            ret.setShopId(1L);
-            return Result.success(ret);
-        }
-    }
+    class Fallback extends ShopApi.Fallback implements ShopApiClient { }
 }

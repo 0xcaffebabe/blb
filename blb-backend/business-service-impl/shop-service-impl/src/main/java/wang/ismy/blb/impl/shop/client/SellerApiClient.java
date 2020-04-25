@@ -13,15 +13,6 @@ import wang.ismy.blb.common.result.Result;
  */
 @FeignClient(value = ServiceName.SELLER_SERVICE,fallback = SellerApiClient.Fallback.class)
 public interface SellerApiClient extends SellerApi {
-    /** mock todo*/
     @Component
-    class Fallback extends SellerApi.Fallback implements SellerApiClient{
-        @Override
-        public Result<SellerInfoDTO> getSellerInfo(Long sellerId) {
-            SellerInfoDTO dto = new SellerInfoDTO();
-            dto.setRealName("ccc");
-            dto.setPhone("123456");
-            return Result.success(dto);
-        }
-    }
+    class Fallback extends SellerApi.Fallback implements SellerApiClient{ }
 }
