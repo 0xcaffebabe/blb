@@ -20,4 +20,12 @@ public interface OrderRepository extends JpaRepository<OrderDO,Long> {
      * @return
      */
     Page<OrderDO> findAllByShopId(Long shopId, Pageable pageable);
+
+    /**
+     * 根据消费者ID查询
+     * @param consumerId
+     * @param pageable
+     * @return
+     */
+    Page<OrderDO> findAllByConsumerId(Long consumerId,Pageable pageable);
 }
