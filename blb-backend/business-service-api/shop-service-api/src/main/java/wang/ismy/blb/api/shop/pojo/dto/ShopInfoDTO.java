@@ -15,6 +15,8 @@ import java.math.BigDecimal;
 public class ShopInfoDTO {
     @ApiModelProperty("店铺ID")
     private Long shopId ;
+    @ApiModelProperty("卖家ID")
+    private Long sellerId;
     @ApiModelProperty("店铺名称")
     private String shopName ;
     @ApiModelProperty("店铺标志")

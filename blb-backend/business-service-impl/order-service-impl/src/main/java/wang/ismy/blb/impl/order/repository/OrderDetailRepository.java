@@ -16,4 +16,11 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetailDO,Long>
      * @return
      */
     List<OrderDetailDO> findAllByOrderId(Long orderId);
+
+    /**
+     * 根据商品ID批量查询
+     * @param productId
+     * @return
+     */
+    List<OrderDetailDO> findAllByProductIdIn(List<Long> productId);
 }

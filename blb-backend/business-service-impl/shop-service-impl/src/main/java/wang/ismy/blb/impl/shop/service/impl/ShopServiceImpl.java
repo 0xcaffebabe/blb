@@ -162,6 +162,7 @@ public class ShopServiceImpl implements ShopService {
             dto.setSellerName(sellerRes.getData().getRealName());
             dto.setPhone(sellerRes.getData().getPhone());
         }
+        dto.setSellerId(shopDO.getSellerId());
         return dto;
     }
 }

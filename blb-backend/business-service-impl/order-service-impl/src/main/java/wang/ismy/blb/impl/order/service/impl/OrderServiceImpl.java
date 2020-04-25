@@ -34,6 +34,7 @@ import wang.ismy.blb.impl.order.service.OrderService;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -53,6 +54,7 @@ public class OrderServiceImpl implements OrderService {
     private ProductApiClient productApiClient;
     private ConsumerApiClient consumerApiClient;
     private ConsumerDeliveryApiClient deliveryApiClient;
+    private ShopApiClient shopApiClient;
     private CacheService cacheService;
     private final SnowFlake snowFlake;
     @Override
@@ -128,6 +130,7 @@ public class OrderServiceImpl implements OrderService {
             throw new BlbException("订单状态不存在");
         }
         orderDO.setOrderStatus(orderStatus.getCode());
+        orderRepository.save(orderDO);
     }
 
     @Override
@@ -155,12 +158,39 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void updateOrderAmount(String token, Long orderId, BigDecimal amount) {
-
+        var authRes = authApiClient.valid(token);
+        if (!authRes.getSuccess()){
+            log.warn("获取卖家信息失败:{}",authRes);
+            return;
+        }
+        var seller = authRes.getData();
+        OrderDO orderDO = orderRepository
+                .findById(seller.getUserId()).orElseThrow(()->new BlbException("订单不存在"));
+        var shopRes = shopApiClient.getShopInfo(orderDO.getShopId());
+        if (!shopRes.getSuccess()){
+            log.warn("获取店铺信息失败:{}",shopRes);
+            return;
+        }
+        var shop = shopRes.getData();
+        if (shop == null){
+            log.warn("获取不到当前卖家的店铺信息");
+            return;
+        }
+        if (!shop.getSellerId().equals(seller.getUserId())){
+            log.warn("店铺{}不属于卖家{}",shop.getShopId(),seller.getUserId());
+            return;
+        }
+        orderDO.setOrderAmount(amount);
+        orderRepository.save(orderDO);
     }
 
     @Override
     public Map<Long, Long> getProductSales(List<Long> productIdList) {
-        return null;
+        Map<Long,Long> map = new HashMap<>();
+        for (OrderDetailDO orderDetailDO : orderDetailRepository.findAllByProductIdIn(productIdList)) {
+            map.merge(orderDetailDO.getProductId(), orderDetailDO.getProductQuantity().longValue(), Long::sum);
+        }
+        return map;
     }
 
     private void writeOrderDetail(OrderDO orderDO, ProductDTO productDTO, ProductSpecDTO spec, Integer quantity) {

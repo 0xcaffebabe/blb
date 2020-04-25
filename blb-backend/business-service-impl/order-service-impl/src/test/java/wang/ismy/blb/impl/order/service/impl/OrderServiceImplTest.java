@@ -19,13 +19,11 @@ import wang.ismy.blb.api.order.pojo.entity.OrderDO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductSpecDTO;
+import wang.ismy.blb.api.shop.pojo.dto.ShopInfoDTO;
 import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.MockUtils;
 import wang.ismy.blb.impl.order.OrderConstant;
-import wang.ismy.blb.impl.order.client.AuthApiClient;
-import wang.ismy.blb.impl.order.client.ConsumerApiClient;
-import wang.ismy.blb.impl.order.client.ConsumerDeliveryApiClient;
-import wang.ismy.blb.impl.order.client.ProductApiClient;
+import wang.ismy.blb.impl.order.client.*;
 import wang.ismy.blb.impl.order.repository.OrderDetailRepository;
 import wang.ismy.blb.impl.order.repository.OrderRepository;
 
@@ -190,10 +188,34 @@ class OrderServiceImplTest {
     }
 
     @Test
+    @Transactional
     void updateOrderAmount() {
+        String token = "token";
+        Long orderId = 1L;
+        BigDecimal amount = new BigDecimal("10");
+        User user = new User();
+        user.setUserId(1L);
+        AuthApiClient authApiClient = mock(AuthApiClient.class);
+        when(authApiClient.valid(eq(token))).thenReturn(Result.success(user));
+        orderService.setAuthApiClient(authApiClient);
+
+        ShopInfoDTO shopInfo = new ShopInfoDTO();
+        shopInfo.setSellerId(1L);
+        ShopApiClient shopApiClient = mock(ShopApiClient.class);
+        when(shopApiClient.getShopInfo(eq(1L))).thenReturn(Result.success(shopInfo));
+        orderService.setShopApiClient(shopApiClient);
+
+        orderService.updateOrderAmount(token,orderId,amount);
+        OrderDO orderDO = orderRepository.findById(orderId).orElseThrow();
+        assertEquals(amount, orderDO.getOrderAmount());
     }
 
     @Test
     void getProductSales() {
+        var list = List.of(1L,2L,3L);
+        var map = orderService.getProductSales(list);
+        for (long i = 1; i <= 3; i++) {
+            assertEquals(2L,map.get(i));
+        }
     }
 }

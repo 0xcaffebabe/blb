@@ -10,6 +10,7 @@ import wang.ismy.blb.api.shop.pojo.dto.ShopCreateDTO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopInfoDTO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopInfoUpdateDTO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopItemDTO;
+import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Page;
 import wang.ismy.blb.common.result.Pageable;
 import wang.ismy.blb.common.result.Result;
@@ -85,4 +86,37 @@ public interface ShopApi {
     @ApiImplicitParam(paramType = "path", name = "sellerId", dataType = "Long", required = true, value = "商家ID")
     @GetMapping("seller/{sellerId}")
     Result<ShopInfoDTO> getShopBySeller(@PathVariable("sellerId") Long sellerId);
+
+    class Fallback implements ShopApi{
+
+        @Override
+        public Result<Page<ShopItemDTO>> getNearbyShop(String location, Pageable pageable) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 店铺服务 获取附近店铺接口失败");
+        }
+
+        @Override
+        public Result<ShopInfoDTO> getShopInfo(Long shopId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 店铺服务 获取店铺信息接口失败");
+        }
+
+        @Override
+        public Result<Map<Long, ShopInfoDTO>> getShopInfo(List<Long> shopIdList) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 店铺服务 获取店铺信息接口失败");
+        }
+
+        @Override
+        public Result<Long> addShop(ShopCreateDTO shopCreateDTO) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 店铺服务 增加店铺接口失败");
+        }
+
+        @Override
+        public Result<Void> updateShopInfo(Long shopId, ShopInfoUpdateDTO shopInfoUpdateDTO) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 店铺服务 更新店铺信息接口失败");
+        }
+
+        @Override
+        public Result<ShopInfoDTO> getShopBySeller(Long sellerId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 店铺服务 根据卖家获取店铺接口失败");
+        }
+    }
 }
