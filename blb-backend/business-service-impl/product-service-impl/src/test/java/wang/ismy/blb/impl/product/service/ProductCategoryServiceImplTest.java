@@ -11,6 +11,7 @@ import wang.ismy.blb.api.order.OrderApi;
 import wang.ismy.blb.api.product.pojo.ProductCategoryDO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
 import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
+import wang.ismy.blb.api.shop.pojo.dto.ShopInfoDTO;
 import wang.ismy.blb.common.SnowFlake;
 import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.MockUtils;
@@ -80,6 +81,11 @@ class ProductCategoryServiceImplTest {
         user.setUserType("商家");
         when(authApiClient.valid(eq(token))).thenReturn(Result.success(user));
 
+        ShopInfoDTO shopInfoDTO = new ShopInfoDTO();
+        shopInfoDTO.setShopId(1L);
+        ShopApiClient shopApiClient = mock(ShopApiClient.class);
+        when(shopApiClient.getShopBySeller(eq(1L))).thenReturn(Result.success(shopInfoDTO));
+
         Long nextId = 11L;
         var categoryDTO = MockUtils.create(ProductCategoryDTO.class);
         SnowFlake mockSnowFlake = mock(SnowFlake.class);
@@ -105,6 +111,11 @@ class ProductCategoryServiceImplTest {
         user.setUserId(1L);
         user.setUserType("商家");
         when(authApiClient.valid(eq(token))).thenReturn(Result.success(user));
+
+        ShopInfoDTO shopInfoDTO = new ShopInfoDTO();
+        shopInfoDTO.setShopId(1L);
+        ShopApiClient shopApiClient = mock(ShopApiClient.class);
+        when(shopApiClient.getShopBySeller(eq(1L))).thenReturn(Result.success(shopInfoDTO));
 
         Long cateId = 11L;
         var categoryDTO = MockUtils.create(ProductCategoryDTO.class);
@@ -134,6 +145,11 @@ class ProductCategoryServiceImplTest {
         user.setUserId(1L);
         user.setUserType("商家");
         when(authApiClient.valid(eq(token))).thenReturn(Result.success(user));
+
+        ShopInfoDTO shopInfoDTO = new ShopInfoDTO();
+        shopInfoDTO.setShopId(1L);
+        ShopApiClient shopApiClient = mock(ShopApiClient.class);
+        when(shopApiClient.getShopBySeller(eq(1L))).thenReturn(Result.success(shopInfoDTO));
 
         Long cateId = 11L;
         var categoryDTO = MockUtils.create(ProductCategoryDTO.class);

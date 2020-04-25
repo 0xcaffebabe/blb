@@ -90,11 +90,13 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     public void addCategory(String token, ProductCategoryDTO productCategoryDTO) {
         User seller = getSeller(token);
         if (seller == null) {
+            log.warn("获取商家信息失败");
             return;
         }
         // 根据商家ID获取店铺信息
         ShopInfoDTO shopInfo = getShopInfo(seller);
         if (shopInfo == null) {
+            log.warn("获取店铺失败");
             return;
         }
         ProductCategoryDO categoryDO = new ProductCategoryDO();
@@ -134,6 +136,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
     public void delete(String token, Long categoryId) {
         ProductCategoryDO categoryDO = validCateOfSeller(token, categoryId);
         if (categoryDO == null) {
+            log.warn("获取目录失败");
             return;
         }
 
