@@ -26,7 +26,7 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://local:3306/blb_shop?characterEncoding=utf8
   application:
-    name: product-service
+    name: shop-service
 feign:
   sentinel:
     enabled: true

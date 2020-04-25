@@ -52,7 +52,7 @@ public interface OrderApi {
     @ApiOperation("更新订单状态")
     @ApiImplicitParams({
             @ApiImplicitParam(type = "path",name = "orderId",dataType = "Long",required = true,value = "订单ID"),
-            @ApiImplicitParam(type = "query",name = "status",dataType = "Integer",required = true,value = "更新后的订单状态")
+            @ApiImplicitParam(type = "query",name = "status",dataType = "int",required = true,value = "更新后的订单状态")
     })
     @PutMapping("{orderId}")
     Result<Void> updateOrderStatus(@PathVariable("orderId") Long orderId,
@@ -67,7 +67,7 @@ public interface OrderApi {
     @ApiOperation("更新订单支付状态")
     @ApiImplicitParams({
             @ApiImplicitParam(type = "path",name = "orderId",dataType = "Long",required = true,value = "订单ID"),
-            @ApiImplicitParam(type = "query",name = "status",dataType = "Integer",required = true,value = "更新后的订单支付状态")
+            @ApiImplicitParam(type = "query",name = "status",dataType = "int",required = true,value = "更新后的订单支付状态")
     })
     @PutMapping("{orderId}/pay")
     Result<Void> updatePayStatus(@PathVariable("orderId") Long orderId,

@@ -29,8 +29,6 @@ spring:
     name: order-service
   main:
     allow-bean-definition-overriding: true
-  jackson:
-    serialization:
 feign:
   sentinel:
     enabled: true

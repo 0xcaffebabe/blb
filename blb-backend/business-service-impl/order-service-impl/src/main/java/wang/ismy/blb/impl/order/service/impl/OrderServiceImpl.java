@@ -145,6 +145,7 @@ public class OrderServiceImpl implements OrderService {
             throw new BlbException("支付状态不存在");
         }
         orderDO.setPayStatus(payStatus.getCode());
+        orderRepository.save(orderDO);
     }
 
     @Override
@@ -165,7 +166,7 @@ public class OrderServiceImpl implements OrderService {
         }
         var seller = authRes.getData();
         OrderDO orderDO = orderRepository
-                .findById(seller.getUserId()).orElseThrow(()->new BlbException("订单不存在"));
+                .findById(orderId).orElseThrow(()->new BlbException("订单不存在"));
         var shopRes = shopApiClient.getShopInfo(orderDO.getShopId());
         if (!shopRes.getSuccess()){
             log.warn("获取店铺信息失败:{}",shopRes);
