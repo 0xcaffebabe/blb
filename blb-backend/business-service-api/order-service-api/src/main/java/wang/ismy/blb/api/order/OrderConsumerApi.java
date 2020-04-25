@@ -2,6 +2,7 @@ package wang.ismy.blb.api.order;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,7 +18,7 @@ import wang.ismy.blb.common.result.Result;
  * @date 2020/4/9 10:26
  */
 @Api(tags = "订单消费者接口")
-@RequestMapping("consumer")
+@RequestMapping(value = "v1/api/consumer",produces = MediaType.APPLICATION_JSON_VALUE)
 public interface OrderConsumerApi {
 
     /**

@@ -31,7 +31,6 @@ class OrderApiImplTest {
     private MockMvc mockMvc;
     private OrderService orderService;
 
-
     @BeforeEach
     public void setUp() throws Exception {
         orderService = mock(OrderService.class);
