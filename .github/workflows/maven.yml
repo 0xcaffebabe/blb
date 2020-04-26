@@ -145,3 +145,18 @@ jobs:
       with:
         name: order-service
         path: ./blb-backend/artifact/order-service-1.0.jar
+  pay-service-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 13
+      uses: actions/setup-java@v1
+      with:
+        java-version: 13
+    - name: 构建支付服务
+      run: mvn package -f ./blb-backend/parent/pom.xml -pl :pay-service-impl -am
+    - name: 保留支付服务构建物
+      uses: actions/upload-artifact@v1
+      with:
+        name: pay-service
+        path: ./blb-backend/artifact/pay-service-1.0.jar

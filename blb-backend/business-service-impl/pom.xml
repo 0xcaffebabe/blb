@@ -18,6 +18,7 @@
         <module>consumer-service-impl</module>
         <module>shop-service-impl</module>
         <module>order-service-impl</module>
+        <module>pay-service-impl</module>
     </modules>
 
     <dependencies>
