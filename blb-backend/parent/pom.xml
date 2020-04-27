@@ -85,6 +85,11 @@
                 <artifactId>common</artifactId>
                 <version>1.0</version>
             </dependency>
+            <dependency>
+                <groupId>com.alipay.sdk</groupId>
+                <artifactId>alipay-sdk-java</artifactId>
+                <version>4.9.124.ALL</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>

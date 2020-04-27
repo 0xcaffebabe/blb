@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import wang.ismy.blb.api.pay.pojo.PayStatusDTO;
 import wang.ismy.blb.common.result.Result;
 
 import javax.servlet.http.HttpServletRequest;
@@ -32,7 +33,7 @@ public interface PayApi {
             @ApiImplicitParam(paramType = "query", name = "type", dataType = "String", required = true, value = "支付类型")
     })
     @PostMapping("order/{orderId}")
-    Result<Long> generatePay(@PathVariable("orderId") Long orderId,
+    Result<String> generatePay(@PathVariable("orderId") Long orderId,
                              @RequestParam("type") Integer type);
 
     /**
@@ -44,6 +45,16 @@ public interface PayApi {
     @ApiImplicitParam(paramType = "path", name = "payId", dataType = "Long", required = true, value = "支付ID")
     @GetMapping("/{payId}")
     Result<String> pay(@PathVariable("payId") Long payId);
+
+    /**
+     * 获取支付单支付状态
+     * @param payId
+     * @return
+     */
+    @ApiOperation("获取支付单支付状态")
+    @ApiImplicitParam(paramType = "path", name = "payId", dataType = "Long", required = true, value = "支付ID")
+    @GetMapping("status/{payId}")
+    Result<PayStatusDTO> getPayStatus(@PathVariable("payId") Long payId);
 
     /**
      * 第三方支付回调

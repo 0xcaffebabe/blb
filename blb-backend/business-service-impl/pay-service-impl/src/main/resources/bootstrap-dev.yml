@@ -1,0 +1,35 @@
+swagger:
+  base-package: wang.ismy.blb.impl.pay
+  base-path: /**
+  contact:
+    email: admin@ismy.wang
+  description: 支付服务api
+  enabled: true
+  exclude-path: /error, /ops/**
+  title: 支付服务文档
+server:
+  port: 10010
+spring:
+  cloud:
+    nacos:
+      config:
+        server-addr: local:8848
+        file-extension: yaml
+      discovery:
+        server-addr: local:8848
+  jpa:
+    generate-ddl: false
+    database: mysql
+    show-sql: true
+  datasource:
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://local:3306/blb_pay?characterEncoding=utf8
+  application:
+    name: pay-service
+  main:
+    allow-bean-definition-overriding: true
+feign:
+  sentinel:
+    enabled: true

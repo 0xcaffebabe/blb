@@ -1,13 +1,16 @@
 package wang.ismy.blb.impl.pay;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import wang.ismy.blb.api.pay.enums.PayTypeEnum;
+import wang.ismy.blb.api.pay.pojo.PayStatusDTO;
 import wang.ismy.blb.common.SystemConstant;
 import wang.ismy.blb.common.result.Result;
+import wang.ismy.blb.common.util.MockUtils;
 import wang.ismy.blb.impl.pay.service.PayService;
 
 import javax.ws.rs.PUT;
@@ -42,7 +45,7 @@ class PayApiImplTest {
                 .param("type",type.toString())
         )
                 .andExpect(status().isOk())
-                .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.success(1L))));
+                .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.success(orderId.toString()))));
     }
 
     @Test
@@ -75,5 +78,16 @@ class PayApiImplTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.success())));
         verify(payService).refund(eq(token),eq(orderId));
+    }
+
+    @Test
+    void getPayStatus() throws Exception {
+        Long payId = 1L;
+        PayStatusDTO payStatusDTO = MockUtils.create(PayStatusDTO.class);
+        when(payService.getPayStatus(eq(payId))).thenReturn(payStatusDTO);
+        mockMvc.perform(get("/v1/api/status/" + payId)
+        )
+                .andExpect(status().isOk())
+                .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.success(payStatusDTO))));
     }
 }

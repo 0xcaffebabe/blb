@@ -24,4 +24,6 @@ public interface ServiceName {
     long CONSUMER_SERVICE_ID = 7L;
     String SELLER_SERVICE = "seller-service";
     long SELLER_SERVICE_ID = 8L;
+    String PAY_SERVICE = "pay-service";
+    long PAY_SERVICE_ID = 9L;
 }

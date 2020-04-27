@@ -1,5 +1,7 @@
 package wang.ismy.blb.impl.pay.service;
 
+import wang.ismy.blb.api.pay.pojo.PayStatusDTO;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -37,4 +39,11 @@ public interface PayService {
      * @param orderId
      */
     void refund(String token, Long orderId);
+
+    /**
+     * 获取支付单支付状态
+     * @param payId
+     * @return
+     */
+    PayStatusDTO getPayStatus(Long payId);
 }

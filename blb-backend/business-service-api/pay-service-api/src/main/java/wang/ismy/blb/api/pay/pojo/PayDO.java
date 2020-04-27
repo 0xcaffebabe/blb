@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import wang.ismy.blb.common.BaseDO;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -16,6 +17,7 @@ import java.math.BigDecimal;
 @EqualsAndHashCode(callSuper = true)
 @Table(name="tb_pay")
 @Data
+@Entity
 public class PayDO extends BaseDO implements Serializable {
 
     /** 支付ID */
@@ -32,5 +34,7 @@ public class PayDO extends BaseDO implements Serializable {
     /** 实际支付金额 */
     private BigDecimal payAmount ;
     /** 支付状态，0为未支付，1为已支付，2为已取消 */
-    private String payStatus ;
+    private Integer payStatus ;
+
+    private String payTitle;
 }

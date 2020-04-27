@@ -3,6 +3,7 @@ package wang.ismy.blb.impl.pay;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 import wang.ismy.blb.api.pay.PayApi;
+import wang.ismy.blb.api.pay.pojo.PayStatusDTO;
 import wang.ismy.blb.common.SystemConstant;
 import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.CurrentRequestUtils;
@@ -20,14 +21,19 @@ import javax.servlet.http.HttpServletResponse;
 public class PayApiImpl implements PayApi {
     private final PayService payService;
     @Override
-    public Result<Long> generatePay(Long orderId, Integer type) {
+    public Result<String> generatePay(Long orderId, Integer type) {
         String token = CurrentRequestUtils.getHeader(SystemConstant.TOKEN);
-        return Result.success(payService.generatePay(token,orderId,type));
+        return Result.success(payService.generatePay(token,orderId,type).toString());
     }
 
     @Override
     public Result<String> pay(Long payId) {
         return Result.success(payService.pay(payId));
+    }
+
+    @Override
+    public Result<PayStatusDTO> getPayStatus(Long payId) {
+        return Result.success(payService.getPayStatus(payId));
     }
 
     @Override
