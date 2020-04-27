@@ -17,6 +17,7 @@
             </div>
             <h3>王小明</h3> <span>#90天内第3次下单</span>
             <p>漳浦县旧镇镇 漳浦第三中学 高三八班</p>
+            <p>骑手取餐码:2981</p><el-button size="mini" type="primary">出餐</el-button>
           </div>
           <el-divider></el-divider>
           <div class="order-note">

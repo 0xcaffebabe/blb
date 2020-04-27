@@ -17,12 +17,28 @@
               <span slot="title">饿点招牌面系列</span>
             </el-menu-item>
             <el-menu-item index="4">
-              <span slot="title">沙县小吃系列</span>
+              <span slot="title">
+                <span v-if="!showCategoryEdit">沙县小吃系列</span>
+                <span class="el-icon-edit success" @click="handleCategoryEdit" v-if="!showCategoryEdit"></span>
+                <span class="el-icon-delete danger" @click="handleCategoryEdit" v-if="!showCategoryEdit"></span>
+                <el-input value="沙县小吃系列" @blur="showCategoryEdit = !showCategoryEdit" v-else v-focus="showCategoryEdit">
+                  <span slot="suffix" class="el-icon-check"></span>
+                </el-input>
+              </span>
             </el-menu-item>
+            <el-menu-item v-if="showCategoryAdd">
+              <el-input value="沙县小吃系列" @blur="showCategoryAdd = !showCategoryAdd" v-focus="showCategoryAdd">
+                  <span slot="suffix" class="el-icon-check"></span>
+                </el-input>
+            </el-menu-item>
+            <el-button size="mini" icon="el-icon-plus" style="width:100%" @click="showCategoryAdd = true"></el-button>
           </el-menu>
         </div>
       </el-col>
       <el-col :span="20">
+        <div>
+          <el-button size="mini" type="primary" @click="showProductEdit=true">新增商品</el-button>
+        </div>
         <ul class="product-list">
           <li class="product-list-item" v-for="item in 8" :key="item">
             <el-card>
@@ -54,13 +70,36 @@
         </ul>
       </el-col>
     </el-row>
+    <product-edit-panel v-model="showProductEdit"/>
   </div>
 </template>
 
 <script>
+import ProductEditPanel from '../components/product/ProductEditPanel'
 export default {
   data () {
-    return {}
+    return {
+      showProductEdit: false,
+      showCategoryEdit: false,
+      showCategoryAdd: false
+    }
+  },
+  components: {
+    ProductEditPanel
+  },
+  methods: {
+    handleCategoryEdit () {
+      this.showCategoryEdit = !this.showCategoryEdit
+    }
+  },
+  directives: {
+    focus: {
+      inserted (el, { value }) {
+        if (value) {
+          el.querySelector('input').focus()
+        }
+      }
+    }
   }
 }
 </script>
@@ -75,6 +114,7 @@ export default {
     font-size: 14px;
   }
   .product-list {
+    margin-top: 10px;
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
