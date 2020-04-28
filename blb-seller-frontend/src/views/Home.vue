@@ -31,7 +31,7 @@
               <i class="el-icon-money"></i>
               <span slot="title">财务</span>
             </el-menu-item>
-            <el-menu-item index="6">
+            <el-menu-item index="/shop">
               <i class="el-icon-s-shop"></i>
               <span slot="title">门店</span>
             </el-menu-item>

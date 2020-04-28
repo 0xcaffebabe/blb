@@ -8,6 +8,7 @@ import NewOrder from '../views/order/NewOrder'
 import Product from '../views/Product'
 import Login from '../views/Login'
 import Register from '../views/Register'
+import Shop from '../views/Shop'
 Vue.use(VueRouter)
 
 const routes = [
@@ -18,6 +19,7 @@ const routes = [
     children: [
       { path: 'index', component: Index },
       { path: 'product', component: Product },
+      { path: 'shop', component: Shop },
       {
         path: 'order',
         component: Order,
