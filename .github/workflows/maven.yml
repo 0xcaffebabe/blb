@@ -160,3 +160,18 @@ jobs:
       with:
         name: pay-service
         path: ./blb-backend/artifact/pay-service-1.0.jar
+  rider-service-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 13
+      uses: actions/setup-java@v1
+      with:
+        java-version: 13
+    - name: 构建骑手服务
+      run: mvn package -f ./blb-backend/parent/pom.xml -pl :rider-service-impl -am
+    - name: 保留骑手服务构建物
+      uses: actions/upload-artifact@v1
+      with:
+        name: rider-service
+        path: ./blb-backend/artifact/rider-service-1.0.jar     

@@ -3,6 +3,7 @@ package wang.ismy.blb.api.rider;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.rider.pojo.dto.eval.RiderEvalInfoDTO;
 import wang.ismy.blb.api.rider.pojo.dto.eval.RiderEvalItemDTO;
@@ -17,7 +18,7 @@ import wang.ismy.blb.common.result.Result;
  * @date 2020/4/8 13:20
  */
 @Api(tags = "骑手评价服务接口")
-@RequestMapping("eval")
+@RequestMapping(value = "v1/api/eval",produces = MediaType.APPLICATION_JSON_VALUE)
 public interface RiderEvaluationApi {
 
     /**

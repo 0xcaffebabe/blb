@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import wang.ismy.blb.common.BaseDO;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -16,6 +17,7 @@ import java.math.BigDecimal;
 @Table(name="tb_rider_evaluation")
 @EqualsAndHashCode(callSuper = true)
 @Data
+@Entity
 public class RiderEvaluationDO extends BaseDO implements Serializable {
     /** 骑手评价ID */
     @Id
@@ -24,6 +26,7 @@ public class RiderEvaluationDO extends BaseDO implements Serializable {
     private Long orderId ;
     /** 骑手ID */
     private Long riderId ;
+    private Long consumerId;
     /** 本次评价评分 */
     private BigDecimal ranking ;
     /** 评价内容 */
