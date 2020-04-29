@@ -3,6 +3,7 @@ package wang.ismy.blb.api.rider;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.rider.pojo.dto.OrderRiderDTO;
 import wang.ismy.blb.api.rider.pojo.dto.order.RiderHistoryOrderItemDTO;
@@ -15,7 +16,7 @@ import wang.ismy.blb.common.result.Result;
  * @date 2020/4/8 14:12
  */
 @Api(tags = "骑手订单服务接口")
-@RequestMapping("order")
+@RequestMapping(value = "v1/api/order",produces = MediaType.APPLICATION_JSON_VALUE)
 public interface RiderOrderApi {
 
     /**

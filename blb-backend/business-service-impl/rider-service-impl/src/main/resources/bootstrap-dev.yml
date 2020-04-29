@@ -10,6 +10,9 @@ swagger:
 server:
   port: 11000
 spring:
+  redis:
+    port: 6379
+    host: local
   cloud:
     nacos:
       config:
