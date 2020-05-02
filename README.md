@@ -76,6 +76,7 @@
 - 框架：vue
   - vuex
   - vue router
+- 移动端框架：uniapp
 - ui框架：element ui
 - css loader：less
 - 地图组件：amap
