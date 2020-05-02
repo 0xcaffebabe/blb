@@ -5,6 +5,7 @@ import Home from '../views/Home'
 import Index from '../views/Index'
 import Order from '../views/order/Order'
 import NewOrder from '../views/order/NewOrder'
+import OrderManage from '../views/order/OrderManage'
 import Product from '../views/Product'
 import Login from '../views/Login'
 import Register from '../views/Register'
@@ -25,7 +26,8 @@ const routes = [
         component: Order,
         redirect: '/order/new',
         children: [
-          { path: 'new', component: NewOrder }
+          { path: 'new', component: NewOrder },
+          { path: 'manage', component: OrderManage }
         ]
       }
     ]

@@ -6,7 +6,7 @@
           新订单
         </el-badge>
       </el-menu-item>
-      <el-menu-item index="2">
+      <el-menu-item index="/order/manage">
         <el-badge>
           订单管理
         </el-badge>

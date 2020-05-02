@@ -2,55 +2,7 @@
   <div>
     <el-row :gutter="20">
       <el-col :span="16">
-        <el-card v-for="item in 6" :key="item" class="order-item">
-          <div slot="header" class="header">
-            <span>等待处理</span>
-            <div>
-              <h1 class="primary">31</h1>
-              希望尽快送达,建议11:15之前出餐
-            </div>
-          </div>
-          <div class="consumer-info">
-            <div class="delivery-info">
-              <div><span class="el-icon-phone" style="color:#409EFF"></span>17319561234</div>
-              <div style="float:right"><span class="el-icon-location" style="color:#409EFF"></span>地图</div>
-            </div>
-            <h3>王小明</h3> <span>#90天内第3次下单</span>
-            <p>漳浦县旧镇镇 漳浦第三中学 高三八班</p>
-            <p>骑手取餐码:2981</p><el-button size="mini" type="primary">出餐</el-button>
-          </div>
-          <el-divider></el-divider>
-          <div class="order-note">
-            <p><span>备注：</span>不要辣，不要一次性筷子</p>
-          </div>
-          <el-collapse v-model="expand">
-            <el-collapse-item title="商品" name="1">
-              <el-table
-                :show-header="false"
-                :data="tableData"
-                style="width: 100%">
-                <el-table-column
-                  width="500">
-                  <template slot-scope="scope">
-                    <p class="product-name">{{ scope.row.name }}</p>
-                    <span class="product-spec primary">[{{scope.row.spec}}]</span>
-                  </template>
-                </el-table-column>
-                <el-table-column
-                  width="100">
-                  <template slot-scope="scope">
-                    <h4 class="product-num">X{{scope.row.num}}</h4>
-                  </template>
-                </el-table-column>
-                <el-table-column :fixed="'right'">
-                  <template slot-scope="scope">
-                    <h4 class="product-num">{{scope.row.price}}</h4>
-                  </template>
-                </el-table-column>
-              </el-table>
-            </el-collapse-item>
-          </el-collapse>
-        </el-card>
+        <order-item></order-item>
       </el-col>
       <el-col :span="8">
         <el-card class="overview">
@@ -72,6 +24,7 @@
 </template>
 
 <script>
+import OrderItem from '../../components/order/OrderItem'
 export default {
   data () {
     return {
@@ -98,6 +51,9 @@ export default {
         spec: '大份'
       }]
     }
+  },
+  components: {
+    OrderItem
   }
 }
 </script>
