@@ -9,7 +9,10 @@
 			<input type="password" class="input" placeholder="密码">
 		</div>
 		<div class="input-wrapper">
-			<button type="primary" class="login-btn">登录</button>
+			<button type="primary" class="login-btn" @click="login">登录</button>
+		</div>
+		<div class="input-wrapper">
+			<button type="success" class="login-btn" @click="register">注册</button>
 		</div>
 	</view>
 </template>
@@ -23,7 +26,17 @@
 			}
 		},
 		methods: {
-			
+			login () {
+				uni.showToast({
+				    title: 'xxx',
+				    duration: 2000
+				});
+			},
+			register () {
+				uni.navigateTo({
+					url:'/pages/register/register'
+				})
+			}
 		}
 	}
 </script>

@@ -1,6 +1,5 @@
 <template>
 	<div>
-		  <progress percent="50" show-info />
 	</div>
 </template>
 
@@ -9,7 +8,7 @@
 	export default {
 		data() {
 			return {
-				title: 'Hello'
+
 			}
 		},
 		onLoad() {
@@ -17,6 +16,9 @@
 		},
 		methods: {
 
+		},
+		components: {
+			
 		}
 	}
 </script>
