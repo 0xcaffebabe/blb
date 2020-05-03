@@ -4,6 +4,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.seller.pojo.SellerInfoDTO;
 import wang.ismy.blb.api.seller.pojo.dto.LoginResultDTO;
@@ -17,6 +18,7 @@ import wang.ismy.blb.common.result.Result;
  * @date 2020/4/10 10:03
  */
 @Api(tags = "商家服务接口")
+@RequestMapping(value = "v1/api",produces = MediaType.APPLICATION_JSON_VALUE)
 public interface SellerApi {
 
     /**

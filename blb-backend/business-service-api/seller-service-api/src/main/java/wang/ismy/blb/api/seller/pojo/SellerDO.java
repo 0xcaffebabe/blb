@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import wang.ismy.blb.common.BaseDO;
 
+import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import java.io.Serializable;
@@ -15,6 +16,7 @@ import java.io.Serializable;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Table(name="tb_seller")
+@Entity
 public class SellerDO extends BaseDO implements Serializable {
     /** 商家ID */
     @Id
@@ -28,5 +30,5 @@ public class SellerDO extends BaseDO implements Serializable {
     /**  */
     private String password ;
     /** 账户是否可用 */
-    private Boolean isEnable ;
+    private Boolean enable ;
 }

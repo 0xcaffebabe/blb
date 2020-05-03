@@ -17,4 +17,6 @@ public class LoginResultDTO {
     /** 登录结果提示语 */
     @ApiModelProperty(value = "登录结果提示语")
     private String greeting;
+    /** 0为登录成功 1为账号不存在 2为账户或密码错误*/
+    private Integer status;
 }
