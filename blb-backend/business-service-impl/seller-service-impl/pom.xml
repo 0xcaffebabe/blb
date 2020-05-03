@@ -55,7 +55,7 @@
     </dependencies>
 
     <build>
-        <finalName>rider-service-${version}</finalName>
+        <finalName>seller-service-${version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
