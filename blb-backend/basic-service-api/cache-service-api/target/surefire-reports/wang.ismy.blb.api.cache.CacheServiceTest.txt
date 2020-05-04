@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: wang.ismy.blb.api.cache.CacheServiceTest
 -------------------------------------------------------------------------------
-Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.675 s - in wang.ismy.blb.api.cache.CacheServiceTest
+Tests run: 5, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.735 s - in wang.ismy.blb.api.cache.CacheServiceTest

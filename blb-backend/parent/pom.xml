@@ -11,6 +11,7 @@
         <module>../business-service-impl</module>
         <module>../basic-service-api</module>
         <module>../basic-service-impl</module>
+        <module>../aggregation-service</module>
     </modules>
     <properties>
         <java.version>11</java.version>

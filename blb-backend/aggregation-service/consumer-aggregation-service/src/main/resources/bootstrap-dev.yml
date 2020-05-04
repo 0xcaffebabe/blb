@@ -1,0 +1,22 @@
+server:
+  port: 13000
+swagger:
+  base-package: wang.ismy.blb.aggregation
+  base-path: /**
+  contact:
+    email: admin@ismy.wang
+  description: 消费者聚合服务api
+  enabled: true
+  exclude-path: /error, /ops/**
+  title: 消费者聚合服务文档
+  version: 1.0
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: local:8848
+  application:
+    name: consumer-aggregation-service
+feign:
+  sentinel:
+    enabled: true
