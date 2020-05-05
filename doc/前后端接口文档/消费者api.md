@@ -27,6 +27,75 @@ msg     | 响应消息   |
 success | 请求是否成功 |
 data    | 请求结果   |
 
+## 获取店铺分类
+
+- 请求方式：get
+- url：/category/:level
+- 请求参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+level | 目录层级 | 可选值 1 2 3
+
+- 响应参数
+
+```json
+[
+  {
+    "categoryId": 1,
+    "categoryName": "顶级目录",
+    "categoryImg": "blb.com/1.jpg",
+    "subCategoryList": [
+      {
+        "categoryId": 1,
+        "categoryName": "二级目录",
+        "categoryImg": "blb.com/1.jpg",
+        "subCategoryList": [...]
+      }
+      // ...
+    ]
+
+  }
+  //...
+]
+```
+
+## 根据分类获取店铺
+
+- 方式：get
+- url：/category/:categoryId/shop
+- 请求参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+categoryId | 店铺目录ID
+location | 经纬度字符串 | 如117,29这种形式
+page | 页数 | 默认为1
+size | 每页展示数 | 默认为10
+
+- 响应参数
+
+```json
+{
+  "total":123, //总数据条数
+  "data": [
+    {
+      "shopId": 1, // 店铺ID
+      "shopLogo": "img.com/1.jpg", // 店铺logourl
+      "shopName": "黄焖鸡米饭", // 店铺名称
+      "ranking": 3.7, // 店铺评分
+      "distance": "1.47KM", // 店铺距离,
+      "sales": 12, // 店铺商品销售数
+      "startingPrice": 14, // 起送价
+      "deliveryFee": 2, // 配送费
+      "deliveryTime": "38分钟" // 所需配送时间
+    }
+    ,
+    // ...后面还有shop item
+  ]
+}
+```
+
 ## 登录接口
 
 - 请求方式：POST
@@ -118,6 +187,7 @@ id | 店铺ID
 
 ```json
 {
+  "shopLogo": "img.blb.com/1.jpg",
   "shopName": "黄焖鸡米饭",
   "deliveryMethod": "蜂鸟专送", // 配送方式
   "deliveryTime": "35分钟",
@@ -204,6 +274,296 @@ id | 店铺ID
 ```json
 {
   "rating": 4.7, // 店铺评分
-  "wor"
+  "wordCloud": ["味道好","干净卫生","价格便宜"]
 }
 ```
+
+### 获取店铺评价列表
+
+- 方式：get
+- url：/shop/:id/evaluation/list
+- 请求参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+id | 店铺ID
+page | 页码 | 默认为1
+size | 每页显示数 | 默认为10
+
+- 响应参数
+
+```json
+{
+  "total":15,
+  "data": [
+    {
+      "nickName": "cxk", // 评价用户昵称
+      "ranking": 3.8,
+      "content": "不错，不错，味道好极了",
+      "createTime": "2020-05-04 11:20:38"
+    }
+    // ...
+  ]
+}
+```
+
+## 获取购物车
+
+- 方式：get
+- url：/shop/:id/cart
+- 请求参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+id | 店铺ID
+
+- 响应参数
+
+```json
+[
+  {
+    "productId":1,
+    "specId":1,
+    "productName":"黄焖鸡米饭",
+    "productImg":"blb.com/1.jpg",
+    "specName": "大份",
+    "productQuantity": 2,
+    "productPrice": 18
+  }
+  //...
+]
+```
+
+## 加入购物车
+
+- 方式：put
+- url：/shop/:id/cart/
+- 请求参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+id | 店铺ID
+productId | 商品ID
+specId | 规格ID
+quantity | 数量
+
+## 删除购物车商品
+
+- 方式：delete
+- url：/shop/:id/cart/:productId/:specId
+- 请求参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+id | 店铺ID
+productId | 商品ID
+specId | 规格ID
+
+## 获取默认收货地址
+
+- 方式：get
+- url：/delivery/default
+- 响应参数
+
+```json
+{
+  "deliveryId": 1,
+  "building": "泉州师范学院软件学院",
+  "detail": "男生宿舍B305",
+  "realName": "蔡徐坤",
+  "phone": "17359561234"
+}
+```
+
+
+## 提交订单
+
+- 方式：post
+- url：/shop/order
+- 请求参数
+
+```json
+{
+  "deliveryId": 1,
+  "orderNote": "米饭多一点",
+  "productList": [
+    {
+      "productId": 1,
+      "specId": 1,
+      "quantity": 1
+    }
+    // ...
+  ]
+}
+```
+
+- 响应参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+default | orderId
+
+## 生成支付
+
+- 请求方式：post
+- url：/pay/order/:orderId
+- 请求参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+orderId | 订单ID | 路径参数
+type |支付类型 | 0 为支付宝
+
+- 响应参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+default | payId
+
+## 获取支付二维码
+
+- 请求方式：get
+- url：/pay/:payId
+- 响应参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+default | 二维码链接 | 需要前端自己生成二维码
+
+## 查询支付状态
+
+- 请求方式：get
+- url：/pay/status/:payId
+- 响应参数
+
+```json
+{
+  "status": 0, // 0 1 2分别为等待支付 已支付 已取消
+  "msg": "等待支付" // 支付状态文本表示
+}
+```
+
+## 搜索店铺
+
+- 方式：get
+- url：/shop/search
+- 请求参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+kw | 搜索关键字
+page | 页数 | 默认为1
+size | 每页展示数 | 默认为10
+
+- 响应参数
+
+```json
+{
+  "total":123, //总数据条数
+  "data": [
+    {
+      "shopId": 1, // 店铺ID
+      "shopLogo": "img.com/1.jpg", // 店铺logourl
+      "shopName": "黄焖鸡米饭", // 店铺名称
+      "ranking": 3.7, // 店铺评分
+      "distance": "1.47KM", // 店铺距离,
+      "sales": 12, // 店铺商品销售数
+      "startingPrice": 14, // 起送价
+      "deliveryFee": 2, // 配送费
+      "deliveryTime": "38分钟" // 所需配送时间
+    }
+    ,
+    // ...后面还有shop item
+  ]
+}
+```
+
+## 获取订单列表
+
+- 方式：get
+- url：/order
+- 请求参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+page | 页数 | 默认为1
+size | 每页展示数 | 默认为10
+
+- 响应参数
+
+```json
+[
+  {
+    "orderId":1,
+    "shopId": 1,
+    "shopName": "黄焖鸡米饭",
+    "shopLogo": "blb.com/1.jpg",
+    "orderAmount": 52.5,
+    "payStatus": 0,
+    "orderDesc": "黄焖鸡米饭 + 菊花茶 等 2件",
+    "createTime": "2020-05-05 20:07:06"
+  }
+  //...
+]
+```
+
+## 获取订单详情
+
+- 方式：get
+- url：/order/:orderId
+- 响应参数
+
+```json
+{
+  "orderId": 1,
+  "shopId": 1,
+  "shopName": "黄焖鸡米饭",
+  "shopLogo": "blb.com/logo.jpg",
+  "productList": [
+    {
+      "productId":1,
+      "productName": "黄焖鸡",
+      "productImg": "blb.com/1.JPG",
+      "specId": 1,
+      "specName": "大份",
+      "productQuantity": 1,
+      "productPrice": 18
+    }
+    //...
+  ],
+  "orderAmount": 305.90,
+  "consumerAddress": "泉州软件学院 男生宿舍B305",
+  "consumerName":"蔡徐坤",
+  "consumerPhone":"173599567123",
+  "orderNote": "芋圆波波奶茶不要芋圆不要奶茶",
+  "orderStaut":0,
+  "payStatus":0,
+  "createTime": "2020-05-05 20:07:06"
+}
+```
+
+## 更新用户信息
+
+- 方式：POST
+- url：/info
+- 请求参数
+
+```json
+{
+  "avatar": "blb.com/1.jpg",
+  "username": "new username",
+  "phone": "1739569185693"
+}
+```
+
+## 修改用户密码
+
+- 方式：POST
+- url：/info/password
+- 请求参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+oldPassword|旧密码
+newPassword | 新密码
+
