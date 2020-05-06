@@ -208,3 +208,19 @@ jobs:
       with:
         name: consumer-aggregation-service
         path: ./blb-backend/artifact/consumer-aggregation-service-1.0.jar
+## 治理服务构建
+  gateway-service-build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up JDK 13
+      uses: actions/setup-java@v1
+      with:
+        java-version: 13
+    - name: 构建网关服务
+      run: mvn package -f ./blb-backend/parent/pom.xml -pl :gateway-service -am
+    - name: 保留网关服务构建物
+      uses: actions/upload-artifact@v1
+      with:
+        name: gateway-service
+        path: ./blb-backend/artifact/gateway-service-1.0.jar
