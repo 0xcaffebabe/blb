@@ -13,7 +13,7 @@
     <artifactId>service-govern</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>service-gateway</module>
+        <module>gateway-service</module>
     </modules>
 
     <dependencies>
