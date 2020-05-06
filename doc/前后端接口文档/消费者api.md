@@ -567,3 +567,46 @@ size | 每页展示数 | 默认为10
 oldPassword|旧密码
 newPassword | 新密码
 
+## 拉取收货信息列表
+
+- 方式：get
+- url：/delivery
+- 响应参数
+
+```json
+{
+  "deliveryId": 1,
+  "building": "泉州软件学院",
+  "detail": "男生宿舍B305",
+  "realName": "蔡徐坤",
+  "phone": "173956173456"
+}
+```
+
+## 更新收货信息
+
+- 方式：PUT
+- url：/delivery/:deliveryId
+- 请求参数
+
+```json
+{
+  "building":"泉州师范学院软件学院",
+  "detail":"路边摊2号",
+  "defaultDelivery":true
+}
+```
+
+## 新增收货信息
+
+- 方式：POST
+- url：/delivery
+- 请求参数
+
+```json
+{
+  "building":"泉州师范学院软件学院",
+  "detail":"路边摊2号",
+  "defaultDelivery":true
+}
+```
