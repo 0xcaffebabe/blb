@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
 import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
 import wang.ismy.blb.common.SystemConstant;
+import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Result;
 
 import java.util.List;
@@ -79,4 +80,32 @@ public interface ProductCategoryApi {
     @DeleteMapping("{categoryId}")
     Result<Void> deleteCategory(@RequestHeader(SystemConstant.TOKEN) String token,
                                 @PathVariable("categoryId") Long categoryId);
+
+    class Fallback implements ProductCategoryApi{
+
+        @Override
+        public Result<List<ShopProductDTO>> getProductByCategory(Long categoryId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商品分类目录 根据分类获取商品接口失败");
+        }
+
+        @Override
+        public Result<List<ProductCategoryDTO>> getCategoryList(Long shopId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商品分类目录 获取商品分类列表失败");
+        }
+
+        @Override
+        public Result<Void> addCategory(String token, ProductCategoryDTO productCategoryDTO) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商品分类目录 增加商品分类接口失败");
+        }
+
+        @Override
+        public Result<Void> updateCategory(String token, ProductCategoryDTO productCategoryDTO) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商品分类目录 更新商品分类接口失败");
+        }
+
+        @Override
+        public Result<Void> deleteCategory(String token, Long categoryId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商品分类目录 删除商品分类口失败");
+        }
+    }
 }

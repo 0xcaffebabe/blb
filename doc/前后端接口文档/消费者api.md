@@ -112,9 +112,10 @@ password | 密码 |
 参数名     | 参数说明   | 备注
 ------- | ------ | -----
 token | 后续请求凭证|
-username| 用户名
-userId| 用户ID
-avatar | 用户头像
+greeting | 登录提示语 |
+username| 用户名|
+userId| 用户ID|
+avatar | 用户头像|
 
 ## 注册接口
 
@@ -138,7 +139,7 @@ password | 密码
 }
 ```
 
-## 获取附近商家
+## 获取附近店铺
 
 - 方式：get
 - url：/shop/vicinity
@@ -200,7 +201,7 @@ id | 店铺ID
 }
 ```
 
-## 获取店铺分类列表
+## 获取店铺商品分类列表
 
 - 方式：get
 - url：/shop/:id/category
@@ -226,12 +227,13 @@ id | 店铺ID
 ## 获取商品列表
 
 - 方式：get
-- url：/shop/:id/product
+- url：/shop/:id/:categoryId/product/
 - 请求参数
 
 参数名     | 参数说明   | 备注
 ------- | ------ | -----
 id | 店铺ID
+categoryId | 商品分类ID
 
 - 响应参数
 

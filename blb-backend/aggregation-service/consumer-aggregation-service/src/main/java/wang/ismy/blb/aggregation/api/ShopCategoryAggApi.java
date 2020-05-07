@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.aggregation.client.ShopApiClient;
 import wang.ismy.blb.aggregation.client.ShopCategoryApiClient;
 import wang.ismy.blb.aggregation.pojo.CategoryShopDTO;
+import wang.ismy.blb.aggregation.service.ShopService;
 import wang.ismy.blb.api.shop.pojo.dto.ShopCategoryDTO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopItemDTO;
 import wang.ismy.blb.common.result.Page;
@@ -27,7 +28,7 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "category",produces = MediaType.APPLICATION_JSON_VALUE)
 @Api(tags = "店铺分类接口")
 @AllArgsConstructor
-public class CategoryAggApi {
+public class ShopCategoryAggApi {
     private final ShopCategoryApiClient shopCategoryApiClient;
     private final ShopApiClient shopApiClient;
     @ApiOperation("获取某一层级的目录")
@@ -43,38 +44,6 @@ public class CategoryAggApi {
                                              @RequestParam(defaultValue = "1") Long page,
                                              @RequestParam(defaultValue = "10") Long size){
         var shopCateRes = shopCategoryApiClient.getShopByCategory(categoryId,location, Pageable.of(page,size));
-        if (!shopCateRes.getSuccess()){
-            return shopCateRes;
-        }
-        List<ShopItemDTO> shopList = shopCateRes.getData().getData();
-        if (CollectionUtils.isEmpty(shopList)){
-            return shopCateRes;
-        }
-
-        var shopRes = shopApiClient.getShopInfo(
-                shopList.stream()
-                .map(ShopItemDTO::getShopId).collect(Collectors.toList())
-        );
-        if (!shopRes.getSuccess()){
-            return shopCateRes;
-        }
-
-        var shopMap = shopRes.getData();
-        var resultList = shopList.stream()
-                .map(shopItemDTO -> {
-                    CategoryShopDTO shopDTO = new CategoryShopDTO();
-                    BeanUtils.copyProperties(shopItemDTO,shopDTO);
-                    var shop = shopMap.get(shopItemDTO.getShopId());
-                    if (shop == null){
-                        return shopDTO;
-                    }
-                    shopDTO.setDeliveryTime("38分钟");
-                    shopDTO.setStartingPrice(shop.getStartingPrice());
-                    shopDTO.setDeliveryFee(shop.getDeliveryFee());
-                    shopDTO.setSales(25);
-                    return shopDTO;
-                }).collect(Collectors.toList());
-
-        return Result.success(new Page<>(shopCateRes.getData().getTotal(),resultList));
+        return new ShopService().convertShopItems(shopCateRes,shopApiClient);
     }
 }
