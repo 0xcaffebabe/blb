@@ -17,4 +17,7 @@ public class LoginResultDTO {
     /** 登录结果提示语 */
     @ApiModelProperty(value = "登录结果提示语")
     private String greeting;
+    private String username;
+    private Long userId;
+    private String avatar;
 }

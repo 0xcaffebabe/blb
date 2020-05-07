@@ -82,6 +82,7 @@ public class ConsumerServiceImpl implements ConsumerService {
         if (!consumer.getPassword().equals(DigestUtils.md5Hex(password))){
             throw new BlbException(ResultCode.USER_LOGIN_ERROR);
         }
+        ConsumerInfoDO consumerInfo = consumerInfoRepository.findById(consumer.getUserId()).orElseThrow();
         User user = new User();
         user.setUserType(UserTypeEnum.CONSUMER.getType());
         user.setUsername(consumer.getUsername());
@@ -95,6 +96,9 @@ public class ConsumerServiceImpl implements ConsumerService {
         LoginResultDTO result = new LoginResultDTO();
         result.setToken(authRes.getData());
         result.setGreeting("欢迎登录");
+        result.setAvatar(consumerInfo.getAvatar());
+        result.setUserId(consumer.getUserId());
+        result.setUsername(consumer.getUsername());
         return result;
     }
 

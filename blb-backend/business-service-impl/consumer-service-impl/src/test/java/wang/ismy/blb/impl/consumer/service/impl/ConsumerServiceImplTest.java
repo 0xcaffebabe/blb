@@ -68,6 +68,9 @@ class ConsumerServiceImplTest {
         consumerService.setAuthApiClient(authApiClient);
         var result = consumerService.login(str,password);
         assertEquals("token",result.getToken());
+        assertEquals("cxk avatar",result.getAvatar());
+        assertEquals("cxk",result.getUsername());
+        assertEquals(1L,result.getUserId());
     }
 
     @Transactional
