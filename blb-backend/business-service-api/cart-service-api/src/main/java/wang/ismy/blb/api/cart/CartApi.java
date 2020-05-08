@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.common.SystemConstant;
+import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Result;
 
 import java.util.List;
@@ -72,4 +73,22 @@ public interface CartApi {
     Result<Void> deleteProduct(@RequestHeader(SystemConstant.TOKEN) String token,
                                @PathVariable("productId") Long productId,
                                @PathVariable("specId") Long specId);
+
+    class Fallback implements CartApi{
+
+        @Override
+        public Result<Void> addProduct(String token, Long productId, Long specId, Long quantity) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 购物车服务 增加商品接口失败");
+        }
+
+        @Override
+        public Result<List<CartItem>> getCartList(String token, Long shopId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 购物车服务 获取商品列表接口失败");
+        }
+
+        @Override
+        public Result<Void> deleteProduct(String token, Long productId, Long specId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 购物车服务 删除商品接口失败");
+        }
+    }
 }

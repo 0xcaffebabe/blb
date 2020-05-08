@@ -2,6 +2,7 @@ package wang.ismy.blb.common.util;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 /**
  * @author MY
@@ -10,6 +11,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class JsonUtils {
 
     public static String parse(Object obj) throws JsonProcessingException {
-        return new ObjectMapper().writeValueAsString(obj);
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        return objectMapper.writeValueAsString(obj);
     }
 }

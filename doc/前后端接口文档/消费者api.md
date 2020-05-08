@@ -261,7 +261,7 @@ categoryId | 商品分类ID
 ]
 ```
 
-## 获取店铺评价
+## 获取店铺评价信息
 
 - 方式：get
 - url：/shop/:id/evaluation
@@ -309,7 +309,7 @@ size | 每页显示数 | 默认为10
 }
 ```
 
-## 获取购物车
+## 获取购物车列表
 
 - 方式：get
 - url：/shop/:id/cart
