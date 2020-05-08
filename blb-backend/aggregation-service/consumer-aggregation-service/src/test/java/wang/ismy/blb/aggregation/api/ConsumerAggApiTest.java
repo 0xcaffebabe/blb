@@ -6,16 +6,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import wang.ismy.blb.aggregation.client.ConsumerApiClient;
-import wang.ismy.blb.aggregation.client.ShopApiClient;
-import wang.ismy.blb.aggregation.client.ShopCategoryApiClient;
+import wang.ismy.blb.aggregation.client.consumer.ConsumerApiClient;
 import wang.ismy.blb.api.consumer.pojo.dto.LoginResultDTO;
 import wang.ismy.blb.api.consumer.pojo.dto.RegisterDTO;
 import wang.ismy.blb.api.consumer.pojo.dto.RegisterResultDTO;
 import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.MockUtils;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;

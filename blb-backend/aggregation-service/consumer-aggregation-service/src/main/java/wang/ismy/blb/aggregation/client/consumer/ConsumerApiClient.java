@@ -1,4 +1,4 @@
-package wang.ismy.blb.aggregation.client;
+package wang.ismy.blb.aggregation.client.consumer;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;

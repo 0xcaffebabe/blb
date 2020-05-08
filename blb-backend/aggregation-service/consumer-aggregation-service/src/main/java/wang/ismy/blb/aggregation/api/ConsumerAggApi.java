@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import wang.ismy.blb.aggregation.client.ConsumerApiClient;
+import wang.ismy.blb.aggregation.client.consumer.ConsumerApiClient;
 import wang.ismy.blb.api.consumer.pojo.dto.LoginResultDTO;
 import wang.ismy.blb.api.consumer.pojo.dto.RegisterDTO;
 import wang.ismy.blb.api.consumer.pojo.dto.RegisterResultDTO;
