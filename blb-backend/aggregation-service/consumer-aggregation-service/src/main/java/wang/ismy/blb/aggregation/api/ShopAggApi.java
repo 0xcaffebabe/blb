@@ -6,9 +6,14 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.aggregation.client.*;
+import wang.ismy.blb.aggregation.client.order.OrderApiClient;
+import wang.ismy.blb.aggregation.client.order.OrderConsumerApiClient;
 import wang.ismy.blb.aggregation.service.ShopService;
 import wang.ismy.blb.api.cart.CartItem;
 import wang.ismy.blb.api.order.pojo.dto.OrderCreateDTO;
+import wang.ismy.blb.api.order.pojo.dto.OrderQuery;
+import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderDetailDTO;
+import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderItemDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
 import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
 import wang.ismy.blb.api.product.pojo.dto.eval.ConsumerEvalItem;
@@ -36,6 +41,7 @@ public class ShopAggApi {
     private final ProductEvalApiClient productEvalApiClient;
     private final CartApiClient cartApiClient;
     private final OrderApiClient orderApiClient;
+    private final OrderConsumerApiClient orderConsumerApiClient;
     @ApiOperation("获取附近店铺")
     @GetMapping("vicinity")
     public Result getNearbyShop(@RequestParam String location,
@@ -109,5 +115,27 @@ public class ShopAggApi {
     @PostMapping("order")
     public Result<String> submitOrder(@RequestBody OrderCreateDTO orderCreateDTO){
         return orderApiClient.addOrder(orderCreateDTO);
+    }
+
+    @ApiOperation("搜索店铺")
+    @GetMapping("search")
+    public Result searchShop(@RequestParam("kw") String keyword,
+                                                    @RequestParam(defaultValue = "1") Long page,
+                                                    @RequestParam(defaultValue = "10") Long size){
+        var shopRes =  shopApiClient.getNearbyShop("117,29",Pageable.of(page,size));
+        return new ShopService().convertShopItems(shopRes,shopApiClient);
+    }
+
+    @ApiOperation("获取订单列表")
+    @GetMapping("order")
+    public Result<Page<ConsumerOrderItemDTO>> getConsumerOrderList(@RequestParam(defaultValue = "1") Long page,
+                                                                   @RequestParam(defaultValue = "10") Long size){
+        return orderConsumerApiClient.getConsumerOrderList(new OrderQuery(),Pageable.of(page,size));
+    }
+
+    @ApiOperation("获取订单详情")
+    @GetMapping("order/{orderId}")
+    public Result<ConsumerOrderDetailDTO> getConsumerOrderDetail(@PathVariable Long orderId){
+        return orderConsumerApiClient.getConsumerOrderDetail(orderId);
     }
 }

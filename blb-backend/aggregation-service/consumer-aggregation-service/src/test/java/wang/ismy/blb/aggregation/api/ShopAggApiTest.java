@@ -1,14 +1,19 @@
 package wang.ismy.blb.aggregation.api;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import wang.ismy.blb.aggregation.client.*;
+import wang.ismy.blb.aggregation.client.order.OrderApiClient;
+import wang.ismy.blb.aggregation.client.order.OrderConsumerApiClient;
 import wang.ismy.blb.aggregation.pojo.CategoryShopDTO;
 import wang.ismy.blb.api.cart.CartItem;
+import wang.ismy.blb.api.order.pojo.dto.OrderCreateDTO;
+import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderDetailDTO;
+import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderItemDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
 import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
 import wang.ismy.blb.api.product.pojo.dto.eval.ConsumerEvalItem;
@@ -21,12 +26,10 @@ import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.JsonUtils;
 import wang.ismy.blb.common.util.MockUtils;
 
-import javax.lang.model.element.QualifiedNameable;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -41,17 +44,23 @@ class ShopAggApiTest {
     ProductCategoryApiClient productCategoryApiClient;
     ProductEvalApiClient productEvalApiClient;
     CartApiClient cartApiClient;
+    OrderApiClient orderApiClient;
+    OrderConsumerApiClient orderConsumerApiClient;
     @BeforeEach
     void setup(){
         shopApiClient = mock(ShopApiClient.class);
         productCategoryApiClient = mock(ProductCategoryApiClient.class);
         productEvalApiClient = mock(ProductEvalApiClient.class);
         cartApiClient = mock(CartApiClient.class);
+        orderApiClient = mock(OrderApiClient.class);
+        orderConsumerApiClient = mock(OrderConsumerApiClient.class);
         mockMvc = MockMvcBuilders.standaloneSetup(
                 new ShopAggApi(shopApiClient,
                         productCategoryApiClient,
                         productEvalApiClient,
-                        cartApiClient
+                        cartApiClient,
+                        orderApiClient,
+                        orderConsumerApiClient
                         )
         ).build();
     }
@@ -201,5 +210,38 @@ class ShopAggApiTest {
                 .header(SystemConstant.TOKEN,token)
         )
                 .andExpect(content().json(JsonUtils.parse(Result.success())));
+    }
+
+    @Test
+    void submitOrder() throws Exception {
+        OrderCreateDTO orderCreateDTO = MockUtils.create(OrderCreateDTO.class);
+        String orderId = "1";
+        when(orderApiClient.addOrder(eq(orderCreateDTO))).thenReturn(Result.success(orderId));
+
+        mockMvc.perform(post("/shop/order")
+            .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtils.parse(orderCreateDTO))
+        )
+                .andExpect(content().json(JsonUtils.parse(Result.success(orderId))));
+    }
+
+    @Test
+    void getConsumerOrderList() throws Exception {
+        var list = MockUtils.create(ConsumerOrderItemDTO.class,10);
+        var page = new Page<>(15L,list);
+        when(orderConsumerApiClient.getConsumerOrderList(any(),any())).thenReturn(Result.success(page));
+
+        mockMvc.perform(get("/shop/order"))
+                .andExpect(content().json(JsonUtils.parse(Result.success(page))));
+    }
+
+    @Test
+    void getConsumerOrderDetail() throws Exception {
+        Long orderId = 1L;
+        ConsumerOrderDetailDTO detail = MockUtils.create(ConsumerOrderDetailDTO.class);
+        when(orderConsumerApiClient.getConsumerOrderDetail(eq(orderId))).thenReturn(Result.success(detail));
+
+        mockMvc.perform(get("/shop/order/"+orderId))
+                .andExpect(content().json(JsonUtils.parse(Result.success(detail))));
     }
 }

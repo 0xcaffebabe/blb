@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.pay.pojo.PayStatusDTO;
+import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Result;
 
 import javax.servlet.http.HttpServletRequest;
@@ -74,4 +75,32 @@ public interface PayApi {
     @ApiImplicitParam(paramType = "path", name = "orderId", dataType = "Long", required = true, value = "订单号")
     @PutMapping("refund/{orderId}")
     Result<Void> refund(@PathVariable("orderId") Long orderId);
+
+    class Fallback implements PayApi {
+
+        @Override
+        public Result<String> generatePay(Long orderId, Integer type) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 支付服务 生成支付接口失败");
+        }
+
+        @Override
+        public Result<String> pay(Long payId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 支付服务 支付接口失败");
+        }
+
+        @Override
+        public Result<PayStatusDTO> getPayStatus(Long payId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 支付服务 获取支付状态接口失败");
+        }
+
+        @Override
+        public void callback(HttpServletRequest request, HttpServletResponse response) {
+
+        }
+
+        @Override
+        public Result<Void> refund(Long orderId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 支付服务 退款接口失败");
+        }
+    }
 }

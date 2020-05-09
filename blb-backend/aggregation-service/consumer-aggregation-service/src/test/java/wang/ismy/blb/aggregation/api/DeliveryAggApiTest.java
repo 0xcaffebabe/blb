@@ -1,9 +1,11 @@
 package wang.ismy.blb.aggregation.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeanUtils;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import wang.ismy.blb.aggregation.client.consumer.ConsumerApiClient;
@@ -16,10 +18,10 @@ import wang.ismy.blb.common.util.JsonUtils;
 import wang.ismy.blb.common.util.MockUtils;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -52,5 +54,37 @@ class DeliveryAggApiTest {
         )
                 .andExpect(status().isOk())
                 .andExpect(content().json(JsonUtils.parse(Result.success(showDTO))));
+    }
+    
+    @Test
+    void getDeliveryList() throws Exception {
+        var list =  MockUtils.create(DeliveryDTO.class,10);
+        when(deliveryApiClient.getDeliveryInfoList()).thenReturn(Result.success(list));
+
+        mockMvc.perform(get("/delivery"))
+                .andExpect(content().json(JsonUtils.parse(Result.success(list))));
+    }
+
+    @Test
+    void updateDelivery() throws Exception {
+        DeliveryDTO deliveryDTO = MockUtils.create(DeliveryDTO.class);
+        Long deliveryId = 1L;
+        when(deliveryApiClient.updateDelivery(eq(deliveryId),eq(deliveryDTO))).thenReturn(Result.success());
+
+        mockMvc.perform(put("/delivery/"+deliveryId)
+            .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtils.parse(deliveryDTO))
+        ).andExpect(content().json(JsonUtils.parse(Result.success())));
+    }
+
+    @Test
+    void addDelivery() throws Exception {
+        DeliveryDTO deliveryDTO = MockUtils.create(DeliveryDTO.class);
+        when(deliveryApiClient.addDelivery(eq(deliveryDTO))).thenReturn(Result.success());
+
+        mockMvc.perform(post("/delivery/")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtils.parse(deliveryDTO))
+        ).andExpect(content().json(JsonUtils.parse(Result.success())));
     }
 }

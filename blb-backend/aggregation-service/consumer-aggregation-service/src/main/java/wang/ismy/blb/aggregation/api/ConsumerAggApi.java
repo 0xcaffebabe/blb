@@ -4,11 +4,9 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.aggregation.client.consumer.ConsumerApiClient;
+import wang.ismy.blb.api.consumer.pojo.dto.ConsumerUpdateDTO;
 import wang.ismy.blb.api.consumer.pojo.dto.LoginResultDTO;
 import wang.ismy.blb.api.consumer.pojo.dto.RegisterDTO;
 import wang.ismy.blb.api.consumer.pojo.dto.RegisterResultDTO;
@@ -36,5 +34,18 @@ public class ConsumerAggApi {
     @PostMapping("register")
     public Result<RegisterResultDTO> register(@RequestBody RegisterDTO registerDTO){
         return consumerApiClient.register(registerDTO);
+    }
+
+    @ApiOperation("更新用户信息")
+    @PostMapping("info")
+    public Result<Void> updateConsumerInfo(@RequestBody ConsumerUpdateDTO consumerUpdateDTO){
+        return consumerApiClient.updateInfo(consumerUpdateDTO);
+    }
+
+    @ApiOperation("修改密码")
+    @PostMapping("info/password")
+    public Result<Void> updatePassword(@RequestParam("oldPassword") String oldPassword,
+                                       @RequestParam("newPassword") String newPassword){
+        return consumerApiClient.updatePassword(oldPassword,newPassword);
     }
 }

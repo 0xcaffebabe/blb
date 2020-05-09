@@ -7,10 +7,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import wang.ismy.blb.aggregation.client.consumer.ConsumerApiClient;
+import wang.ismy.blb.api.consumer.pojo.dto.ConsumerUpdateDTO;
 import wang.ismy.blb.api.consumer.pojo.dto.LoginResultDTO;
 import wang.ismy.blb.api.consumer.pojo.dto.RegisterDTO;
 import wang.ismy.blb.api.consumer.pojo.dto.RegisterResultDTO;
 import wang.ismy.blb.common.result.Result;
+import wang.ismy.blb.common.util.JsonUtils;
 import wang.ismy.blb.common.util.MockUtils;
 
 import static org.mockito.ArgumentMatchers.eq;
@@ -59,5 +61,29 @@ class ConsumerAggApiTest {
         )
                 .andExpect(status().isOk())
                 .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.success(result))));
+    }
+
+    @Test
+    void updateInfo() throws Exception {
+        ConsumerUpdateDTO consumerUpdateDTO = MockUtils.create(ConsumerUpdateDTO.class);
+        when(consumerApiClient.updateInfo(eq(consumerUpdateDTO))).thenReturn(Result.success());
+
+        mockMvc.perform(post("/info")
+            .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtils.parse(consumerUpdateDTO))
+        ).andExpect(content().json(JsonUtils.parse(Result.success())));
+
+    }
+
+    @Test
+    void updatePassword() throws Exception {
+        String oldPassword = "123";
+        String newPassword = "456";
+        when(consumerApiClient.updatePassword(eq(oldPassword),eq(newPassword))).thenReturn(Result.success());
+
+        mockMvc.perform(post("/info/password")
+                .param("oldPassword",oldPassword)
+                .param("newPassword",newPassword)
+        ).andExpect(content().json(JsonUtils.parse(Result.success())));
     }
 }
