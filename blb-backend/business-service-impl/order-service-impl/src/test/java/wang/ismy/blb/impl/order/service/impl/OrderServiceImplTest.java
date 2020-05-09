@@ -126,11 +126,11 @@ class OrderServiceImplTest {
         detail2.setSpecId(2L);
         orderCreateDTO.setProductList(List.of(detail1,detail2));
         orderService.setCacheService(cacheService);
-        Long orderId = orderService.addOrder(token, orderCreateDTO);
+        String orderId = orderService.addOrder(token, orderCreateDTO);
 
         assertNotNull(orderId);
-        var order = orderRepository.findById(orderId).orElseThrow();
-        var detailList = detailRepository.findAllByOrderId(orderId);
+        var order = orderRepository.findById(Long.parseLong(orderId)).orElseThrow();
+        var detailList = detailRepository.findAllByOrderId(Long.parseLong(orderId));
 
         assertEquals(new BigDecimal("18.0"),order.getOrderAmount());
         assertEquals("蔡徐坤",order.getConsumerName());

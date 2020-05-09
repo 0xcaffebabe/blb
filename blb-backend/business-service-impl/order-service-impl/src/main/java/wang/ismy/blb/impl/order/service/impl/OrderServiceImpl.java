@@ -75,7 +75,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     @Transactional(rollbackOn = Exception.class)
-    public Long addOrder(String token,OrderCreateDTO orderCreateDTO) {
+    public String addOrder(String token,OrderCreateDTO orderCreateDTO) {
         // 验证订餐者
         User consumer = getConsumer(token);
         // 根据商品与商品规格拉取 商品列表
@@ -103,7 +103,7 @@ public class OrderServiceImpl implements OrderService {
         // 生成订单验证码并写入
         generateAndWriteValidCode(orderDO.getOrderId());
         // 向消息队列写入消息：订单 订单详情 TODO
-        return orderDO.getOrderId();
+        return orderDO.getOrderId().toString();
     }
 
     private void generateAndWriteValidCode(Long orderId) {

@@ -53,14 +53,14 @@ class OrderApiImplTest {
         String token = "token";
         OrderCreateDTO orderCreateDTO = MockUtils.create(OrderCreateDTO.class);
         orderCreateDTO.setProductList(MockUtils.create(OrderDetailCreateDTO.class,5));
-        when(orderService.addOrder(eq(token),eq(orderCreateDTO))).thenReturn(1L);
+        when(orderService.addOrder(eq(token),eq(orderCreateDTO))).thenReturn("1");
         mockMvc.perform(post("/v1/api/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .header(SystemConstant.TOKEN,token)
                 .content(new ObjectMapper().writeValueAsBytes(orderCreateDTO))
         )
                 .andExpect(status().isOk())
-                .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.success(1L))));
+                .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.success("1"))));
     }
 
     @Test

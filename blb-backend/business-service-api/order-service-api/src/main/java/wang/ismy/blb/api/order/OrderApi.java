@@ -41,7 +41,7 @@ public interface OrderApi {
      */
     @ApiOperation("增加一条订单")
     @PostMapping("")
-    Result<Long> addOrder(@RequestBody OrderCreateDTO orderCreateDTO);
+    Result<String> addOrder(@RequestBody OrderCreateDTO orderCreateDTO);
 
     /**
      * 更新订单状态
@@ -109,7 +109,7 @@ public interface OrderApi {
         }
 
         @Override
-        public Result<Long> addOrder(OrderCreateDTO orderCreateDTO) {
+        public Result<String> addOrder(OrderCreateDTO orderCreateDTO) {
             return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 订单服务 增加订单接口失败");
         }
 

@@ -25,9 +25,9 @@ public interface OrderService {
      * 新增一条订单
      * @param token
      * @param orderCreateDTO
-     * @return
+     * @return order id
      */
-    Long addOrder(String token,OrderCreateDTO orderCreateDTO);
+    String addOrder(String token,OrderCreateDTO orderCreateDTO);
 
     /**
      * 更新订单状态

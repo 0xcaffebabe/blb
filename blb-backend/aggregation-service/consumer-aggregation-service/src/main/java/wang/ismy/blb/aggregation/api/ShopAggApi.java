@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.aggregation.client.*;
 import wang.ismy.blb.aggregation.service.ShopService;
 import wang.ismy.blb.api.cart.CartItem;
+import wang.ismy.blb.api.order.pojo.dto.OrderCreateDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
 import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
 import wang.ismy.blb.api.product.pojo.dto.eval.ConsumerEvalItem;
@@ -34,7 +35,7 @@ public class ShopAggApi {
     private final ProductCategoryApiClient productCategoryApiClient;
     private final ProductEvalApiClient productEvalApiClient;
     private final CartApiClient cartApiClient;
-
+    private final OrderApiClient orderApiClient;
     @ApiOperation("获取附近店铺")
     @GetMapping("vicinity")
     public Result getNearbyShop(@RequestParam String location,
@@ -102,5 +103,11 @@ public class ShopAggApi {
             @PathVariable("productId") Long productId,
             @PathVariable("specId") Long specId) {
         return cartApiClient.deleteProduct(token,productId,specId);
+    }
+
+    @ApiOperation("提交订单")
+    @PostMapping("order")
+    public Result<String> submitOrder(@RequestBody OrderCreateDTO orderCreateDTO){
+        return orderApiClient.addOrder(orderCreateDTO);
     }
 }
