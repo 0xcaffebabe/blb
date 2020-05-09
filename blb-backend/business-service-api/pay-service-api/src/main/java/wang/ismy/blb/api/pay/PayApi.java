@@ -64,7 +64,7 @@ public interface PayApi {
      */
     @ApiOperation("第三方支付回调URL")
     @RequestMapping("callback")
-    void callback(HttpServletRequest request, HttpServletResponse response);
+    default void callback(HttpServletRequest request, HttpServletResponse response){}
 
     /**
      * 商家退款
@@ -91,11 +91,6 @@ public interface PayApi {
         @Override
         public Result<PayStatusDTO> getPayStatus(Long payId) {
             return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 支付服务 获取支付状态接口失败");
-        }
-
-        @Override
-        public void callback(HttpServletRequest request, HttpServletResponse response) {
-
         }
 
         @Override

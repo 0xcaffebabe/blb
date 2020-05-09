@@ -26,7 +26,7 @@ public class ShopCategoryApiImpl implements ShopCategoryApi {
     }
 
     @Override
-    public Result<Page<ShopItemDTO>> getShopByCategory(Long categoryId, String location, Pageable pageable) {
-        return Result.success(shopCategoryService.getShopByCategory(categoryId,location,pageable));
+    public Result<Page<ShopItemDTO>> getShopByCategory(Long categoryId, String location, Long page,Long size) {
+        return Result.success(shopCategoryService.getShopByCategory(categoryId,location,Pageable.of(page,size)));
     }
 }

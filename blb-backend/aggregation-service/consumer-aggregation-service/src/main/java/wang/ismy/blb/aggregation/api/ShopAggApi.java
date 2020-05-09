@@ -47,7 +47,7 @@ public class ShopAggApi {
     public Result getNearbyShop(@RequestParam String location,
                                 @RequestParam(defaultValue = "1") Long page,
                                 @RequestParam(defaultValue = "10") Long size) {
-        var shopRes = shopApiClient.getNearbyShop(location, Pageable.of(page, size));
+        var shopRes = shopApiClient.getNearbyShop(location, page,size);
         return new ShopService().convertShopItems(shopRes, shopApiClient);
     }
 
@@ -82,7 +82,7 @@ public class ShopAggApi {
                                                           @RequestParam(defaultValue = "1") Long page,
                                                           @RequestParam(defaultValue = "10") Long size
     ) {
-        return productEvalApiClient.getShopEvalList(shopId, Pageable.of(page, size));
+        return productEvalApiClient.getShopEvalList(shopId, page, size);
     }
 
     @ApiOperation("获取购物车列表")
@@ -122,7 +122,7 @@ public class ShopAggApi {
     public Result searchShop(@RequestParam("kw") String keyword,
                                                     @RequestParam(defaultValue = "1") Long page,
                                                     @RequestParam(defaultValue = "10") Long size){
-        var shopRes =  shopApiClient.getNearbyShop("117,29",Pageable.of(page,size));
+        var shopRes =  shopApiClient.getNearbyShop("117,29",page,size);
         return new ShopService().convertShopItems(shopRes,shopApiClient);
     }
 
@@ -130,7 +130,7 @@ public class ShopAggApi {
     @GetMapping("order")
     public Result<Page<ConsumerOrderItemDTO>> getConsumerOrderList(@RequestParam(defaultValue = "1") Long page,
                                                                    @RequestParam(defaultValue = "10") Long size){
-        return orderConsumerApiClient.getConsumerOrderList(new OrderQuery(),Pageable.of(page,size));
+        return orderConsumerApiClient.getConsumerOrderList(page, size);
     }
 
     @ApiOperation("获取订单详情")

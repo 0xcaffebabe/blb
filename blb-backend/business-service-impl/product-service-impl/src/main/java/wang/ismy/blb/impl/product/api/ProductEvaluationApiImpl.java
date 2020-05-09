@@ -41,8 +41,8 @@ public class ProductEvaluationApiImpl implements ProductEvaluationApi {
     }
 
     @Override
-    public Result<Page<ConsumerEvalItem>> getShopEvalList(Long shopId, Pageable pageable) {
-        Page<ConsumerEvalItem> ret = productEvalService.getShopEvalList(shopId,pageable);
+    public Result<Page<ConsumerEvalItem>> getShopEvalList(Long shopId, Long page,Long size) {
+        Page<ConsumerEvalItem> ret = productEvalService.getShopEvalList(shopId,Pageable.of(page, size));
         return Result.success(ret);
     }
 

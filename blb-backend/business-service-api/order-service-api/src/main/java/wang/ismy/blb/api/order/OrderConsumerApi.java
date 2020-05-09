@@ -6,6 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import wang.ismy.blb.api.order.pojo.dto.OrderQuery;
 import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderDetailDTO;
 import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderItemDTO;
@@ -24,13 +25,14 @@ public interface OrderConsumerApi {
 
     /**
      * 拉取订餐者订单列表
-     * @param query 搜索条件
-     * @param pageable
+     * @param page
+     * @param size
      * @return 分页订单列表结果
      */
     @ApiOperation("拉取订餐者订单列表")
     @GetMapping("")
-    Result<Page<ConsumerOrderItemDTO>> getConsumerOrderList(OrderQuery query, Pageable pageable);
+    Result<Page<ConsumerOrderItemDTO>> getConsumerOrderList(@RequestParam("page") Long page,
+                                                            @RequestParam("size") Long size);
 
     /**
      * 拉取订餐者订单详细信息
@@ -45,7 +47,7 @@ public interface OrderConsumerApi {
     class Fallback implements OrderConsumerApi{
 
         @Override
-        public Result<Page<ConsumerOrderItemDTO>> getConsumerOrderList(OrderQuery query, Pageable pageable) {
+        public Result<Page<ConsumerOrderItemDTO>> getConsumerOrderList(Long page,Long size) {
             return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 消费者订单服务 获取消费者订单接口失败");
         }
 

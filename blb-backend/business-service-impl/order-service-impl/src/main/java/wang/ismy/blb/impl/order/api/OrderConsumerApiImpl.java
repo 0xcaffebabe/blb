@@ -22,9 +22,9 @@ import wang.ismy.blb.impl.order.service.OrderConsumerService;
 public class OrderConsumerApiImpl implements OrderConsumerApi {
     private final OrderConsumerService consumerService;
     @Override
-    public Result<Page<ConsumerOrderItemDTO>> getConsumerOrderList(OrderQuery query, Pageable pageable) {
+    public Result<Page<ConsumerOrderItemDTO>> getConsumerOrderList(Long page,Long size) {
         String token = CurrentRequestUtils.getHeader(SystemConstant.TOKEN);
-        return Result.success(consumerService.getOrderList(token,query,pageable));
+        return Result.success(consumerService.getOrderList(token,new OrderQuery(),Pageable.of(page,size)));
     }
 
     @Override

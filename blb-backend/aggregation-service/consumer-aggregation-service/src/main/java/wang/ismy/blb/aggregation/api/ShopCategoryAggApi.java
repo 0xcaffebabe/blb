@@ -43,7 +43,7 @@ public class ShopCategoryAggApi {
                                              @RequestParam String location,
                                              @RequestParam(defaultValue = "1") Long page,
                                              @RequestParam(defaultValue = "10") Long size){
-        var shopCateRes = shopCategoryApiClient.getShopByCategory(categoryId,location, Pageable.of(page,size));
+        var shopCateRes = shopCategoryApiClient.getShopByCategory(categoryId,location, page,size);
         return new ShopService().convertShopItems(shopCateRes,shopApiClient);
     }
 }

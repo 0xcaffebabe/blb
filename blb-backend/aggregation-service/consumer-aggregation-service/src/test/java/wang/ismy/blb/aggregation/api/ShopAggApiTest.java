@@ -75,9 +75,7 @@ class ShopAggApiTest {
         ShopItemDTO shopItem2 = new ShopItemDTO();
         shopItem2.setShopId(2L);
         shopItem2.setShopName("2");
-        when(shopApiClient.getNearbyShop(eq(location),argThat(pageable->
-                pageable.getPage().equals(1L) && pageable.getSize().equals(10L)
-        ))).thenReturn(Result.success(new Page<>(2L, List.of(shopItem1,shopItem2))));
+        when(shopApiClient.getNearbyShop(eq(location),eq(1L),eq(10L))).thenReturn(Result.success(new Page<>(2L, List.of(shopItem1,shopItem2))));
 
         ShopInfoDTO shopInfo1 = new ShopInfoDTO();
         shopInfo1.setStartingPrice(new BigDecimal("10"));
@@ -162,7 +160,7 @@ class ShopAggApiTest {
         Long shopId = 1L;
         var list = MockUtils.create(ConsumerEvalItem.class,10);
         Page<ConsumerEvalItem> page = new Page<>(10L, list);
-        when(productEvalApiClient.getShopEvalList(eq(shopId),argThat(pageable->pageable.getPage().equals(1L) && pageable.getSize().equals(10L))))
+        when(productEvalApiClient.getShopEvalList(eq(shopId),eq(1L),eq(10L)))
                 .thenReturn(Result.success(page));
         mockMvc.perform(get("/shop/"+shopId+"/evaluation/list"))
                 .andExpect(status().isOk())

@@ -61,9 +61,7 @@ class ShopCategoryAggApiTest {
         ShopItemDTO shopItem2 = new ShopItemDTO();
         shopItem2.setShopId(2L);
         shopItem2.setShopName("2");
-        when(shopCategoryApiClient.getShopByCategory(eq(categoryId),eq(location),argThat(pageable->
-                pageable.getPage().equals(1L) && pageable.getSize().equals(10L)
-                ))).thenReturn(Result.success(new Page<>(2L, List.of(shopItem1,shopItem2))));
+        when(shopCategoryApiClient.getShopByCategory(eq(categoryId),eq(location),eq(1L),eq(10L))).thenReturn(Result.success(new Page<>(2L, List.of(shopItem1,shopItem2))));
 
         ShopInfoDTO shopInfo1 = new ShopInfoDTO();
         shopInfo1.setStartingPrice(new BigDecimal("10"));

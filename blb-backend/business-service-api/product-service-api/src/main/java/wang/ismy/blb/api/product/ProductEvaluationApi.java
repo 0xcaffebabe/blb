@@ -61,13 +61,16 @@ public interface ProductEvaluationApi {
     /**
      * 分页获取店铺评价列表
      * @param shopId
-     * @param pageable
+     * @param page
+     * @param size
      * @return
      */
     @ApiOperation("获取店铺评价列表")
     @ApiImplicitParam(paramType = "path", name = "shopId", dataType = "Long", required = true, value = "店铺ID")
     @GetMapping("shop/list/{shopId}")
-    Result<Page<ConsumerEvalItem>> getShopEvalList(@PathVariable("shopId") Long shopId, Pageable pageable);
+    Result<Page<ConsumerEvalItem>> getShopEvalList(@PathVariable("shopId") Long shopId,
+                                                   @RequestParam("page") Long page,
+                                                   @RequestParam("size") Long size);
 
     /**
      * 消费者添加评价
@@ -98,7 +101,7 @@ public interface ProductEvaluationApi {
         }
 
         @Override
-        public Result<Page<ConsumerEvalItem>> getShopEvalList(Long shopId, Pageable pageable) {
+        public Result<Page<ConsumerEvalItem>> getShopEvalList(Long shopId, Long page,Long size) {
             return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商品评价服务 获取店铺评价接口失败");
         }
 

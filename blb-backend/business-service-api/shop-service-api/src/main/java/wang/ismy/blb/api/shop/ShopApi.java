@@ -29,14 +29,16 @@ public interface ShopApi {
     /**
      * 获取附近店铺
      * @param location 经纬度
-     * @param pageable
+     * @param page
+     * @param size
      * @return 店铺分页列表
      */
     @ApiOperation("获取附近店铺")
     @ApiImplicitParam(paramType = "query", name = "location", dataType = "String", required = true, value = "经纬度")
     @GetMapping("vicinity")
     Result<Page<ShopItemDTO>> getNearbyShop(@RequestParam("location") String location,
-                                            Pageable pageable);
+                                            @RequestParam("page") Long page,
+                                            @RequestParam("size") Long size);
 
     /**
      * 根据店铺ID获取店铺信息
@@ -90,7 +92,7 @@ public interface ShopApi {
     class Fallback implements ShopApi{
 
         @Override
-        public Result<Page<ShopItemDTO>> getNearbyShop(String location, Pageable pageable) {
+        public Result<Page<ShopItemDTO>> getNearbyShop(String location, Long page,Long size) {
             return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 店铺服务 获取附近店铺接口失败");
         }
 

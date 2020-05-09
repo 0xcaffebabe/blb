@@ -9,8 +9,8 @@ import wang.ismy.blb.common.enums.ServiceName;
  * @author MY
  * @date 2020/5/8 15:40
  */
-@FeignClient(ServiceName.CONSUMER_SERVICE)
+@FeignClient(value = ServiceName.CONSUMER_SERVICE,fallback = ConsumerDeliveryApiClient.Fallback.class)
 public interface ConsumerDeliveryApiClient extends ConsumerDeliveryApi {
     @Component
-    class Fallback extends ConsumerDeliveryApi.Fallback implements ConsumerDeliveryApi{}
+    class Fallback extends ConsumerDeliveryApi.Fallback implements ConsumerDeliveryApiClient{}
 }

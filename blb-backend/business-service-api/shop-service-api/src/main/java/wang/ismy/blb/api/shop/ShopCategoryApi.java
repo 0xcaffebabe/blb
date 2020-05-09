@@ -40,7 +40,8 @@ public interface ShopCategoryApi {
      * 根据目录ID获取店铺
      * @param categoryId
      * @param location
-     * @param pageable
+     * @param page
+     * @param size
      * @return 店铺分页列表
      */
     @ApiOperation("根据目录ID获取店铺")
@@ -51,7 +52,8 @@ public interface ShopCategoryApi {
     @GetMapping("{categoryId}/shop")
     Result<Page<ShopItemDTO>> getShopByCategory(@PathVariable("categoryId") Long categoryId,
                                                 @RequestParam("location") String location,
-                                                Pageable pageable);
+                                                @RequestParam("page") Long page,
+                                                @RequestParam("size") Long size);
 
     class Fallback implements ShopCategoryApi{
 
@@ -61,7 +63,7 @@ public interface ShopCategoryApi {
         }
 
         @Override
-        public Result<Page<ShopItemDTO>> getShopByCategory(Long categoryId, String location, Pageable pageable) {
+        public Result<Page<ShopItemDTO>> getShopByCategory(Long categoryId, String location, Long page,Long size) {
             return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 店铺目录服务 根据目录获取店铺接口失败");
         }
     }

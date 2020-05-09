@@ -22,7 +22,7 @@ public class BlbExceptionHandler {
     }
 
     @ExceptionHandler(Throwable.class)
-    public Result<Object> handle(RuntimeException e){
+    public Result<Object> handle(Throwable e){
         e.printStackTrace();
         return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),e.getMessage());
     }

@@ -1,6 +1,5 @@
 package wang.ismy.blb.aggregation.client;
 
-import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;
 import wang.ismy.blb.api.shop.ShopCategoryApi;

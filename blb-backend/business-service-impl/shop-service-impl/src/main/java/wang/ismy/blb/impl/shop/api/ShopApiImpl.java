@@ -26,8 +26,8 @@ import java.util.Map;
 public class ShopApiImpl implements ShopApi {
     private final ShopService shopService;
     @Override
-    public Result<Page<ShopItemDTO>> getNearbyShop(String location, Pageable pageable) {
-        return Result.success(shopService.getNearbyShop(location,pageable));
+    public Result<Page<ShopItemDTO>> getNearbyShop(String location, Long page,Long size) {
+        return Result.success(shopService.getNearbyShop(location,Pageable.of(page, size)));
     }
 
     @Override
