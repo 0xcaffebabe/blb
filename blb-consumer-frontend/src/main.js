@@ -6,6 +6,7 @@ import router from './router'
 import store from './store'
 import './assets/global.css'
 import VueAMap from 'vue-amap'
+
 Vue.use(VueAMap)
 Vue.use(ElementUI)
 Vue.config.productionTip = false

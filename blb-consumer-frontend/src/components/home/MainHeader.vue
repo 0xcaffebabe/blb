@@ -2,7 +2,7 @@
     <div class="container">
         <el-row>
         <el-col :span="4">
-          <span class="logo">饱了吧
+          <span class="logo" @click="test">饱了吧
           </span>
         </el-col>
         <el-col :span="16">
@@ -34,14 +34,24 @@
 
 <script>
 import LocationChooser from './LocationChooser'
+import categoryService from '../../service/CategoryService'
+
 export default {
   data () {
     return {}
   },
-  created () {
+  async created () {
+    const data = await categoryService.getShopCategory()
+    console.log(data)
   },
   components: {
     LocationChooser
+  },
+  methods: {
+    async test () {
+      const data = await categoryService.getShopCategory()
+      console.log(data)
+    }
   }
 }
 </script>

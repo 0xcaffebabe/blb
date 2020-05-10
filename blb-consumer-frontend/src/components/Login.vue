@@ -4,7 +4,7 @@
     :visible="$store.state.loginPanelShow"
     @close="$store.commit('toggleLoginPanel')"
     width="40%">
-      <el-tabs v-model="activeName" @tab-click="handleClick">
+      <el-tabs v-model="activeName">
         <el-tab-pane label="登录" name="login">
           <el-form :model="loginForm" :rules="loginFormRules" ref="loginForm" :label-position="'right'" label-width="80px">
             <el-form-item label="登录账号" prop="name">
