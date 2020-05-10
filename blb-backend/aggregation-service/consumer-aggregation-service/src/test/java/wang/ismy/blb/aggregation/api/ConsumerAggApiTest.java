@@ -7,10 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import wang.ismy.blb.aggregation.client.consumer.ConsumerApiClient;
-import wang.ismy.blb.api.consumer.pojo.dto.ConsumerUpdateDTO;
-import wang.ismy.blb.api.consumer.pojo.dto.LoginResultDTO;
-import wang.ismy.blb.api.consumer.pojo.dto.RegisterDTO;
-import wang.ismy.blb.api.consumer.pojo.dto.RegisterResultDTO;
+import wang.ismy.blb.api.consumer.pojo.dto.*;
 import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.JsonUtils;
 import wang.ismy.blb.common.util.MockUtils;
@@ -85,5 +82,14 @@ class ConsumerAggApiTest {
                 .param("oldPassword",oldPassword)
                 .param("newPassword",newPassword)
         ).andExpect(content().json(JsonUtils.parse(Result.success())));
+    }
+
+    @Test
+    void getInfo() throws Exception {
+        ConsumerDTO dto = MockUtils.create(ConsumerDTO.class);
+        when(consumerApiClient.getInfo()).thenReturn(Result.success(dto));
+
+        mockMvc.perform(get("/info"))
+                .andExpect(content().json(JsonUtils.parse(Result.success(dto))));
     }
 }

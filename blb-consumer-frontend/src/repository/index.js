@@ -5,6 +5,16 @@ class Repository {
     const data = await axios.get('/category/1')
     return data.data
   }
+
+  async getConsumerInfo () {
+    const data = await axios.get('/info')
+    return data.data
+  }
+
+  async login (username, password) {
+    const data = await axios.post(`/login?username=${username}&password=${password}`)
+    return data.data
+  }
 }
 
 export default new Repository()

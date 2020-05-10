@@ -21,7 +21,7 @@
         </el-col>
         <el-col :span="4">
             <span class="login-tip" @click="$store.commit('toggleLoginPanel')" v-if="!$store.state.user.login">登录/注册</span>
-            <el-avatar v-else class="avatar"></el-avatar>
+            <el-avatar :src="$store.state.user.info.avatar" v-else class="avatar"></el-avatar>
             <span class="el-icon-location location" @click="$store.commit('toggleLocationChooser')"> {{$store.state.location}}
               <span class="el-icon-caret-bottom" v-if="!$store.state.locationChooserShow"></span>
               <span class="el-icon-caret-top" v-else></span>
@@ -35,14 +35,18 @@
 <script>
 import LocationChooser from './LocationChooser'
 import categoryService from '../../service/CategoryService'
-
+import consumerService from '../../service/ConsumerService'
 export default {
   data () {
-    return {}
+    return { }
   },
   async created () {
-    const data = await categoryService.getShopCategory()
-    console.log(data)
+    const isLogin = await consumerService.isLogin()
+    this.$store.commit('setLoginState', isLogin)
+    if (isLogin) {
+      const userInfo = await consumerService.getConsumerInfo()
+      this.$store.commit('setUserInfo', userInfo)
+    }
   },
   components: {
     LocationChooser

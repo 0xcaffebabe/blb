@@ -6,10 +6,8 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.aggregation.client.consumer.ConsumerApiClient;
-import wang.ismy.blb.api.consumer.pojo.dto.ConsumerUpdateDTO;
-import wang.ismy.blb.api.consumer.pojo.dto.LoginResultDTO;
-import wang.ismy.blb.api.consumer.pojo.dto.RegisterDTO;
-import wang.ismy.blb.api.consumer.pojo.dto.RegisterResultDTO;
+import wang.ismy.blb.api.consumer.pojo.dto.*;
+import wang.ismy.blb.common.SystemConstant;
 import wang.ismy.blb.common.result.Result;
 
 /**
@@ -47,5 +45,11 @@ public class ConsumerAggApi {
     public Result<Void> updatePassword(@RequestParam("oldPassword") String oldPassword,
                                        @RequestParam("newPassword") String newPassword){
         return consumerApiClient.updatePassword(oldPassword,newPassword);
+    }
+
+    @ApiOperation("获取当前用户信息")
+    @GetMapping("info")
+    public Result<ConsumerDTO> getInfo(){
+        return consumerApiClient.getInfo();
     }
 }

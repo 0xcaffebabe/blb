@@ -4,6 +4,7 @@ axios.defaults.baseURL = process.env.VUE_APP_API_URL
 // 添加请求头
 axios.interceptors.request.use(config => {
   config.headers.TYPE = 'CONSUMER'
+  config.headers.TOKEN = window.localStorage.getItem('token')
   return config
 })
 axios.interceptors.response.use(config => {

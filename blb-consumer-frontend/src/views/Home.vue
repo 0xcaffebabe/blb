@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+  <el-container class="container">
     <el-header style="padding:0">
       <main-header></main-header>
     </el-header>
@@ -37,3 +37,9 @@ export default {
   }
 }
 </script>
+
+<style lang="less" scoped>
+  .container {
+    min-width: 1080px;
+  }
+</style>

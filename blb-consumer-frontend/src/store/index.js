@@ -11,7 +11,8 @@ export default new Vuex.Store({
     loginPanelShow: false,
     userEditPanelShow: true,
     user: {
-      login: false
+      login: false,
+      info: {}
     },
     location: '漳州'
   },
@@ -28,8 +29,17 @@ export default new Vuex.Store({
     toggleLoginPanel () {
       this.state.loginPanelShow = !this.state.loginPanelShow
     },
+    closeLoginPanel () {
+      this.state.loginPanelShow = false
+    },
     toggleUserEditPanel () {
       this.state.userEditPanelShow = !this.state.userEditPanelShow
+    },
+    setLoginState (state, val) {
+      this.state.user.login = val
+    },
+    setUserInfo (state, info) {
+      this.state.user.info = info
     }
   },
   actions: {

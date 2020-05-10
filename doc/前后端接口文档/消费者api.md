@@ -117,6 +117,22 @@ username| 用户名|
 userId| 用户ID|
 avatar | 用户头像|
 
+## 获取当前登录用户信息
+
+- 方式：get
+- url：/info
+- 响应参数
+
+```json
+{
+  "avatar":"头像",
+  "username":"cxk",
+  "realName":"蔡徐坤",
+  "phone":"17385469123",
+  "email":"xxx"
+}
+```
+
 ## 注册接口
 
 - 请求方式：POST

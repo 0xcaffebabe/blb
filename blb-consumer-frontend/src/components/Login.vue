@@ -1,8 +1,8 @@
 <template>
   <el-dialog
-    title="登录"
+    :title="activeName == 'login' ? '登录' : '注册'"
     :visible="$store.state.loginPanelShow"
-    @close="$store.commit('toggleLoginPanel')"
+    @close="$store.commit('closeLoginPanel')"
     width="40%">
       <el-tabs v-model="activeName">
         <el-tab-pane label="登录" name="login">
@@ -45,6 +45,7 @@
 </template>
 
 <script>
+import consumerService from '../service/ConsumerService'
 export default {
   data () {
     const emailValidator = (rule, value, callback) => {
@@ -69,7 +70,7 @@ export default {
       }
     }
     return {
-      activeName: 'register',
+      activeName: 'login',
       loginForm: {
         name: '',
         password: ''
@@ -115,9 +116,19 @@ export default {
   },
   methods: {
     login () {
-      this.$refs.loginForm.validate(valid => {
+      this.$refs.loginForm.validate(async valid => {
         if (valid) {
-          this.$message.success('登录成功')
+          try {
+            const data = await consumerService.login(this.loginForm.name, this.loginForm.password)
+            this.$message.success('登录成功')
+            // 设置登录状态 用户信息
+            this.$store.commit('setUserInfo', data)
+            this.$store.commit('setLoginState', true)
+            // 关闭弹窗
+            this.$store.commit('closeLoginPanel')
+          } catch (e) {
+            this.$message.error(e.message)
+          }
         } else {
           this.$message.error('请将信息填写完整')
         }
