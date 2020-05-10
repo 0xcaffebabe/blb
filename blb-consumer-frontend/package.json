@@ -6,7 +6,7 @@
     "serve": "vue-cli-service serve --model development",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "test": "echo test"
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^0.19.2",
