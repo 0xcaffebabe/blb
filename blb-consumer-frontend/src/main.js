@@ -7,6 +7,10 @@ import store from './store'
 import './assets/global.css'
 import VueAMap from 'vue-amap'
 
+import axios from 'axios'
+import NProgress from 'nprogress'
+import 'nprogress/nprogress.css'
+
 Vue.use(VueAMap)
 Vue.use(ElementUI)
 Vue.config.productionTip = false
@@ -19,6 +23,19 @@ VueAMap.initAMapApiLoader({
   plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor'],
   // 高德 sdk 版本，默认为 1.4.4
   v: '1.4.4'
+})
+
+// 添加上方进度条
+axios.interceptors.request.use(config => {
+  NProgress.start()
+  return config
+})
+// 结束上方进度条
+axios.interceptors.response.use(config => {
+  NProgress.done()
+  return config
+},error=>{
+  NProgress.done()
 })
 
 new Vue({
