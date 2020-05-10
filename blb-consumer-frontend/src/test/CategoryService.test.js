@@ -2,7 +2,7 @@ import reposutiry from '../repository'
 import categoryService from '../service/CategoryService'
 
 jest.mock('../repository')
-test('获取店铺目录列表',()=>{
+test('获取店铺目录列表', () => {
   const data = {
     success: true,
     msg: 'success',

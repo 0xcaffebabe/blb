@@ -1,8 +1,9 @@
 import repository from '../repository'
+import storageService from './StorageService'
 class ConsumerService {
   // 判断是否登录
   async isLogin () {
-    const token = window.localStorage.getItem('token')
+    const token = storageService.getItem('token')
     if (!token) {
       return false
     }
@@ -28,7 +29,7 @@ class ConsumerService {
     if (!data.success) {
       throw new Error('登录失败:' + data.msg)
     }
-    window.localStorage.setItem('token', data.data.token)
+    storageService.putItem('token', data.data.token)
     return data.data
   }
 }

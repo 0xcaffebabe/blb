@@ -49,7 +49,15 @@
     "parserOptions": {
       "parser": "babel-eslint"
     },
-    "rules": {}
+    "rules": {},
+    "overrides": [
+      {
+        "files": ["*-test.js","*.spec.js"],
+        "rules": {
+          "no-unused-expressions": "off"
+        }
+      }
+    ]
   },
   "browserslist": [
     "> 1%",
