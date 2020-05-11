@@ -135,9 +135,16 @@ export default {
       })
     },
     register () {
-      this.$refs.registerForm.validate(valid => {
+      this.$refs.registerForm.validate(async valid => {
         if (valid) {
-          this.$message.success('注册成功')
+          try {
+            const data = await consumerService.register(this.registerForm)
+            this.$message.success(data.greeting + `,您是本系统第${data.userNumber}个会员`)
+            // 切换到登录tab栏
+            this.activeName = 'login'
+          } catch (e) {
+            this.$message.error(e.message)
+          }
         } else {
           this.$message.error('请将信息填写完整')
         }

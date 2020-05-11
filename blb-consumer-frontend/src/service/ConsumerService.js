@@ -32,5 +32,14 @@ class ConsumerService {
     storageService.putItem('token', data.data.token)
     return data.data
   }
+
+  // 进行注册
+  async register (params) {
+    const data = await repository.register(params)
+    if (!data.success) {
+      throw new Error('注册失败:' + data.msg)
+    }
+    return data.data
+  }
 }
 export default new ConsumerService()

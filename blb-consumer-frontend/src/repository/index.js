@@ -15,6 +15,11 @@ class Repository {
     const data = await axios.post(`/login?username=${username}&password=${password}`)
     return data.data
   }
+
+  async register (params) {
+    const data = await axios.post('/register', params)
+    return data.data
+  }
 }
 
 export default new Repository()

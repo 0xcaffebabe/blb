@@ -38,3 +38,14 @@ test('测试 login', () => {
       expect(storageService.putItem.mock.calls[0][1]).toBe('token')
       )
 })
+
+test('测试 register', ()=> {
+  reposutiry.register.mockResolvedValue({
+    success: true,
+    data: {
+      greeting: '注册成功'
+    }
+  })
+  return consumerService.register({username: 'cxk', password: '123'})
+    .then(data => expect(data.greeting).toEqual('注册成功'))
+})
