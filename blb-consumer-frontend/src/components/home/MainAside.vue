@@ -1,7 +1,13 @@
 <template>
   <div>
     <el-menu
-      default-active="2" :collapse="isCollapse" :collapse-transition="false" class="aside-menu" :unique-opened="true">
+      default-active="2"
+      :collapse="isCollapse"
+      :collapse-transition="false"
+      class="aside-menu"
+      :unique-opened="true"
+      :router="true"
+      >
       <span class="collapse el-icon-more" @click="toggleAside"></span>
       <span v-if="categoryList.length == 0">暂无数据</span>
       <el-submenu :index="item.categoryId + ''" v-for="item in categoryList" :key="item.categoryId">
@@ -12,7 +18,7 @@
             <el-tag type="info" size="mini">2264</el-tag>
           </div>
         </template>
-        <el-menu-item :index="item1.categoryId + ''" v-for="item1 in item.subCategoryList" :key="item1.categoryId">
+        <el-menu-item :index="'/list/' + item1.categoryId" v-for="item1 in item.subCategoryList" :key="item1.categoryId">
           {{item1.categoryName}}
           <span style="float:right">2075</span>
         </el-menu-item>

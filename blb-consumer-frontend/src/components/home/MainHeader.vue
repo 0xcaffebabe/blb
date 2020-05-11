@@ -36,6 +36,7 @@
 import LocationChooser from './LocationChooser'
 import categoryService from '../../service/CategoryService'
 import consumerService from '../../service/ConsumerService'
+import locationService from '../../service/LocationService'
 export default {
   data () {
     return { }
@@ -47,6 +48,8 @@ export default {
       const userInfo = await consumerService.getConsumerInfo()
       this.$store.commit('setUserInfo', userInfo)
     }
+    const location = await locationService.getLocation()
+    console.log(location)
   },
   components: {
     LocationChooser

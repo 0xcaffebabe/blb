@@ -5,26 +5,26 @@
         {{title}}
       </div>
       <ul class="shop-list">
-        <li class="shop-item-wrapper" v-for="item in shopList" :key="item">
+        <li class="shop-item-wrapper" v-for="item in shopList" :key="item.shopId">
           <div class="shop-item" @click="handleShopItemClick">
-            <el-image src="https://p1.meituan.net/waimaipoi/23d94486b3882b8eb6101aa251bbd45030720.jpg" alt="">
+            <el-image fit="cover" :src="item.shopLogo" alt="" style="height:128px">
               <div slot="error" class="image-slot">
                 <i class="el-icon-picture-outline"></i>
               </div>
             </el-image>
-            <h1>小康烘焙</h1>
+            <h1>{{item.shopName}}</h1>
             <el-rate
-              :value="3.7"
+              :value="item.ranking"
               disabled
               show-score
               text-color="#ff9900"
               score-template="{value}">
             </el-rate>
-            <span class="shop-sales">月售:106单</span>
+            <span class="shop-sales">月售:{{item.sales}}单</span>
             <div>
-              <span class="shop-price">起送:￥20/免配送费</span>
+              <span class="shop-price">起送:￥${{item.startingPrice}}/配送费:￥{{item.deliveryFee}}</span>
             </div>
-            <p class="distance el-icon-time">1388.8公里 / <span>14小时48分钟</span></p>
+            <p class="distance el-icon-time">{{item.distance}} / <span>{{item.deliveryTime}}</span></p>
           </div>
         </li>
       </ul>
@@ -70,6 +70,7 @@ export default {
     h1 {
       margin: 10px 0;
       font-weight: 400;
+      text-align: center;
     }
     .shop-price {
       font-size: 12px;

@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-
+import locationService from '../service/LocationService'
 Vue.use(Vuex)
-
+const city = locationService.getLocation().city
 export default new Vuex.Store({
   state: {
     cartShow: false,
@@ -14,7 +14,7 @@ export default new Vuex.Store({
       login: false,
       info: {}
     },
-    location: '漳州'
+    location: city
   },
   mutations: {
     toggleCart () {

@@ -20,6 +20,11 @@ class Repository {
     const data = await axios.post('/register', params)
     return data.data
   }
+
+  async getShopByCategory (params) {
+    const data = await axios.get(`/category/${params.categoryId}/shop?location=${params.location}`)
+    return data.data
+  }
 }
 
 export default new Repository()
