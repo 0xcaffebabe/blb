@@ -5,7 +5,7 @@
     <el-card>
         <el-tabs v-model="activeName">
           <el-tab-pane label="商品" name="product">
-            <shop-product :categoryList="productCategoryList" :shopId="shopId"/>
+            <shop-product :shopId="shopId"/>
           </el-tab-pane>
           <el-tab-pane label="评价" name="eval">
             <shop-eval/>
@@ -38,8 +38,7 @@ export default {
       activeName: 'product',
       cartShow: true,
       shopId: this.$route.params.shopId,
-      shopInfo: {},
-      productCategoryList: []
+      shopInfo: {}
     }
   },
   components: {
@@ -53,19 +52,10 @@ export default {
       } catch (e) {
         this.$message.error(e.message)
       }
-    },
-    async getProductCategory () {
-      try {
-        this.productCategoryList = await shopService.getShopProductCategory(this.shopId)
-        console.log(this.productCategoryList)
-      } catch (e) {
-        this.$message.error(e.message)
-      }
     }
   },
   created () {
     this.getShopInfo()
-    this.getProductCategory()
   }
 }
 </script>
