@@ -11,5 +11,34 @@ class ShopService {
     }
     return data.data
   }
+
+  async getShopInfo (shopId) {
+    const data = await repository.getShopInfo(shopId)
+    if (!data.success) {
+      throw new Error('获取店铺信息失败:' + data.msg)
+    }
+    return data.data
+  }
+
+  async getShopProductCategory (shopId) {
+    const data = await repository.getShopProductCategory(shopId)
+    if (!data.success) {
+      throw new Error('获取店铺商品分类失败:' + data.msg)
+    }
+    return data.data
+  }
+
+  async getProductList (shopId, categoryId) {
+    const data = await repository.getProductList(shopId, categoryId)
+    if (!data.success) {
+      throw new Error('获取商品列表失败:' + data.msg)
+    }
+    const productList = data.data
+    // 设置默认选中规格
+    productList.forEach(v => {
+      v.defaultSpec = v.productSpecList[0]
+    })
+    return productList
+  }
 }
 export default new ShopService()

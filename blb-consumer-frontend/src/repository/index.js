@@ -27,6 +27,21 @@ class Repository {
     })
     return data.data
   }
+
+  async getShopInfo (shopId) {
+    const data = await axios.get('/shop/info/' + shopId)
+    return data.data
+  }
+
+  async getShopProductCategory (shopId) {
+    const data = await axios.get(`/shop/${shopId}/category/`)
+    return data.data
+  }
+
+  async getProductList (shopId, categoryId) {
+    const data = await axios.get(`/shop/${shopId}/${categoryId}/product/`)
+    return data.data
+  }
 }
 
 export default new Repository()

@@ -7,7 +7,7 @@
       <el-alert v-if="shopList.length == 0" title="没有数据"></el-alert>
       <ul class="shop-list">
         <li class="shop-item-wrapper" v-for="item in shopList" :key="item.shopId">
-          <div class="shop-item" @click="handleShopItemClick">
+          <div class="shop-item" @click="handleShopItemClick(item)">
             <el-image fit="cover" :src="item.shopLogo" alt="" style="height:128px">
               <div slot="error" class="image-slot">
                 <i class="el-icon-picture-outline"></i>
@@ -40,8 +40,8 @@ export default {
     return {}
   },
   methods: {
-    handleShopItemClick () {
-      this.$router.push('/shop')
+    handleShopItemClick (shop) {
+      this.$router.push('/shop/' + shop.shopId)
     }
   }
 }

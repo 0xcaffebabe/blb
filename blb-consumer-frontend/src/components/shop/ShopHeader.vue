@@ -2,25 +2,25 @@
   <div>
     <el-card class="shop-header" :body-style="{padding:0}">
       <div class="shop-header-img">
-        <el-image src="https://p1.meituan.net/waimaipoi/23d94486b3882b8eb6101aa251bbd45030720.jpg" fit="cover"/>
+        <el-image :src="info.shopLogo" fit="cover"/>
       </div>
       <el-row class="shop-detail" :gutter="20">
         <el-col :span="4">
           <el-image
             class="shop-logo"
             style="width: 150px; height: 150px"
-            src="https://p1.meituan.net/waimaipoi/23d94486b3882b8eb6101aa251bbd45030720.jpg"
-            :preview-src-list="['https://p1.meituan.net/waimaipoi/23d94486b3882b8eb6101aa251bbd45030720.jpg']"
+            :src="info.shopLogo"
+            :preview-src-list="[info.shopLogo]"
             fit="cover"></el-image>
         </el-col>
         <el-col :span="16">
-          <h1 class="shop-name">小康烘焙</h1>
+          <h1 class="shop-name">{{info.shopName}}</h1>
           <p class="shop-delivery">
             <el-tag effect="dark" type="primary" size="mini" style="vertical-align:top">蜂鸟专送</el-tag>
             / 35分钟送达
-             / 配送费￥5 起送价 ￥20
+             / 配送费￥{{info.deliveryFee}} 起送价 ￥{{info.startingPrice}}
             </p>
-          <p class="shop-slogan">公告：欢迎光临，用餐高峰请提前下单，谢谢</p>
+          <p class="shop-slogan">{{info.shopSlogan}}</p>
         </el-col>
       </el-row>
     </el-card>
@@ -29,6 +29,7 @@
 
 <script>
 export default {
+  props: ['info'],
   data () {
     return {}
   }

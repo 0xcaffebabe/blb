@@ -1,11 +1,11 @@
 <template>
   <div>
-    <shop-header></shop-header>
+    <shop-header :info="shopInfo"/>
     <!-- 菜单选项栏 -->
     <el-card>
         <el-tabs v-model="activeName">
           <el-tab-pane label="商品" name="product">
-            <shop-product/>
+            <shop-product :categoryList="productCategoryList" :shopId="shopId"/>
           </el-tab-pane>
           <el-tab-pane label="评价" name="eval">
             <shop-eval/>
@@ -30,15 +30,42 @@ import ShopHeader from '../components/shop/ShopHeader'
 import ShopProduct from '../components/shop/ShopProduct'
 import ShopCart from '../components/shop/ShopCart'
 import ShopEval from '../components/shop/ShopEval'
+
+import shopService from '../service/ShopService'
 export default {
   data () {
     return {
-      activeName: 'eval',
-      cartShow: true
+      activeName: 'product',
+      cartShow: true,
+      shopId: this.$route.params.shopId,
+      shopInfo: {},
+      productCategoryList: []
     }
   },
   components: {
     ShopHeader, ShopProduct, ShopCart, ShopEval
+  },
+  methods: {
+    async getShopInfo () {
+      try {
+        const shopInfo = await shopService.getShopInfo(this.shopId)
+        this.shopInfo = shopInfo
+      } catch (e) {
+        this.$message.error(e.message)
+      }
+    },
+    async getProductCategory () {
+      try {
+        this.productCategoryList = await shopService.getShopProductCategory(this.shopId)
+        console.log(this.productCategoryList)
+      } catch (e) {
+        this.$message.error(e.message)
+      }
+    }
+  },
+  created () {
+    this.getShopInfo()
+    this.getProductCategory()
   }
 }
 </script>
