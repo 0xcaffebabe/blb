@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     handleShopItemClick () {
-      this.$router.push('shop')
+      this.$router.push('/shop')
     }
   }
 }

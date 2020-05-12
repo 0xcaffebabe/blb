@@ -32,6 +32,9 @@ export default {
     this.getShopData()
   },
   beforeRouteUpdate (to, from, next) {
+    if (!to.fullPath.startsWith('/list')) {
+      return next()
+    }
     next()
     // 跳转到其他分类下额店铺页面
     this.page = 1
