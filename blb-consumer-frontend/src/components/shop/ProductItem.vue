@@ -23,7 +23,7 @@
       <el-col :span="6">
         <h1 class="product-price" v-if="!showPrice()">￥{{getPriceRange(product)}}</h1>
         <h1 class="product-price" v-if="showPrice()">￥{{currentSpec.price}}</h1>
-        <el-button type="primary" icon="el-icon-plus" :disabled="!showPrice()" circle size="mini"></el-button>
+        <el-button type="primary" icon="el-icon-plus" :disabled="!showPrice()" circle size="mini" @click="intoCart"></el-button>
       </el-col>
     </el-row>
     <el-divider></el-divider>
@@ -32,8 +32,9 @@
 
 <script>
 import productService from '../../service/ProductService'
+import cartService from '../../service/CartService'
 export default {
-  props: ['product'],
+  props: ['product', 'shopId'],
   data () {
     return {
       choosedSpec: '',
@@ -53,6 +54,19 @@ export default {
     },
     handleSpecClick (item1) {
       this.currentSpec = item1
+    },
+    async intoCart () {
+      try {
+        await cartService.addProduct({
+          shopId: this.shopId,
+          productId: this.product.productId,
+          specId: this.currentSpec.specId,
+          quantity: 1
+        })
+        this.$message.success(this.choosedSpec + '加入购物车成功')
+      } catch (e) {
+        this.$message.error(e.message)
+      }
     }
   }
 }

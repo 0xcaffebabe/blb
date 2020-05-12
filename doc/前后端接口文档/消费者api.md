@@ -355,7 +355,7 @@ id | 店铺ID
 ## 加入购物车
 
 - 方式：put
-- url：/shop/:id/cart/
+- url：/shop/:id/cart/:productId/:specId
 - 请求参数
 
 参数名     | 参数说明   | 备注

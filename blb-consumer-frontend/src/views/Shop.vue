@@ -14,7 +14,7 @@
         </el-tabs>
     </el-card>
     <!-- 购物车 -->
-    <shop-cart :cartShow="cartShow"></shop-cart>
+    <shop-cart :cartShow="cartShow" :shopId="shopId"></shop-cart>
     <!-- 侧边电梯 -->
     <div class="cart-bar">
       <el-badge :value="12">

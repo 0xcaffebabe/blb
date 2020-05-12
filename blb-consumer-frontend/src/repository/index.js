@@ -42,6 +42,16 @@ class Repository {
     const data = await axios.get(`/shop/${shopId}/${categoryId}/product/`)
     return data.data
   }
+
+  async addProductIntoCart (params) {
+    const data = await axios.put(`/shop/${params.shopId}/cart/${params.productId}/${params.specId}?quantity=${params.quantity}`)
+    return data.data
+  }
+
+  async getCartProductList (shopId) {
+    const data = await axios.get('/shop/' + shopId + '/cart')
+    return data.data
+  }
 }
 
 export default new Repository()

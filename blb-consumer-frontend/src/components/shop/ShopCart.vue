@@ -11,16 +11,16 @@
         <el-button icon="el-icon-delete" type="danger" size="mini">清空</el-button>
       </div>
       <ul class="cart-list">
-        <li class="cart-list-item" v-for="item in 7" :key="item">
+        <li class="cart-list-item" v-for="item in productList" :key="item">
           <el-row :gutter="20">
             <el-col :span="6">
-              <el-image src="./food.png" fit="cover"></el-image>
+              <el-image :src="item.productImg" fit="cover"></el-image>
             </el-col>
             <el-col :span="18">
               <el-row>
                 <el-col :span="14">
-                  <h3>华莱士全家桶</h3>
-                  <span>套餐1</span>
+                  <h3>{{item.productName}}</h3>
+                  <span>{{item.specName}}</span>
                   <h1 class="product-price">￥20</h1>
                 </el-col>
                 <el-col :span="10">
@@ -37,10 +37,26 @@
 </template>
 
 <script>
+import cartService from '../../service/CartService'
 export default {
-  props: ['cartShow'],
+  props: ['cartShow', 'shopId'],
   data () {
-    return {}
+    return {
+      productList: []
+    }
+  },
+  methods: {
+    async getProductList () {
+      try {
+        this.productList = await cartService.getProductList(this.shopId)
+        console.log(this.productList)
+      } catch (e) {
+        this.$message.error(e.message)
+      }
+    }
+  },
+  created () {
+    this.getProductList()
   }
 }
 </script>

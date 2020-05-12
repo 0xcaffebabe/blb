@@ -11,7 +11,7 @@
         <el-alert title="没有数据" v-if="productList.length == 0" :closable="false"></el-alert>
         <ul class="product-list">
           <li v-for="item in productList" :key="item.productId">
-            <product-item :product="item"/>
+            <product-item :product="item" :shopId="shopId"/>
           </li>
         </ul>
     </el-tab-pane>
