@@ -22,7 +22,9 @@ class Repository {
   }
 
   async getShopByCategory (params) {
-    const data = await axios.get(`/category/${params.categoryId}/shop?location=${params.location}`)
+    const data = await axios.get(`/category/${params.categoryId}/shop`, {
+      params
+    })
     return data.data
   }
 }

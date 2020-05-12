@@ -4,6 +4,7 @@
       <div slot="header">
         {{title}}
       </div>
+      <el-alert v-if="shopList.length == 0" title="没有数据"></el-alert>
       <ul class="shop-list">
         <li class="shop-item-wrapper" v-for="item in shopList" :key="item.shopId">
           <div class="shop-item" @click="handleShopItemClick">
