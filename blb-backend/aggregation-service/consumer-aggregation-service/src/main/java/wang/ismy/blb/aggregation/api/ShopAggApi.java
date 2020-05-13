@@ -95,40 +95,40 @@ public class ShopAggApi {
 
     @ApiOperation("获取购物车列表")
     @GetMapping("{shopId}/cart")
-    public Result getCartList(@PathVariable Long shopId) {
+    public Result<List<CartItem>> getCartList(@PathVariable Long shopId) {
         String token = CurrentRequestUtils.getHeader(SystemConstant.TOKEN);
-        var cartRes =  cartApiClient.getCartList(token, shopId);
-        if (!cartRes.getSuccess()){
-            return cartRes;
-        }
-        var productRes = productApiClient.getListByProductAndSpecList(
-                cartRes.getData()
-                .stream().map(item -> {
-                    CartProductGetDTO dto = new CartProductGetDTO();
-                    dto.setSpecId(item.getSpecId());
-                    dto.setProductId(item.getProductId());
-                    return dto;
-                }).collect(Collectors.toList())
-        );
-        if (!productRes.getSuccess()){
-            log.warn("调用商品服务失败:{}",productRes.getMsg());
-            return cartRes;
-        }
-        Map<Long, CartItemShowDTO> cartItemMap = new HashMap<>();
-        for (CartItem cartItem : cartRes.getData()) {
-            CartItemShowDTO itemShowDTO = new CartItemShowDTO();
-            BeanUtils.copyProperties(cartItem,itemShowDTO);
-            cartItemMap.put(cartItem.getSpecId(),itemShowDTO);
-        }
-        for (ProductDTO product : productRes.getData()) {
-            for (ProductSpecDTO specDTO : product.getProductSpecList()) {
-                var cartItem = cartItemMap.get(specDTO.getSpecId());
-                if (cartItem != null){
-                    cartItem.setSpecName(specDTO.getSpecName());
-                }
-            }
-        }
-        return Result.success(new ArrayList<>(cartItemMap.values()));
+//        var cartRes =  cartApiClient.getCartList(token, shopId);
+//        if (!cartRes.getSuccess()){
+//            return cartRes;
+//        }
+//        var productRes = productApiClient.getListByProductAndSpecList(
+//                cartRes.getData()
+//                .stream().map(item -> {
+//                    CartProductGetDTO dto = new CartProductGetDTO();
+//                    dto.setSpecId(item.getSpecId());
+//                    dto.setProductId(item.getProductId());
+//                    return dto;
+//                }).collect(Collectors.toList())
+//        );
+//        if (!productRes.getSuccess()){
+//            log.warn("调用商品服务失败:{}",productRes.getMsg());
+//            return cartRes;
+//        }
+//        Map<Long, CartItemShowDTO> cartItemMap = new HashMap<>();
+//        for (CartItem cartItem : cartRes.getData()) {
+//            CartItemShowDTO itemShowDTO = new CartItemShowDTO();
+//            BeanUtils.copyProperties(cartItem,itemShowDTO);
+//            cartItemMap.put(cartItem.getSpecId(),itemShowDTO);
+//        }
+//        for (ProductDTO product : productRes.getData()) {
+//            for (ProductSpecDTO specDTO : product.getProductSpecList()) {
+//                var cartItem = cartItemMap.get(specDTO.getSpecId());
+//                if (cartItem != null){
+//                    cartItem.setSpecName(specDTO.getSpecName());
+//                }
+//            }
+//        }
+        return cartApiClient.getCartList(token, shopId);
     }
 
     @ApiOperation("加入购物车")

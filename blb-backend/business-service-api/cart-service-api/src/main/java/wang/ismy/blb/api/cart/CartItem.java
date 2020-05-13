@@ -20,6 +20,10 @@ public class CartItem {
     private Long productId;
     @ApiModelProperty("规格ID")
     private Long specId;
+    @ApiModelProperty("规格名称")
+    private String specName;
+    @ApiModelProperty("包装费")
+    private BigDecimal packageFee;
     @ApiModelProperty("商品名称")
     private String productName;
     @ApiModelProperty("商品图片")

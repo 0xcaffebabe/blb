@@ -64,6 +64,8 @@ public class CartServiceImpl implements CartService {
         item.setProductPrice(spec.getPrice());
         item.setProductQuantity(quantity);
         item.setSpecId(specId);
+        item.setSpecName(spec.getSpecName());
+        item.setPackageFee(spec.getPackageFee());
         cart.append(item);
         // 写回缓存
         cacheService.put(key, cart, CartConstant.TTL);

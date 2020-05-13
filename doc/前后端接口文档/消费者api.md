@@ -345,6 +345,7 @@ id | 店铺ID
     "productName":"黄焖鸡米饭",
     "productImg":"blb.com/1.jpg",
     "specName": "大份",
+    "packageFee": 2,
     "productQuantity": 2,
     "productPrice": 18
   }
