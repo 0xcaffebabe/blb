@@ -64,6 +64,8 @@ export default {
           quantity: 1
         })
         this.$message.success(this.choosedSpec + '加入购物车成功')
+        // 触发购物车更新
+        this.$store.commit('updateLastProductAddTime')
       } catch (e) {
         this.$message.error(e.message)
       }

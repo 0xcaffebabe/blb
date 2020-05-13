@@ -14,10 +14,10 @@
         </el-tabs>
     </el-card>
     <!-- 购物车 -->
-    <shop-cart :cartShow="cartShow" :shopId="shopId"></shop-cart>
+    <shop-cart :cartShow="cartShow" :shopId="shopId" ref="shopCart" @loadComplete="handleCartLoadComplete"></shop-cart>
     <!-- 侧边电梯 -->
     <div class="cart-bar">
-      <el-badge :value="12">
+      <el-badge :value="cartTotal">
         <el-button icon="el-icon-shopping-cart-2" circle class="cart-button" @click="$store.commit('toggleCart')"></el-button>
       </el-badge>
       <el-button type="success" class="pay-button" @click="$router.push('confirmOrder')">结算</el-button>
@@ -38,11 +38,23 @@ export default {
       activeName: 'product',
       cartShow: true,
       shopId: this.$route.params.shopId,
-      shopInfo: {}
+      shopInfo: {},
+      // 购物车商品总数
+      cartTotal: 0
     }
   },
   components: {
     ShopHeader, ShopProduct, ShopCart, ShopEval
+  },
+  computed: {
+    lastProductAddTime () {
+      return this.$store.state.lastProductAddTime
+    }
+  },
+  watch: {
+    lastProductAddTime () {
+      this.cartTotal = this.$refs.shopCart.getCartTotal()
+    }
   },
   methods: {
     async getShopInfo () {
@@ -52,6 +64,9 @@ export default {
       } catch (e) {
         this.$message.error(e.message)
       }
+    },
+    handleCartLoadComplete () {
+      this.cartTotal = this.$refs.shopCart.getCartTotal()
     }
   },
   created () {

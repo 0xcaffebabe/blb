@@ -14,7 +14,8 @@ export default new Vuex.Store({
       login: false,
       info: {}
     },
-    location: city
+    location: city,
+    lastProductAddTime: 1
   },
   mutations: {
     toggleCart () {
@@ -40,6 +41,9 @@ export default new Vuex.Store({
     },
     setUserInfo (state, info) {
       this.state.user.info = info
+    },
+    updateLastProductAddTime () {
+      this.state.lastProductAddTime = this.state.lastProductAddTime + 1
     }
   },
   actions: {

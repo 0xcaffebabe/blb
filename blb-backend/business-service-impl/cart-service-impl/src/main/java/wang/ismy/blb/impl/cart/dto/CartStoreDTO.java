@@ -27,7 +27,7 @@ public class CartStoreDTO {
         int i = cartItemList.indexOf(cartItem);
         if (i != -1) {
             CartItem item = cartItemList.get(i);
-            item.setProductQuantity(item.getProductQuantity() + item.getProductQuantity());
+            item.setProductQuantity(item.getProductQuantity() + cartItem.getProductQuantity());
         } else {
             cartItemList.add(cartItem);
         }

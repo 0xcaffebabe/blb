@@ -15,5 +15,17 @@ class CartService {
     }
     return data.data
   }
+
+  getCartTotal (productList) {
+    if (!productList) {
+      return 0
+    }
+    let total = 0
+    console.log(productList)
+    productList.forEach(v => {
+      total += v.productQuantity
+    })
+    return total
+  }
 }
 export default new CartService()

@@ -11,7 +11,7 @@
         <el-button icon="el-icon-delete" type="danger" size="mini">清空</el-button>
       </div>
       <ul class="cart-list">
-        <li class="cart-list-item" v-for="item in productList" :key="item">
+        <li class="cart-list-item" v-for="item in productList" :key="item.productId + '-' + item.specId">
           <el-row :gutter="20">
             <el-col :span="6">
               <el-image :src="item.productImg" fit="cover"></el-image>
@@ -21,10 +21,10 @@
                 <el-col :span="14">
                   <h3>{{item.productName}}</h3>
                   <span>{{item.specName}}</span>
-                  <h1 class="product-price">￥20</h1>
+                  <h1 class="product-price">￥{{item.productPrice}}</h1>
                 </el-col>
                 <el-col :span="10">
-                  <el-input-number label="描述文字" size="mini" style="width:100px;margin-top:20px"></el-input-number>
+                  <el-input-number label="描述文字" v-model="item.productQuantity" size="mini" style="width:100px;margin-top:20px"></el-input-number>
                 </el-col>
               </el-row>
             </el-col>
@@ -32,6 +32,7 @@
           <el-divider></el-divider>
         </li>
       </ul>
+      <el-button type="success" size="medium" style="margin-bottom:10px">结算</el-button>
     </el-card>
   </el-drawer>
 </template>
@@ -45,14 +46,28 @@ export default {
       productList: []
     }
   },
+  computed: {
+    lastProductAddTime () {
+      return this.$store.state.lastProductAddTime
+    }
+  },
+  watch: {
+    lastProductAddTime () {
+      this.getProductList()
+    }
+  },
   methods: {
     async getProductList () {
       try {
         this.productList = await cartService.getProductList(this.shopId)
-        console.log(this.productList)
+        // 获取购物车商品列表完成，向外触发加载完成事件
+        this.$emit('loadComplete')
       } catch (e) {
         this.$message.error(e.message)
       }
+    },
+    getCartTotal () {
+      return cartService.getCartTotal(this.productList)
     }
   },
   created () {
