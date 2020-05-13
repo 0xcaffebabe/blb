@@ -68,6 +68,9 @@ export default {
     },
     getCartTotal () {
       return cartService.getCartTotal(this.productList)
+    },
+    getProductListLocal () {
+      return this.productList
     }
   },
   created () {

@@ -20,7 +20,7 @@
       <el-badge :value="cartTotal">
         <el-button icon="el-icon-shopping-cart-2" circle class="cart-button" @click="$store.commit('toggleCart')"></el-button>
       </el-badge>
-      <el-button type="success" class="pay-button" @click="$router.push('confirmOrder')">结算</el-button>
+      <el-button type="success" class="pay-button" @click="handleSettlementClick">结算</el-button>
     </div>
   </div>
 </template>
@@ -67,6 +67,16 @@ export default {
     },
     handleCartLoadComplete () {
       this.cartTotal = this.$refs.shopCart.getCartTotal()
+    },
+    handleSettlementClick () {
+      console.log(this.shopInfo)
+      this.$router.push({
+        name: 'confirmOrder',
+        params: {
+          shopInfo: this.shopInfo,
+          productList: this.$refs.shopCart.getProductListLocal()
+        }
+      })
     }
   },
   created () {

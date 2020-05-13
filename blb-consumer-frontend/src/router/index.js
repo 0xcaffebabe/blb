@@ -23,7 +23,7 @@ const routes = [
       { path: 'order', component: Order },
       { path: 'my', component: My },
       { path: 'pay', component: Pay },
-      { path: 'confirmOrder', component: ConfirmOrder },
+      { name: 'confirmOrder', path: 'confirmOrder', component: ConfirmOrder },
       { path: 'list/:categoryId', component: List }
     ]
   }

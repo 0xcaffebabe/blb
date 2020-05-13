@@ -2,18 +2,19 @@
   <div>
     <el-card>
             <div slot="header">
-              华莱士-全🍔汉堡(旧镇店) <span class="el-icon-arrow-right"></span>
+              {{shopInfo.shopName}} <span class="el-icon-arrow-right"></span>
             </div>
             <ul class="order-detail-list">
-              <li v-for="item in 3" :key="item" class="order-detail-item">
+              <li v-for="item in productList" :key="item.productId + '-' + item.specId" class="order-detail-item">
                 <el-row>
                   <el-col :span="2">
                     <el-avatar shape="square"></el-avatar>
                   </el-col>
                   <el-col :span="22">
-                    <span style="float:right">￥25.09</span>
-                    <span style="float:right;color:#666;margin-right:20px">X 1</span>
-                    <h4>牛肉汉堡</h4>
+                    <span style="float:right">￥{{item.productPrice}}</span>
+                    <span style="float:right;color:#666;margin-right:20px">X {{item.productQuantity}}</span>
+                    <h4>黄焖鸡米饭</h4>
+                    <span class="spec-name">{{item.specName}}</span>
                   </el-col>
                 </el-row>
               </li>
@@ -24,7 +25,7 @@
                     <el-tag size="medium" effect="dark">配送费</el-tag>
                   </el-col>
                   <el-col :span="22">
-                    <span style="float:right">￥25.09</span>
+                    <span style="float:right">￥{{shopInfo.deliveryFee}}</span>
                     <span style="float:right;color:#666;margin-right:20px">X 1</span>
                   </el-col>
                 </el-row>
@@ -55,6 +56,7 @@
 
 <script>
 export default {
+  props: ['shopInfo', 'productList'],
   data () {
     return {}
   }
@@ -66,8 +68,10 @@ export default {
     margin-bottom: 20px;
     h4 {
       margin: 0;
-      margin-top: 10px;
       font-size: 14px;
+    }
+    .spec-name {
+      font-size: 12px;
     }
   }
 </style>

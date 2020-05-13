@@ -6,7 +6,7 @@
       </div>
         <el-row :gutter="10">
           <el-col :span="16">
-            <order-product/>
+            <order-product :shopInfo="shopInfo" :productList="productList"/>
           </el-col>
           <el-col :span="8">
             <el-card>
@@ -68,11 +68,17 @@ export default {
       payValue: '支付宝',
       payOptions: [
         '支付宝', '银联'
-      ]
+      ],
+      shopInfo: {},
+      productList: []
     }
   },
   components: {
     OrderProduct
+  },
+  created () {
+    this.shopInfo = this.$route.params.shopInfo
+    this.productList = this.$route.params.productList
   }
 }
 </script>
