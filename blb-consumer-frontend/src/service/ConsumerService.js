@@ -41,5 +41,14 @@ class ConsumerService {
     }
     return data.data
   }
+
+  // 获取当前登录用户默认收货信息
+  async getDefaultDelivery () {
+    const data = await repository.getConsumerDefaultDelivery()
+    if (!data.success) {
+      throw new Error('获取默认收货信息失败:' + data.msg)
+    }
+    return data.data
+  }
 }
 export default new ConsumerService()

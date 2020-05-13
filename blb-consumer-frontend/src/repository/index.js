@@ -52,6 +52,16 @@ class Repository {
     const data = await axios.get('/shop/' + shopId + '/cart')
     return data.data
   }
+
+  async getConsumerDefaultDelivery () {
+    const data = await axios.get('/delivery/default')
+    return data.data
+  }
+
+  async makeOrder (params) {
+    const data = await axios.post('/shop/order', params)
+    return data.data
+  }
 }
 
 export default new Repository()

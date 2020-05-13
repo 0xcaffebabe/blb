@@ -29,7 +29,7 @@ public class DeliveryAggApi {
     @GetMapping("default")
     public Result getDefaultDelivery(){
         var deliveryRes = deliveryApiClient.getDefaultDeliveryInfo();
-        if (!deliveryRes.getSuccess()){
+        if (!deliveryRes.getSuccess() || deliveryRes.getData() == null){
             return deliveryRes;
         }
         var consumerRes = consumerApiClient.getInfo();

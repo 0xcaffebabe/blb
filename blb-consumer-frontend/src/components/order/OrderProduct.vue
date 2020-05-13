@@ -8,7 +8,7 @@
               <li v-for="item in productList" :key="item.productId + '-' + item.specId" class="order-detail-item">
                 <el-row>
                   <el-col :span="2">
-                    <el-avatar shape="square"></el-avatar>
+                    <el-avatar shape="square" :src="item.productImg"></el-avatar>
                   </el-col>
                   <el-col :span="22">
                     <span style="float:right">￥{{item.productPrice}}</span>
@@ -36,16 +36,18 @@
                     <el-tag size="medium">包装费</el-tag>
                   </el-col>
                   <el-col :span="22">
-                    <span style="float:right">￥25.09</span>
+                    <span style="float:right">￥{{getTotalPackageFee()}}</span>
                     <span style="float:right;color:#666;margin-right:20px">X 1</span>
                   </el-col>
                 </el-row>
               </li>
               <li class="order-detail-item">
-                <el-row>
-                  <el-col :span="4" :offset="20">
-                    <el-tag style="margin-right:20px" size="small" type="danger">实付</el-tag>
-                    <span>￥25.09</span>
+               <el-row>
+                  <el-col :span="2">
+                    <el-tag size="medium" type="danger">实付</el-tag>
+                  </el-col>
+                  <el-col :span="22">
+                    <span style="float:right">￥{{getTotalAmount()}}</span>
                   </el-col>
                 </el-row>
               </li>
@@ -55,10 +57,19 @@
 </template>
 
 <script>
+import productService from '../../service/ProductService'
 export default {
   props: ['shopInfo', 'productList'],
   data () {
     return {}
+  },
+  methods: {
+    getTotalPackageFee () {
+      return productService.calcTotalPackageFee(this.productList)
+    },
+    getTotalAmount () {
+      return productService.calcTotalAmount(this.productList)
+    }
   }
 }
 </script>

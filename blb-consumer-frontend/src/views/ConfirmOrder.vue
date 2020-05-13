@@ -15,8 +15,8 @@
                   <span class="el-icon-location location-icon"></span>
                 </el-col>
                 <el-col :span="18">
-                  <strong>蔡徐坤</strong> 先生 <span class="phone">17359561234</span>
-                  <p class="address">翻斗大街42栋 3602</p>
+                  <strong>{{delivery.realName}}</strong> <span style="font-size:14px">先生/女士</span> <span class="phone">17359561234</span>
+                  <p class="address">{{delivery.building}} {{delivery.detail}}</p>
                 </el-col>
                 <el-col :span="2">
                   <span class="el-icon-arrow-right"></span>
@@ -26,7 +26,7 @@
             <el-card class="delivery-time">
               <el-col :span="8"><h1>送达时间</h1></el-col>
               <el-col :span="16">
-                <p>尽快送达 | 预计 11:15</p>
+                <p>预计 {{getDeliveryTime()}}</p>
                 <el-tag effect="dark" type="primary" size="mini">蜂鸟专送</el-tag>
               </el-col>
             </el-card>
@@ -46,13 +46,13 @@
                 <el-divider></el-divider>
                 <li>
                   <p>订单备注</p>
-                  <el-input type="textarea"></el-input>
+                  <el-input type="textarea" v-model="orderNote"></el-input>
                 </li>
               </ul>
             </el-card>
             <el-card style="margin-top:10px">
               <span>待支付:￥ 405.00</span>
-              <el-button type="success" style="margin-left:50px" @click="$router.push('pay')">确认下单</el-button>
+              <el-button type="success" style="margin-left:50px" @click="handleMakeOrder()">确认下单</el-button>
             </el-card>
           </el-col>
         </el-row>
@@ -62,6 +62,8 @@
 
 <script>
 import OrderProduct from '../components/order/OrderProduct'
+import consumerService from '../service/ConsumerService'
+import orderService from '../service/OrderService'
 export default {
   data () {
     return {
@@ -70,7 +72,15 @@ export default {
         '支付宝', '银联'
       ],
       shopInfo: {},
-      productList: []
+      productList: [],
+      hasDefaultDelivery: false,
+      delivery: {},
+      orderNote: '',
+      orderForm: {
+        deliveryId: -1,
+        orderNote: '',
+        prdocutList: this.productList
+      }
     }
   },
   components: {
@@ -79,6 +89,36 @@ export default {
   created () {
     this.shopInfo = this.$route.params.shopInfo
     this.productList = this.$route.params.productList
+    this.getDefaultDelivery()
+  },
+  methods: {
+    async getDefaultDelivery () {
+      try {
+        const delivery = await consumerService.getDefaultDelivery()
+        if (delivery) {
+          this.hasDefaultDelivery = true
+          this.delivery = delivery
+          this.orderForm = this.delivery.deliveryId
+        }
+      } catch (e) {
+        this.$message.error(e.message)
+      }
+    },
+    getDeliveryTime () {
+      return orderService.getOrderDeliveryTime()
+    },
+    handleMakeOrder () {
+      this.makeOrder()
+    },
+    async makeOrder () {
+      try {
+        this.orderForm.orderNote = this.orderNote
+        const orderId = await orderService.makeOrder(this.orderForm)
+        this.$message.success('下单成功：' + orderId)
+      } catch (e) {
+        this.$message.error(e.messahe)
+      }
+    }
   }
 }
 </script>
@@ -100,6 +140,7 @@ export default {
   }
   .address {
     margin-top: 5px;
+    font-size: 14px;
   }
   .delivery-time {
     margin-top: 10px;
