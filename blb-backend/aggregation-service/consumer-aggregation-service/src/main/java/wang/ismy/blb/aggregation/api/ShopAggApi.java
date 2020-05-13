@@ -3,19 +3,21 @@ package wang.ismy.blb.aggregation.api;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.aggregation.client.*;
 import wang.ismy.blb.aggregation.client.order.OrderApiClient;
 import wang.ismy.blb.aggregation.client.order.OrderConsumerApiClient;
+import wang.ismy.blb.aggregation.pojo.CartItemShowDTO;
 import wang.ismy.blb.aggregation.service.ShopService;
 import wang.ismy.blb.api.cart.CartItem;
 import wang.ismy.blb.api.order.pojo.dto.OrderCreateDTO;
 import wang.ismy.blb.api.order.pojo.dto.OrderQuery;
 import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderDetailDTO;
 import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderItemDTO;
-import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
-import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
+import wang.ismy.blb.api.product.pojo.dto.*;
 import wang.ismy.blb.api.product.pojo.dto.eval.ConsumerEvalItem;
 import wang.ismy.blb.api.product.pojo.dto.eval.ShopEvalInfo;
 import wang.ismy.blb.api.shop.pojo.dto.ShopInfoDTO;
@@ -25,7 +27,11 @@ import wang.ismy.blb.common.result.Pageable;
 import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.CurrentRequestUtils;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * @author MY
@@ -35,6 +41,7 @@ import java.util.List;
 @RequestMapping(value = "shop", produces = MediaType.APPLICATION_JSON_VALUE)
 @Api(tags = "店铺接口")
 @AllArgsConstructor
+@Slf4j
 public class ShopAggApi {
     private final ShopApiClient shopApiClient;
     private final ProductCategoryApiClient productCategoryApiClient;
@@ -42,6 +49,7 @@ public class ShopAggApi {
     private final CartApiClient cartApiClient;
     private final OrderApiClient orderApiClient;
     private final OrderConsumerApiClient orderConsumerApiClient;
+    private final ProductApiClient productApiClient;
     @ApiOperation("获取附近店铺")
     @GetMapping("vicinity")
     public Result getNearbyShop(@RequestParam String location,
@@ -87,9 +95,40 @@ public class ShopAggApi {
 
     @ApiOperation("获取购物车列表")
     @GetMapping("{shopId}/cart")
-    public Result<List<CartItem>> getCartList(@PathVariable Long shopId) {
+    public Result getCartList(@PathVariable Long shopId) {
         String token = CurrentRequestUtils.getHeader(SystemConstant.TOKEN);
-        return cartApiClient.getCartList(token, shopId);
+        var cartRes =  cartApiClient.getCartList(token, shopId);
+        if (!cartRes.getSuccess()){
+            return cartRes;
+        }
+        var productRes = productApiClient.getListByProductAndSpecList(
+                cartRes.getData()
+                .stream().map(item -> {
+                    CartProductGetDTO dto = new CartProductGetDTO();
+                    dto.setSpecId(item.getSpecId());
+                    dto.setProductId(item.getProductId());
+                    return dto;
+                }).collect(Collectors.toList())
+        );
+        if (!productRes.getSuccess()){
+            log.warn("调用商品服务失败:{}",productRes.getMsg());
+            return cartRes;
+        }
+        Map<Long, CartItemShowDTO> cartItemMap = new HashMap<>();
+        for (CartItem cartItem : cartRes.getData()) {
+            CartItemShowDTO itemShowDTO = new CartItemShowDTO();
+            BeanUtils.copyProperties(cartItem,itemShowDTO);
+            cartItemMap.put(cartItem.getSpecId(),itemShowDTO);
+        }
+        for (ProductDTO product : productRes.getData()) {
+            for (ProductSpecDTO specDTO : product.getProductSpecList()) {
+                var cartItem = cartItemMap.get(specDTO.getSpecId());
+                if (cartItem != null){
+                    cartItem.setSpecName(specDTO.getSpecName());
+                }
+            }
+        }
+        return Result.success(new ArrayList<>(cartItemMap.values()));
     }
 
     @ApiOperation("加入购物车")

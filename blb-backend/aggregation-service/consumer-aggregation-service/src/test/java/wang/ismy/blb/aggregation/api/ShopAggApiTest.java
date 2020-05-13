@@ -9,12 +9,15 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import wang.ismy.blb.aggregation.client.*;
 import wang.ismy.blb.aggregation.client.order.OrderApiClient;
 import wang.ismy.blb.aggregation.client.order.OrderConsumerApiClient;
+import wang.ismy.blb.aggregation.pojo.CartItemShowDTO;
 import wang.ismy.blb.aggregation.pojo.CategoryShopDTO;
 import wang.ismy.blb.api.cart.CartItem;
 import wang.ismy.blb.api.order.pojo.dto.OrderCreateDTO;
 import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderDetailDTO;
 import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderItemDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
+import wang.ismy.blb.api.product.pojo.dto.ProductDTO;
+import wang.ismy.blb.api.product.pojo.dto.ProductSpecDTO;
 import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
 import wang.ismy.blb.api.product.pojo.dto.eval.ConsumerEvalItem;
 import wang.ismy.blb.api.product.pojo.dto.eval.ShopEvalInfo;
@@ -46,6 +49,7 @@ class ShopAggApiTest {
     CartApiClient cartApiClient;
     OrderApiClient orderApiClient;
     OrderConsumerApiClient orderConsumerApiClient;
+    ProductApiClient productApiClient;
     @BeforeEach
     void setup(){
         shopApiClient = mock(ShopApiClient.class);
@@ -54,13 +58,15 @@ class ShopAggApiTest {
         cartApiClient = mock(CartApiClient.class);
         orderApiClient = mock(OrderApiClient.class);
         orderConsumerApiClient = mock(OrderConsumerApiClient.class);
+        productApiClient = mock(ProductApiClient.class);
         mockMvc = MockMvcBuilders.standaloneSetup(
                 new ShopAggApi(shopApiClient,
                         productCategoryApiClient,
                         productEvalApiClient,
                         cartApiClient,
                         orderApiClient,
-                        orderConsumerApiClient
+                        orderConsumerApiClient,
+                        productApiClient
                         )
         ).build();
     }
@@ -171,13 +177,43 @@ class ShopAggApiTest {
     void getCartList() throws Exception {
         Long shopId = 1L;
         String token = "token";
-        var list = MockUtils.create(CartItem.class,10);
-        when(cartApiClient.getCartList(eq(token),eq(shopId)))
-                .thenReturn(Result.success(list));
+        CartItem item1 = new CartItem();
+        item1.setSpecId(1L);
+        item1.setProductId(1L);
+        CartItem item2 = new CartItem();
+        item2.setSpecId(2L);
+        item2.setProductId(2L);
+        when(cartApiClient.getCartList(eq(token),eq(shopId))).thenReturn(Result.success(List.of(item1,item2)));
+        ProductDTO productDTO1 = new ProductDTO();
+        ProductDTO productDTO2 = new ProductDTO();
+        ProductSpecDTO specDTO1 = new ProductSpecDTO();
+        specDTO1.setSpecId(1L);
+        specDTO1.setSpecName("规格1");
+        ProductSpecDTO specDTO2 = new ProductSpecDTO();
+        specDTO2.setSpecId(2L);
+        specDTO2.setSpecName("规格2");
+        productDTO1.setProductSpecList(List.of(specDTO1));
+        productDTO2.setProductSpecList(List.of(specDTO2));
+        when(productApiClient.getListByProductAndSpecList(argThat(list->
+                list.size() == 2
+                && list.get(0).getProductId().equals(1L)
+                && list.get(0).getSpecId().equals(1L)
+                && list.get(1).getProductId().equals(2L)
+                && list.get(1).getSpecId().equals(2L)
+        ))).thenReturn(Result.success(List.of(productDTO1,productDTO2)));
+        CartItemShowDTO itemShowDTO1 = new CartItemShowDTO();
+        CartItemShowDTO itemShowDTO2 = new CartItemShowDTO();
+        itemShowDTO1.setProductId(1L);
+        itemShowDTO1.setSpecId(1L);
+        itemShowDTO1.setSpecName("规格1");
+
+        itemShowDTO2.setProductId(2L);
+        itemShowDTO2.setSpecId(2L);
+        itemShowDTO2.setSpecName("规格2");
         mockMvc.perform(get("/shop/"+shopId+"/cart")
             .header(SystemConstant.TOKEN,token)
         )
-                .andExpect(content().json(JsonUtils.parse(Result.success(list))));
+                .andExpect(content().json(JsonUtils.parse(Result.success(List.of(itemShowDTO1,itemShowDTO2)))));
     }
 
     @Test
