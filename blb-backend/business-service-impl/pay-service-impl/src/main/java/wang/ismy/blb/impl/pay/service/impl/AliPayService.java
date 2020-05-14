@@ -85,8 +85,9 @@ public class AliPayService {
         try {
             response = alipayClient.execute(request);
             if (!response.isSuccess()){
-                payResultDTO.setStatus(-1);
-                payResultDTO.setMsg("查询支付信息失败");
+                // 获取支付信息失败
+                payResultDTO.setStatus(PayStatusEnum.WAIT_SCANNED.getCode());
+                payResultDTO.setMsg("等待扫码");
                 return payResultDTO;
             }
             payResultDTO.setThirdPartId(response.getTradeNo());
@@ -110,7 +111,7 @@ public class AliPayService {
             return payResultDTO;
         } catch (AlipayApiException e) {
             payResultDTO.setStatus(-1);
-            payResultDTO.setMsg("等待用户扫码");
+            payResultDTO.setMsg("查询订单状态错误:" + e.getErrMsg());
             return payResultDTO;
         }
     }

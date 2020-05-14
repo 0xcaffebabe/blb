@@ -10,12 +10,14 @@ import lombok.Getter;
 @AllArgsConstructor
 @Getter
 public enum PayStatusEnum {
-    /** 等待支付（未支付） */
-    UN_PROCESSED(0,"等待支付"),
+    /** 等待扫码 */
+    WAIT_SCANNED(0,"等待扫码"),
+    /** 等待支付（已扫码，未支付） */
+    UN_PROCESSED(1,"等待支付"),
     /** 商家已完成，等待骑手取餐 */
-    PROCESSED(1,"已支付"),
+    PROCESSED(2,"已支付"),
     /** 订餐者关闭或者超时关闭 */
-    SHIPPING(2,"已取消"),
+    SHIPPING(3,"已取消"),
     ;
     private Integer code;
     private String msg;

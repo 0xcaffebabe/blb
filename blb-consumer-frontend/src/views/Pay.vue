@@ -6,7 +6,7 @@
       </div>
       <div style="text-align:center">
         <el-image :src="qrcode"></el-image>
-        <p>支付状态:等待支付</p>
+        <p>支付状态:{{payStatus}}</p>
         <el-button type="primary" @click="$router.push('order')">已完成支付?</el-button>
       </div>
     </el-card>
@@ -20,7 +20,9 @@ export default {
     return {
       orderId: this.$route.params.orderId,
       payId: '',
-      qrcode: ''
+      qrcode: '',
+      timer: null,
+      payStatus: ''
     }
   },
   methods: {
@@ -30,8 +32,15 @@ export default {
         if (this.payId) {
           this.qrcode = await payService.getPayQRCode(this.payId)
           if (this.qrcode) {
-            setInterval(async () => {
-              console.log('支付状态', await payService.getPayStatus(this.payId))
+            this.timer = setInterval(async () => {
+              const status = await payService.getPayStatus(this.payId)
+              this.payStatus = status.msg
+              if (status.status === 2) {
+                // 支付成功
+                clearInterval(this.timer)
+                this.$message.success(status.msg)
+                this.$router.push('/order')
+              }
             }, 3000)
           }
         }
@@ -42,6 +51,12 @@ export default {
   },
   created () {
     this.getPayId()
+  },
+  // 即将离开该页面
+  beforeRouteLeave (to, from, next) {
+    // 离开该页面之前，清空定时查询支付状态
+    clearInterval(this.timer)
+    next()
   }
 }
 </script>
