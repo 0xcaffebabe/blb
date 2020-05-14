@@ -53,8 +53,8 @@ class OrderConsumerServiceImplTest {
         assertEquals(shopMap.get(1L).getShopLogo(),page.getData().get(0).getShopLogo());
         assertEquals(shopMap.get(1L).getShopLogo(),page.getData().get(1).getShopLogo());
 
-        assertEquals(new BigDecimal("7.00"),page.getData().get(0).getOrderAmount());
-        assertEquals(new BigDecimal("15.00"),page.getData().get(1).getOrderAmount());
+        assertEquals(new BigDecimal("15.00"),page.getData().get(0).getOrderAmount());
+        assertEquals(new BigDecimal("7.00"),page.getData().get(1).getOrderAmount());
     }
 
     @Test

@@ -16,7 +16,7 @@ class PayStatusEnumTest {
     @Test
     @DisplayName("保证支付状态枚举行为")
     void protectEnum() {
-        var list = List.of("等待支付", "已支付", "已取消");
+        var list = List.of("等待扫码","等待支付", "已支付", "已取消");
         for (int i = 0; i < list.size(); i++) {
             assertEquals(list.get(i), PayStatusEnum.valueOf(i).getMsg());
         }
