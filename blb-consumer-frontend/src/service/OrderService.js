@@ -36,6 +36,14 @@ class OrderService {
     return data.data
   }
 
+  async getOrderDetail (orderId) {
+    const data = await repository.getOrderDetail(orderId)
+    if (!data.success) {
+      throw new Error('获取订单详情失败:' + data.msg)
+    }
+    return data.data
+  }
+
   getOrderStatus (order) {
     if (order.orderStatus === 0) {
       return '未处理'

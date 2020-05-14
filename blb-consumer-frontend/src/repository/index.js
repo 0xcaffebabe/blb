@@ -91,6 +91,11 @@ class Repository {
     })
     return data.data
   }
+
+  async getOrderDetail (orderId) {
+    const data = await axios.get('/shop/order/' + orderId)
+    return data.data
+  }
 }
 
 export default new Repository()

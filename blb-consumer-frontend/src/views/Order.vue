@@ -1,6 +1,6 @@
 <template>
   <div>
-    <order-list :orderList="orderList"/>
+    <order-list :orderList="orderList" @showOrderDetail="handleShowOrderDetail"/>
     <el-card>
        <el-pagination
       @size-change="handleSizeChange"
@@ -13,7 +13,7 @@
       :total="11">
     </el-pagination>
     </el-card>
-    <order-detail :show="orderDetailShow" @close="handleDetailClose"></order-detail>
+    <order-detail :show="orderDetailShow" @close="handleDetailClose" :order="orderDetail"></order-detail>
   </div>
 </template>
 
@@ -28,7 +28,8 @@ export default {
       page: 1,
       size: 5,
       total: 0,
-      orderList: []
+      orderList: [],
+      orderDetail: {}
     }
   },
   components: {
@@ -54,6 +55,17 @@ export default {
     handlePageChange (val) {
       this.page = val
       this.getOrderList()
+    },
+    handleShowOrderDetail (orderId) {
+      this.getOrderDetail(orderId)
+      this.$store.commit('toggleOrderDetail')
+    },
+    async getOrderDetail (orderId) {
+      try {
+        this.orderDetail = await orderService.getOrderDetail(orderId)
+      } catch (e) {
+        this.$message.error(e.message)
+      }
     }
   },
   created () {

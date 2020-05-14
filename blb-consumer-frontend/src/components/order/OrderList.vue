@@ -17,7 +17,8 @@
                 <el-divider></el-divider>
                 <span style="float:right">￥{{item.orderAmount}}</span>
                 <p class="order-detail">2个香辣鸡腿堡+中可 等2件</p>
-                <el-button size="mini" type="primary" style="float:right;margin-top:5px" @click="$router.push('shop')">再来一单</el-button>
+                <el-button size="mini" type="primary" style="float:right;margin-top:5px;margin-left:15px" @click="$router.push('/shop/' + item.shopId)">再来一单</el-button>
+                <el-button size="mini" type="success" style="float:right;margin-top:5px" @click="showOrderDetail(item.orderId)">订单详情</el-button>
               </el-col>
             </el-row>
           </el-card>
@@ -36,6 +37,9 @@ export default {
   methods: {
     getOrderStatus (order) {
       return orderService.getOrderStatus(order)
+    },
+    showOrderDetail (orderId) {
+      this.$emit('showOrderDetail', orderId)
     }
   }
 }

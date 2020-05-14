@@ -6,7 +6,7 @@
     width="80%">
       <el-row :gutter="20">
         <el-col :span="20">
-          <order-product/>
+          <order-product :productList="order.productList"/>
         </el-col>
         <el-col :span="4">
           <el-card class="order-detail-header">
@@ -22,10 +22,10 @@
             <div slot="header">配送信息</div>
             <ul class="delivery-info">
               <li>送达时间：尽快送达</li>
-              <li>送货地址：漳浦三中 旧镇镇城外村</li>
-              <li>收货人：蔡徐坤</li>
-              <li>手机：1731111111</li>
-              <li>备注：芋圆波波奶茶不要芋圆不要奶茶</li>
+              <li>送货地址：{{order.consumerAddress}}</li>
+              <li>收货人：{{order.consumerName}}</li>
+              <li>手机：{{order.consumerPhone}}</li>
+              <li>备注：{{order.orderNote}}</li>
             </ul>
             <el-divider></el-divider>
             <el-timeline>
@@ -40,8 +40,8 @@
           <el-card class="order-info">
             <div slot="header">订单信息</div>
             <ul>
-              <li>订单号: 355 600 789 123</li>
-              <li>创建时间：2020-03-28 20::07</li>
+              <li>订单号: {{order.orderId}}</li>
+              <li>创建时间：{{order.createTime}}</li>
             </ul>
           </el-card>
           <el-card style="margin-top:10px">
@@ -58,7 +58,7 @@
 <script>
 import OrderProduct from './OrderProduct'
 export default {
-  props: ['show'],
+  props: ['show', 'order'],
   data () {
     return { }
   },
