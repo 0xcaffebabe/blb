@@ -14,6 +14,13 @@ class OrderService {
     if (!params.productList) {
       throw new Error('下单失败:下单商品列表为空')
     }
+    params.productList = params.productList.map(v => {
+      return {
+        productId: v.productId,
+        specId: v.specId,
+        quantity: v.productQuantity
+      }
+    })
     const data = await repository.makeOrder(params)
     if (!data.success) {
       throw new Error('下单失败:' + data.msg)

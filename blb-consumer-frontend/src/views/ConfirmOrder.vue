@@ -46,13 +46,13 @@
                 <el-divider></el-divider>
                 <li>
                   <p>订单备注</p>
-                  <el-input type="textarea" v-model="orderNote"></el-input>
+                  <el-input type="textarea" v-model="orderForm.orderNote"></el-input>
                 </li>
               </ul>
             </el-card>
             <el-card style="margin-top:10px">
               <span>待支付:￥ 405.00</span>
-              <el-button type="success" style="margin-left:50px" @click="handleMakeOrder()">确认下单</el-button>
+              <el-button type="success" style="margin-left:50px" @click="handleMakeOrder">确认下单</el-button>
             </el-card>
           </el-col>
         </el-row>
@@ -75,11 +75,10 @@ export default {
       productList: [],
       hasDefaultDelivery: false,
       delivery: {},
-      orderNote: '',
       orderForm: {
-        deliveryId: -1,
+        deliveryId: '',
         orderNote: '',
-        prdocutList: this.productList
+        prdocutList: []
       }
     }
   },
@@ -89,6 +88,7 @@ export default {
   created () {
     this.shopInfo = this.$route.params.shopInfo
     this.productList = this.$route.params.productList
+    this.orderForm.productList = this.productList
     this.getDefaultDelivery()
   },
   methods: {
@@ -98,7 +98,7 @@ export default {
         if (delivery) {
           this.hasDefaultDelivery = true
           this.delivery = delivery
-          this.orderForm = this.delivery.deliveryId
+          this.orderForm.deliveryId = this.delivery.deliveryId
         }
       } catch (e) {
         this.$message.error(e.message)
@@ -112,11 +112,10 @@ export default {
     },
     async makeOrder () {
       try {
-        this.orderForm.orderNote = this.orderNote
         const orderId = await orderService.makeOrder(this.orderForm)
         this.$message.success('下单成功：' + orderId)
       } catch (e) {
-        this.$message.error(e.messahe)
+        this.$message.error(e.message)
       }
     }
   }

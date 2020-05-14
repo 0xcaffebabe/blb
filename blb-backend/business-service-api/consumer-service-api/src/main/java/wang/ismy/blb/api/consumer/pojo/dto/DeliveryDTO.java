@@ -15,7 +15,7 @@ import javax.validation.constraints.NotEmpty;
 @ApiModel("收货信息参数")
 public class DeliveryDTO {
     @ApiModelProperty("收货信息ID")
-    private Long deliveryId;
+    private String deliveryId;
     @ApiModelProperty("收货地址建筑物（小区、学校）")
     @NotEmpty
     @Max(value = 64,message = "建筑物长度不能超过64个字符")

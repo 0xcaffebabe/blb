@@ -117,7 +117,7 @@ public class ConsumerDeliveryServiceImpl implements ConsumerDeliveryService {
             dto.setDetail(deliveryInfoDO.getDetail());
             dto.setBuilding(deliveryInfoDO.getBuilding());
             dto.setDefaultDelivery(consumerDeliveryMap.get(deliveryInfoDO.getDeliveryInfoId()).getDefaultDelivery());
-            dto.setDeliveryId(deliveryInfoDO.getDeliveryInfoId());
+            dto.setDeliveryId(deliveryInfoDO.getDeliveryInfoId().toString());
             result.add(dto);
         }
         return result;
@@ -154,7 +154,7 @@ public class ConsumerDeliveryServiceImpl implements ConsumerDeliveryService {
         dto.setDetail(delivery.getDetail());
         dto.setBuilding(delivery.getBuilding());
         dto.setDefaultDelivery(consumerDelivery.getDefaultDelivery());
-        dto.setDeliveryId(delivery.getDeliveryInfoId());
+        dto.setDeliveryId(delivery.getDeliveryInfoId().toString());
 
         return dto;
     }
