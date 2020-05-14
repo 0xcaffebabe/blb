@@ -22,7 +22,8 @@ export default {
       payId: '',
       qrcode: '',
       timer: null,
-      payStatus: ''
+      payStatus: '',
+      shopInfo: this.$route.params.shopInfo
     }
   },
   methods: {

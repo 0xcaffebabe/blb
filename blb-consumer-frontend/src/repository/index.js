@@ -77,6 +77,11 @@ class Repository {
     const data = await axios.get('/pay/status/' + payId)
     return data.data
   }
+
+  async clearCart (shopId) {
+    const data = await axios.delete('/shop/' + shopId + '/cart')
+    return data.data
+  }
 }
 
 export default new Repository()

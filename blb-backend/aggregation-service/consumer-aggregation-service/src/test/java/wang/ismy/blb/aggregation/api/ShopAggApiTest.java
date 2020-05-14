@@ -249,6 +249,17 @@ class ShopAggApiTest {
     }
 
     @Test
+    void deleteCartProductList () throws Exception {
+        Long shopId = 1L;
+        when(cartApiClient.delAllProductList(eq(shopId)))
+                .thenReturn(Result.success());
+        mockMvc.perform(delete("/shop/"+shopId+"/cart/")
+        )
+                .andExpect(content().json(JsonUtils.parse(Result.success())));
+    }
+
+
+    @Test
     void submitOrder() throws Exception {
         OrderCreateDTO orderCreateDTO = MockUtils.create(OrderCreateDTO.class);
         String orderId = "1";

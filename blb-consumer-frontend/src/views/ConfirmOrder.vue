@@ -64,6 +64,7 @@
 import OrderProduct from '../components/order/OrderProduct'
 import consumerService from '../service/ConsumerService'
 import orderService from '../service/OrderService'
+import cartService from '../service/CartService'
 export default {
   data () {
     return {
@@ -115,7 +116,14 @@ export default {
         const orderId = await orderService.makeOrder(this.orderForm)
         if (orderId) {
           this.$message.success('下单成功,请进行支付')
-          this.$router.push('/pay/' + orderId)
+          cartService.clearCart(this.shopInfo.shopId)
+          this.$router.push({
+            name: 'pay',
+            params: {
+              orderId,
+              shopInfo: this.shopInfo
+            }
+          })
         }
       } catch (e) {
         this.$message.error(e.message)

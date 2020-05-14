@@ -49,7 +49,7 @@ public class CartServiceImpl implements CartService {
             return;
         }
 
-        String key = getKey(product, user);
+        String key = getKey(product.getProductCategory().getShopId(), user);
         CartStoreDTO cart = cacheService.get(key, CartStoreDTO.class);
         // 如果购物车为空，就创建一个，否则直接追加
         if (cart == null) {
@@ -105,7 +105,7 @@ public class CartServiceImpl implements CartService {
             return;
         }
 
-        String key = getKey(product,user);
+        String key = getKey(product.getProductCategory().getShopId(),user);
         CartStoreDTO cart = cacheService.get(key, CartStoreDTO.class);
         if (cart == null) {
             return;
@@ -119,6 +119,16 @@ public class CartServiceImpl implements CartService {
         cart.getCartItemList().remove(item);
 
         cacheService.put(key,cart,CartConstant.TTL);
+    }
+
+    @Override
+    public void deleteProductList(String token, Long shopId) {
+        var user = getUser(token);
+        if (user == null){
+            throw new BlbException("用户未登录");
+        }
+        String key = getKey(shopId,user);
+        cacheService.delete(key);
     }
 
     private User getUser(String consumerToken) {
@@ -164,7 +174,7 @@ public class CartServiceImpl implements CartService {
         return spec;
     }
 
-    private String getKey(ProductDTO product, User user) {
-        return product.getProductCategory().getShopId() + "-" + user.getUserId();
+    private String getKey(Long shopId, User user) {
+        return shopId + "-" + user.getUserId();
     }
 }

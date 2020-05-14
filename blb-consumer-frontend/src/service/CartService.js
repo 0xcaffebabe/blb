@@ -27,5 +27,10 @@ class CartService {
     })
     return total
   }
+
+  async clearCart (shopId) {
+    const data = await repository.clearCart(shopId)
+    return data.success
+  }
 }
 export default new CartService()

@@ -57,6 +57,15 @@ public interface CartApi {
     Result<List<CartItem>> getCartList(@RequestHeader(SystemConstant.TOKEN) String token , @PathVariable("shopId") Long shopId);
 
     /**
+     * 清空购物车
+     * @param shopId
+     * @return
+     */
+    @ApiOperation("清空购物车")
+    @DeleteMapping("list/{shopId}")
+    Result<Void> delAllProductList(@PathVariable("shopId") Long shopId);
+
+    /**
      * 删除购物车的某个商品
      * @param token
      * @param productId
@@ -84,6 +93,11 @@ public interface CartApi {
         @Override
         public Result<List<CartItem>> getCartList(String token, Long shopId) {
             return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 购物车服务 获取商品列表接口失败");
+        }
+
+        @Override
+        public Result<Void> delAllProductList(Long shopId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 购物车服务 清空购物车接口失败");
         }
 
         @Override

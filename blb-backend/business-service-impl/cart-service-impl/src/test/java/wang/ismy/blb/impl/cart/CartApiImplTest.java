@@ -69,4 +69,14 @@ class CartApiImplTest {
                 .andExpect(content().json(new Gson().toJson(Result.success())));
         verify(cartService).deleteProduct(eq(token),eq(productId),eq(specId));
     }
+
+    @Test
+    void testDeleteProductList () throws Exception {
+        String token = "token";
+        Long shopId = 1L;
+        mockMvc.perform(delete("/v1/api/list/"+shopId).contentType(MediaType.APPLICATION_JSON_VALUE).header("TOKEN",token))
+                .andExpect(status().isOk())
+                .andExpect(content().json(new Gson().toJson(Result.success())));
+        verify(cartService).deleteProductList(eq(token),eq(shopId));
+    }
 }

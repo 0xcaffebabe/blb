@@ -35,4 +35,6 @@ public interface CartService {
      * @param specId
      */
     void deleteProduct(String token, Long productId, Long specId);
+
+    void deleteProductList(String token, Long shopId);
 }

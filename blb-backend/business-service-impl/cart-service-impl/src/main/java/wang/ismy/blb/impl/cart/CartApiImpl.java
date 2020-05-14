@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 import wang.ismy.blb.api.cart.CartApi;
 import wang.ismy.blb.api.cart.CartItem;
+import wang.ismy.blb.common.SystemConstant;
 import wang.ismy.blb.common.result.Result;
+import wang.ismy.blb.common.util.CurrentRequestUtils;
 import wang.ismy.blb.impl.cart.service.CartService;
 
 import java.util.List;
@@ -27,6 +29,13 @@ public class CartApiImpl implements CartApi {
     @Override
     public Result<List<CartItem>> getCartList(String token,Long shopId) {
         return Result.success(cartService.getCartList(token,shopId));
+    }
+
+    @Override
+    public Result<Void> delAllProductList(Long shopId) {
+        String token = CurrentRequestUtils.getHeader(SystemConstant.TOKEN);
+        cartService.deleteProductList(token,shopId);
+        return Result.success();
     }
 
     @Override

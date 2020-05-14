@@ -131,4 +131,17 @@ class CartServiceImplTest {
         }),eq(CartConstant.TTL));
     }
 
+    @Test
+    void deleteProductList () {
+        String token = "token";
+        Long shopId = 1L;
+        AuthApiClient authApiClient = mock(AuthApiClient.class);
+        User user = new User();
+        user.setUserId(1L);
+        when(authApiClient.valid(eq(token))).thenReturn(Result.success(user));
+        CacheService cacheService = mock(CacheService.class);
+        CartService cartService = new CartServiceImpl(cacheService,null,authApiClient);
+        cartService.deleteProductList(token,shopId);
+        verify(cacheService).delete(eq(shopId+"-"+user.getUserId()));
+    }
 }
