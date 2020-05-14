@@ -27,5 +27,31 @@ class OrderService {
     }
     return data.data
   }
+
+  async getOrderList (page, size) {
+    const data = await repository.getOrderList(page, size)
+    if (!data.success) {
+      throw new Error('获取订单列表失败:' + data.msg)
+    }
+    return data.data
+  }
+
+  getOrderStatus (order) {
+    if (order.orderStatus === 0) {
+      return '未处理'
+    }
+    if (order.orderStatus === 1) {
+      return '已处理'
+    }
+    if (order.orderStatus === 2) {
+      return '配送中'
+    }
+    if (order.orderStatus === 3) {
+      return '已完结'
+    }
+    if (order.orderStatus === 4) {
+      return '已作废'
+    }
+  }
 }
 export default new OrderService()

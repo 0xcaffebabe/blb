@@ -17,8 +17,12 @@ import java.time.LocalDateTime;
 @ApiModel("订餐者订单列表项")
 public class ConsumerOrderItemDTO {
 
+    @ApiModelProperty("店铺ID")
+    private Long shopId;
     @ApiModelProperty("店铺LOGO")
     private String shopLogo;
+    @ApiModelProperty("店铺名称")
+    private String shopName;
     @ApiModelProperty("订单号")
     private Long orderId;
     @ApiModelProperty("订单名称（使用订单信息生成）")

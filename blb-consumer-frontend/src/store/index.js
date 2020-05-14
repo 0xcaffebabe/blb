@@ -6,7 +6,7 @@ const city = locationService.getLocation().city
 export default new Vuex.Store({
   state: {
     cartShow: false,
-    orderDetailShow: true,
+    orderDetailShow: false,
     locationChooserShow: false,
     loginPanelShow: false,
     userEditPanelShow: true,

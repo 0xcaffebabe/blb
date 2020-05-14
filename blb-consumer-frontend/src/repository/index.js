@@ -82,6 +82,15 @@ class Repository {
     const data = await axios.delete('/shop/' + shopId + '/cart')
     return data.data
   }
+
+  async getOrderList (page, size) {
+    const data = await axios.get('/shop/order', {
+      params: {
+        page, size
+      }
+    })
+    return data.data
+  }
 }
 
 export default new Repository()

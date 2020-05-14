@@ -20,7 +20,6 @@ import wang.ismy.blb.impl.order.client.ShopApiClient;
 import wang.ismy.blb.impl.order.repository.OrderDetailRepository;
 import wang.ismy.blb.impl.order.repository.OrderRepository;
 import wang.ismy.blb.impl.order.service.OrderConsumerService;
-import wang.ismy.blb.impl.order.service.OrderSellerService;
 
 import java.math.RoundingMode;
 import java.util.stream.Collectors;
@@ -42,7 +41,7 @@ public class OrderConsumerServiceImpl implements OrderConsumerService {
     public Page<ConsumerOrderItemDTO> getOrderList(String token, OrderQuery query, Pageable pageable) {
         var consumer = getConsumer(token);
         var dbPage = orderRepository
-                .findAllByConsumerId(consumer.getUserId(), PageRequest.of(pageable.getPage().intValue()-1,pageable.getSize().intValue()));
+                .findAllByConsumerIdOrderByCreateTimeDesc(consumer.getUserId(), PageRequest.of(pageable.getPage().intValue()-1,pageable.getSize().intValue()));
         var shopIdList = dbPage.stream()
                 .map(OrderDO::getShopId).collect(Collectors.toList());
         var shopRes = shopApiClient.getShopInfo(shopIdList);
@@ -70,6 +69,8 @@ public class OrderConsumerServiceImpl implements OrderConsumerService {
                                 dto.setOrderAmount(order.getOrderAmount().setScale(2, RoundingMode.CEILING));
                                 dto.setOrderName("订单");
                                 dto.setShopLogo(shopMap.get(order.getShopId()).getShopLogo());
+                                dto.setShopName(shopMap.get(order.getShopId()).getShopName());
+                                dto.setShopId(order.getShopId());
                                 return dto;
                             }).collect(Collectors.toList())
             );

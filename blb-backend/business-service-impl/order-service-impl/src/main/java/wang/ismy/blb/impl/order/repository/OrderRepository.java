@@ -27,5 +27,5 @@ public interface OrderRepository extends JpaRepository<OrderDO,Long> {
      * @param pageable
      * @return
      */
-    Page<OrderDO> findAllByConsumerId(Long consumerId,Pageable pageable);
+    Page<OrderDO> findAllByConsumerIdOrderByCreateTimeDesc(Long consumerId, Pageable pageable);
 }

@@ -1,6 +1,18 @@
 <template>
   <div>
-    <order-list></order-list>
+    <order-list :orderList="orderList"/>
+    <el-card>
+       <el-pagination
+      @size-change="handleSizeChange"
+      background
+      @current-change="handlePageChange"
+      :current-page="page"
+      :page-sizes="[5, 10, 20, 30]"
+      :page-size="size"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="11">
+    </el-pagination>
+    </el-card>
     <order-detail :show="orderDetailShow" @close="handleDetailClose"></order-detail>
   </div>
 </template>
@@ -8,10 +20,15 @@
 <script>
 import OrderList from '../components/order/OrderList'
 import OrderDetail from '../components/order/OrderDetail'
+import orderService from '../service/OrderService'
 export default {
   data () {
     return {
-      orderDetailShow: true
+      orderDetailShow: true,
+      page: 1,
+      size: 5,
+      total: 0,
+      orderList: []
     }
   },
   components: {
@@ -20,7 +37,27 @@ export default {
   methods: {
     handleDetailClose () {
       this.orderDetailShow = false
+    },
+    async getOrderList () {
+      try {
+        const data = await orderService.getOrderList(this.page, this.size)
+        this.orderList = data.data
+        this.total = data.total
+      } catch (e) {
+        this.$message.error(e.message)
+      }
+    },
+    handleSizeChange (val) {
+      this.size = val
+      this.getOrderList()
+    },
+    handlePageChange (val) {
+      this.page = val
+      this.getOrderList()
     }
+  },
+  created () {
+    this.getOrderList()
   }
 }
 </script>
