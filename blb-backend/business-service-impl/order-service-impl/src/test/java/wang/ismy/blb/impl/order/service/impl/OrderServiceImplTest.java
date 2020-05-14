@@ -104,7 +104,7 @@ class OrderServiceImplTest {
         orderService.setConsumerApiClient(consumerApiClient);
 
         DeliveryDTO deliveryDTO = new DeliveryDTO();
-        deliveryDTO.setDeliveryId(1L);
+        deliveryDTO.setDeliveryId("1");
         deliveryDTO.setBuilding("泉州师范学院软件学院");
         deliveryDTO.setDetail("男B305");
         ConsumerDeliveryApiClient consumerDeliveryApiClient = mock(ConsumerDeliveryApiClient.class);
