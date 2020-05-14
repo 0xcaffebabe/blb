@@ -78,7 +78,7 @@ export default {
       orderForm: {
         deliveryId: '',
         orderNote: '',
-        prdocutList: []
+        productList: []
       }
     }
   },
@@ -113,7 +113,10 @@ export default {
     async makeOrder () {
       try {
         const orderId = await orderService.makeOrder(this.orderForm)
-        this.$message.success('下单成功：' + orderId)
+        if (orderId) {
+          this.$message.success('下单成功,请进行支付')
+          this.$router.push('/pay/' + orderId)
+        }
       } catch (e) {
         this.$message.error(e.message)
       }

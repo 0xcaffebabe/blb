@@ -62,6 +62,21 @@ class Repository {
     const data = await axios.post('/shop/order', params)
     return data.data
   }
+
+  async generatePay (orderId) {
+    const data = await axios.post('/pay/order/' + orderId)
+    return data.data
+  }
+
+  async getPayUrl (payId) {
+    const data = await axios.get('/pay/' + payId)
+    return data.data
+  }
+
+  async getPayStatus (payId) {
+    const data = await axios.get('/pay/status/' + payId)
+    return data.data
+  }
 }
 
 export default new Repository()

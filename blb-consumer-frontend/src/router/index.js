@@ -22,7 +22,7 @@ const routes = [
       { path: 'search', component: Search },
       { path: 'order', component: Order },
       { path: 'my', component: My },
-      { path: 'pay', component: Pay },
+      { path: 'pay/:orderId', component: Pay },
       { name: 'confirmOrder', path: 'confirmOrder', component: ConfirmOrder },
       { path: 'list/:categoryId', component: List }
     ]

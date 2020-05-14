@@ -93,7 +93,7 @@ public class AliPayService {
             switch (response.getTradeStatus()){
                 case "WAIT_BUYER_PAY":
                     payResultDTO.setStatus(PayStatusEnum.UN_PROCESSED.getCode());
-                    payResultDTO.setMsg("等待用户支付");
+                    payResultDTO.setMsg("已扫码，等待用户支付");
                     break;
                 case "TRADE_CLOSED":
                     payResultDTO.setStatus(PayStatusEnum.SHIPPING.getCode());
@@ -110,7 +110,7 @@ public class AliPayService {
             return payResultDTO;
         } catch (AlipayApiException e) {
             payResultDTO.setStatus(-1);
-            payResultDTO.setMsg("查询支付信息失败");
+            payResultDTO.setMsg("等待用户扫码");
             return payResultDTO;
         }
     }
