@@ -12,6 +12,14 @@ class ShopService {
     return data.data
   }
 
+  async getNearyByShop () {
+    const data = await repository.getNearByShop(locationService.getLocation().location)
+    if (!data.success) {
+      throw new Error('获取附近店铺失败:' + data.msg)
+    }
+    return data.data
+  }
+
   async getShopInfo (shopId) {
     const data = await repository.getShopInfo(shopId)
     if (!data.success) {

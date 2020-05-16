@@ -23,7 +23,7 @@
             </el-rate>
             <span class="shop-sales">月售:{{item.sales}}单</span>
             <div>
-              <span class="shop-price">起送:￥${{item.startingPrice}}/配送费:￥{{item.deliveryFee}}</span>
+              <span class="shop-price">起送:￥{{item.startingPrice}}/配送费:￥{{item.deliveryFee}}</span>
             </div>
             <p class="distance el-icon-time">{{item.distance}} / <span>{{item.deliveryTime}}</span></p>
           </div>

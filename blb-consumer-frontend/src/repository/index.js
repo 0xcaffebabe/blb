@@ -96,6 +96,13 @@ class Repository {
     const data = await axios.get('/shop/order/' + orderId)
     return data.data
   }
+
+  async getNearByShop (location) {
+    const data = await axios.get('/shop/vicinity', {
+      params: { location }
+    })
+    return data.data
+  }
 }
 
 export default new Repository()
