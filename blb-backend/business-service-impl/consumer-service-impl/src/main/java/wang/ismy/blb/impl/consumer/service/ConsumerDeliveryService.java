@@ -52,4 +52,11 @@ public interface ConsumerDeliveryService {
      * @return
      */
     DeliveryDTO getDeliveryInfo(Long deliveryId);
+
+    /**
+     * 消费者删除收货信息
+     * @param token
+     * @param deliveryId
+     */
+    void deleteDelivery(String token, Long deliveryId);
 }

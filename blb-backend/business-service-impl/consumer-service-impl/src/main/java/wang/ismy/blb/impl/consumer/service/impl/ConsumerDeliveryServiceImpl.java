@@ -147,6 +147,22 @@ public class ConsumerDeliveryServiceImpl implements ConsumerDeliveryService {
         return getDeliveryDTO(consumerDelivery);
     }
 
+    @Override
+    public void deleteDelivery(String token, Long deliveryId) {
+        var consumer = getConsumer(token);
+        if (consumer == null) {
+            throw new BlbException("用户未登录");
+        }
+        var deliveryDO = deliveryRepository.findById(deliveryId).orElseThrow(()->new BlbException("收货信息不存在"));
+        var consumerDeliveryDO = consumerDeliveryRepository.findById(deliveryDO.getDeliveryInfoId()).orElseThrow();
+        if (!consumerDeliveryDO.getUserId().equals(consumer.getUserId())){
+            log.warn("收货信息{}不属于当前用户{}",deliveryId,consumer.getUserId());
+            throw new BlbException("收货信息不属于当前用户");
+        }
+        consumerDeliveryDO.setRemoved(true);
+        consumerDeliveryRepository.save(consumerDeliveryDO);
+    }
+
     private DeliveryDTO getDeliveryDTO(ConsumerDeliveryDO consumerDelivery) {
         var delivery = deliveryRepository.findById(consumerDelivery.getDeliveryInfoId()).orElse(null);
 

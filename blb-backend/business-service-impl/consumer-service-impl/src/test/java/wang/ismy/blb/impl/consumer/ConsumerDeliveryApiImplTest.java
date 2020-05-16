@@ -101,4 +101,16 @@ class ConsumerDeliveryApiImplTest {
                 .andExpect(status().isOk())
                 .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.success(dto))));
     }
+
+    @Test
+    void deleteDelivery() throws Exception {
+        Long deliveryId = 1L;
+        mockMvc.perform(delete("/v1/api/delivery/"+deliveryId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .header(SystemConstant.TOKEN,"token")
+        )
+                .andExpect(status().isOk())
+                .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.success())));
+        verify(deliveryService).deleteDelivery(eq("token"),eq(deliveryId));
+    }
 }

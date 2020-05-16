@@ -110,6 +110,26 @@ class Repository {
     })
     return data.data
   }
+
+  async getDeliveryList () {
+    const data = await axios.get('/delivery')
+    return data.data
+  }
+
+  async addDelivery (params) {
+    const data = await axios.post('/delivery', params)
+    return data.data
+  }
+
+  async updateDelivery (params) {
+    const data = await axios.put('/delivery/' + params.deliveryId, params)
+    return data.data
+  }
+
+  async deleteDelivery (deliveryId) {
+    const data = await axios.delete('/delivery/' + deliveryId)
+    return data.data
+  }
 }
 
 export default new Repository()

@@ -17,6 +17,8 @@ import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.JsonUtils;
 import wang.ismy.blb.common.util.MockUtils;
 
+import java.util.stream.Collectors;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
@@ -60,7 +62,6 @@ class DeliveryAggApiTest {
     void getDeliveryList() throws Exception {
         var list =  MockUtils.create(DeliveryDTO.class,10);
         when(deliveryApiClient.getDeliveryInfoList()).thenReturn(Result.success(list));
-
         mockMvc.perform(get("/delivery"))
                 .andExpect(content().json(JsonUtils.parse(Result.success(list))));
     }
@@ -85,6 +86,16 @@ class DeliveryAggApiTest {
         mockMvc.perform(post("/delivery/")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtils.parse(deliveryDTO))
+        ).andExpect(content().json(JsonUtils.parse(Result.success())));
+    }
+
+    @Test
+    void deleteDelivery () throws Exception {
+        Long deliveryId = 1L;
+        when(deliveryApiClient.deleteDelivery(eq(deliveryId))).thenReturn(Result.success());
+
+        mockMvc.perform(delete("/delivery/"+deliveryId)
+                .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(content().json(JsonUtils.parse(Result.success())));
     }
 }

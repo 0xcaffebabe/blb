@@ -27,7 +27,8 @@ public interface ConsumerDeliveryRepository extends JpaRepository<ConsumerDelive
      * @param userId
      * @return
      */
-    List<ConsumerDeliveryDO> findAllByUserId(Long userId);
+    @Query("FROM ConsumerDeliveryDO WHERE (removed <> true OR removed is null) AND userId =:userId")
+    List<ConsumerDeliveryDO> findAllByUserId(@Param("userId") Long userId);
 
     /**
      * 根据用户以及是否是默认地址查询

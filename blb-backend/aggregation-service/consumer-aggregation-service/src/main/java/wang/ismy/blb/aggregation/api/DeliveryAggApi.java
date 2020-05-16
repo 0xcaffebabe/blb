@@ -13,6 +13,7 @@ import wang.ismy.blb.api.consumer.pojo.dto.DeliveryDTO;
 import wang.ismy.blb.common.result.Result;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author MY
@@ -58,8 +59,14 @@ public class DeliveryAggApi {
     }
 
     @ApiOperation("新增收货信息")
-    @PostMapping()
+    @PostMapping
     public Result<Void> addDelivery(@RequestBody DeliveryDTO deliveryDTO){
         return deliveryApiClient.addDelivery(deliveryDTO);
+    }
+
+    @ApiOperation("删除收货信息")
+    @DeleteMapping("{deliveryId}")
+    public Result<Void> deleteDelivery(@PathVariable Long deliveryId){
+        return deliveryApiClient.deleteDelivery(deliveryId);
     }
 }

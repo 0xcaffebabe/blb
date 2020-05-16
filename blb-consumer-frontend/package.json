@@ -62,7 +62,10 @@
           "no-unused-expressions": "off"
         }
       }
-    ]
+    ],
+    "globals": {
+      "AMap": "writeable"
+    }
   },
   "browserslist": [
     "> 1%",

@@ -144,4 +144,20 @@ class ConsumerDeliveryServiceImplTest {
         assertEquals("爱情公寓A楼",delivery.getBuilding());
         assertEquals(true,delivery.getDefaultDelivery());
     }
+
+    @Test
+    @Transactional
+    void deleteDelivery(){
+        String token = "token";
+        Long deliveryId = 1L;
+        AuthApiClient authApiClient = mock(AuthApiClient.class);
+        User user = new User();
+        user.setUserId(1L);
+        when(authApiClient.valid(eq(token))).thenReturn(Result.success(user));
+        deliveryService.setAuthApiClient(authApiClient);
+        deliveryService.deleteDelivery(token,deliveryId);
+        var list = consumerDeliveryRepository.findAllByUserId(1L);
+        assertEquals(1,list.size());
+        assertEquals(2L,list.get(0).getDeliveryInfoId());
+    }
 }

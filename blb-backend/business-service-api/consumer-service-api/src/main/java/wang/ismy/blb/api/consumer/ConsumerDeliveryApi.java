@@ -67,6 +67,15 @@ public interface ConsumerDeliveryApi {
     Result<DeliveryDTO> getDefaultDeliveryInfo(@PathVariable Long consumerId);
 
     /**
+     * 消费者删除收货信息
+     * @param deliveryId
+     * @return
+     */
+    @ApiOperation("消费者删除收货信息")
+    @DeleteMapping("{deliveryId}")
+    Result<Void> deleteDelivery(@PathVariable Long deliveryId);
+
+    /**
      * 根据收货信息ID获取收货信息
      * @param deliveryId
      * @return 不存在返回null
@@ -101,6 +110,11 @@ public interface ConsumerDeliveryApi {
         @Override
         public Result<DeliveryDTO> getDefaultDeliveryInfo(Long consumerId) {
             return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 消费者收货信息服务 获取默认收货信息接口失败");
+        }
+
+        @Override
+        public Result<Void> deleteDelivery(Long deliveryId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 消费者收货信息服务 删除收货信息接口失败");
         }
 
         @Override

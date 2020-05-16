@@ -51,6 +51,13 @@ public class ConsumerDeliveryApiImpl implements ConsumerDeliveryApi {
     }
 
     @Override
+    public Result<Void> deleteDelivery(Long deliveryId) {
+        String token = CurrentRequestUtils.getHeader(SystemConstant.TOKEN);
+        deliveryService.deleteDelivery(token,deliveryId);
+        return Result.success();
+    }
+
+    @Override
     public Result<DeliveryDTO> getDeliveryInfo(Long deliveryId) {
         return Result.success(deliveryService.getDeliveryInfo(deliveryId));
     }
