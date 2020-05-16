@@ -1,5 +1,7 @@
 package wang.ismy.blb.api.product.pojo.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -15,6 +17,7 @@ import java.util.List;
 @Data
 public class ProductDTO {
     @ApiModelProperty("商品ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long productId ;
     @ApiModelProperty("商品所属分类")
     private ProductCategoryDTO productCategory ;

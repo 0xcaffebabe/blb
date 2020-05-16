@@ -8,6 +8,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import wang.ismy.blb.api.cart.CartItem;
 import wang.ismy.blb.common.result.Result;
+import wang.ismy.blb.common.util.JsonUtils;
 import wang.ismy.blb.impl.cart.service.CartService;
 
 import java.util.ArrayList;
@@ -55,7 +56,7 @@ class CartApiImplTest {
         when(cartService.getCartList(eq(token),eq(shopId))).thenReturn(cartItems);
         mockMvc.perform(get("/v1/api/list/"+shopId).contentType(MediaType.APPLICATION_JSON_VALUE).header("TOKEN",token))
                 .andExpect(status().isOk())
-                .andExpect(content().json(new Gson().toJson(Result.success(cartItems))));
+                .andExpect(content().json(JsonUtils.parse(Result.success(cartItems))));
     }
 
     @Test

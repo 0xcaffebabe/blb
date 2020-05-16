@@ -1,5 +1,7 @@
 package wang.ismy.blb.api.cart;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -17,8 +19,10 @@ import java.util.Objects;
 @ApiModel("购物车内容项")
 public class CartItem {
     @ApiModelProperty("商品ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long productId;
     @ApiModelProperty("规格ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long specId;
     @ApiModelProperty("规格名称")
     private String specName;

@@ -27,11 +27,12 @@ INSERT INTO tb_order_detail
     product_quantity,
     product_price,
     product_spec,
+    spec_name,
     removed,
     create_time,
     update_time
 )
-VALUES (1,1,1,'黄焖鸡米饭','黄焖鸡米饭img',1,3.5,1,0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP ),
-        (2,1,1,'黄焖鸡米饭','黄焖鸡米饭img',1,3.5,2,0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP ),
-        (3,2,2,'黄焖猪脚米饭','黄焖猪脚米饭img',2,3.5,3,0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP ),
-        (4,2,3,'黄焖鸭米饭','黄焖鸭米饭img',2,3.5,4,0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP );
+VALUES (1,1,1,'黄焖鸡米饭','黄焖鸡米饭img',1,3.5,1,'大份',0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP ),
+        (2,1,1,'黄焖鸡米饭','黄焖鸡米饭img',1,3.5,2,'小份',0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP ),
+        (3,2,2,'黄焖猪脚米饭','黄焖猪脚米饭img',2,3.5,3,'小份',0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP ),
+        (4,2,3,'黄焖鸭米饭','黄焖鸭米饭img',2,3.5,4,'小份',0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP );

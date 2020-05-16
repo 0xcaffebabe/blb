@@ -22,7 +22,10 @@
       </el-col>
       <el-col :span="6">
         <h1 class="product-price" v-if="!showPrice()">￥{{getPriceRange(product)}}</h1>
-        <h1 class="product-price" v-if="showPrice()">￥{{currentSpec.price}}</h1>
+        <h1 class="product-price" v-if="showPrice()">
+          ￥{{currentSpec.price}}
+          <p style="font-size:14px;color:#bbb">包装费:￥ {{currentSpec.packageFee}}</p>
+        </h1>
         <el-button type="primary" icon="el-icon-plus" :disabled="!showPrice()" circle size="mini" @click="intoCart"></el-button>
       </el-col>
     </el-row>

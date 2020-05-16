@@ -103,6 +103,13 @@ class Repository {
     })
     return data.data
   }
+
+  async searchShop (params) {
+    const data = await axios.get('/shop/search', {
+      params
+    })
+    return data.data
+  }
 }
 
 export default new Repository()

@@ -111,6 +111,14 @@ class OrderServiceImplTest {
         when(consumerDeliveryApiClient.getDeliveryInfo(eq(1L))).thenReturn(Result.success(deliveryDTO));
         orderService.setDeliveryApiClient(consumerDeliveryApiClient);
 
+        ShopApiClient shopApiClient = mock(ShopApiClient.class);
+        orderService.setShopApiClient(shopApiClient);
+        ShopInfoDTO shopInfoDTO = new ShopInfoDTO();
+        shopInfoDTO.setShopId(1L);
+        shopInfoDTO.setDeliveryFee(new BigDecimal("0"));
+        when(shopApiClient.getShopInfo(eq(1L)))
+                .thenReturn(Result.success(shopInfoDTO));
+
         CacheService cacheService = mock(CacheService.class);
 
         OrderCreateDTO orderCreateDTO = new OrderCreateDTO();

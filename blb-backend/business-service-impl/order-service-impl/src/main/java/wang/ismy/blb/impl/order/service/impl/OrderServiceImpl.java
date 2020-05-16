@@ -24,6 +24,7 @@ import wang.ismy.blb.api.order.pojo.entity.OrderDetailDO;
 import wang.ismy.blb.api.product.pojo.dto.CartProductGetDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductSpecDTO;
+import wang.ismy.blb.api.shop.pojo.dto.ShopInfoDTO;
 import wang.ismy.blb.common.BlbException;
 import wang.ismy.blb.common.SnowFlake;
 import wang.ismy.blb.impl.order.OrderConstant;
@@ -85,6 +86,12 @@ public class OrderServiceImpl implements OrderService {
             throw new BlbException("获取不到商品列表");
         }
         Long shopId = productList.get(0).getProductCategory().getShopId();
+        var shopRes = shopApiClient.getShopInfo(shopId);
+        if (!shopRes.getSuccess()){
+            log.warn("获取店铺信息失败:{}",shopRes);
+            throw new BlbException("获取店铺信息失败");
+        }
+        var shop = shopRes.getData();
         var specQuantityMap = orderCreateDTO.getProductList()
                 .stream()
                 .collect(Collectors.toMap(dto->dto.getSpecId(),dto->dto.getQuantity()));
@@ -93,7 +100,7 @@ public class OrderServiceImpl implements OrderService {
         // 获取用户收货信息
         DeliveryDTO delivery = getDelivery(orderCreateDTO);
         // 写入订单
-        OrderDO orderDO = writeOrder(orderCreateDTO, consumer, productList, shopId, specQuantityMap, consumerInfo, delivery);
+        OrderDO orderDO = writeOrder(orderCreateDTO, consumer, productList, shop, specQuantityMap, consumerInfo, delivery);
         // 写入订单详情
         for (ProductDTO productDTO : productList) {
             var spec = productDTO.getProductSpecList().get(0);
@@ -209,10 +216,10 @@ public class OrderServiceImpl implements OrderService {
         orderDetailRepository.save(orderDetailDO);
     }
 
-    private OrderDO writeOrder(OrderCreateDTO orderCreateDTO, User consumer, List<ProductDTO> productList, Long shopId, Map<Long, Integer> specQuantityMap, ConsumerDTO consumerInfo, DeliveryDTO delivery) {
+    private OrderDO writeOrder(OrderCreateDTO orderCreateDTO, User consumer, List<ProductDTO> productList, ShopInfoDTO shop, Map<Long, Integer> specQuantityMap, ConsumerDTO consumerInfo, DeliveryDTO delivery) {
         OrderDO orderDO = new OrderDO();
         orderDO.setOrderId(snowFlake.nextId());
-        orderDO.setShopId(shopId);
+        orderDO.setShopId(shop.getShopId());
         orderDO.setConsumerId(consumer.getUserId());
         orderDO.setConsumerName(consumerInfo.getRealName());
         orderDO.setConsumerPhone(consumerInfo.getPhone());
@@ -223,13 +230,13 @@ public class OrderServiceImpl implements OrderService {
         orderDO.setOrderNote(orderCreateDTO.getOrderNote());
         orderDO.initTime();
         // 计算商品总价
-        BigDecimal amount = getAmount(productList, specQuantityMap);
+        BigDecimal amount = getAmount(productList, specQuantityMap,shop);
         orderDO.setOrderAmount(amount);
         orderRepository.save(orderDO);
         return orderDO;
     }
 
-    private BigDecimal getAmount(List<ProductDTO> productList, Map<Long, Integer> specQuantityMap) {
+    private BigDecimal getAmount(List<ProductDTO> productList, Map<Long, Integer> specQuantityMap, ShopInfoDTO shop) {
         BigDecimal amount = BigDecimal.ZERO;
         for (ProductDTO productDTO : productList) {
             var spec = productDTO.getProductSpecList().get(0);
@@ -237,6 +244,8 @@ public class OrderServiceImpl implements OrderService {
             var price = spec.getPrice().add(spec.getPackageFee()).multiply(new BigDecimal(quantity));
             amount = amount.add(price);
         }
+        // 加上店铺配送费
+        amount = amount.add(shop.getDeliveryFee());
         return amount;
     }
 

@@ -1,5 +1,7 @@
 package wang.ismy.blb.api.product.pojo.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -14,6 +16,7 @@ import java.math.BigDecimal;
 @ApiModel("商品规格")
 public class ProductSpecDTO {
     @ApiModelProperty("规格ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long specId ;
     @ApiModelProperty("规格名称")
     private String specName ;

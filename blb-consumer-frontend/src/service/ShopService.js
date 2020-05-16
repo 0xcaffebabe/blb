@@ -20,6 +20,14 @@ class ShopService {
     return data.data
   }
 
+  async searchShop (params) {
+    const data = await repository.searchShop(params)
+    if (!data.success) {
+      throw new Error('搜索店铺失败:' + data.msg)
+    }
+    return data.data
+  }
+
   async getShopInfo (shopId) {
     const data = await repository.getShopInfo(shopId)
     if (!data.success) {
