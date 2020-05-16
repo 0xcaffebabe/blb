@@ -24,6 +24,7 @@ CREATE TABLE tb_order_detail(
     product_quantity INT NOT NULL   COMMENT '商品数量' ,
     product_price DECIMAL(32,8) NOT NULL   COMMENT '购买时的商品单价' ,
     product_spec BIGINT NOT NULL   COMMENT '商品规格' ,
+    spec_name VARCHAR(128) NOT NULL COMMENT '规格名称',
     removed tinyint(1)    COMMENT '逻辑删除N为正常，Y为删除' ,
     create_time DATETIME    COMMENT '创建时间' ,
     update_time DATETIME    COMMENT '更新时间' ,

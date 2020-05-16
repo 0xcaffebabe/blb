@@ -13,7 +13,7 @@
                   <el-col :span="22">
                     <span style="float:right">￥{{item.productPrice}}</span>
                     <span style="float:right;color:#666;margin-right:20px">X {{item.productQuantity}}</span>
-                    <h4>黄焖鸡米饭</h4>
+                    <h4>{{item.productName}}</h4>
                     <span class="spec-name">{{item.specName}}</span>
                   </el-col>
                 </el-row>

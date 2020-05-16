@@ -203,6 +203,7 @@ public class OrderServiceImpl implements OrderService {
         orderDetailDO.setProductImg(productDTO.getProductImg());
         orderDetailDO.setProductQuantity(quantity);
         orderDetailDO.setProductSpec(spec.getSpecId());
+        orderDetailDO.setSpecName(spec.getSpecName());
         orderDetailDO.setProductPrice(spec.getPrice().add(spec.getPackageFee()).multiply(new BigDecimal(quantity)));
         orderDetailDO.initTime();
         orderDetailRepository.save(orderDetailDO);

@@ -6,12 +6,12 @@
     width="80%">
       <el-row :gutter="20">
         <el-col :span="20">
-          <order-product :productList="order.productList"/>
+          <order-product :productList="order.productList" :shopInfo="{shopName: order.shopName}"/>
         </el-col>
         <el-col :span="4">
           <el-card class="order-detail-header">
-            <el-avatar :size="80"></el-avatar>
-            <h2>支付超时</h2>
+            <el-avatar :size="80" :src="order.shopLogo"></el-avatar>
+            <h2>{{getPayStatus(order.payStatus)}}</h2>
             <el-button type="primary" size="mini" @click="$router.push('shop')">再来一单</el-button>
           </el-card>
         </el-col>
@@ -57,6 +57,7 @@
 
 <script>
 import OrderProduct from './OrderProduct'
+import payService from '../../service/PayService'
 export default {
   props: ['show', 'order'],
   data () {
@@ -64,6 +65,14 @@ export default {
   },
   components: {
     OrderProduct
+  },
+  methods: {
+    getPayStatus (status) {
+      return payService.getPayStatusStr(status)
+    }
+  },
+  created () {
+    console.log(this.order)
   }
 }
 </script>

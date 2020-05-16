@@ -38,4 +38,5 @@ public class OrderDetailItemDTO {
     /** 商品规格ID */
     @ApiModelProperty("商品规格ID")
     private Long productSpec ;
+    private String specName;
 }

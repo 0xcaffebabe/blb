@@ -138,6 +138,7 @@ public class ConsumerServiceImpl implements ConsumerService {
         ConsumerDTO dto = new ConsumerDTO();
         BeanUtils.copyProperties(consumerInfo,dto);
         dto.setUsername(consumer.getUsername());
+        dto.setPhone(consumer.getPhone());
         return dto;
     }
 

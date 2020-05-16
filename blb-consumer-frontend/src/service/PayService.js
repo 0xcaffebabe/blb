@@ -26,5 +26,17 @@ class PayService {
     }
     return data.data
   }
+
+  getPayStatusStr (status) {
+    if (status === 0) {
+      return '未支付'
+    }
+    if (status === 1) {
+      return '已支付'
+    }
+    if (status === 2) {
+      return '已取消'
+    }
+  }
 }
 export default new PayService()

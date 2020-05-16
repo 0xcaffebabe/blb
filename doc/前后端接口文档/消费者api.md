@@ -539,7 +539,7 @@ size | 每页展示数 | 默认为10
 ## 获取订单详情
 
 - 方式：get
-- url：/order/:orderId
+- url：/shop/order/:orderId
 - 响应参数
 
 ```json

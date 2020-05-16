@@ -41,6 +41,11 @@ class OrderService {
     if (!data.success) {
       throw new Error('获取订单详情失败:' + data.msg)
     }
+    if (data.data && data.data.productList) {
+      data.data.productList.forEach(v => {
+        v.specId = v.productSpec
+      })
+    }
     return data.data
   }
 

@@ -28,6 +28,7 @@ public class OrderDetailDO extends BaseDO implements Serializable {
     private Long productId ;
     /** 商品名称 */
     private String productName ;
+    private String specName;
     /** 商品图片地址 */
     private String productImg ;
     /** 商品数量 */
