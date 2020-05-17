@@ -639,3 +639,17 @@ newPassword | 新密码
   "defaultDelivery":true
 }
 ```
+
+## 删除收货信息
+
+- 方式：DELETE
+- url：/delivery/:deliveryId
+- 请求参数
+
+## 头像上传
+
+- 方式：POST
+- url：/avatar
+- 请求参数
+
+file: 文件内容

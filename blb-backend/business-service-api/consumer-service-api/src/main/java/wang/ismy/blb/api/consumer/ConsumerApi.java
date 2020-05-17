@@ -3,6 +3,7 @@ package wang.ismy.blb.api.consumer;
 import io.swagger.annotations.*;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import wang.ismy.blb.api.consumer.pojo.dto.*;
 import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Result;
@@ -80,6 +81,12 @@ public interface ConsumerApi {
     @PutMapping("")
     Result<Void> updateInfo(@RequestBody ConsumerUpdateDTO consumerUpdateDTO);
 
+    /**
+     * 消费者修改密码
+     * @param oldPasword
+     * @param newPassword
+     * @return
+     */
     @ApiOperation("订餐者修改密码")
     @ApiImplicitParams({
             @ApiImplicitParam(paramType = "query", name = "oldPassword", dataType = "String", required = true, value = "旧密码"),

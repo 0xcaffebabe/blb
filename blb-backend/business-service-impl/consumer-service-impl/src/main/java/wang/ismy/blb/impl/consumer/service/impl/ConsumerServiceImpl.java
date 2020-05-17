@@ -109,6 +109,7 @@ public class ConsumerServiceImpl implements ConsumerService {
             log.warn("当前登录用户不是消费者");
             throw new BlbException(ResultCode.AUTH_ERROR);
         }
+        var consumerDO = consumerRepository.findById(consumer.getUserId()).orElseThrow(()->new BlbException("用户不存在"));
         var consumerInfo = consumerInfoRepository.findById(consumer.getUserId()).orElse(null);
         if (consumerInfo == null){
             throw new BlbException(ResultCode.USER_NOT_EXIST);
@@ -116,6 +117,8 @@ public class ConsumerServiceImpl implements ConsumerService {
         ConsumerDTO dto = new ConsumerDTO();
         BeanUtils.copyProperties(consumerInfo,dto);
         dto.setUsername(consumer.getUsername());
+        dto.setPhone(consumerDO.getPhone());
+        dto.setEmail(consumerDO.getEmail());
         return dto;
     }
 
@@ -172,7 +175,8 @@ public class ConsumerServiceImpl implements ConsumerService {
             log.warn("用户不存在:{}",consumer.getUserId());
             return;
         }
-        if (consumerRepository.findByUsername(consumerUpdateDTO.getUsername()) != null){
+        ConsumerDO byUsername = consumerRepository.findByUsername(consumerUpdateDTO.getUsername());
+        if (byUsername != null && !byUsername.getUserId().equals(consumer.getUserId())){
             throw new BlbException(ResultCode.USER_HAS_EXISTED);
         }
         consumerDO.setUsername(consumerUpdateDTO.getUsername());
@@ -180,6 +184,7 @@ public class ConsumerServiceImpl implements ConsumerService {
         consumerRepository.save(consumerDO);
 
         consumerInfoDO.setAvatar(consumerUpdateDTO.getAvatar());
+        consumerInfoDO.setRealName(consumerUpdateDTO.getRealName());
         consumerInfoRepository.save(consumerInfoDO);
     }
 

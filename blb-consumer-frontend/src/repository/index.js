@@ -130,6 +130,26 @@ class Repository {
     const data = await axios.delete('/delivery/' + deliveryId)
     return data.data
   }
+
+  async uploadAvatar (fromData) {
+    const data = await axios({
+      method: 'post',
+      url: '/avatar',
+      headers: { 'Content-Type': 'multipart/form-data' },
+      data: fromData
+    })
+    return data.data
+  }
+
+  async updateUserInfo (userInfo) {
+    const data = await axios.post('/info', userInfo)
+    return data.data
+  }
+
+  async updatePassword (oldPassword, newPassword) {
+    const data = await axios.post(`/info/password?oldPassword=${oldPassword}&newPassword=${newPassword}`)
+    return data.data
+  }
 }
 
 export default new Repository()

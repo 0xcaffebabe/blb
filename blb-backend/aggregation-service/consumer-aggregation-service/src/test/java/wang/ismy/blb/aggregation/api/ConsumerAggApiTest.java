@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import wang.ismy.blb.aggregation.client.AuthApiClient;
+import wang.ismy.blb.aggregation.client.UploadApiClient;
 import wang.ismy.blb.aggregation.client.consumer.ConsumerApiClient;
 import wang.ismy.blb.api.consumer.pojo.dto.*;
 import wang.ismy.blb.common.result.Result;
@@ -24,11 +26,13 @@ class ConsumerAggApiTest {
 
     MockMvc mockMvc;
     ConsumerApiClient consumerApiClient;
+    UploadApiClient uploadApiClient;
     @BeforeEach
     void setup(){
         consumerApiClient = mock(ConsumerApiClient.class);
+        uploadApiClient = mock(UploadApiClient.class);
         mockMvc = MockMvcBuilders.standaloneSetup(
-                new ConsumerAggApi(consumerApiClient)
+                new ConsumerAggApi(consumerApiClient,uploadApiClient)
         ).build();
     }
 

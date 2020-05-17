@@ -17,4 +17,5 @@ public class ConsumerUpdateDTO {
     private String username;
     @ApiModelProperty("手机")
     private String phone;
+    private String realName;
 }

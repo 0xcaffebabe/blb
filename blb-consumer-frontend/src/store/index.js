@@ -9,7 +9,7 @@ export default new Vuex.Store({
     orderDetailShow: false,
     locationChooserShow: false,
     loginPanelShow: false,
-    userEditPanelShow: true,
+    userEditPanelShow: false,
     user: {
       login: false,
       info: {}

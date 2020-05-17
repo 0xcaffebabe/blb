@@ -5,6 +5,9 @@ import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+import wang.ismy.blb.aggregation.annotations.NeedLogin;
+import wang.ismy.blb.aggregation.client.UploadApiClient;
 import wang.ismy.blb.aggregation.client.consumer.ConsumerApiClient;
 import wang.ismy.blb.api.consumer.pojo.dto.*;
 import wang.ismy.blb.common.SystemConstant;
@@ -21,6 +24,7 @@ import wang.ismy.blb.common.result.Result;
 public class ConsumerAggApi {
 
     private final ConsumerApiClient consumerApiClient;
+    private final UploadApiClient uploadApiClient;
 
     @ApiOperation("登录接口")
     @PostMapping("login")
@@ -51,5 +55,17 @@ public class ConsumerAggApi {
     @GetMapping("info")
     public Result<ConsumerDTO> getInfo(){
         return consumerApiClient.getInfo();
+    }
+
+    /**
+     * 消费者上传头像
+     * @param file
+     * @return
+     */
+    @ApiOperation(value = "消费者上传头像",consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping("avatar")
+    @NeedLogin
+    public Result<String> uploadAvatar(@RequestParam("file") MultipartFile file){
+        return uploadApiClient.upload(file);
     }
 }

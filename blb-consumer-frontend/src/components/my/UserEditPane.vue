@@ -5,7 +5,7 @@
     width="50%"
     @close="$store.commit('toggleUserEditPanel')"
     >
-    <el-tabs v-model="activeName" @tab-click="handleClick">
+    <el-tabs v-model="currentTab">
       <el-tab-pane label="收货地址" name="delivery">
         <ul class="delivery-list">
           <li v-for="item in deliveryList" :key="item.deliveryId" class="delivery-item">
@@ -47,33 +47,29 @@
         </div>
       </el-tab-pane>
       <el-tab-pane label="登录密码" name="password">
-        <el-form :model="deliveryForm" :rules="deliveryFormRules" ref="deliveryForm" label-width="100px">
+        <el-form label-width="100px">
             <el-form-item label="旧密码" prop="name">
-              <el-input v-model="deliveryForm.name" placeholder="旧密码" show-password clearable></el-input>
+              <el-input v-model="oldPassword" placeholder="旧密码" show-password clearable></el-input>
             </el-form-item>
             <el-form-item label="新密码" prop="name">
-              <el-input v-model="deliveryForm.name" placeholder="新密码" show-password clearable></el-input>
+              <el-input v-model="newPassword" placeholder="新密码" show-password clearable></el-input>
             </el-form-item>
             <el-form-item label="重复新密码" prop="name">
-              <el-input v-model="deliveryForm.name" placeholder="重复新密码" show-password clearable></el-input>
+              <el-input v-model="repeatPassword" placeholder="重复新密码" show-password clearable></el-input>
             </el-form-item>
-            <el-button type="success" size="small" style="float:right">确认修改</el-button>
+            <el-button type="success" size="small" style="float:right" @click="handleUpdatePassword">确认修改</el-button>
         </el-form>
       </el-tab-pane>
-      <el-tab-pane label="个人信息" name="phone">
-        <el-form :model="deliveryForm" :rules="deliveryFormRules" ref="deliveryForm" label-width="70px">
+      <el-tab-pane label="个人信息" name="info">
+        <el-form label-width="70px">
             <el-form-item label="联系人" prop="name">
-              <el-input v-model="deliveryForm.name" placeholder="姓名"></el-input>
-              <el-radio-group v-model="radio1" size="mini">
-                <el-radio-button label="先生"></el-radio-button>
-                <el-radio-button label="女士"></el-radio-button>
-              </el-radio-group>
+              <el-input v-model="userInfo.realName" placeholder="姓名"></el-input>
             </el-form-item>
             <el-form-item label="电话" prop="name">
-              <el-input v-model="deliveryForm.name" placeholder="手机号码"></el-input>
+              <el-input v-model="userInfo.phone" placeholder="手机号码"></el-input>
             </el-form-item>
           </el-form>
-        <el-button type="success" size="small" style="float:right;margin-top:20px">确认修改</el-button>
+        <el-button type="success" size="small" style="float:right;margin-top:20px" @click="updateUserInfo">确认修改</el-button>
       </el-tab-pane>
     </el-tabs>
   </el-dialog>
@@ -81,7 +77,9 @@
 
 <script>
 import deliveryService from '../../service/DeliveryService'
+import consumerService from '../../service/ConsumerService'
 export default {
+  props: ['currentTab'],
   data () {
     return {
       activeName: 'delivery',
@@ -90,6 +88,7 @@ export default {
         detail: '',
         defaultDelivery: false
       },
+      userInfo: this.$store.state.user.info,
       deliveryFormRules: {
         building: [
           { required: true, message: '请选择地点', trigger: 'blur' }
@@ -98,6 +97,9 @@ export default {
           { required: true, message: '情输入详细地址', trigger: 'blur' }
         ]
       },
+      oldPassword: '',
+      newPassword: '',
+      repeatPassword: '',
       deliveryList: [],
       mapEvents: {
         click (e) {
@@ -184,6 +186,31 @@ export default {
         }
       } catch (e) {
         this.$message.error(e.message)
+      }
+    },
+    async updateUserInfo () {
+      try {
+        if (await consumerService.updateUserInfo(this.userInfo)) {
+          this.$message.success('更新资料成功')
+        }
+      } catch (e) {
+        this.$message.error(e.message)
+      }
+    },
+    async handleUpdatePassword () {
+      if (this.oldPassword && this.newPassword && this.repeatPassword) {
+        if (this.newPassword !== this.repeatPassword) {
+          return this.$message.error('两次输入的新密码不一致')
+        }
+        try {
+          if (await consumerService.updatePassword(this.oldPassword, this.newPassword)) {
+            this.$message.success('修改密码成功')
+          }
+        } catch (e) {
+          this.$message.error(e.message)
+        }
+      } else {
+        this.$message.error('请将密码信息填写完整')
       }
     }
   },

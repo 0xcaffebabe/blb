@@ -50,5 +50,34 @@ class ConsumerService {
     }
     return data.data
   }
+
+  async uploadAvatar (fileList) {
+    if (!fileList || fileList.length === 0) {
+      throw new Error('上传头像失败:没有选择图片')
+    }
+    const formData = new FormData()
+    formData.append('file', fileList[0])
+    const data = await repository.uploadAvatar(formData)
+    if (!data.success) {
+      throw new Error('上传头像失败:' + data.msg)
+    }
+    return data.data
+  }
+
+  async updateUserInfo (userInfo) {
+    const data = await repository.updateUserInfo(userInfo)
+    if (!data.success) {
+      throw new Error('保存用户信息失败:' + data.msg)
+    }
+    return true
+  }
+
+  async updatePassword (old, newPassword) {
+    const data = await repository.updatePassword(old, newPassword)
+    if (!data.success) {
+      throw new Error('修改密码失败:' + data.msg)
+    }
+    return true
+  }
 }
 export default new ConsumerService()
