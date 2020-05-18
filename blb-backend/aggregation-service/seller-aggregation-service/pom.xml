@@ -12,7 +12,7 @@
     <artifactId>seller-aggregation-service</artifactId>
 
     <build>
-        <finalName>consumer-aggregation-service-${version}</finalName>
+        <finalName>seller-aggregation-service-${version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
