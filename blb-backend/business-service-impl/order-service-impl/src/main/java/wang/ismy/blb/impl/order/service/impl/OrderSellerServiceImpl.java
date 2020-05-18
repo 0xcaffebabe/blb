@@ -8,11 +8,15 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import wang.ismy.blb.api.auth.User;
+import wang.ismy.blb.api.order.enums.OrderStatusEnum;
+import wang.ismy.blb.api.order.enums.PayStatusEnum;
+import wang.ismy.blb.api.order.pojo.dto.NewOrderItemDTO;
 import wang.ismy.blb.api.order.pojo.dto.OrderDetailItemDTO;
 import wang.ismy.blb.api.order.pojo.dto.OrderQuery;
 import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderDetailDTO;
 import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderItemDTO;
 import wang.ismy.blb.api.order.pojo.entity.OrderDO;
+import wang.ismy.blb.api.order.pojo.entity.OrderDetailDO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopInfoDTO;
 import wang.ismy.blb.common.BlbException;
 import wang.ismy.blb.common.result.Page;
@@ -24,7 +28,10 @@ import wang.ismy.blb.impl.order.repository.OrderRepository;
 import wang.ismy.blb.impl.order.service.OrderSellerService;
 
 import java.math.RoundingMode;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -99,5 +106,37 @@ public class OrderSellerServiceImpl implements OrderSellerService {
                 }).collect(Collectors.toList())
         );
         return detailDTO;
+    }
+
+    @Override
+    public List<NewOrderItemDTO> getNewOrderList(String token) {
+        var seller = getSeller(token);
+        var shop = getShop(seller);
+
+        var orderList = orderRepository.findNewOrder(OrderStatusEnum.UN_PROCESSED.getCode(),shop.getShopId(), PayStatusEnum.PROCESSED.getCode());
+        var orderIdList = orderList.stream().map(OrderDO::getOrderId).collect(Collectors.toList());
+        var orderDetailList = detailRepository.findAllByOrderIdIn(orderIdList);
+
+        Map<Long,List<OrderDetailDO>> orderDetailMap = new HashMap<>(orderDetailList.size());
+        for (OrderDetailDO orderDetailDO : orderDetailList) {
+            orderDetailMap.computeIfAbsent(orderDetailDO.getOrderId(), k -> new ArrayList<>());
+            orderDetailMap.get(orderDetailDO.getOrderId()).add(orderDetailDO);
+        }
+
+        List<NewOrderItemDTO> result = new ArrayList<>();
+        for (OrderDO orderDO : orderList) {
+            NewOrderItemDTO dto = new NewOrderItemDTO();
+            BeanUtils.copyProperties(orderDO,dto);
+            var detailList = orderDetailMap.get(orderDO.getOrderId());
+            if (!CollectionUtils.isEmpty(detailList)){
+                dto.setProductList(detailList.stream().map(detail->{
+                    OrderDetailItemDTO itemDTO = new OrderDetailItemDTO();
+                    BeanUtils.copyProperties(detail,itemDTO);
+                    return itemDTO;
+                }).collect(Collectors.toList()));
+            }
+            result.add(dto);
+        }
+        return result;
     }
 }

@@ -83,7 +83,7 @@ class ShopApiImplTest {
     void addShop() throws Exception {
         String token = "token";
         ShopCreateDTO dto = MockUtils.create(ShopCreateDTO.class);
-        when(shopService.addShop(eq(token),eq(dto))).thenReturn(1L);
+        when(shopService.addShop(eq(token),eq(dto))).thenReturn("1");
 
         mockMvc.perform(post("/v1/api")
                 .header(SystemConstant.TOKEN,token)
@@ -91,7 +91,7 @@ class ShopApiImplTest {
                 .content(new ObjectMapper().writeValueAsBytes(dto))
         )
                 .andExpect(status().isOk())
-                .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.success(1L))));
+                .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.success("1"))));
 
     }
 

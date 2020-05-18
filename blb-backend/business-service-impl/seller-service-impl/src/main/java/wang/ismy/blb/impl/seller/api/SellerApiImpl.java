@@ -32,4 +32,9 @@ public class SellerApiImpl implements SellerApi {
     public Result<LoginResultDTO> login(String loginStr, String password) {
         return Result.success(sellerService.login(loginStr,password));
     }
+
+    @Override
+    public Result<SellerInfoDTO> getSellerInfo(String username) {
+        return Result.success(sellerService.getSellerInfo(username));
+    }
 }

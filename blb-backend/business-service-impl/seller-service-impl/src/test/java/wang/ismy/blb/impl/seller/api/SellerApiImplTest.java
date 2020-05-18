@@ -12,6 +12,7 @@ import wang.ismy.blb.api.seller.pojo.dto.SellerCreateDTO;
 import wang.ismy.blb.api.seller.pojo.dto.SellerRegisterResultDTO;
 import wang.ismy.blb.common.SystemConstant;
 import wang.ismy.blb.common.result.Result;
+import wang.ismy.blb.common.util.JsonUtils;
 import wang.ismy.blb.common.util.MockUtils;
 import wang.ismy.blb.impl.seller.service.SellerService;
 
@@ -77,5 +78,18 @@ class SellerApiImplTest {
         )
                 .andExpect(status().isOk())
                 .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.success(loginResultDTO))));
+    }
+
+    @Test
+    void getSellerInfoByUsername () throws Exception {
+        String username = "cxk";
+        SellerInfoDTO dto = MockUtils.create(SellerInfoDTO.class);
+        when(sellerService.getSellerInfo(eq(username))).thenReturn(dto);
+
+        mockMvc.perform(get("/v1/api/info/username")
+            .param("username",username)
+        )
+                .andExpect(status().isOk())
+                .andExpect(content().json(JsonUtils.parse(Result.success(dto))));
     }
 }

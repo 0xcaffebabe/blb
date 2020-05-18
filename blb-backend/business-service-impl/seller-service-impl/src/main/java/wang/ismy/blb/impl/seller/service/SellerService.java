@@ -31,4 +31,11 @@ public interface SellerService {
      * @return
      */
     LoginResultDTO login(String loginStr, String password);
+
+    /**
+     * 根据用户名查询商家
+     * @param username
+     * @return
+     */
+    SellerInfoDTO getSellerInfo(String username);
 }

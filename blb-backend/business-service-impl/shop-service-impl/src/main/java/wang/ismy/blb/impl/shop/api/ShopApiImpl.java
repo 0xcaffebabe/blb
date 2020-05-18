@@ -41,7 +41,7 @@ public class ShopApiImpl implements ShopApi {
     }
 
     @Override
-    public Result<Long> addShop(ShopCreateDTO shopCreateDTO) {
+    public Result<String> addShop(ShopCreateDTO shopCreateDTO) {
         String token = CurrentRequestUtils.getHeader(SystemConstant.TOKEN);
         return Result.success(shopService.addShop(token,shopCreateDTO));
     }

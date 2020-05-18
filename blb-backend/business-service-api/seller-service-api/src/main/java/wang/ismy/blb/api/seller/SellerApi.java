@@ -56,6 +56,15 @@ public interface SellerApi {
     Result<LoginResultDTO> login(@RequestParam("loginStr") String loginStr,
                                  @RequestParam("password") String password);
 
+    /**
+     * 根据用户名查询商家
+     * @param username
+     * @return
+     */
+    @ApiOperation("根据用户名查询商家")
+    @GetMapping("info/username")
+    Result<SellerInfoDTO> getSellerInfo(@RequestParam("username") String username);
+
     class Fallback implements SellerApi {
 
         @Override
@@ -71,6 +80,11 @@ public interface SellerApi {
         @Override
         public Result<LoginResultDTO> login(String loginStr, String password) {
             return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商家服务 登录接口失败");
+        }
+
+        @Override
+        public Result<SellerInfoDTO> getSellerInfo(String username) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商家服务 根据用户名查询商家接口失败");
         }
     }
 }

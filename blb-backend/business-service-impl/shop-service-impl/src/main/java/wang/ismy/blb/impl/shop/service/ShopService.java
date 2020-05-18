@@ -44,7 +44,7 @@ public interface ShopService {
      * @param shopCreateDTO
      * @return 店铺ID
      */
-    Long addShop(String token,ShopCreateDTO shopCreateDTO);
+    String addShop(String token,ShopCreateDTO shopCreateDTO);
 
     /**
      * 当前商家更新店铺信息

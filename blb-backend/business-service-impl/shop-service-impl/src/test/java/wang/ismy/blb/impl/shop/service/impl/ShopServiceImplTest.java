@@ -94,7 +94,7 @@ class ShopServiceImplTest {
         when(authApiClient.valid(eq(token))).thenReturn(Result.success(user));
         shopService.setAuthApiClient(authApiClient);
 
-        Long shopId = shopService.addShop(token, createDTO);
+        Long shopId = Long.parseLong(shopService.addShop(token, createDTO));
         var shop = shopRepository.findById(shopId).orElse(null);
         var shopInfo = shopInfoRepository.findById(shopId).orElse(null);
 

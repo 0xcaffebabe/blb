@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import wang.ismy.blb.api.order.pojo.dto.NewOrderItemDTO;
 import wang.ismy.blb.api.order.pojo.dto.OrderQuery;
 import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderDetailDTO;
 import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderItemDTO;
@@ -13,6 +14,7 @@ import wang.ismy.blb.common.SystemConstant;
 import wang.ismy.blb.common.result.Page;
 import wang.ismy.blb.common.result.Pageable;
 import wang.ismy.blb.common.result.Result;
+import wang.ismy.blb.common.util.JsonUtils;
 import wang.ismy.blb.common.util.MockUtils;
 import wang.ismy.blb.impl.order.service.OrderSellerService;
 import wang.ismy.blb.impl.order.service.OrderService;
@@ -76,5 +78,16 @@ class OrderSellerApiImplTest {
         )
                 .andExpect(status().isOk())
                 .andExpect(content().json(objectMapper.writeValueAsString(Result.success(detailDTO))));
+    }
+
+    @Test
+    void getNewOrderList () throws Exception {
+        String token = "token";
+        var list = MockUtils.create(NewOrderItemDTO.class,10);
+        when(sellerService.getNewOrderList(eq(token))).thenReturn(list);
+        mockMvc.perform(get("/v1/api/seller/new")
+            .header(SystemConstant.TOKEN,token)
+        )
+                .andExpect(content().json(JsonUtils.parse(Result.success(list))));
     }
 }

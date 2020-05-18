@@ -65,4 +65,12 @@ class SellerServiceImplTest {
         assertEquals(0,login.getStatus());
         assertEquals("token",login.getToken());
     }
+
+    @Test
+    void getSellerInfoByUsername () {
+        String username = "seller-cxk";
+        SellerInfoDTO dto = sellerService.getSellerInfo(username);
+        assertEquals("蔡徐坤",dto.getRealName());
+        assertEquals("17359561234",dto.getPhone());
+    }
 }

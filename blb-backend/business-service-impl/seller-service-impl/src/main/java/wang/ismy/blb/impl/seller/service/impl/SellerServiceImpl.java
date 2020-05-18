@@ -94,4 +94,17 @@ public class SellerServiceImpl implements SellerService {
         result.setToken(authRes.getData());
         return result;
     }
+
+    @Override
+    public SellerInfoDTO getSellerInfo(String username) {
+        SellerDO sellerDO = sellerRepository.findByUsername(username);
+        if (sellerDO == null) {
+            return null;
+        }
+        SellerInfoDO sellerInfoDO = infoRepository.findById(sellerDO.getSellerId()).orElseThrow();
+        SellerInfoDTO dto = new SellerInfoDTO();
+        dto.setPhone(sellerInfoDO.getConcatNumber());
+        dto.setRealName(sellerInfoDO.getRealName());
+        return dto;
+    }
 }

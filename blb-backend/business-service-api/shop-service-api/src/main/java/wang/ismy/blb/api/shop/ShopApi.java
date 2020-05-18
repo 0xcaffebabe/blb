@@ -66,7 +66,7 @@ public interface ShopApi {
      */
     @ApiOperation("添加店铺")
     @PostMapping("")
-    Result<Long> addShop(@RequestBody ShopCreateDTO shopCreateDTO);
+    Result<String> addShop(@RequestBody ShopCreateDTO shopCreateDTO);
 
     /**
      * 更新店铺信息
@@ -107,7 +107,7 @@ public interface ShopApi {
         }
 
         @Override
-        public Result<Long> addShop(ShopCreateDTO shopCreateDTO) {
+        public Result<String> addShop(ShopCreateDTO shopCreateDTO) {
             return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 店铺服务 增加店铺接口失败");
         }
 

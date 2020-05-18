@@ -84,7 +84,7 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     @Transactional(rollbackOn = Exception.class)
-    public Long addShop(String token, ShopCreateDTO shopCreateDTO) {
+    public String addShop(String token, ShopCreateDTO shopCreateDTO) {
         User seller = getSeller(token);
         if (!categoryRepository.existsById(shopCreateDTO.getCategoryId())){
             log.warn("添加店铺 商品目录不存在:{}",shopCreateDTO.getCategoryId());
@@ -92,7 +92,7 @@ public class ShopServiceImpl implements ShopService {
         }
         ShopDO shopDO = shopRepository.findBySellerId(seller.getUserId());
         if (shopDO != null){
-            return shopDO.getShopId();
+            return shopDO.getShopId().toString();
         }
         shopDO = new ShopDO();
         shopDO.setCategoryId(shopCreateDTO.getCategoryId());
@@ -105,7 +105,7 @@ public class ShopServiceImpl implements ShopService {
         BeanUtils.copyProperties(shopCreateDTO,shopInfoDO);
         shopInfoDO.setShopId(shopDO.getShopId());
         shopInfoRepository.save(shopInfoDO);
-        return shopDO.getShopId();
+        return shopDO.getShopId().toString();
     }
 
     private User getSeller(String token) {

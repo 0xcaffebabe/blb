@@ -79,4 +79,26 @@ class OrderSellerServiceImplTest {
         assertEquals("黄焖鸡米饭",detail.getProductList().get(1).getProductName());
         assertEquals(2L,detail.getProductList().get(1).getProductSpec());
     }
+
+    @Test
+    void getNewOrderList (){
+        String token = "token";
+        User user = new User();
+        user.setUserId(1L);
+        AuthApiClient authApiClient = mock(AuthApiClient.class);
+        when(authApiClient.valid(eq(token))).thenReturn(Result.success(user));
+        sellerService.setAuthApiClient(authApiClient);
+
+        ShopInfoDTO shop = new ShopInfoDTO();
+        shop.setShopId(1L);
+        shop.setShopLogo("shop logo");
+        ShopApiClient shopApiClient = mock(ShopApiClient.class);
+        when(shopApiClient.getShopBySeller(eq(1L))).thenReturn(Result.success(shop));
+        sellerService.setShopApiClient(shopApiClient);
+
+        var newOrderList = sellerService.getNewOrderList(token);
+        assertEquals(2,newOrderList.size());
+        assertEquals("蔡徐坤",newOrderList.get(0).getConsumerName());
+        assertEquals("黄焖鸡米饭",newOrderList.get(0).getProductList().get(0).getProductName());
+    }
 }

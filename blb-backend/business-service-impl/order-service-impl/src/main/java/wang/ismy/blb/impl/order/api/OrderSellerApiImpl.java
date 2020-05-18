@@ -3,6 +3,7 @@ package wang.ismy.blb.impl.order.api;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 import wang.ismy.blb.api.order.OrderSellerApi;
+import wang.ismy.blb.api.order.pojo.dto.NewOrderItemDTO;
 import wang.ismy.blb.api.order.pojo.dto.OrderQuery;
 import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderDetailDTO;
 import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderItemDTO;
@@ -12,6 +13,8 @@ import wang.ismy.blb.common.result.Pageable;
 import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.CurrentRequestUtils;
 import wang.ismy.blb.impl.order.service.OrderSellerService;
+
+import java.util.List;
 
 /**
  * @author MY
@@ -25,6 +28,12 @@ public class OrderSellerApiImpl implements OrderSellerApi {
     public Result<Page<ConsumerOrderItemDTO>> getSellerOrderList(OrderQuery query, Pageable pageable) {
         String token = CurrentRequestUtils.getHeader(SystemConstant.TOKEN);
         return Result.success(orderSellerService.getSellerOrderList(token,query,pageable));
+    }
+
+    @Override
+    public Result<List<NewOrderItemDTO>> getNewOrderList() {
+        String token = CurrentRequestUtils.getHeader(SystemConstant.TOKEN);
+        return Result.success(orderSellerService.getNewOrderList(token));
     }
 
     @Override
