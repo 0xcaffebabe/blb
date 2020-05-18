@@ -140,7 +140,8 @@ level | 目录层级 | 可选值 1 2 3
       }
       //...
     ]
-  }
+  },
+  ...
 ]
 ```
 
@@ -158,3 +159,259 @@ orderId | 订单ID
 
 - 方式：get
 - url：/shop/order/list
+- 请求参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+startDate | 开始日期 | 与结束日期可以一起为空
+endDate | 结束日期 | 与开始日期可以一起为空
+kw | 搜索关键字 | 可以为空
+page | 页数 | 默认为1
+size | 每页展示数 | 默认为10
+
+- 响应参数
+
+```json
+{
+  "total": 15,
+  "data": [
+    {
+      "orderId":1,
+      "orderName": "xxx",
+      "orderAmount": 15,
+      "orderStatus": 0,
+      "payStatus": 1
+    },
+    ...
+  ]
+}
+```
+
+## 获取订单详情
+
+- 方式:get
+- url:/shop/order/:orderId
+- 请求参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+orderId | 订单ID
+
+- 响应参数
+
+```json
+{
+    "orderId": 1,
+    "orderStatus": 0,
+    "consumerName": "王小明",
+    "consumerAddress": "泉州师范学院软件学院 男B305",
+    "consumerPhone": "17359561234",
+    "diningOutCode": "2981", //   骑手取餐码
+    "orderNote": "黄焖鸡不要辣",
+    "productList": [
+      {
+        "productId": 1,
+        "productName": "黄焖鸡",
+        "specId": 1,
+        "specName": "大份",
+        "productQuantity": 1,
+        "productPrice": 13
+      }
+      //...
+    ]
+}
+```
+
+## 获取店铺商品分类
+
+- 方式：get
+- url：/shop/category
+- 响应参数
+
+```json
+[
+  {
+    "categoryId": 1, // 目录ID
+    "categoryName": "黄焖系列",
+    "categoryDesc": "本店招牌系列菜"
+  }
+  // others ...
+]
+```
+
+## 新增商品分类
+
+- 方式：POST
+- url：/shop/category
+- 请求参数
+
+```json
+{
+  "categoryName": "目录名称",
+  "orderDesc": "目录描述"
+}
+```
+
+## 更新商品分类
+
+- 方式：PUT
+- url：/shop/category/:id
+- 请求参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+id | 目录ID
+
+```json
+{
+  "categoryName": "新目录名称",
+  "categoryDesc": "新描述"
+}
+```
+
+## 删除目录
+
+- 方式：DELETE
+- url：/shop/category/:id
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+id | 目录ID
+
+## 根据目录获取商品列表
+
+- 方式：get
+- url：/shop/category/:id/product
+- 请求参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+id | 目录ID
+
+- 响应参数
+
+```json
+[
+  {
+    "productId": 1,
+    "productName": "黄焖鸡米饭",
+    "productImg": "img.blb.com/1.jpg",
+    "productDesc": "江西特产黄焖鸡米饭",
+    "specList": [ // 商品规格列表
+      {
+        "specId":1,
+        "specName": "大份",
+        "packageFee":2, // 包装费
+        "price": 18, // 规格价格
+        "stock": 100
+      }
+      // ...
+    ],
+    "sales": 123, // 商品销量
+    "positiveRate": 59
+  }
+  // ...
+]
+```
+
+## 新增商品
+
+- 方式：POST
+- url：/shop/category/:id/product
+- 请求参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+id | 目录ID
+
+```json
+{
+  "categoryId": 1,
+  "productName": "黄焖腐竹",
+  "productSpec": "香喷喷黄焖腐竹",
+  "productImg": "blb.com/1.jpg",
+  "productSpecList": [
+    {
+      "specName": "大份",
+      "packageFee": 2,
+      "price": 15
+    }
+    ...
+  ]
+}
+```
+
+## 更新商品
+
+- 方式：PUT
+- url：/shop/category/:id/product
+- 请求参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+id | 目录ID
+
+```json
+{
+  "productId": 1,
+  "categoryId": 1,
+  "productName": "黄焖腐竹",
+  "productSpec": "香喷喷黄焖腐竹",
+  "productImg": "blb.com/1.jpg",
+  "productSpecList": [
+    {
+      "specId": 1,
+      "specName": "大份a",
+      "packageFee": 2,
+      "price": 15
+    },
+    {
+      "specName": "大份b",
+      "packageFee": 2,
+      "price": 17
+    }
+    ...
+  ]
+}
+```
+
+## 下架商品
+
+- 方式：DELETE
+- url：/shop/category/:id/product/:productId
+- 请求参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+id | 目录ID
+productId | 商品ID
+
+## 更新库存
+
+- 方式：PUT
+- url：/shop/category/:id/product/:productId/stock
+- 请求参数
+
+参数名     | 参数说明   | 备注
+------- | ------ | -----
+id | 目录ID
+productId | 商品ID
+type | 更新库存的类型 | full或empty
+
+## 更新店铺信息
+
+- PUT
+- url：/shop/info
+- 请求参数
+
+```json
+{
+  "shopLogo": "logo.jpg",
+  "shopName": "黄焖鸡米饭(鲤城店)",
+  "shopDesc": "店铺简介",
+  "shopSlogan": "让生活更美好",
+  "businessHour": "8:00-24:00",
+  "deliveryFee": 5,
+  "startingPrice": 15
+}
+```
