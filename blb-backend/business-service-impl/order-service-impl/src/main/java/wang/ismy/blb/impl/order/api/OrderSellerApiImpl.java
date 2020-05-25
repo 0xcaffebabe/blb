@@ -26,9 +26,9 @@ public class OrderSellerApiImpl implements OrderSellerApi {
     private final OrderSellerService orderSellerService;
 
     @Override
-    public Result<Page<ConsumerOrderItemDTO>> getSellerOrderList(OrderQuery query, Long page, Long size) {
+    public Result<Page<ConsumerOrderItemDTO>> getSellerOrderList(String date, String status, Long page, Long size) {
         String token = CurrentRequestUtils.getHeader(SystemConstant.TOKEN);
-        return Result.success(orderSellerService.getSellerOrderList(token,query,Pageable.of(page,size)));
+        return Result.success(orderSellerService.getSellerOrderList(token,new OrderQuery(),Pageable.of(page,size)));
     }
 
     @Override

@@ -24,14 +24,16 @@ import java.util.List;
 public interface OrderSellerApi {
     /**
      * 拉取商家订单列表
-     * @param query 搜索条件
+     * @param date
+     * @param status
      * @param page
      * @param size
      * @return 分页订单列表结果
      */
     @ApiOperation("拉取商家订单列表")
     @GetMapping("")
-    Result<Page<ConsumerOrderItemDTO>> getSellerOrderList(@RequestBody OrderQuery query,
+    Result<Page<ConsumerOrderItemDTO>> getSellerOrderList(@RequestParam("date") String date,
+                                                          @RequestParam("status") String status,
                                                           @RequestParam("page") Long page,
                                                           @RequestParam("size")Long size);
 
@@ -53,8 +55,10 @@ public interface OrderSellerApi {
     Result<ConsumerOrderDetailDTO> getSellerOrderDetail(@PathVariable("orderId") Long orderId);
 
     class Fallback implements OrderSellerApi{
+
+
         @Override
-        public Result<Page<ConsumerOrderItemDTO>> getSellerOrderList(OrderQuery query, Long page, Long size) {
+        public Result<Page<ConsumerOrderItemDTO>> getSellerOrderList(String date, String status, Long page, Long size) {
             return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 卖家订单服务 获取订单列表接口失败");
         }
 
