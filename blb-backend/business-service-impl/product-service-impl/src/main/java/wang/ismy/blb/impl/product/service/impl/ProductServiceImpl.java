@@ -11,6 +11,8 @@ import wang.ismy.blb.api.product.pojo.dto.CartProductGetDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductSpecDTO;
+import wang.ismy.blb.common.BlbException;
+import wang.ismy.blb.impl.product.client.AuthApiClient;
 import wang.ismy.blb.impl.product.pojo.ProductStockDO;
 import wang.ismy.blb.impl.product.repository.ProductCategoryRepository;
 import wang.ismy.blb.impl.product.repository.ProductRepository;
@@ -32,7 +34,6 @@ public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProductCategoryRepository productCategoryRepository;
     private final ProductSpecRepository productSpecRepository;
-
     @Override
     public ProductDTO getProduct(Long productId) {
         // 获取商品主信息
@@ -146,5 +147,12 @@ public class ProductServiceImpl implements ProductService {
         ProductSpecDTO dto = new ProductSpecDTO();
         BeanUtils.copyProperties(productSpecDO, dto);
         return dto;
+    }
+
+    @Override
+    public void updateStock(String token, Long specId, Long stock) {
+        var spec = productSpecRepository.findById(specId).orElseThrow(()->new BlbException("商品规格不存在"));
+        spec.setStock(stock);
+        productSpecRepository.save(spec);
     }
 }

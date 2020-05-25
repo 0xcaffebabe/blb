@@ -24,10 +24,11 @@ import java.util.List;
 @AllArgsConstructor
 public class OrderSellerApiImpl implements OrderSellerApi {
     private final OrderSellerService orderSellerService;
+
     @Override
-    public Result<Page<ConsumerOrderItemDTO>> getSellerOrderList(OrderQuery query, Pageable pageable) {
+    public Result<Page<ConsumerOrderItemDTO>> getSellerOrderList(OrderQuery query, Long page, Long size) {
         String token = CurrentRequestUtils.getHeader(SystemConstant.TOKEN);
-        return Result.success(orderSellerService.getSellerOrderList(token,query,pageable));
+        return Result.success(orderSellerService.getSellerOrderList(token,query,Pageable.of(page,size)));
     }
 
     @Override

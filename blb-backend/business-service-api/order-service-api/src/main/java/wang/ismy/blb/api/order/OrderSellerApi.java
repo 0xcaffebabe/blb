@@ -3,9 +3,7 @@ package wang.ismy.blb.api.order;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.order.pojo.dto.NewOrderItemDTO;
 import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderDetailDTO;
 import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderItemDTO;
@@ -27,12 +25,15 @@ public interface OrderSellerApi {
     /**
      * 拉取商家订单列表
      * @param query 搜索条件
-     * @param pageable
+     * @param page
+     * @param size
      * @return 分页订单列表结果
      */
     @ApiOperation("拉取商家订单列表")
     @GetMapping("")
-    Result<Page<ConsumerOrderItemDTO>> getSellerOrderList(OrderQuery query, Pageable pageable);
+    Result<Page<ConsumerOrderItemDTO>> getSellerOrderList(@RequestBody OrderQuery query,
+                                                          @RequestParam("page") Long page,
+                                                          @RequestParam("size")Long size);
 
     /**
      * 获取商家新订单
@@ -52,9 +53,8 @@ public interface OrderSellerApi {
     Result<ConsumerOrderDetailDTO> getSellerOrderDetail(@PathVariable("orderId") Long orderId);
 
     class Fallback implements OrderSellerApi{
-
         @Override
-        public Result<Page<ConsumerOrderItemDTO>> getSellerOrderList(OrderQuery query, Pageable pageable) {
+        public Result<Page<ConsumerOrderItemDTO>> getSellerOrderList(OrderQuery query, Long page, Long size) {
             return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 卖家订单服务 获取订单列表接口失败");
         }
 

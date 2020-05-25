@@ -1,5 +1,6 @@
 package wang.ismy.blb.aggregation.api;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,14 +9,20 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import wang.ismy.blb.aggregation.client.*;
+import wang.ismy.blb.aggregation.client.order.OrderSellerApiClient;
 import wang.ismy.blb.api.auth.User;
 import wang.ismy.blb.api.auth.UserTypeEnum;
+import wang.ismy.blb.api.order.pojo.dto.NewOrderItemDTO;
+import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
+import wang.ismy.blb.api.product.pojo.dto.ProductCreateDTO;
+import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
 import wang.ismy.blb.api.seller.pojo.SellerInfoDTO;
 import wang.ismy.blb.api.seller.pojo.dto.LoginResultDTO;
 import wang.ismy.blb.api.seller.pojo.dto.SellerRegisterResultDTO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopCategoryDTO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopCreateDTO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopInfoDTO;
+import wang.ismy.blb.api.shop.pojo.dto.ShopInfoUpdateDTO;
 import wang.ismy.blb.common.SystemConstant;
 import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.JsonUtils;
@@ -24,8 +31,7 @@ import wang.ismy.blb.common.util.MockUtils;
 import static org.junit.jupiter.api.Assertions.*;
 
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -37,18 +43,30 @@ class SellerAggApiTest {
     UploadApiClient uploadApiClient;
     ShopCategoryApiClient shopCategoryApiClient;
     AuthApiClient authApiClient;
+    OrderSellerApiClient orderSellerApiClient;
+    ProductCategoryApiClient productCategoryApiClient;
+    ProductSellerApiClient productSellerApiClient;
+    ProductApiClient productApiClient;
     @BeforeEach
     void setup (){
         sellerApiClient = mock(SellerApiClient.class);
         shopApiClient = mock(ShopApiClient.class);
         shopCategoryApiClient = mock(ShopCategoryApiClient.class);
         authApiClient = mock(AuthApiClient.class);
+        orderSellerApiClient = mock(OrderSellerApiClient.class);
+        productCategoryApiClient = mock(ProductCategoryApiClient.class);
+        productSellerApiClient = mock(ProductSellerApiClient.class);
+        productApiClient = mock(ProductApiClient.class);
         mockMvc = MockMvcBuilders.standaloneSetup(
                 new SellerAggApi(sellerApiClient,
                         shopApiClient,
                         uploadApiClient,
                         shopCategoryApiClient,
-                        authApiClient
+                        authApiClient,
+                        orderSellerApiClient,
+                        productCategoryApiClient,
+                        productSellerApiClient,
+                        productApiClient
                         )
         ).build();
     }
@@ -132,5 +150,140 @@ class SellerAggApiTest {
             .header(SystemConstant.TOKEN,token)
         )
                 .andExpect(content().json(JsonUtils.parse(Result.success(shopInfoDTO))));
+    }
+
+    @Test
+    void getNewOrderList () throws Exception {
+        var list = MockUtils.create(NewOrderItemDTO.class,10);
+        when(orderSellerApiClient.getNewOrderList()).thenReturn(Result.success(list));
+        mockMvc.perform(get("/shop/order/new")
+        )
+                .andExpect(content().json(JsonUtils.parse(Result.success(list))));
+    }
+
+    @Test
+    void addCategory () throws Exception {
+        String token = "token";
+        var dto = MockUtils.create(ProductCategoryDTO.class);
+        when(productCategoryApiClient.addCategory(eq(token),eq(dto))).thenReturn(Result.success());
+
+        mockMvc.perform(post("/shop/category")
+                .header(SystemConstant.TOKEN,token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtils.parse(dto))
+        )
+                .andExpect(content().json(JsonUtils.parse(Result.success())));
+    }
+
+    @Test
+    void updateCategory() throws Exception {
+        String token = "token";
+        Long categoryId =1L;
+        var dto = MockUtils.create(ProductCategoryDTO.class);
+        when(productCategoryApiClient.updateCategory(eq(token),argThat(d->d.getCategoryId().equals(categoryId)))).thenReturn(Result.success());
+        mockMvc.perform(put("/shop/category/"+categoryId)
+                .header(SystemConstant.TOKEN,token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtils.parse(dto))
+        )
+                .andExpect(content().json(JsonUtils.parse(Result.success())));
+    }
+
+    @Test
+    void deleteCategory() throws Exception {
+        String token = "token";
+        Long categoryId =1L;
+        when(productCategoryApiClient.deleteCategory(eq(token),eq(categoryId))).thenReturn(Result.success());
+
+        mockMvc.perform(delete("/shop/category/"+categoryId)
+                .header(SystemConstant.TOKEN,token)
+        )
+                .andExpect(content().json(JsonUtils.parse(Result.success())));
+    }
+
+    @Test
+    void getProduct() throws Exception {
+        Long categoryId = 1L;
+        var list = MockUtils.create(ShopProductDTO.class,10);
+        when(productCategoryApiClient.getProductByCategory(eq(categoryId))).thenReturn(Result.success(list));
+
+        mockMvc.perform(get("/shop/category/"+categoryId+"/product")
+        )
+                .andExpect(content().json(JsonUtils.parse(Result.success(list))));
+    }
+
+    @Test
+    void addProduct() throws Exception {
+        String token ="token";
+        Long categoryId = 1L;
+        var dto = MockUtils.create(ProductCreateDTO.class);
+        when(productSellerApiClient.addProduct(eq(token),eq(dto))).thenReturn(Result.success());
+
+        mockMvc.perform(post("/shop/category/"+categoryId+"/product")
+                .header(SystemConstant.TOKEN,token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtils.parse(dto))
+        )
+                .andExpect(content().json(JsonUtils.parse(Result.success())));
+    }
+
+    @Test
+    void updateProduct() throws Exception {
+        String token ="token";
+        Long categoryId = 1L;
+        var dto = MockUtils.create(ProductCreateDTO.class);
+        when(productSellerApiClient.updateProduct(eq(token),eq(dto.getProductId()),eq(dto))).thenReturn(Result.success());
+
+        mockMvc.perform(put("/shop/category/"+categoryId+"/product")
+                .header(SystemConstant.TOKEN,token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtils.parse(dto))
+        )
+                .andExpect(content().json(JsonUtils.parse(Result.success())));
+    }
+
+    @Test void updateStockFull() throws Exception {
+        Long categoryId = 1L;
+        Long productId = 1L;
+        Long specId = 1L;
+        when(productApiClient.updateStock(eq(productId),eq(specId),eq(9999L))).thenReturn(Result.success());
+
+        mockMvc.perform(put("/shop/category/"+categoryId+"/product/"+productId+"/"+specId+"/stock")
+                .param("type","full")
+        )
+                .andExpect(content().json(JsonUtils.parse(Result.success())));
+    }
+
+    @Test void updateStockEmpty() throws Exception {
+        Long categoryId = 1L;
+        Long productId = 1L;
+        Long specId = 1L;
+        when(productApiClient.updateStock(eq(productId),eq(specId),eq(0L))).thenReturn(Result.success());
+
+        mockMvc.perform(put("/shop/category/"+categoryId+"/product/"+productId+"/"+specId+"/stock")
+                .param("type","empty")
+        )
+                .andExpect(content().json(JsonUtils.parse(Result.success())));
+    }
+
+    @Test void updateShopInfo() throws Exception {
+        String token = "token";
+        User user = new User();
+        user.setUserId(1L);
+        when(authApiClient.valid(eq(token))).thenReturn(Result.success(user));
+
+        ShopInfoDTO shopInfoDTO = new ShopInfoDTO();
+        shopInfoDTO.setShopId(1L);
+        when(shopApiClient.getShopBySeller(eq(1L))).thenReturn(Result.success(shopInfoDTO));
+
+        var dto = MockUtils.create(ShopInfoUpdateDTO.class);
+
+        when(shopApiClient.updateShopInfo(eq(1L),eq(dto))).thenReturn(Result.success());
+
+        mockMvc.perform(put("/shop/info")
+            .header(SystemConstant.TOKEN,token)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtils.parse(dto))
+        ).andExpect(content().json(JsonUtils.parse(Result.success())));
     }
 }

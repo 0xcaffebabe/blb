@@ -9,6 +9,7 @@ import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCreateDTO;
 import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
 import wang.ismy.blb.common.SystemConstant;
+import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Page;
 import wang.ismy.blb.common.result.Pageable;
 import wang.ismy.blb.common.result.Result;
@@ -84,5 +85,31 @@ public interface ProductSellerApi {
     @GetMapping("category/list")
     Result<List<ProductCategoryDTO>> getCategoryList(@RequestHeader(SystemConstant.TOKEN) String token);
 
+    class Fallback implements ProductSellerApi{
 
+        @Override
+        public Result<Void> addProduct(String token, ProductCreateDTO productCreateDTO) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商品卖家服务 增加商品接口失败");
+        }
+
+        @Override
+        public Result<Void> updateProduct(String token, Long productId, ProductCreateDTO productCreateDTO) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商品卖家服务 更新商品接口失败");
+        }
+
+        @Override
+        public Result<Void> deleteProduct(String token, Long productId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商品卖家服务 删除商品接口失败");
+        }
+
+        @Override
+        public Result<Page<ShopProductDTO>> getProductList(String token, Pageable pageable) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商品卖家服务 获取商品列表接口失败");
+        }
+
+        @Override
+        public Result<List<ProductCategoryDTO>> getCategoryList(String token) {
+            return null;
+        }
+    }
 }

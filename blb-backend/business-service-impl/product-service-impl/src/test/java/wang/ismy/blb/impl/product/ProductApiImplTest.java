@@ -9,8 +9,10 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import wang.ismy.blb.api.product.pojo.dto.CartProductGetDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductSpecDTO;
+import wang.ismy.blb.common.SystemConstant;
 import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Result;
+import wang.ismy.blb.common.util.JsonUtils;
 import wang.ismy.blb.common.util.MockUtils;
 import wang.ismy.blb.impl.product.api.ProductApiImpl;
 import wang.ismy.blb.impl.product.service.ProductService;
@@ -110,5 +112,20 @@ class ProductApiImplTest {
         mockMvc.perform(get("/v1/api/spec/"+specId))
                 .andExpect(status().isOk())
                 .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.failure(ResultCode.PRODUCT_SPEC_NOT_EXIST))));
+    }
+
+    @Test void updateStock() throws Exception{
+        Long specId = 1L;
+        String token = "token";
+        Long stock = 100L;
+        Long productId = 1L;
+
+        mockMvc.perform(put("/v1/api/"+productId+"/" + specId+"/stock")
+            .header(SystemConstant.TOKEN,token)
+                .param("stock",stock.toString())
+        )
+                .andExpect(status().isOk())
+                .andExpect(content().json(JsonUtils.parse(Result.success())));
+        verify(productService).updateStock(eq(token),eq(specId),eq(stock));
     }
 }

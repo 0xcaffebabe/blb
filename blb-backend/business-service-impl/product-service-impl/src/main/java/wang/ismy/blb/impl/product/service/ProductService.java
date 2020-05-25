@@ -39,4 +39,13 @@ public interface ProductService {
      * @return
      */
     ProductSpecDTO getProductSpec(Long specId);
+
+
+    /**
+     * 更新库存
+     * @param token
+     * @param specId
+     * @param stock
+     */
+    void updateStock(String token,Long specId,Long stock);
 }

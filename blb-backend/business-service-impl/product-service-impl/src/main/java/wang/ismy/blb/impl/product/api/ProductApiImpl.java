@@ -7,8 +7,10 @@ import wang.ismy.blb.api.product.ProductApi;
 import wang.ismy.blb.api.product.pojo.dto.CartProductGetDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductSpecDTO;
+import wang.ismy.blb.common.SystemConstant;
 import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Result;
+import wang.ismy.blb.common.util.CurrentRequestUtils;
 import wang.ismy.blb.impl.product.service.ProductService;
 
 import java.util.List;
@@ -21,7 +23,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductApiImpl implements ProductApi {
 
-    private ProductService productService;
+    private final ProductService productService;
 
     @Override
     public Result<ProductDTO> getProduct(Long productId) {
@@ -56,5 +58,12 @@ public class ProductApiImpl implements ProductApi {
             return Result.failure(ResultCode.PRODUCT_SPEC_NOT_EXIST);
         }
         return Result.success(spec);
+    }
+
+    @Override
+    public Result<Void> updateStock(Long productId, Long specId, Long stock) {
+        String token = CurrentRequestUtils.getHeader(SystemConstant.TOKEN);
+        productService.updateStock(token,specId,stock);
+        return Result.success();
     }
 }

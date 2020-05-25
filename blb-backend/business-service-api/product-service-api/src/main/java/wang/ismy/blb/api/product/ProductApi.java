@@ -63,6 +63,20 @@ public interface ProductApi {
     @GetMapping("spec/{specId}")
     Result<ProductSpecDTO> getProductSpec(@PathVariable("specId") Long specId);
 
+    /**
+     * 更新库存
+     * @param productId
+     * @param specId
+     * @param stock
+     * @return
+     */
+    @ApiOperation("更新库存")
+    @PutMapping("{productId}/{specId}/stock")
+    Result<Void> updateStock(@PathVariable("productId") Long productId,
+                             @PathVariable("specId") Long specId,
+                             @RequestParam("stock") Long stock
+                             );
+
     class Fallback implements ProductApi{
 
         @Override
@@ -83,6 +97,11 @@ public interface ProductApi {
         @Override
         public Result<ProductSpecDTO> getProductSpec(Long specId) {
             return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商品服务 获取商品规格接口失败");
+        }
+
+        @Override
+        public Result<Void> updateStock(Long productId, Long specId, Long stock) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 商品服务 更新库存接口失败");
         }
     }
 }

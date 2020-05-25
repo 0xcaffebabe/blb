@@ -6,9 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
+import wang.ismy.blb.api.product.pojo.ProductSpecDO;
 import wang.ismy.blb.api.product.pojo.dto.CartProductGetDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductDTO;
+import wang.ismy.blb.impl.product.repository.ProductSpecRepository;
 
+import javax.transaction.Transactional;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,6 +24,9 @@ class ProductServiceImplTest {
 
     @Autowired
     ProductService productService;
+
+    @Autowired
+    private ProductSpecRepository specRepository;
 
     @Test void testGetProduct(){
         ProductDTO product = productService.getProduct(1L);
@@ -97,5 +103,12 @@ class ProductServiceImplTest {
 
         productSpec = productService.getProductSpec(60L);
         assertNull(productSpec);
+    }
+
+    @Transactional
+    @Test void updateStock(){
+        productService.updateStock("to",1L,999L);
+        ProductSpecDO spec = specRepository.findById(1L).orElseThrow();
+        assertEquals(999L,spec.getStock());
     }
 }
