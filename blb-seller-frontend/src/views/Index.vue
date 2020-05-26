@@ -73,9 +73,13 @@
 </template>
 
 <script>
+import shopService from '../service/ShopService'
 export default {
   data () {
     return {}
+  },
+  created () {
+    shopService.getShopCategory()
   }
 }
 </script>

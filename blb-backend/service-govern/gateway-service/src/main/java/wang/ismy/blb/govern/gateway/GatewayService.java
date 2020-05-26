@@ -27,6 +27,8 @@ public class GatewayService {
         return builder.routes()
                 .route("consumer-router", r -> r.header("TYPE","CONSUMER")
                         .uri("lb://consumer-aggregation-service"))
+                .route("seller-router", r -> r.header("TYPE","SELLER")
+                        .uri("lb://seller-aggregation-service"))
                 .build();
     }
 

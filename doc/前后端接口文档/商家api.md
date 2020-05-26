@@ -34,7 +34,8 @@ password | 密码 |
 ```json
 {
   "greeting": "注册欢迎语",
-  "sellerNumber": 3 // 当前商家数量
+   "token":"xxx",
+    "status": 0
 }
 ```
 
@@ -70,7 +71,7 @@ file: 文件内容
 ## 获取店铺分类
 
 - 请求方式：get
-- url：/category/:level
+- url：/shop/category
 - 请求参数
 
 参数名     | 参数说明   | 备注
@@ -389,13 +390,14 @@ productId | 商品ID
 ## 更新库存
 
 - 方式：PUT
-- url：/shop/category/:id/product/:productId/stock
+- url：/shop/category/:id/product/:productId/:specId/stock
 - 请求参数
 
 参数名     | 参数说明   | 备注
 ------- | ------ | -----
-id | 目录ID
-productId | 商品ID
+id | 目录ID|
+productId | 商品ID|
+specId | 分类ID |
 type | 更新库存的类型 | full或empty
 
 ## 更新店铺信息

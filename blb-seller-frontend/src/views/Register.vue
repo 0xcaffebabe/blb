@@ -28,9 +28,8 @@
                     @change="handleChange"></el-cascader>
                 </el-form-item>
                  <el-form-item label="门店地址" prop="name">
-                  <el-input v-model="registerForm.name"></el-input>
-                  <el-amap class="amap-box" :vid="'amap-vue'" :zoom="10" :center="[117.5,24]">
-                    <el-amap-marker vid="component-marker" :position="[117.5,24]"></el-amap-marker>
+                  <el-input v-model="registerForm.shopAddress"></el-input>
+                  <el-amap class="amap-box" :vid="'amap-vue'" :zoom="10" :events="mapEvents" :plugin="plugin">
                   </el-amap>
                 </el-form-item>
               </el-form>
@@ -46,8 +45,8 @@
                 <el-form-item label="店铺分类" prop="name">
                   <el-cascader
                     v-model="value"
-                    :options="options"
-                    :props="{ expandTrigger: 'hover' }"
+                    :options="categoryList"
+                    :props="{ expandTrigger: 'hover', value: 'categoryId', label: 'categoryName', children: 'subCategoryList' }"
                     @change="handleChange"></el-cascader>
                 </el-form-item>
                 <el-form-item label="店铺logo" prop="name">
@@ -62,22 +61,29 @@
                  </el-upload>
                 </el-form-item>
                  <el-form-item label="店铺简介" prop="name">
-                  <el-input v-model="registerForm.name"></el-input>
+                  <el-input v-model="registerForm.name" type="textarea"></el-input>
                 </el-form-item>
                  <el-form-item label="店铺slogan" prop="name">
                   <el-input v-model="registerForm.name"></el-input>
                 </el-form-item>
                  <el-form-item label="营业时间" prop="name">
-                  <el-input v-model="registerForm.name"></el-input>
+                  <el-time-picker
+                    is-range
+                    v-model="registerForm.bussinessHour"
+                    range-separator="至"
+                    start-placeholder="开始时间"
+                    end-placeholder="结束时间"
+                    placeholder="选择时间范围">
+                  </el-time-picker>
                 </el-form-item>
                  <el-form-item label="店铺联系电话" prop="name">
                   <el-input v-model="registerForm.name"></el-input>
                 </el-form-item>
                  <el-form-item label="配送费" prop="name">
-                  <el-input v-model="registerForm.name"></el-input>
+                  <el-input-number v-model="registerForm.name" size="medium"></el-input-number>
                 </el-form-item>
                  <el-form-item label="起送价" prop="name">
-                  <el-input v-model="registerForm.name"></el-input>
+                  <el-input-number v-model="registerForm.name" size="medium"></el-input-number>
                 </el-form-item>
                 <el-form-item label="营业执照" prop="name">
                  <el-upload
@@ -110,30 +116,77 @@
 </template>
 
 <script>
+import shopService from '../service/ShopService'
 export default {
   data () {
     return {
-      registerForm: {},
+      registerForm: {
+        shopName: '',
+        shopAddress: '',
+        categoryId: -1,
+        shopLogo: '',
+        shopDesc: '',
+        shopSlogan: '',
+        bussinessHour: '',
+        phone: '',
+        deliveryFee: '',
+        startingPrice: '',
+        businessLicense: '',
+        foodServiceLicense: ''
+      },
       registerFormRules: [],
-      options: [
-        {
-          value: '中国',
-          label: '中国',
-          children: [
-            {
-              value: '福建',
-              label: '福建',
-              children: [
-                {
-                  value: '漳州', label: '漳州'
-                }
-              ]
+      categoryList: [],
+      fixedSteps: false,
+      mapEvents: {
+        click (e) {
+          const { lng, lat } = e.lnglat
+          this.lng = lng
+          this.lat = lat
+
+          // 这里通过高德 SDK 完成。
+          const geocoder = new AMap.Geocoder({
+            radius: 1000,
+            extensions: 'all'
+          })
+          geocoder.getAddress([lng, lat], (status, result) => {
+            if (status === 'complete' && result.info === 'OK') {
+              if (result && result.regeocode) {
+                this.registerForm.shopAddress = result.regeocode.formattedAddress
+              }
             }
-          ]
+          })
         }
-      ],
-      fixedSteps: false
+      },
+      plugin: [{
+        pName: 'Geolocation',
+        events: {
+          init (o) {
+            // o 是高德地图定位插件实例
+            o.getCurrentPosition((status, result) => {
+              if (result && result.position) {
+                self.lng = result.position.lng
+                self.lat = result.position.lat
+                self.center = [self.lng, self.lat]
+                self.loaded = true
+                self.$nextTick()
+              }
+            })
+          }
+        }
+      }]
     }
+  },
+  methods: {
+    async getCategoryList () {
+      try {
+        this.categoryList = await shopService.getShopCategory()
+      } catch (e) {
+        this.$message.error(e.message)
+      }
+    }
+  },
+  created () {
+    this.getCategoryList()
   },
   mounted () {
     // const steps = document.querySelector('.steps-wrapper')

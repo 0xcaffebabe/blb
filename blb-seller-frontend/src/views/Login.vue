@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import sellerService from '../service/SellerService'
+import shopService from '../service/ShopService'
 export default {
   data () {
     return {
@@ -26,9 +28,21 @@ export default {
     }
   },
   methods: {
-    login () {
+    async login () {
       if (this.username && this.password) {
-        this.$message.success('登录成功')
+        try {
+          const data = await sellerService.login(this.username, this.password)
+          this.$message.success(data.greeting)
+          if (await shopService.hasShop()) {
+            this.$router.push('/index')
+          } else {
+            this.$router.push('/register')
+          }
+        } catch (e) {
+          this.$message.error(e.message)
+        }
+      } else {
+        this.$message.error('请将登录信息填写完整')
       }
     }
   }
