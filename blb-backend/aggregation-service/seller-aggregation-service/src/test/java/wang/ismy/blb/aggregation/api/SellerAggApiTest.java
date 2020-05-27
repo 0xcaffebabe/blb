@@ -286,4 +286,17 @@ class SellerAggApiTest {
                 .content(JsonUtils.parse(dto))
         ).andExpect(content().json(JsonUtils.parse(Result.success())));
     }
+
+    @Test void getSellerInfo() throws Exception {
+        String token = "toiken";
+        User user = new User();
+        user.setUserId(1L);
+        when(authApiClient.valid(eq(token))).thenReturn(Result.success(user));
+        var dto = MockUtils.create(SellerInfoDTO.class);
+        when(sellerApiClient.getSellerInfo(eq(1L))).thenReturn(Result.success(dto));
+        mockMvc.perform(get("/seller/info")
+                .header(SystemConstant.TOKEN,token)
+                .contentType(MediaType.APPLICATION_JSON)
+        ).andExpect(content().json(JsonUtils.parse(Result.success(dto))));
+    }
 }

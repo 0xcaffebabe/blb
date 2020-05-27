@@ -15,6 +15,7 @@ import wang.ismy.blb.api.order.pojo.dto.NewOrderItemDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCreateDTO;
 import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
+import wang.ismy.blb.api.seller.pojo.SellerInfoDTO;
 import wang.ismy.blb.api.seller.pojo.dto.LoginResultDTO;
 import wang.ismy.blb.api.seller.pojo.dto.SellerCreateDTO;
 import wang.ismy.blb.api.seller.pojo.dto.SellerRegisterResultDTO;
@@ -195,5 +196,18 @@ public class SellerAggApi {
             throw new BlbException("调用商品服务失败");
         }
         return shopApiClient.updateShopInfo(shopRes.getData().getShopId(),shopInfoUpdateDTO);
+    }
+
+    @ApiOperation("获取商家信息")
+    @GetMapping("seller/info")
+    @NeedLogin
+    public Result<SellerInfoDTO> getSellerInfo(){
+        String token = CurrentRequestUtils.getHeader(SystemConstant.TOKEN);
+        var authRes = authApiClient.valid(token);
+        if (!authRes.getSuccess()){
+            log.warn("调用认证服务失败:{}",authRes);
+            throw new BlbException("调用认证服务失败");
+        }
+        return sellerApiClient.getSellerInfo(authRes.getData().getUserId());
     }
 }

@@ -8,5 +8,14 @@ class SellerService {
     window.localStorage.setItem('token', data.data.token)
     return data.data
   }
+
+  async isLogin () {
+    const token = window.localStorage.getItem('token')
+    if (token) {
+      const data = await repository.getSellerInfo()
+      return data.success
+    }
+    return false
+  }
 }
 export default new SellerService()

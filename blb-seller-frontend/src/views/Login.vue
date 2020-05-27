@@ -27,22 +27,33 @@ export default {
       agree: true
     }
   },
+  created () {
+    this.isLogin()
+  },
   methods: {
     async login () {
       if (this.username && this.password) {
         try {
           const data = await sellerService.login(this.username, this.password)
           this.$message.success(data.greeting)
-          if (await shopService.hasShop()) {
-            this.$router.push('/index')
-          } else {
-            this.$router.push('/register')
-          }
+          this.redirectPage()
         } catch (e) {
           this.$message.error(e.message)
         }
       } else {
         this.$message.error('请将登录信息填写完整')
+      }
+    },
+    async redirectPage () {
+      if (await shopService.hasShop()) {
+        this.$router.push('/index')
+      } else {
+        this.$router.push('/register')
+      }
+    },
+    async isLogin () {
+      if (await sellerService.isLogin()) {
+        this.redirectPage()
       }
     }
   }

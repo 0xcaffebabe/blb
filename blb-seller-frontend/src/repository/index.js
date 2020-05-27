@@ -26,5 +26,25 @@ class Repository {
     const data = await axios.get('/shop/info')
     return data.data
   }
+
+  async getSellerInfo () {
+    const data = await axios.get('/seller/info')
+    return data.data
+  }
+
+  async upload (fromData) {
+    const data = await axios({
+      method: 'post',
+      url: '/image',
+      headers: { 'Content-Type': 'multipart/form-data' },
+      data: fromData
+    })
+    return data.data
+  }
+
+  async registerShop (params) {
+    const data = await axios.post('/shop/register', params)
+    return data.data
+  }
 }
 export default new Repository()

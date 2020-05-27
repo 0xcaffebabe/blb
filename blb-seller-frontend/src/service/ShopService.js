@@ -15,5 +15,31 @@ class ShopService {
     }
     return false
   }
+
+  async upload (fileList) {
+    if (!fileList || fileList.length === 0) {
+      throw new Error('上传头像失败:没有选择图片')
+    }
+    const formData = new FormData()
+    formData.append('file', fileList[0])
+    const data = await repository.upload(formData)
+    if (!data.success) {
+      throw new Error('上传失败:' + data.msg)
+    }
+    return data.data
+  }
+
+  async registerShop (params) {
+    params = JSON.parse(JSON.stringify(params))
+    const startHour = new Date(params.bussinessHour[0])
+    const endHour = new Date(params.bussinessHour[1])
+    params.bussinessHour = startHour.getHours() + ':' + startHour.getMinutes() + '-' + endHour.getHours() + ':' + endHour.getMinutes()
+    params.categoryId = params.categoryId[params.categoryId.length - 1]
+    const data = await repository.registerShop(params)
+    if (!data.success) {
+      throw new Error('注册店铺失败:' + data.msg)
+    }
+    return data.data
+  }
 }
 export default new ShopService()

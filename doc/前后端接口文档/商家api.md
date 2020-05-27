@@ -417,3 +417,8 @@ type | 更新库存的类型 | full或empty
   "startingPrice": 15
 }
 ```
+
+## 获取商家信息
+
+- GET
+- url：/seller/info
