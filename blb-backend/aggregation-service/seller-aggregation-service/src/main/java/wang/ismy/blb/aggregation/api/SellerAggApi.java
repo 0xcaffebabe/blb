@@ -14,6 +14,8 @@ import wang.ismy.blb.aggregation.client.order.OrderSellerApiClient;
 import wang.ismy.blb.api.auth.UserTypeEnum;
 import wang.ismy.blb.api.order.enums.OrderStatusEnum;
 import wang.ismy.blb.api.order.pojo.dto.NewOrderItemDTO;
+import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderDetailDTO;
+import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderItemDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCreateDTO;
 import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
@@ -28,6 +30,8 @@ import wang.ismy.blb.api.shop.pojo.dto.ShopInfoUpdateDTO;
 import wang.ismy.blb.common.BlbException;
 import wang.ismy.blb.common.SystemConstant;
 import wang.ismy.blb.common.enums.ResultCode;
+import wang.ismy.blb.common.result.Page;
+import wang.ismy.blb.common.result.Pageable;
 import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.CurrentRequestUtils;
 
@@ -154,6 +158,18 @@ public class SellerAggApi {
     @GetMapping("shop/order/new")
     public Result<List<NewOrderItemDTO>> getNewOrderList(){
         return orderSellerApiClient.getNewOrderList();
+    }
+
+    @ApiOperation("获取订单列表")
+    @GetMapping("shop/order/list")
+    public Result<Page<ConsumerOrderItemDTO>> getOrderList(Pageable pageable){
+        return orderSellerApiClient.getSellerOrderList("","",pageable.getPage(),pageable.getSize());
+    }
+
+    @ApiOperation("获取订单详情")
+    @GetMapping("shop/order/{orderId}")
+    public Result<ConsumerOrderDetailDTO> getOrderDetail(@PathVariable Long orderId){
+        return orderSellerApiClient.getSellerOrderDetail(orderId);
     }
 
     @ApiOperation("新增商品分类")

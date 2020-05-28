@@ -17,6 +17,8 @@ import wang.ismy.blb.api.auth.UserTypeEnum;
 import wang.ismy.blb.api.order.enums.OrderStatusEnum;
 import wang.ismy.blb.api.order.pojo.dto.NewOrderItemDTO;
 import wang.ismy.blb.api.order.pojo.dto.OrderResultDTO;
+import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderDetailDTO;
+import wang.ismy.blb.api.order.pojo.dto.consumer.ConsumerOrderItemDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCreateDTO;
 import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
@@ -28,6 +30,7 @@ import wang.ismy.blb.api.shop.pojo.dto.ShopCreateDTO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopInfoDTO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopInfoUpdateDTO;
 import wang.ismy.blb.common.SystemConstant;
+import wang.ismy.blb.common.result.Page;
 import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.JsonUtils;
 import wang.ismy.blb.common.util.MockUtils;
@@ -327,5 +330,24 @@ class SellerAggApiTest {
         ).andExpect(content().json(JsonUtils.parse(Result.success())));
 
         verify(orderApiClient).updateOrderStatus(eq(orderId),eq(OrderStatusEnum.PROCESSED.getCode()));
+    }
+
+    @Test void getOrderList() throws Exception {
+        var list = MockUtils.create(ConsumerOrderItemDTO.class,10);
+        var page = new Page<>(10L, list);
+        when(orderSellerApiClient.getSellerOrderList(anyString(),anyString(),eq(1L),eq(10L))).thenReturn(Result.success(page));
+        mockMvc.perform(get("/shop/order/list")
+                .param("page","1")
+                .param("size","10")
+        ).andExpect(content().json(JsonUtils.parse(Result.success(page))));
+    }
+
+    @Test void getOrderDetail () throws Exception {
+        Long orderId = 1L;
+        var dto = MockUtils.create(ConsumerOrderDetailDTO.class);
+        when(orderSellerApiClient.getSellerOrderDetail(eq(orderId))).thenReturn(Result.success(dto));
+
+        mockMvc.perform(get("/shop/order/"+orderId)
+        ).andExpect(content().json(JsonUtils.parse(Result.success(dto))));
     }
 }

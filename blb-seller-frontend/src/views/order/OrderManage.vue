@@ -30,25 +30,23 @@
         </el-col>
       </el-row>
       <el-table
-    :data="tableData"
+    :data="orderList"
     stripe
-    style="width: 100%">
+    style="width: 100%"
+    @expand-change="handleExpandChange"
+    >
     <el-table-column type="expand">
-      <template>
-        <order-item></order-item>
+      <template slot-scope="scope">
+        <order-item :order="orderDetails[scope.row.orderId]"></order-item>
       </template>
     </el-table-column>
     <el-table-column
       label="订单 ID"
-      prop="id">
-    </el-table-column>
-    <el-table-column
-      label="订单名称"
-      prop="name">
+      prop="orderId">
     </el-table-column>
     <el-table-column
       label="总金额"
-      prop="amount">
+      prop="orderAmount">
     </el-table-column>
     <el-table-column
       label="订单状态"
@@ -65,6 +63,7 @@
 
 <script>
 import OrderItem from '../../components/order/OrderItem'
+import OrderService from '../../service/OrderService'
 export default {
   data () {
     return {
@@ -72,11 +71,41 @@ export default {
         { id: 1 },
         { id: 2 },
         { id: 3 }
-      ]
+      ],
+      orderList: [],
+      orderDetails: {},
+      page: 1,
+      size: 5,
+      total: 0
     }
   },
   components: {
     OrderItem
+  },
+  methods: {
+    async getOrderList () {
+      try {
+        const data = await OrderService.getOrderList({ page: this.page, size: this.size })
+        this.total = data.total
+        this.orderList = data.data
+      } catch (e) {
+        this.$message.error(e.message)
+      }
+    },
+    async getOrderDetail (orderId) {
+      try {
+        this.orderDetails[orderId] = await OrderService.getOrderDetail(orderId)
+        console.log(this.orderDetails)
+      } catch (e) {
+        this.$message.error(e.message)
+      }
+    },
+    handleExpandChange (row) {
+      this.getOrderDetail(row.orderId)
+    }
+  },
+  created () {
+    this.getOrderList()
   }
 }
 </script>

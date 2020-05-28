@@ -56,5 +56,15 @@ class Repository {
     const data = await axios.put(`/shop/order/${orderId}/out`)
     return data.data
   }
+
+  async getOrderList (params) {
+    const data = await axios.get(`/shop/order/list?page=${params.page}&size=${params.size}`)
+    return data.data
+  }
+
+  async getOrderDetail (orderId) {
+    const data = await axios.get('/shop/order/' + orderId)
+    return data.data
+  }
 }
 export default new Repository()
