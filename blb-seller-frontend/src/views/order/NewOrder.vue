@@ -2,7 +2,12 @@
   <div>
     <el-row :gutter="20">
       <el-col :span="16">
-        <order-item></order-item>
+        <order-item
+        :order="item"
+        v-for="item in orderList"
+        :key="item.orderId"
+        @refreshOrder="getNewOrder"
+        />
       </el-col>
       <el-col :span="8">
         <el-card class="overview">
@@ -25,35 +30,28 @@
 
 <script>
 import OrderItem from '../../components/order/OrderItem'
+import orderService from '../../service/OrderService'
 export default {
   data () {
     return {
       expand: '1',
-      tableData: [{
-        name: '黄焖鸡',
-        num: 1,
-        price: 18.0,
-        spec: '大份'
-      }, {
-        name: '黄焖鸭',
-        num: 1,
-        price: 13.0,
-        spec: '正常规格'
-      }, {
-        name: '黄焖猪蹄',
-        num: 2,
-        price: 13.0,
-        spec: '正常规格'
-      }, {
-        name: '菊花茶',
-        num: 1,
-        price: 6.0,
-        spec: '大份'
-      }]
+      orderList: []
     }
   },
   components: {
     OrderItem
+  },
+  methods: {
+    async getNewOrder () {
+      try {
+        this.orderList = await orderService.getNewOrderList()
+      } catch (e) {
+        this.$message.error(e.message)
+      }
+    }
+  },
+  created () {
+    this.getNewOrder()
   }
 }
 </script>

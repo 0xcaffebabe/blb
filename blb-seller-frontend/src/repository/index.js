@@ -46,5 +46,15 @@ class Repository {
     const data = await axios.post('/shop/register', params)
     return data.data
   }
+
+  async getNewOrderList () {
+    const data = await axios.get('/shop/order/new')
+    return data.data
+  }
+
+  async dinnerOut (orderId) {
+    const data = await axios.put(`/shop/order/${orderId}/out`)
+    return data.data
+  }
 }
 export default new Repository()

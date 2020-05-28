@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import wang.ismy.blb.aggregation.annotations.NeedLogin;
 import wang.ismy.blb.aggregation.client.*;
+import wang.ismy.blb.aggregation.client.order.OrderApiClient;
 import wang.ismy.blb.aggregation.client.order.OrderSellerApiClient;
 import wang.ismy.blb.api.auth.UserTypeEnum;
+import wang.ismy.blb.api.order.enums.OrderStatusEnum;
 import wang.ismy.blb.api.order.pojo.dto.NewOrderItemDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCreateDTO;
@@ -25,6 +27,7 @@ import wang.ismy.blb.api.shop.pojo.dto.ShopInfoDTO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopInfoUpdateDTO;
 import wang.ismy.blb.common.BlbException;
 import wang.ismy.blb.common.SystemConstant;
+import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.CurrentRequestUtils;
 
@@ -46,6 +49,7 @@ public class SellerAggApi {
     private final ShopCategoryApiClient shopCategoryApiClient;
     private final AuthApiClient authApiClient;
     private final OrderSellerApiClient orderSellerApiClient;
+    private final OrderApiClient orderApiClient;
     private final ProductCategoryApiClient productCategoryApiClient;
     private final ProductSellerApiClient productSellerApiClient;
     private final ProductApiClient productApiClient;
@@ -80,6 +84,33 @@ public class SellerAggApi {
             loginRes.getData().setGreeting(registerRes.getData().getGreeting()+",您是本系统第" + registerRes.getData().getSellerNumber()+"位商家");
         }
         return loginRes;
+    }
+
+    @ApiOperation("出餐")
+    @PutMapping("shop/order/{orderId}/out")
+    @NeedLogin
+    public Result<Void> dinnerOut(@PathVariable Long orderId){
+        var authRes = authApiClient.valid(CurrentRequestUtils.getHeader(SystemConstant.TOKEN));
+        if (!authRes.getSuccess()){
+            log.warn("调用认证服务失败：{}",authRes);
+            throw new BlbException("调用认证服务失败");
+        }
+        var shopRes = shopApiClient.getShopBySeller(authRes.getData().getUserId());
+        if (!shopRes.getSuccess()) {
+            log.warn("调用店铺服务失败:{}",shopRes);
+            throw new BlbException("调用店铺服务失败");
+        }
+        var order = orderApiClient.getOrder(orderId);
+        if (order.getSuccess() && order.getData() != null){
+            if (order.getData().getShopId().equals(shopRes.getData().getShopId())){
+                orderApiClient.updateOrderStatus(orderId, OrderStatusEnum.PROCESSED.getCode());
+                return Result.success();
+            }
+        }else {
+            log.warn("获取订单失败:{}",order);
+            throw new BlbException("获取订单失败");
+        }
+        return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR);
     }
 
     @ApiOperation("店铺注册")

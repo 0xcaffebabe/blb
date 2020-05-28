@@ -2,6 +2,7 @@ package wang.ismy.blb.aggregation.api;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.jdi.event.ExceptionEvent;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.BeanUtils;
@@ -9,10 +10,13 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import wang.ismy.blb.aggregation.client.*;
+import wang.ismy.blb.aggregation.client.order.OrderApiClient;
 import wang.ismy.blb.aggregation.client.order.OrderSellerApiClient;
 import wang.ismy.blb.api.auth.User;
 import wang.ismy.blb.api.auth.UserTypeEnum;
+import wang.ismy.blb.api.order.enums.OrderStatusEnum;
 import wang.ismy.blb.api.order.pojo.dto.NewOrderItemDTO;
+import wang.ismy.blb.api.order.pojo.dto.OrderResultDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCategoryDTO;
 import wang.ismy.blb.api.product.pojo.dto.ProductCreateDTO;
 import wang.ismy.blb.api.product.pojo.dto.ShopProductDTO;
@@ -47,6 +51,7 @@ class SellerAggApiTest {
     ProductCategoryApiClient productCategoryApiClient;
     ProductSellerApiClient productSellerApiClient;
     ProductApiClient productApiClient;
+    OrderApiClient orderApiClient;
     @BeforeEach
     void setup (){
         sellerApiClient = mock(SellerApiClient.class);
@@ -57,6 +62,7 @@ class SellerAggApiTest {
         productCategoryApiClient = mock(ProductCategoryApiClient.class);
         productSellerApiClient = mock(ProductSellerApiClient.class);
         productApiClient = mock(ProductApiClient.class);
+        orderApiClient = mock(OrderApiClient.class);
         mockMvc = MockMvcBuilders.standaloneSetup(
                 new SellerAggApi(sellerApiClient,
                         shopApiClient,
@@ -64,6 +70,7 @@ class SellerAggApiTest {
                         shopCategoryApiClient,
                         authApiClient,
                         orderSellerApiClient,
+                        orderApiClient,
                         productCategoryApiClient,
                         productSellerApiClient,
                         productApiClient
@@ -298,5 +305,27 @@ class SellerAggApiTest {
                 .header(SystemConstant.TOKEN,token)
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(content().json(JsonUtils.parse(Result.success(dto))));
+    }
+
+    @Test void dinnerOut () throws Exception {
+        String token = "token";
+        Long orderId = 1L;
+        User user = new User();
+        user.setUserId(1L);
+        when(authApiClient.valid(eq(token))).thenReturn(Result.success(user));
+
+        ShopInfoDTO shopInfoDTO = new ShopInfoDTO();
+        shopInfoDTO.setShopId(1L);
+        when(shopApiClient.getShopBySeller(eq(1L))).thenReturn(Result.success(shopInfoDTO));
+
+        OrderResultDTO orderResultDTO = new OrderResultDTO();
+        orderResultDTO.setShopId(1L);
+        when(orderApiClient.getOrder(eq(1L))).thenReturn(Result.success(orderResultDTO));
+
+        mockMvc.perform(put("/shop/order/"+orderId+"/out")
+                .header(SystemConstant.TOKEN,token)
+        ).andExpect(content().json(JsonUtils.parse(Result.success())));
+
+        verify(orderApiClient).updateOrderStatus(eq(orderId),eq(OrderStatusEnum.PROCESSED.getCode()));
     }
 }
