@@ -89,6 +89,8 @@ class PayServiceImplTest {
         payService.setAliPayService(aliPayService);
         PayResultDTO payResultDTO = new PayResultDTO();
         payResultDTO.setMsg("支付成功");
+        payResultDTO.setStatus(2);
+
         when(aliPayService.getPay(eq(1L))).thenReturn(payResultDTO);
 
         PayStatusDTO status = payService.getPayStatus(1L);
