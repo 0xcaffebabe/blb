@@ -350,4 +350,22 @@ class SellerAggApiTest {
         mockMvc.perform(get("/shop/order/"+orderId)
         ).andExpect(content().json(JsonUtils.parse(Result.success(dto))));
     }
+
+    @Test void getProductCategory() throws Exception{
+        String token = "token";
+        var list = MockUtils.create(ProductCategoryDTO.class,10);
+        User user = new User();
+        user.setUserId(1L);
+        when(authApiClient.valid(eq(token))).thenReturn(Result.success(user));
+
+        ShopInfoDTO shopInfoDTO = new ShopInfoDTO();
+        shopInfoDTO.setShopId(1L);
+        when(shopApiClient.getShopBySeller(eq(1L))).thenReturn(Result.success(shopInfoDTO));
+
+        when(productCategoryApiClient.getCategoryList(eq(1L))).thenReturn(Result.success(list));
+
+        mockMvc.perform(get("/shop/product/category")
+                .header(SystemConstant.TOKEN,token)
+        ).andExpect(content().json(JsonUtils.parse(Result.success(list))));
+    }
 }

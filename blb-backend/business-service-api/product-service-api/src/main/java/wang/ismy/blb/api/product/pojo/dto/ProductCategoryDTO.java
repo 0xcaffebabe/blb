@@ -1,5 +1,7 @@
 package wang.ismy.blb.api.product.pojo.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -14,6 +16,7 @@ import javax.validation.constraints.NotEmpty;
 @ApiModel("商品目录")
 public class ProductCategoryDTO {
     @ApiModelProperty("目录ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long categoryId;
     @ApiModelProperty("目录名称")
     @NotEmpty(message = "商品目录不能为空")

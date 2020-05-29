@@ -154,6 +154,23 @@ public class SellerAggApi {
         return shopApiClient.getShopBySeller(seller.getUserId());
     }
 
+    @ApiOperation("获取店铺商品分类")
+    @GetMapping("shop/product/category")
+    public Result<List<ProductCategoryDTO>> getProductCategory(){
+        var authRes = authApiClient.valid(CurrentRequestUtils.getHeader(SystemConstant.TOKEN));
+        if (!authRes.getSuccess()){
+            log.warn("调用认证服务失败:{}",authRes);
+            throw new BlbException("调用认证服务失败");
+        }
+
+        var shopRes = shopApiClient.getShopBySeller(authRes.getData().getUserId());
+        if (!shopRes.getSuccess()){
+            log.warn("调用店铺服务失败:{}",shopRes);
+            throw new BlbException("调用店铺服务失败");
+        }
+        return productCategoryApiClient.getCategoryList(shopRes.getData().getShopId());
+    }
+
     @ApiOperation("获取新订单列表")
     @GetMapping("shop/order/new")
     public Result<List<NewOrderItemDTO>> getNewOrderList(){

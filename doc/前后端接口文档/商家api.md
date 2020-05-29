@@ -226,7 +226,7 @@ orderId | 订单ID
 ## 获取店铺商品分类
 
 - 方式：get
-- url：/shop/category
+- url：/shop/product/category
 - 响应参数
 
 ```json

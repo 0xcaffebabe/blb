@@ -66,5 +66,25 @@ class Repository {
     const data = await axios.get('/shop/order/' + orderId)
     return data.data
   }
+
+  async getProductCategory () {
+    const data = await axios.get('/shop/product/category')
+    return data.data
+  }
+
+  async getProduct (categoryId) {
+    const data = await axios.get(`/shop/category/${categoryId}/product`)
+    return data.data
+  }
+
+  async updateStock (params, type) {
+    const data = await axios.put(`/shop/category/${params.categoryId}/product/${params.productId}/${params.specId}/stock?type=${type}`)
+    return data.data
+  }
+
+  async addProduct (product) {
+    const data = await axios.post(`/shop/category/${product.categoryId}/product`, product)
+    return data.data
+  }
 }
 export default new Repository()
