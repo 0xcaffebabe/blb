@@ -101,6 +101,11 @@ public class PayServiceImpl implements PayService {
         PayStatusDTO status = new PayStatusDTO();
         status.setStatus(dto.getStatus());
         status.setMsg(dto.getMsg());
+        if (status.getStatus().equals(PayStatusEnum.PROCESSED.getCode())){
+            payDO.setPayStatus(status.getStatus());
+            payRepository.save(payDO);
+            orderApiClient.updatePayStatus(payDO.getOrderId(),status.getStatus());
+        }
         return status;
     }
 }
