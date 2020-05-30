@@ -10,6 +10,7 @@ import Product from '../views/Product'
 import Login from '../views/Login'
 import Register from '../views/Register'
 import Shop from '../views/Shop'
+import Category from '../views/Category'
 Vue.use(VueRouter)
 
 const routes = [
@@ -21,6 +22,7 @@ const routes = [
       { path: 'index', component: Index },
       { path: 'product', component: Product },
       { path: 'shop', component: Shop },
+      { path: 'category', component: Category },
       {
         path: 'order',
         component: Order,

@@ -22,6 +22,22 @@ class ProductService {
     return data.data
   }
 
+  async updateProductCategory (category) {
+    const data = await repository.updateProductCategory(category)
+    if (!data.success) {
+      throw new Error('更新分类失败:' + data.msg)
+    }
+    return true
+  }
+
+  async saveProductCategory (category) {
+    const data = await repository.saveProductCategory(category)
+    if (!data.success) {
+      throw new Error('新增商品分类失败:' + data.msg)
+    }
+    return true
+  }
+
   async getProduct (categoryId) {
     const data = await repository.getProduct(categoryId)
     if (!data.success) {
