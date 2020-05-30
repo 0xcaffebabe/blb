@@ -96,5 +96,10 @@ class Repository {
     const data = await axios.post('/shop/category', category)
     return data.data
   }
+
+  async updateShopInfo (shopInfo) {
+    const data = await axios.put('/shop/info', shopInfo)
+    return data.data
+  }
 }
 export default new Repository()

@@ -16,6 +16,14 @@ class ShopService {
     return false
   }
 
+  async getShopInfo () {
+    const data = await repository.getShop()
+    if (!data.success) {
+      throw new Error('获取店铺信息失败:' + data.msg)
+    }
+    return data.data
+  }
+
   async upload (fileList) {
     if (!fileList || fileList.length === 0) {
       throw new Error('上传头像失败:没有选择图片')
@@ -40,6 +48,22 @@ class ShopService {
       throw new Error('注册店铺失败:' + data.msg)
     }
     return data.data
+  }
+
+  async updateShopInfo (shopInfo) {
+    const data = await repository.updateShopInfo(shopInfo)
+    if (!data.success) {
+      throw new Error('更新店铺信息失败:' + data.msg)
+    }
+    return true
+  }
+
+  getShopBussinessHour (shopInfo) {
+    const s = shopInfo.businessHour.split('-')
+    const startTime = new Date(s[0])
+    const endTime = new Date(s[1])
+    console.log({ startTime, endTime })
+    return { startTime, endTime }
   }
 }
 export default new ShopService()

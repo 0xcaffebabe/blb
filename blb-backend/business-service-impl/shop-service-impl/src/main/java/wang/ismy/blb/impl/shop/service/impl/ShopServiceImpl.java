@@ -126,13 +126,13 @@ public class ShopServiceImpl implements ShopService {
             log.warn("店铺{}不属于商家{}",shop.getShopId(),seller.getUserId());
             throw new BlbException("店铺不属于商家");
         }
-        if (!categoryRepository.existsById(shopInfoUpdateDTO.getCategoryId())){
-            log.warn("店铺分类{}不存在",shopInfoUpdateDTO.getCategoryId());
-            throw new BlbException("店铺分类不存在");
-        }
         var shopInfo = shopInfoRepository.findById(shopId).orElseThrow();
 
         if (shopInfoUpdateDTO.getCategoryId() != null){
+            if (!categoryRepository.existsById(shopInfoUpdateDTO.getCategoryId())){
+                log.warn("店铺分类{}不存在",shopInfoUpdateDTO.getCategoryId());
+                throw new BlbException("店铺分类不存在");
+            }
             shop.setCategoryId(shopInfoUpdateDTO.getCategoryId());
             shopRepository.save(shop);
         }

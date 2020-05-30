@@ -5,30 +5,25 @@
       <el-tab-pane label="营业设置" name="first">
         <el-form :model="productForm" :rules="productFormRules" ref="productForm" label-width="100px" class="demo-ruleForm">
           <el-form-item label="店铺logo" prop="name">
-         <el-upload
-           class="avatar-uploader"
-           action="https://jsonplaceholder.typicode.com/posts/"
-           :show-file-list="false"
-           :on-success="handleAvatarSuccess"
-           :before-upload="beforeAvatarUpload">
-           <img v-if="imageUrl" :src="imageUrl" class="avatar">
-           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-         </el-upload>
+          <input type="file" ref="shopLogoFile"> <el-button type="primary" size="mini" @click="uploadShopLogo">上传店铺logo</el-button>
+          <div>
+            <img :src="shopInfo.shopLogo" v-if="shopInfo.shopLogo" alt="" style="max-wdith:100px;max-height:100px">
+          </div>
         </el-form-item>
         <el-divider></el-divider>
         <el-form-item label="店铺名称">
-          <span v-if="!showShopNameEdit" @click="showShopNameEdit = true">黄焖鸡米饭</span>
-          <el-input style="width:200px" size="medium" value="黄焖鸡米饭" v-if="showShopNameEdit" v-focus="showShopNameEdit" @blur="showShopNameEdit=false"></el-input>
+          <span v-if="!showShopNameEdit" @click="showShopNameEdit = true">{{shopInfo.shopName}}</span>
+          <el-input style="width:200px" size="medium" v-model="shopInfo.shopName" v-if="showShopNameEdit" v-focus="showShopNameEdit" @blur="showShopNameEdit=false"></el-input>
         </el-form-item>
         <el-divider></el-divider>
         <el-form-item label="店铺简介">
-          <span class="long-text" v-if="!showShopDescEdit" @click="showShopDescEdit = true">黄焖鸡 黄焖鸡米饭又叫香鸡煲、浓汁鸡煲饭，属于鲁菜系家常菜品，起源于山东省济南市。 主要食材是鸡腿肉，配以青椒、土豆、香菇等焖制而成，味道美妙，具有肉质鲜美嫩滑的特点</span>
-          <el-input type="textarea" size="medium" value="黄焖鸡 黄焖鸡米饭又叫香鸡煲、浓汁鸡煲饭，属于鲁菜系家常菜品，起源于山东省济南市。 主要食材是鸡腿肉，配以青椒、土豆、香菇等焖制而成，味道美妙，具有肉质鲜美嫩滑的特点" v-if="showShopDescEdit" v-focus="showShopDescEdit" @blur="showShopDescEdit=false"></el-input>
+          <span class="long-text" v-if="!showShopDescEdit" @click="showShopDescEdit = true">{{shopInfo.shopDesc}}</span>
+          <el-input type="textarea" size="medium" v-model="shopInfo.shopDesc" v-if="showShopDescEdit" v-focus="showShopDescEdit" @blur="showShopDescEdit=false"></el-input>
         </el-form-item>
         <el-divider></el-divider>
-        <el-form-item label="店铺简介">
-          <span class="long-text" v-if="!showShopSloganEdit" @click="showShopSloganEdit = true">欢迎来到黄焖鸡米饭，在此感谢小主们对本店一直以来的支持和信任，为了回馈小主们，我们坚持追求用心，责任，高品质，高效率，让小主们看到我们的努力，打心底觉得吃的安全，放心！温馨提醒:1.高峰期提前下单，保障用餐时间。2.下雨天稍有延误请谅解。3.疑问和建议请与本店联系，谢谢</span>
-          <el-input type="textarea" size="medium" value="欢迎来到黄焖鸡米饭，在此感谢小主们对本店一直以来的支持和信任，为了回馈小主们，我们坚持追求用心，责任，高品质，高效率，让小主们看到我们的努力，打心底觉得吃的安全，放心！温馨提醒:1.高峰期提前下单，保障用餐时间。2.下雨天稍有延误请谅解。3.疑问和建议请与本店联系，谢谢" v-if="showShopSloganEdit" v-focus="showShopSloganEdit" @blur="showShopSloganEdit=false"></el-input>
+        <el-form-item label="店铺slogan">
+          <span class="long-text" v-if="!showShopSloganEdit" @click="showShopSloganEdit = true">{{shopInfo.shopSlogan}}</span>
+          <el-input type="textarea" size="medium" v-model="shopInfo.shopSlogan" v-if="showShopSloganEdit" v-focus="showShopSloganEdit" @blur="showShopSloganEdit=false"></el-input>
         </el-form-item>
         <el-divider></el-divider>
         <el-form-item label="营业时间">
@@ -44,11 +39,11 @@
         <el-divider></el-divider>
         <el-form-item label="配送管理">
           <div>
-            起送价<el-input-number size="small" style="width:120px" value="20"></el-input-number>
+            起送价<el-input-number size="small" style="width:120px" v-model="shopInfo.startingPrice"></el-input-number>
           </div>
-          <div>配送费<el-input-number size="small" style="width:120px" value="20"></el-input-number></div>
+          <div>配送费<el-input-number size="small" style="width:120px" v-model="shopInfo.deliveryFee"></el-input-number></div>
         </el-form-item>
-        <el-button type="primary" class="fr">保存</el-button>
+        <el-button type="primary" class="fr" @click="updateShopInfo">保存</el-button>
         </el-form>
       </el-tab-pane>
       <el-tab-pane label="资质管理" name="second">资质管理</el-tab-pane>
@@ -59,6 +54,7 @@
 </template>
 
 <script>
+import shopService from '../service/ShopService'
 export default {
   data () {
     return {
@@ -66,8 +62,40 @@ export default {
       showShopNameEdit: false,
       showShopDescEdit: false,
       showShopSloganEdit: false,
-      time: new Date(2020, 4, 20, 0, 0, 0)
+      time: new Date(2020, 4, 20, 0, 0, 0),
+      shopInfo: {}
     }
+  },
+  methods: {
+    async getShopInfo () {
+      try {
+        this.shopInfo = await shopService.getShopInfo()
+      } catch (e) {
+        this.$messaege.error(e.message)
+      }
+    },
+    async uploadShopLogo () {
+      try {
+        const data = await shopService.upload(this.$refs.shopLogoFile.files)
+        this.shopInfo.shopLogo = data
+        this.$message.success('上传店铺LOGO成功')
+      } catch (e) {
+        this.$message.error(e.message)
+      }
+    },
+    async updateShopInfo () {
+      try {
+        if (await shopService.updateShopInfo(this.shopInfo)) {
+          this.$message.success('更新店铺信息成功')
+          this.getShopInfo()
+        }
+      } catch (e) {
+        this.$message.error(e.message)
+      }
+    }
+  },
+  created () {
+    this.getShopInfo()
   },
   directives: {
     focus: {
