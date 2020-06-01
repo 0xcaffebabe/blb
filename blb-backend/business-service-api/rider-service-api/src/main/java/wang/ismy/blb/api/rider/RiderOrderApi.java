@@ -11,6 +11,8 @@ import wang.ismy.blb.common.result.Page;
 import wang.ismy.blb.common.result.Pageable;
 import wang.ismy.blb.common.result.Result;
 
+import java.util.List;
+
 /**
  * @author MY
  * @date 2020/4/8 14:12
@@ -29,6 +31,13 @@ public interface RiderOrderApi {
     @ApiImplicitParam(paramType = "path", name = "orderId", dataType = "Long", required = true, value = "订单ID")
     @ApiOperation("根据订单号取得骑手信息接口")
     Result<OrderRiderDTO> getRiderByOrder(@PathVariable("orderId") Long orderId);
+
+    /**
+     * 获取骑手未完成的订单
+     * @return 未完成订单
+     */
+    @GetMapping("undelivery")
+    Result<RiderHistoryOrderItemDTO> getRiderUnDeliveryOrder();
 
     /**
      * 获取骑手的历史订单

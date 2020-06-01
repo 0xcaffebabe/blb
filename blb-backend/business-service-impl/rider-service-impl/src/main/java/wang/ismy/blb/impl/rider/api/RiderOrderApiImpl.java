@@ -1,6 +1,7 @@
 package wang.ismy.blb.impl.rider.api;
 
 import lombok.AllArgsConstructor;
+import org.checkerframework.checker.units.qual.Current;
 import org.springframework.web.bind.annotation.RestController;
 import wang.ismy.blb.api.rider.RiderOrderApi;
 import wang.ismy.blb.api.rider.pojo.dto.OrderRiderDTO;
@@ -23,6 +24,12 @@ public class RiderOrderApiImpl implements RiderOrderApi {
     @Override
     public Result<OrderRiderDTO> getRiderByOrder(Long orderId) {
         return Result.success(orderService.getRiderByOrder(orderId));
+    }
+
+    @Override
+    public Result<RiderHistoryOrderItemDTO> getRiderUnDeliveryOrder() {
+        String token = CurrentRequestUtils.getHeader(SystemConstant.TOKEN);
+        return Result.success(orderService.getRiderUnDeliveryOrder(token));
     }
 
     @Override

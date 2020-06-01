@@ -144,4 +144,31 @@ public class RiderOrderServiceImpl implements RiderOrderService {
         orderApiClient.updateOrderStatus(orderId,OrderStatusEnum.DONE.getCode());
         return "配送完结";
     }
+
+    @Override
+    public RiderHistoryOrderItemDTO getRiderUnDeliveryOrder(String token) {
+        var authRes = authApiClient.valid(token);
+        if (!authRes.getSuccess()){
+            log.warn("调用认证服务失败:{}",authRes);
+            throw new BlbException("调用认证服务失败");
+        }
+        var rider = authRes.getData();
+        var riderOrderDO = orderRepository.getLastOrder(rider.getUserId());
+
+        var orderRes = orderApiClient.getOrder(riderOrderDO.getOrderId());
+        if (!orderRes.getSuccess()){
+            log.warn("调用订单服务失败:{}", orderRes);
+            throw new BlbException("调用订单服务失败");
+        }
+        var order = orderRes.getData();
+        if (order == null) {
+            return null;
+        }
+        if (order.getOrderStatus().equals(OrderStatusEnum.SHIPPING.getCode())){
+            RiderHistoryOrderItemDTO dto = new RiderHistoryOrderItemDTO();
+            BeanUtils.copyProperties(order,dto);
+            return dto;
+        }
+        return null;
+    }
 }

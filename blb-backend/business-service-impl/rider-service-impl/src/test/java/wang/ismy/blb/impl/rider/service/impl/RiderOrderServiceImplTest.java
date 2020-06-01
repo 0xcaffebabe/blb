@@ -102,4 +102,24 @@ class RiderOrderServiceImplTest {
         assertEquals("配送完结",result);
         verify(orderApiClient).updateOrderStatus(eq(1L),eq(OrderStatusEnum.DONE.getCode()));
     }
+
+    @Test void getUndeliveryOrder (){
+        String token = "token";
+        User user = new User();
+        user.setUserId(1L);
+        var authApiClient = mock(AuthApiClient.class);
+        var orderApiClient = mock(OrderApiClient.class);
+        riderOrderService.setAuthApiClient(authApiClient);
+        riderOrderService.setOrderApiClient(orderApiClient);
+        when(authApiClient.valid(eq(token))).thenReturn(Result.success(user));
+
+        OrderResultDTO orderResultDTO = new OrderResultDTO();
+        orderResultDTO.setOrderId(1L);
+        orderResultDTO.setOrderStatus(OrderStatusEnum.SHIPPING.getCode());
+
+        when(orderApiClient.getOrder(eq(1L))).thenReturn(Result.success(orderResultDTO));
+
+        var result = riderOrderService.getRiderUnDeliveryOrder(token);
+        assertEquals(1L,result.getOrderId());
+    }
 }

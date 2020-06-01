@@ -17,4 +17,6 @@ public interface RiderOrderService {
     String riderGrabOrder(String token, Long orderId);
 
     String riderCompleteOrder(String token, Long orderId, String code);
+
+    RiderHistoryOrderItemDTO getRiderUnDeliveryOrder(String token);
 }

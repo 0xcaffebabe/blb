@@ -13,14 +13,14 @@ import wang.ismy.blb.common.SystemConstant;
 import wang.ismy.blb.common.result.Page;
 import wang.ismy.blb.common.result.Pageable;
 import wang.ismy.blb.common.result.Result;
+import wang.ismy.blb.common.util.JsonUtils;
 import wang.ismy.blb.common.util.MockUtils;
 import wang.ismy.blb.impl.rider.service.RiderOrderService;
 import wang.ismy.blb.impl.rider.service.RiderService;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.eq;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -94,5 +94,15 @@ class RiderOrderApiImplTest {
         )
                 .andExpect(status().isOk())
                 .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.success(result))));
+    }
+
+    @Test void getUndelivery ()throws Exception{
+        String token = "token";
+        mockMvc.perform(get("/v1/api/order/undelivery")
+                .header(SystemConstant.TOKEN,token)
+        )
+                .andExpect(status().isOk())
+                .andExpect(content().json(JsonUtils.parse(Result.success())));
+        verify(orderService).getRiderUnDeliveryOrder(eq(token));
     }
 }

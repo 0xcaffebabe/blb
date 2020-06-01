@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.rider.pojo.dto.LoginResultDTO;
 import wang.ismy.blb.api.rider.pojo.dto.RegisterDTO;
+import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Result;
 
 /**
@@ -44,6 +45,16 @@ public interface RiderApi {
     Result<LoginResultDTO> login(@RequestParam("loginStr") String loginStr,
                                  @RequestParam("password") String password);
 
+    class Fallback implements RiderApi{
+        @Override
+        public Result<String> register(RegisterDTO registerDTO) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 骑手服务 注册接口失败");
+        }
 
+        @Override
+        public Result<LoginResultDTO> login(String loginStr, String password) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 骑手服务 登录接口失败");
+        }
+    }
 
 }
