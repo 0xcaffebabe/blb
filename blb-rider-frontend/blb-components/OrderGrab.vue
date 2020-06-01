@@ -7,7 +7,7 @@
 					<h4>黄焖鸡米饭 - cxk 的订单</h4>
 					<p>金额：35.00</p>
 					<p>距离：2km</p>
-					<button size="mini" type="primary" style="float:right" @click="grabOrder">接单</button>
+					<button size="mini" type="primary" class="grab-btn" style="float:right" @click="grabOrder">接单</button>
 				</div>
 			</li>
 		</ul>
@@ -51,5 +51,8 @@
 			flex: 0 0 75%;
 			margin-left:20rpx;
 		}
+	}
+	.grab-btn {
+		font-size: 28rpx;
 	}
 </style>
