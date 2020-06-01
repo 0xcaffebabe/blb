@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: wang.ismy.blb.impl.auth.AuthApiImplTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.826 s - in wang.ismy.blb.impl.auth.AuthApiImplTest
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 2.375 s - in wang.ismy.blb.impl.auth.AuthApiImplTest

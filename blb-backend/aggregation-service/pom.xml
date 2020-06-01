@@ -15,6 +15,7 @@
     <modules>
         <module>consumer-aggregation-service</module>
         <module>seller-aggregation-service</module>
+        <module>rider-aggregation-service</module>
     </modules>
 
     <dependencies>

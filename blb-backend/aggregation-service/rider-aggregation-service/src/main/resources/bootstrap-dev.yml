@@ -1,0 +1,24 @@
+server:
+  port: 15000
+swagger:
+  base-package: wang.ismy.blb.aggregation
+  base-path: /**
+  contact:
+    email: admin@ismy.wang
+  description: 骑手聚合服务api
+  enabled: true
+  exclude-path: /error, /ops/**
+  title: 骑手聚合服务文档
+  version: 1.0
+spring:
+  cloud:
+    nacos:
+      discovery:
+        server-addr: local:8848
+  application:
+    name: rider-aggregation-service
+  main:
+    allow-bean-definition-overriding: true
+feign:
+  sentinel:
+    enabled: true
