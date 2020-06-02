@@ -14,7 +14,7 @@ INSERT INTO tb_order
     create_time,
     update_time
 )
-VALUES (1,1,1,'蔡徐坤','17359561234','泉州师范学院软件学院 男B305',7,0,2,'芋圆波波奶茶不要芋圆不要奶茶',0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP ),
+VALUES (1,1,1,'蔡徐坤','17359561234','泉州师范学院软件学院 男B305',7,1,2,'芋圆波波奶茶不要芋圆不要奶茶',0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP ),
     (2,1,1,'蔡徐坤','17359561234','泉州师范学院软件学院 男B305',15,0,2,'黄焖鸡米饭多一点',0,CURRENT_TIMESTAMP ,CURRENT_TIMESTAMP );
 
 INSERT INTO tb_order_detail

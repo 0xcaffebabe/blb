@@ -30,6 +30,11 @@ public class OrderApiImpl implements OrderApi {
     }
 
     @Override
+    public Result<List<OrderResultDTO>> getDeliveryOrder() {
+        return Result.success(orderService.getDeliveryOrder());
+    }
+
+    @Override
     public Result<String> addOrder(@Valid OrderCreateDTO orderCreateDTO) {
         String token = CurrentRequestUtils.getHeader(SystemConstant.TOKEN);
         return Result.success(orderService.addOrder(token,orderCreateDTO));

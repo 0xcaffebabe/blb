@@ -226,4 +226,10 @@ class OrderServiceImplTest {
             assertEquals(2L,map.get(i));
         }
     }
+
+    @Test void getDeliveryOrder(){
+        var list = orderService.getDeliveryOrder();
+        assertEquals(1,list.size());
+        assertEquals(1L,list.get(0).getOrderId());
+    }
 }

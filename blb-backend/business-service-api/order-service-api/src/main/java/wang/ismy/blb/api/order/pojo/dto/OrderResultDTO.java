@@ -1,5 +1,7 @@
 package wang.ismy.blb.api.order.pojo.dto;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -15,6 +17,7 @@ import java.util.List;
 @ApiModel("订单展示结果DTO")
 public class OrderResultDTO {
     @ApiModelProperty("订单ID")
+    @JsonSerialize(using = ToStringSerializer.class)
     private Long orderId ;
     @ApiModelProperty("订单所属店铺")
     private Long shopId ;

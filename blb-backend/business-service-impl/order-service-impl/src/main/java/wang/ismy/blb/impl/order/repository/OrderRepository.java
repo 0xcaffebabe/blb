@@ -40,4 +40,13 @@ public interface OrderRepository extends JpaRepository<OrderDO,Long> {
      */
     @Query("FROM OrderDO WHERE orderStatus = :orderStatus AND shopId = :shopId AND payStatus = :payStatus ORDER BY createTime DESC")
     List<OrderDO> findNewOrder(@Param("orderStatus") Integer orderStatus, @Param("shopId") Long shopId,@Param("payStatus") Integer payStatus);
+
+    /**
+     * 根据状态查找订单
+     * @param orderStatus
+     * @param payStatus
+     * @return
+     */
+    @Query("FROM OrderDO WHERE orderStatus = :orderStatus AND payStatus = :payStatus ORDER BY createTime DESC")
+    List<OrderDO> findOrder(@Param("orderStatus") Integer orderStatus,@Param("payStatus") Integer payStatus);
 }

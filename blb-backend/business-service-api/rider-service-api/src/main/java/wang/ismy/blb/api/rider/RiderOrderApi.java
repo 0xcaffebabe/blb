@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.api.rider.pojo.dto.OrderRiderDTO;
 import wang.ismy.blb.api.rider.pojo.dto.order.RiderHistoryOrderItemDTO;
+import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Page;
 import wang.ismy.blb.common.result.Pageable;
 import wang.ismy.blb.common.result.Result;
@@ -68,4 +69,32 @@ public interface RiderOrderApi {
     @PutMapping("complete/{orderId}")
     Result<String> riderCompleteOrder(@PathVariable("orderId") Long orderId,
                                       @RequestParam("code") String code);
+
+    class Fallback implements RiderOrderApi{
+
+        @Override
+        public Result<OrderRiderDTO> getRiderByOrder(Long orderId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 骑手订单服务 获取骑手接口失败");
+        }
+
+        @Override
+        public Result<RiderHistoryOrderItemDTO> getRiderUnDeliveryOrder() {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 骑手订单服务 获取骑手未完成订单接口失败");
+        }
+
+        @Override
+        public Result<Page<RiderHistoryOrderItemDTO>> getRiderHistoryOrder(Pageable pageable) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 骑手订单服务 获取骑手历史订单接口失败");
+        }
+
+        @Override
+        public Result<String> riderGrabOrder(Long orderId) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 骑手订单服务 骑手接单接口失败");
+        }
+
+        @Override
+        public Result<String> riderCompleteOrder(Long orderId, String code) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 骑手订单服务 骑手完结订单接口失败");
+        }
+    }
 }

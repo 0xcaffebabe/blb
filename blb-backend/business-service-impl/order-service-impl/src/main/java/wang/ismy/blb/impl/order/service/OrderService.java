@@ -64,4 +64,10 @@ public interface OrderService {
      * @return
      */
     Map<Long, Long> getProductSales(List<Long> productIdList);
+
+    /**
+     * 获取待配送订单
+     * @return
+     */
+    List<OrderResultDTO> getDeliveryOrder();
 }

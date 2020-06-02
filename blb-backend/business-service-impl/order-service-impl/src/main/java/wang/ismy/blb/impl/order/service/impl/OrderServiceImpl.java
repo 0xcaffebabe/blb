@@ -201,6 +201,17 @@ public class OrderServiceImpl implements OrderService {
         return map;
     }
 
+    @Override
+    public List<OrderResultDTO> getDeliveryOrder() {
+        var orderList = orderRepository.findOrder(OrderStatusEnum.PROCESSED.getCode(),PayStatusEnum.PROCESSED.getCode());
+        return orderList.stream()
+                .map(order -> {
+                    OrderResultDTO dto = new OrderResultDTO();
+                    BeanUtils.copyProperties(order,dto);
+                    return dto;
+                }).collect(Collectors.toList());
+    }
+
     private void writeOrderDetail(OrderDO orderDO, ProductDTO productDTO, ProductSpecDTO spec, Integer quantity) {
         OrderDetailDO orderDetailDO = new OrderDetailDO();
         orderDetailDO.setDetailId(snowFlake.nextId());

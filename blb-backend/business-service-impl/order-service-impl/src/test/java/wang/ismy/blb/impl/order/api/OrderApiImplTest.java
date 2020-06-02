@@ -12,6 +12,7 @@ import wang.ismy.blb.api.order.pojo.dto.OrderResultDTO;
 import wang.ismy.blb.api.order.pojo.dto.OrderValidCode;
 import wang.ismy.blb.common.SystemConstant;
 import wang.ismy.blb.common.result.Result;
+import wang.ismy.blb.common.util.JsonUtils;
 import wang.ismy.blb.common.util.MockUtils;
 import wang.ismy.blb.impl.order.service.OrderService;
 
@@ -121,5 +122,16 @@ class OrderApiImplTest {
         )
                 .andExpect(status().isOk())
                 .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.success(map))));
+    }
+
+    @Test void getDeliveryOrder() throws Exception {
+        var list = MockUtils.create(OrderResultDTO.class,10);
+        when(orderService.getDeliveryOrder()).thenReturn(list);
+
+        mockMvc.perform(get("/v1/api/delivery")
+
+        )
+                .andExpect(status().isOk())
+                .andExpect(content().json(JsonUtils.parse(Result.success(list))));
     }
 }

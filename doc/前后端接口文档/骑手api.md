@@ -124,3 +124,8 @@ password | 密码 |
 
 - POST
 - url：/order/:orderId/complete
+- 请求参数
+  - orderId
+  - takeMealCode
+- 响应参数：完成提示语
+

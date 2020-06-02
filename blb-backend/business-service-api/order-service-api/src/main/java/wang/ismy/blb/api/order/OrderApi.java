@@ -35,6 +35,13 @@ public interface OrderApi {
     Result<OrderResultDTO> getOrder(@PathVariable("orderId") Long orderId);
 
     /**
+     * 获取待配送订单
+     * @return
+     */
+    @GetMapping("/delivery")
+    Result<List<OrderResultDTO>> getDeliveryOrder();
+
+    /**
      * 创建订单
      * @param orderCreateDTO 订单创建DTO
      * @return 订单ID
@@ -106,6 +113,11 @@ public interface OrderApi {
         @Override
         public Result<OrderResultDTO> getOrder(Long orderId) {
             return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 订单服务 获取订单接口失败");
+        }
+
+        @Override
+        public Result<List<OrderResultDTO>> getDeliveryOrder() {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 订单服务 获取待配送订单接口失败");
         }
 
         @Override

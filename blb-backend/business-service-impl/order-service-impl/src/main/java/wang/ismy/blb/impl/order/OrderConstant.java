@@ -5,5 +5,5 @@ package wang.ismy.blb.impl.order;
  * @date 2020/4/24 13:26
  */
 public interface OrderConstant {
-    long VALID_CODE_TTL = 1800;
+    long VALID_CODE_TTL = 18000;
 }
