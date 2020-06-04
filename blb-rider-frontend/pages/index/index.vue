@@ -27,19 +27,18 @@
 	import OrderGrab from '../../blb-components/OrderGrab.vue'
 	import OrderList from '../../blb-components/OrderList.vue'
 	import My from '../../blb-components/My.vue'
-	import RiderService from '../../service/RiderService.js'
 	export default {
 		data() {
 			return {
-				currentTab: 'grab'
+				currentTab: 'grab',
+				orderList: []
 			}
 		},
 		async onLoad() {
-			const data = await RiderService.login("rider-cxk","123")
-			console.log(data)
+			
 		},
 		methods: {
-
+			
 		},
 		components: {
 			'grab': OrderGrab,

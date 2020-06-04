@@ -1,13 +1,13 @@
 <template>
 	<div>
 		<ul class="order-list">
-			<li class="order-item" v-for="item in 12" :key="item">
-				<image src="../static/logo.png" mode="" class="shop-logo"></image>
+			<li class="order-item" v-for="item in orderList" :key="item.orderId">
+				<image :src="item.shopLogo" mode="" class="shop-logo"></image>
 				<div class="order-desc">
-					<h4>黄焖鸡米饭 - cxk 的订单</h4>
-					<p>金额：35.00</p>
+					<h4>{{item.shopId}} - {{item.consumerName}} 的订单</h4>
+					<p>金额：{{item.orderAmount}}</p>
 					<p>距离：2km</p>
-					<button size="mini" type="primary" class="grab-btn" style="float:right" @click="grabOrder">接单</button>
+					<button size="mini" type="primary" class="grab-btn" style="float:right" @click="grabOrder(item.orderId)">接单</button>
 				</div>
 			</li>
 		</ul>
@@ -15,20 +15,71 @@
 </template>
 
 <script>
+	import RiderService from '../service/RiderService.js'
 	export default {
 		data () {
-			return {}
+			return {
+				orderList: []
+			}
+		},
+		created() {
+			this.getUndeliveryOrder()
+				this.getOrderList()
 		},
 		methods: {
-			grabOrder () {
-				uni.showToast({
-					title: '接单成功'
-				})
-				setTimeout(function(){
-					uni.navigateTo({
-						url:'/pages/grabDetail/grabDetail'
+			async grabOrder (orderId) {
+				try {
+					const data = await RiderService.grabOrder(orderId)
+					uni.showToast({
+						title: data
 					})
-				},300)
+					setTimeout(function(){
+						uni.navigateTo({
+							url:'/pages/grabDetail/grabDetail?orderId='+orderId
+						})
+					},300)
+				} catch (e) {
+						uni.showToast({
+							title: e.message,
+							icon:'none'
+						})
+				}
+				
+			},
+			async getOrderList () {
+				try {
+					const data = await RiderService.getDeliveryOrder()
+					this.orderList = data
+					console.log(this.orderList)
+				} catch (e) {
+					uni.showToast({
+						title: e.message,
+						icon: 'none'
+					})
+				}
+			},
+			async getUndeliveryOrder (){
+				try {
+					const data = await RiderService.getUndeliveryOrder()
+					if (data) {
+						uni.showToast({
+							title: '您还有未完成的订单',
+							icon:'none',
+							complete() {
+								setTimeout(()=>{
+									uni.navigateTo({
+										url:'/pages/grabDetail/grabDetail?orderId='+data.orderId
+									})
+								},1000)
+							}
+						})
+					}
+				} catch (e) {
+					uni.showToast({
+						title: e.message,
+						icon: 'none'
+					})
+				}
 			}
 		}
 	}

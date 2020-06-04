@@ -33,5 +33,47 @@ class Repository {
 		})
 		return data.data
 	}
+	async getDeliveryOrder () {
+		const data = await request({
+			url: '/order/delivery',
+			method:'GET'
+		})
+		return data.data
+	}
+	async grabOrder (orderId) {
+		const data = await request({
+			url: '/order/grab/' + orderId,
+			method: 'POST'
+		})
+		return data.data
+	}
+	async getUndeliveryOrder(){
+		const data = await request({
+			url: '/order/undelivery',
+			method:'GET'
+		})
+		return data.data
+	}
+	async getOrderDetail(orderId){
+		const data = await request({
+			url: '/order/detail/'+orderId,
+			method:'GET'
+		})
+		return data.data
+	}
+	async shipOrder (orderId) {
+		const data = await request({
+			url: `/order/${orderId}/delivery`,
+			method:'POST'
+		})
+		return data.data
+	}
+	async completeOrder (orderId,code) {
+		const data = await request({
+			url: `/order/${orderId}/complete?code=${code}`,
+			method:'POST'
+		})
+		return data.data
+	}
 }
 export default new Repository()
