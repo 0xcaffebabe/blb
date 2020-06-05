@@ -31,6 +31,12 @@ spring:
       uris: http://local:9200
   application:
     name: product-service
+  zipkin:
+    base-url: http://local:9411/
+  sleuth:
+    sampler:
+      rate: 1
+
 feign:
   sentinel:
     enabled: true

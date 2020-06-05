@@ -30,6 +30,11 @@ spring:
     name: seller-service
   main:
     allow-bean-definition-overriding: true
+  zipkin:
+    base-url: http://local:9411/
+  sleuth:
+    sampler:
+      rate: 1
 feign:
   sentinel:
     enabled: true

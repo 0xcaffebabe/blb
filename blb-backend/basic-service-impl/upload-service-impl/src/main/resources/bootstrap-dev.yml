@@ -23,6 +23,11 @@ spring:
       max-request-size: 50MB
   application:
     name: upload-service
+  zipkin:
+    base-url: http://local:9411/
+  sleuth:
+    sampler:
+      rate: 1
 swagger:
   base-package: wang.ismy.blb.impl.upload
   base-path: /**

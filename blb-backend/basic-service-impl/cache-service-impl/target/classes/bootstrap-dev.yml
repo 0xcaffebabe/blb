@@ -11,6 +11,11 @@ spring:
     name: cache-service
   redis:
     host: local
+  zipkin:
+    base-url: http://local:9411/
+  sleuth:
+    sampler:
+      rate: 1
 swagger:
   base-package: wang.ismy.blb.impl.cache
   base-path: /**

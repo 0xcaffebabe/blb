@@ -27,6 +27,11 @@ spring:
     url: jdbc:mysql://local:3306/blb_shop?characterEncoding=utf8
   application:
     name: shop-service
+  zipkin:
+    base-url: http://local:9411/
+  sleuth:
+    sampler:
+      rate: 1
 feign:
   sentinel:
     enabled: true

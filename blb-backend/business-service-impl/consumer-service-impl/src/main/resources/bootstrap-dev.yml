@@ -28,6 +28,11 @@ spring:
     url: jdbc:mysql://local:3306/blb_consumer?characterEncoding=utf8
   application:
     name: consumer-service
+  zipkin:
+    base-url: http://local:9411/
+  sleuth:
+    sampler:
+      rate: 1
 feign:
   sentinel:
     enabled: false

@@ -20,5 +20,10 @@ spring:
         retry:
           enabled: true
           max-attempts: 10
+  zipkin:
+    base-url: http://local:9411/
+  sleuth:
+    sampler:
+      rate: 1
 server:
   port: 9310
