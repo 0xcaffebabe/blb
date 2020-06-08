@@ -1,3 +1,4 @@
+# coding=UTF-8
 import os
 import sys
 
@@ -14,15 +15,15 @@ str = os.popen("mvn package -f ./parent/pom.xml -pl :"+serviceName+"-impl -am").
 print (str)
 print ("微服务构建完成\n")
 
-print ("生成DockerFile\n")
+print ("生成Dockerfile\n")
 str = 'FROM openjdk:11\n\
 COPY ./artifact/'+name+'.jar ./\n\
 ENTRYPOINT ["java", "-jar", "-Dspring.profiles.active=prd", "'+name+'.jar"]'
 
-f = open('DockerFile','w')
+f = open('Dockerfile','w')
 f.write(str)
 f.close()
-print ("生成DockerFile完成\n")
+print ("生成Dockerfile完成\n")
 
 print ('正在构建镜像\n')
 str = os.popen("docker build -t='"+name+"' .").read()
