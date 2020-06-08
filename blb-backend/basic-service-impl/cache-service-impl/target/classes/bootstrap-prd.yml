@@ -6,16 +6,13 @@ spring:
       discovery:
         server-addr: local:8848
       config:
-        enabled: false
+        server-addr: local:8848
   application:
     name: cache-service
-swagger:
-  base-package: wang.ismy.blb.impl.cache
-  base-path: /**
-  contact:
-    email: admin@ismy.wang
-  description: 缓存服务api
-  enabled: true
-  exclude-path: /error, /ops/**
-  title: 缓存服务文档
-  version: 1.0
+  redis:
+    host: local
+  zipkin:
+    base-url: http://local:9411/
+  sleuth:
+    sampler:
+      rate: 1
