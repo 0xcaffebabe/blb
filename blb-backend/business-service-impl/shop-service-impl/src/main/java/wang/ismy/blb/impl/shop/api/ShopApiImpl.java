@@ -31,6 +31,11 @@ public class ShopApiImpl implements ShopApi {
     }
 
     @Override
+    public Result<Page<ShopItemDTO>> searchShop(String location, String kw, Long page, Long size) {
+        return Result.success(shopService.searchShop(location,kw,Pageable.of(page, size)));
+    }
+
+    @Override
     public Result<ShopInfoDTO> getShopInfo(Long shopId) {
         return Result.success(shopService.getShopInfo(shopId));
     }

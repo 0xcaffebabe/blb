@@ -6,6 +6,7 @@ import wang.ismy.blb.api.shop.pojo.dto.ShopInfoUpdateDTO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopItemDTO;
 import wang.ismy.blb.common.result.Page;
 import wang.ismy.blb.common.result.Pageable;
+import wang.ismy.blb.common.result.Result;
 
 import java.util.List;
 import java.util.Map;
@@ -60,4 +61,13 @@ public interface ShopService {
      * @return
      */
     ShopInfoDTO getShopBySeller(Long sellerId);
+
+    /**
+     * 搜索店铺
+     * @param location
+     * @param kw
+     * @param page
+     * @return
+     */
+    Page<ShopItemDTO> searchShop(String location, String kw, Pageable page);
 }

@@ -56,6 +56,25 @@ class ShopApiImplTest {
     }
 
     @Test
+    void searchShop() throws Exception {
+        String location = "117,29";
+        String kw = "蔡徐坤";
+        var list = MockUtils.create(ShopItemDTO.class,5);
+        Page<ShopItemDTO> page = new Page<>(5L,list);
+        Pageable pageable = Pageable.of(1L,5L);
+        when(shopService.searchShop(eq(location),eq(kw),eq(pageable))).thenReturn(page);
+
+        mockMvc.perform(get("/v1/api/search")
+                .param("location",location)
+                .param("kw",kw)
+                .param("page","1")
+                .param("size","5")
+        )
+                .andExpect(status().isOk())
+                .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.success(page))));
+    }
+
+    @Test
     void getShopInfo() throws Exception {
         Long shopId = 1L;
         ShopInfoDTO dto = MockUtils.create(ShopInfoDTO.class);

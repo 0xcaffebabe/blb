@@ -41,6 +41,21 @@ public interface ShopApi {
                                             @RequestParam("size") Long size);
 
     /**
+     * 搜索店铺
+     * @param location 经纬度
+     * @param kw 关键词
+     * @param page
+     * @param size
+     * @return 店铺列表
+     */
+    @ApiOperation("搜索店铺")
+    @GetMapping("search")
+    Result<Page<ShopItemDTO>> searchShop(@RequestParam("location") String location,
+                                         @RequestParam("kw") String kw,
+                                         @RequestParam("page") Long page,
+                                         @RequestParam("size") Long size);
+
+    /**
      * 根据店铺ID获取店铺信息
      * @param shopId
      * @return 店铺信息DTO
@@ -94,6 +109,11 @@ public interface ShopApi {
         @Override
         public Result<Page<ShopItemDTO>> getNearbyShop(String location, Long page,Long size) {
             return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 店铺服务 获取附近店铺接口失败");
+        }
+
+        @Override
+        public Result<Page<ShopItemDTO>> searchShop(String location, String kw, Long page, Long size) {
+            return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 店铺服务 搜索店铺信息接口失败");
         }
 
         @Override

@@ -149,6 +149,11 @@ public class ShopServiceImpl implements ShopService {
         return getShopById(shop.getShopId());
     }
 
+    @Override
+    public Page<ShopItemDTO> searchShop(String location, String kw, Pageable page) {
+        return null;
+    }
+
     private ShopInfoDTO getShopById(Long shopId) {
         ShopInfoDO shopInfoDO = shopInfoRepository.findById(shopId).orElseThrow(()->new BlbException("店铺不存在"));
         ShopDO shopDO = shopRepository.findById(shopId).orElseThrow();
