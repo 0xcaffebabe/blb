@@ -135,7 +135,7 @@ public class ShopAggApi {
     public Result searchShop(@RequestParam("kw") String keyword,
                                                     @RequestParam(defaultValue = "1") Long page,
                                                     @RequestParam(defaultValue = "10") Long size){
-        var shopRes =  shopApiClient.getNearbyShop("117,29",page,size);
+        var shopRes =  shopApiClient.searchShop("117,29",keyword,page,size);
         return new ShopService().convertShopItems(shopRes,shopApiClient);
     }
 

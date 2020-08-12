@@ -1,9 +1,12 @@
 package wang.ismy.blb.impl.shop.service.impl;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.action.index.IndexResponse;
+import org.elasticsearch.action.search.SearchRequest;
+import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestClientBuilder;
@@ -12,13 +15,23 @@ import org.elasticsearch.client.indices.CreateIndexRequest;
 import org.elasticsearch.client.indices.CreateIndexResponse;
 import org.elasticsearch.common.settings.Settings;
 import org.elasticsearch.common.xcontent.XContentType;
+import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.SearchHit;
+import org.elasticsearch.search.SearchHits;
+import org.elasticsearch.search.builder.SearchSourceBuilder;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import wang.ismy.blb.api.shop.pojo.ShopDO;
+import wang.ismy.blb.api.shop.pojo.ShopInfoDO;
+import wang.ismy.blb.common.result.Pageable;
+import wang.ismy.blb.impl.shop.service.ShopService;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author MY
@@ -26,7 +39,6 @@ import java.io.IOException;
  */
 @Service
 @Slf4j
-@Profile("dev")
 public class ShopSearchService {
 
     @Value("${elasticsearch.url}")
@@ -39,6 +51,7 @@ public class ShopSearchService {
         client = new RestHighLevelClient(
                 RestClient.builder(HttpHost.create(url))
         );
+        createShopIndex();
     }
 
     public void createShopIndex(){
@@ -93,7 +106,7 @@ public class ShopSearchService {
 
     public void addShop(ShopDO shop){
         IndexRequest request = new IndexRequest("shop");
-        request.id("1");
+        request.id(shop.getShopId().toString());
         String jsonString = "{" +
                 "\"shopId\":\"%s\"," +
                 "\"shopName\":\"%s\"," +
@@ -110,8 +123,34 @@ public class ShopSearchService {
         request.source(jsonString, XContentType.JSON);
         try {
             IndexResponse indexResponse = client.index(request, RequestOptions.DEFAULT);
+            log.info(indexResponse.toString());
         } catch (IOException e){
              e.printStackTrace();
         }
     }
+
+    public List<ShopDO> search(String kw, Pageable pageable){
+        SearchRequest searchRequest = new SearchRequest("shop");
+        SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+        searchSourceBuilder.query(QueryBuilders.queryStringQuery(kw));
+        searchSourceBuilder.from(pageable.getPage().intValue()-1);
+        searchSourceBuilder.size(pageable.getSize().intValue());
+        searchRequest.source(searchSourceBuilder);
+        try {
+            SearchResponse searchResponse = client.search(searchRequest, RequestOptions.DEFAULT);
+            SearchHits hits = searchResponse.getHits();
+            List<ShopDO> ret = new ArrayList<>();
+            for (SearchHit hit : hits) {
+                ShopDO shop = new ShopDO();
+                shop.setShopId(Long.parseLong(hit.getSourceAsMap().get("shopId").toString()));
+                ret.add(shop);
+            }
+            return ret;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return List.of();
+    }
+
+
 }

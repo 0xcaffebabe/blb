@@ -43,6 +43,7 @@ public class ShopServiceImpl implements ShopService {
     private final ShopInfoRepository shopInfoRepository;
     private final ShopRepository shopRepository;
     private final ShopCategoryRepository categoryRepository;
+    private final ShopSearchService shopSearchService;
     private ProductEvalApiClient productEvalApiClient;
     private SellerApiClient sellerApiClient;
     private AuthApiClient authApiClient;
@@ -151,7 +152,32 @@ public class ShopServiceImpl implements ShopService {
 
     @Override
     public Page<ShopItemDTO> searchShop(String location, String kw, Pageable page) {
-        return null;
+        var shopList = shopSearchService.search(kw,Pageable.of(1L,100L));
+        var dbPage = shopInfoRepository.findAllById(shopList.stream().map(ShopDO::getShopId).collect(Collectors.toList()));
+        var evalRes = productEvalApiClient.getShopEval(dbPage.stream().map(ShopInfoDO::getShopId).collect(Collectors.toList()));
+        if (!evalRes.getSuccess()){
+            log.warn("获取店铺评分失败:{}",evalRes);
+        }
+        var list = dbPage.stream().map(shopInfo -> {
+            ShopItemDTO dto = new ShopItemDTO();
+            dto.setShopId(shopInfo.getShopId());
+            dto.setShopName(shopInfo.getShopName());
+            dto.setShopLogo(shopInfo.getShopLogo());
+            dto.setDistance(new BigDecimal("2"));
+            dto.setRanking(evalRes.getData().get(dto.getShopId()));
+            return dto;
+        }).collect(Collectors.toList());
+        return new Page<>((long)dbPage.size(),list);
+    }
+
+    @Override
+    public List<ShopDO> findAll() {
+        List<ShopDO> shops = shopRepository.findAll();
+        for (ShopDO shop : shops) {
+            ShopInfoDO shopInfoDO = shopInfoRepository.findById(shop.getShopId()).orElseThrow();
+            shop.setShopInfo(shopInfoDO);
+        }
+        return shops;
     }
 
     private ShopInfoDTO getShopById(Long shopId) {

@@ -21,3 +21,5 @@ spring:
 feign:
   sentinel:
     enabled: true
+elasticsearch:
+  url: http://local:9555

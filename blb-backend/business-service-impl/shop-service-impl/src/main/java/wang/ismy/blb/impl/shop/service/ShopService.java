@@ -1,5 +1,6 @@
 package wang.ismy.blb.impl.shop.service;
 
+import wang.ismy.blb.api.shop.pojo.ShopDO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopCreateDTO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopInfoDTO;
 import wang.ismy.blb.api.shop.pojo.dto.ShopInfoUpdateDTO;
@@ -70,4 +71,10 @@ public interface ShopService {
      * @return
      */
     Page<ShopItemDTO> searchShop(String location, String kw, Pageable page);
+
+    /**
+     * 查询全部店铺数据
+     * @return 店铺列表
+     */
+    List<ShopDO> findAll();
 }
