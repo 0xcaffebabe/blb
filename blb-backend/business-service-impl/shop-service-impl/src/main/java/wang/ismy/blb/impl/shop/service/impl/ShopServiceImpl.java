@@ -106,6 +106,10 @@ public class ShopServiceImpl implements ShopService {
         BeanUtils.copyProperties(shopCreateDTO,shopInfoDO);
         shopInfoDO.setShopId(shopDO.getShopId());
         shopInfoRepository.save(shopInfoDO);
+
+        // 添加到搜索库
+        shopDO.setShopInfo(shopInfoDO);
+        shopSearchService.addShop(shopDO);
         return shopDO.getShopId().toString();
     }
 
@@ -139,6 +143,10 @@ public class ShopServiceImpl implements ShopService {
         }
         BeanUtils.copyProperties(shopInfoUpdateDTO,shopInfo);
         shopInfoRepository.save(shopInfo);
+
+        // 更新到搜索库
+        shop.setShopInfo(shopInfo);
+        shopSearchService.addShop(shop);
     }
 
     @Override
