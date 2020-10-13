@@ -14,6 +14,9 @@
       </el-container>
     </el-container>
     <login/>
+    <el-footer class="footer">
+      BLB © 2020 版权所有
+    </el-footer>
   </el-container>
 </template>
 
@@ -41,5 +44,12 @@ export default {
 <style lang="less" scoped>
   .container {
     min-width: 1080px;
+  }
+  .footer {
+    bottom: 0;
+    font-size: 18px;
+    color: #ccc;
+    width: 100%;
+    text-align: center;
   }
 </style>
