@@ -1,7 +1,7 @@
 <template>
   <!-- 首页轮播广告组件 -->
   <div>
-      <el-carousel :interval="4000" type="card" height="200px">
+      <el-carousel :interval="4000" type="card" height="300px">
           <el-carousel-item v-for="item in imgList" :key="item">
           <h3 class="medium">
             <img :src="item" alt="" >
