@@ -2,7 +2,9 @@
   <div>
     <el-row :gutter="20">
       <el-col :span="6">
-        <el-image :src="product.productImg" :preview-src-list="['./food.png']" fit="cover"></el-image>
+        <div class="product-img-wrapper">
+          <el-image :src="product.productImg" :preview-src-list="['./food.png']" fit="cover" style="width:100%;height:100%"></el-image>
+        </div>
       </el-col>
       <el-col :span="12">
         <h2>{{product.productName}}</h2>
@@ -78,6 +80,13 @@ export default {
 </script>
 
 <style lang="less" scoped>
+    .product-img-wrapper {
+      width:200px;
+      height:128px;
+      .el-image {
+        border-radius: 5px;
+      }
+    }
     .el-image {
       max-height: 150px;
       max-width: 150px;
