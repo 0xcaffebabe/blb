@@ -9,7 +9,7 @@ swagger:
   title: 消费者服务文档
   version: 1.0
 server:
-  port: 9700
+  port: 0
 spring:
   cloud:
     nacos:

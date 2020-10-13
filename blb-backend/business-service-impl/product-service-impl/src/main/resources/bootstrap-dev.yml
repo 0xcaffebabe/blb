@@ -9,7 +9,7 @@ swagger:
   exclude-path: /error, /ops/**
   title: 商品服务文档
 server:
-  port: 9600
+  port: 0
 spring:
   cloud:
     nacos:
