@@ -9,9 +9,6 @@
         <li class="shop-item-wrapper" v-for="item in shopList" :key="item.shopId">
           <div class="shop-item" @click="handleShopItemClick(item)">
             <el-image fit="cover" :src="item.shopLogo" class="shop-logo">
-              <div slot="error" class="image-slot">
-                <i class="el-icon-picture-outline"></i>
-              </div>
             </el-image>
             <h1>{{item.shopName}}</h1>
             <el-rate
@@ -21,11 +18,11 @@
               text-color="#ff9900"
               score-template="{value}">
             </el-rate>
-            <span class="shop-sales">月售:{{item.sales}}单</span>
+            <span class="shop-sales">月销量: <strong>{{item.sales}}</strong></span>
             <div>
-              <span class="shop-price">起送:￥{{item.startingPrice}}/配送费:￥{{item.deliveryFee}}</span>
+              <span class="shop-price">起送: <strong>{{item.startingPrice}}</strong> / 配送费: <strong>{{item.deliveryFee}}</strong></span>
             </div>
-            <p class="distance el-icon-time">{{item.distance}} / <span>{{item.deliveryTime}}</span></p>
+            <p class="distance el-icon-time"> {{item.distance}} km / <span>{{item.deliveryTime}}送达</span></p>
           </div>
         </li>
       </ul>
@@ -58,7 +55,9 @@ export default {
     .shop-item {
       padding: 20px 20px 0 20px;
       width: 208px;
+      transition: all 0.2s;
       box-sizing: border-box;
+      border-bottom: 1px solid #ccc;
       .shop-logo {
         position: relative;
         height:128px;
@@ -69,8 +68,12 @@ export default {
       }
     }
     .shop-item:hover {
-      box-shadow: 2px 2px 13px rgb(217, 236, 255);
+      box-shadow: 2px 2px 13px #eee;
+      border-bottom: none;
       cursor: pointer;
+      .shop-logo{
+        box-shadow: 2px 2px 13px #bbb;
+      }
     }
     li img {
       max-width: 208px;
