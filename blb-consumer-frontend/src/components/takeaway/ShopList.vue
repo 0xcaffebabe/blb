@@ -8,7 +8,7 @@
       <ul class="shop-list">
         <li class="shop-item-wrapper" v-for="item in shopList" :key="item.shopId">
           <div class="shop-item" @click="handleShopItemClick(item)">
-            <el-image fit="cover" :src="item.shopLogo" alt="" style="height:128px">
+            <el-image fit="cover" :src="item.shopLogo" class="shop-logo">
               <div slot="error" class="image-slot">
                 <i class="el-icon-picture-outline"></i>
               </div>
@@ -59,6 +59,14 @@ export default {
       padding: 20px 20px 0 20px;
       width: 208px;
       box-sizing: border-box;
+      .shop-logo {
+        position: relative;
+        height:128px;
+        width:128px;
+        border-radius:128px;
+        left: 50%;
+        margin-left: -64px;
+      }
     }
     .shop-item:hover {
       box-shadow: 2px 2px 13px rgb(217, 236, 255);
