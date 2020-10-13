@@ -87,10 +87,6 @@ export default {
         border-radius: 5px;
       }
     }
-    .el-image {
-      max-height: 150px;
-      max-width: 150px;
-    }
     li :hover {
       cursor: pointer;
     }
