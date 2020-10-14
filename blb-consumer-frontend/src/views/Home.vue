@@ -3,8 +3,8 @@
     <el-header style="padding:0">
       <main-header></main-header>
     </el-header>
-    <el-container>
-      <el-aside :width="isCollapse ? '80px':'200px'" style="overflow:hidden">
+    <el-container class="main">
+      <el-aside :width="isCollapse ? '80px':'200px'" class="side-menu">
          <main-aside :is-collapse="isCollapse" @toggle="handleSideToggle"></main-aside>
       </el-aside>
       <el-container>
@@ -45,11 +45,22 @@ export default {
   .container {
     min-width: 1080px;
   }
+  .main {
+    width: 1080px;
+    margin: auto;
+  }
   .footer {
     bottom: 0;
     font-size: 18px;
     color: #ccc;
     width: 100%;
     text-align: center;
+  }
+  .side-menu {
+    position: fixed;
+    overflow:hidden;
+    z-index: 999;
+    margin-top: -10px;
+    margin-left: -64px;
   }
 </style>
