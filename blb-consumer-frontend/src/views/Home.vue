@@ -9,7 +9,9 @@
       </el-aside>
       <el-container>
         <el-main>
-          <router-view></router-view>
+          <el-collapse-transition>
+            <router-view></router-view>
+          </el-collapse-transition>
         </el-main>
       </el-container>
     </el-container>
@@ -62,5 +64,11 @@ export default {
     z-index: 999;
     margin-top: -10px;
     margin-left: -64px;
+  }
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+    opacity: 0;
   }
 </style>
