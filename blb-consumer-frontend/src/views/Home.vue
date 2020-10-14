@@ -14,6 +14,12 @@
           </el-collapse-transition>
         </el-main>
       </el-container>
+      <div class="nav-btns">
+        <el-button-group>
+          <el-button type="primary" icon="el-icon-back" circle @click="handleRouterBack"></el-button>
+          <el-button type="primary" icon="el-icon-right" circle @click="handleRouterGo"></el-button>
+        </el-button-group>
+      </div>
     </el-container>
     <login/>
     <el-footer class="footer">
@@ -35,6 +41,12 @@ export default {
   methods: {
     handleSideToggle () {
       this.isCollapse = !this.isCollapse
+    },
+    handleRouterBack () {
+      this.$router.go(-1)
+    },
+    handleRouterGo () {
+      this.$router.go(1)
     }
   },
   components: {
@@ -65,10 +77,13 @@ export default {
     margin-top: -10px;
     margin-left: -64px;
   }
-  .fade-enter-active, .fade-leave-active {
-    transition: opacity .5s;
-  }
-  .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
-    opacity: 0;
+  .nav-btns {
+    position: fixed;
+    float: right;
+    top: 75%;
+    right: 20px;
+    .el-button{
+      box-shadow: 2px 7px 13px #ccc;
+    }
   }
 </style>
