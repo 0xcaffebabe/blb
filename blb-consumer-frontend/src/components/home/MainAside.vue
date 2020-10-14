@@ -8,7 +8,7 @@
       :unique-opened="true"
       :router="true"
       >
-      <span class="collapse el-icon-more" @click="toggleAside"></span>
+      <span class="collapsev" :class="{'el-icon-caret-right': collapsed, 'el-icon-caret-left': !collapsed}" @click="toggleAside"></span>
       <span v-if="categoryList.length == 0">暂无数据</span>
       <el-submenu :index="item.categoryId + ''" v-for="item in categoryList" :key="item.categoryId">
         <template slot="title">
@@ -33,11 +33,13 @@ export default {
   props: ['isCollapse'],
   data () {
     return {
-      categoryList: []
+      categoryList: [],
+      collapsed: false
     }
   },
   methods: {
     toggleAside () {
+      this.collapsed = !this.collapsed
       this.$emit('toggle')
     },
     async getShopCategory () {
@@ -55,6 +57,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  .el-menu {
+    transition: all 0.2s;
+    border-radius: 5px;
+    box-shadow: 2px 2px 13px #ccc;
+  }
   .collapse {
     width: 100%;
     height: 24px;
@@ -62,6 +69,21 @@ export default {
     text-align: center;
     background-color: #3190e8;
     color: #fff;
+    cursor: pointer;
+  }
+  .collapsev {
+    position: absolute;
+    font-size: 22px;
+    top:50%;
+    margin-top: -25px;
+    right: -10px;
+    width: 24px;
+    z-index: 9999;
+    height: 50px;
+    line-height: 50px;
+    background-color: #3190e8;
+    border-radius: 5px;
+    color: white;
     cursor: pointer;
   }
   .el-aside {
