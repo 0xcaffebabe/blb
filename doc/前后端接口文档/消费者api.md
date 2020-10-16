@@ -210,7 +210,7 @@ id | 店铺ID
   "deliveryTime": "35分钟",
   "startingPrice": 14, // 起送价
   "deliveryFee": 2, // 配送费
-  "slogan": "欢迎光临本店，随时可以下单", // 店铺简介
+  "shopSlogan": "欢迎光临本店，随时可以下单", // 店铺简介
   "sellerName": "蔡徐坤", // 卖家真实姓名
   "shopAddress": "鲤城区媒人桥路2号", // 店铺地址
   "shopPhone": "17359561234" // 店铺联系电话
