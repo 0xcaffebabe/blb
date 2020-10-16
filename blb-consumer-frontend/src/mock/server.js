@@ -1,7 +1,6 @@
 const express = require('express')
 const result = require('./result')
 const app = express()
-
 app.listen(8001)
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin','*');
@@ -48,10 +47,41 @@ app.get('/category/:level', (req, res) => {
       }
       subCategoryList.push(subCategory)
     }
-    category.subMenuList = subCategoryList
+    category.subCategoryList = subCategoryList
     categoryList.push(category)
   }
   res.send(result(
     categoryList
+  ))
+})
+
+app.get('/category/:cateId/shop', (req, res) => {
+  const metadata = [
+    {shopLogo: 'https://p0.meituan.net/bbia/c63505335fd950e3a56d352fe4be41eb138325.jpg@220w_125h_1e_1c', shopName: '米兰西饼生日蛋糕（泉州店）'},
+    {shopLogo: 'https://p1.meituan.net/600.600/shopmainpic/6cb402acf097539bb9f1a9be49a023e3124761.jpg@220w_125h_1e_1c', shopName: 'e+咖啡私人影院（美食街店）'},
+    {shopLogo: 'https://p0.meituan.net/600.600/deal/__12303698__9660676.jpg@220w_125h_1e_1c', shopName: '57°C湘（浦西万达广场店）'},
+    {shopLogo: 'https://img.meituan.net/msmerchant/54fb990f3c02532a3255f020c82edc9f1432759.png@220w_125h_1e_1c', shopName: '火锅咖·自选火锅（浦西万达店）'},
+    {shopLogo: 'https://p0.meituan.net/600.600/bbia/c58ff676ad214e99f39de19e682e96c5606999.jpg@220w_125h_1e_1c', shopName: '元品咖啡（泉秀店）'},
+    {shopLogo: 'https://img.meituan.net/600.600/msmerchant/176c18daf749328483e2754a4e898e1443278.jpg@220w_125h_1e_1c', shopName: '哈尼小站（华泰总店）'},
+    {shopLogo: 'https://img.meituan.net/600.600/msmerchant/82843020c1277ed2fa7620b2b1c385b9175314.jpg@220w_125h_1e_1c', shopName: '德克士（新加坡城店）'},
+  ]
+  const shopList = []
+  for(let i = 0;i<req.query.size;i++){
+    shopList.push(Object.assign({}, metadata[Math.ceil(Math.random()*metadata.length) -1 ]))
+  }
+  for(let i = 0;i<shopList.length;i++){
+    shopList[i].shopId = i
+    shopList[i].ranking = (Math.random() * 5).toFixed(1)
+    shopList[i].distance = (Math.random() * 3).toFixed(2) + ''
+    shopList[i].sales = parseInt(Math.random() * 1000)
+    shopList[i].startingPrice = parseInt(Math.random() * 10)
+    shopList[i].deliveryFee = parseInt(Math.random() * 5)
+    shopList[i].deliveryTime = parseInt(Math.random() * 60) + '分钟'
+  }
+  res.send(result(
+    {
+      total: 1000,
+      data: shopList
+    }
   ))
 })
