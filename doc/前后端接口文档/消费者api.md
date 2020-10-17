@@ -292,7 +292,12 @@ id | 店铺ID
 ```json
 {
   "rating": 4.7, // 店铺评分
-  "wordCloud": ["味道好","干净卫生","价格便宜"]
+  "wingRate": 99,
+  "wordCloud": [
+    {"content": "味道好", "positive": true, "count": 100},
+    {"content": "干净卫生", "positive": true, "count": 123},
+    {"content": "价格便宜", "positive": true, "count": 9621}
+  ]
 }
 ```
 
