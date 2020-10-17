@@ -310,6 +310,7 @@ id | 店铺ID
 参数名     | 参数说明   | 备注
 ------- | ------ | -----
 id | 店铺ID
+tagId | 标签ID | 默认为-1
 page | 页码 | 默认为1
 size | 每页显示数 | 默认为10
 
@@ -320,9 +321,13 @@ size | 每页显示数 | 默认为10
   "total":15,
   "data": [
     {
-      "nickName": "cxk", // 评价用户昵称
-      "ranking": 3.8,
+      "nickName": "cxk",
+      "phone": "173****1233",
+      "ranking": 3.5,
       "content": "不错，不错，味道好极了",
+      "imgList": [
+        "1.jpg", "2.jpg"
+      ],
       "createTime": "2020-05-04 11:20:38"
     }
     // ...
