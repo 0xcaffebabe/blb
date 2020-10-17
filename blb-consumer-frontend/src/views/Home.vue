@@ -76,6 +76,7 @@ export default {
     z-index: 999;
     margin-top: -10px;
     margin-left: -64px;
+    transition: all 0.2s;
   }
   .nav-btns {
     position: fixed;
