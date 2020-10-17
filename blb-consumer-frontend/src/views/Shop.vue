@@ -10,7 +10,10 @@
           <el-tab-pane label="评价" name="eval">
             <shop-eval :shopId="shopId"/>
           </el-tab-pane>
-          <el-tab-pane label="商家" name="third">商家</el-tab-pane>
+          <el-tab-pane label="商家" name="third">
+            <p>店主：{{shopInfo.sellerName}}</p>
+            <p>联系电话：{{shopInfo.shopPhone}}</p>
+          </el-tab-pane>
         </el-tabs>
     </el-card>
     <!-- 购物车 -->
