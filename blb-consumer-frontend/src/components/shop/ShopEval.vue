@@ -2,12 +2,12 @@
   <el-row :gutter='20'>
     <el-col :span='18'>
       <el-card>
-        <el-tag class="eval-tag" type='primary' :effect='currentEval == -1 ?"dark":""' @click="handleTagClick(-1)">全部评价({{allEvalSum}})</el-tag>
+        <el-tag class="eval-tag" type='primary' :effect='currentEval == -1 ?"dark":"light"' @click="handleTagClick(-1)">全部评价({{allEvalSum}})</el-tag>
         <el-tag class="eval-tag"
         v-for='item in shopEval.wordCloud'
         :key='item.id'
         :type="!item.positive?'info':'primary'"
-        :effect="currentEval === item.id?'dark':''"
+        :effect="currentEval === item.id?'dark':'light'"
         @click="handleTagClick(item.id)"
         >{{item.content}}({{item.count}})</el-tag>
         <el-divider></el-divider>
@@ -20,7 +20,7 @@
               <el-col :span="22">
                 <span class="eval-date">{{item.createTime}}</span>
                 <h3>{{item.phone}}</h3>
-                <el-rate :value="item.ranking" disabled></el-rate>
+                <el-rate :value="parseFloat(item.ranking)" disabled></el-rate>
                 <p>{{item.content}}</p>
               </el-col>
             </el-row>
@@ -102,8 +102,7 @@ export default {
     handlePageChanged (val) {
       this.evalPage = val
       this.getShopEvalList()
-    }
-    ,
+    },
     handleSizeChanged (val) {
       this.evalPageSize = val
       this.getShopEvalList()
