@@ -10,9 +10,11 @@
         </div>
         <el-alert title="没有数据" v-if="productList.length == 0" :closable="false"></el-alert>
         <ul class="product-list">
-          <li v-for="item in productList" :key="item.productId">
-            <product-item :product="item" :shopId="shopId"/>
-          </li>
+          <transition-group name="list">
+            <li v-for="item in productList" :key="item.productId">
+              <product-item :product="item" :shopId="shopId"/>
+            </li>
+          </transition-group>
         </ul>
     </el-tab-pane>
   </el-tabs>
@@ -20,7 +22,6 @@
 
 <script>
 import shopService from '../../service/ShopService'
-
 import ProductItem from './ProductItem'
 export default {
   props: ['shopId'],
@@ -79,6 +80,18 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  .list-item {
+    display: inline-block;
+    margin-right: 10px;
+  }
+  .list-enter-active, .list-leave-active {
+    transition: all 1s;
+  }
+  .list-enter, .list-leave-to
+  /* .list-leave-active for below version 2.1.8 */ {
+    opacity: 0;
+    transform: translateY(30px);
+  }
   .el-tabs__item .is-left {
     height: 48px!important;
   }
