@@ -246,3 +246,60 @@ app.get('/shop/:id/evaluation',(req,res) => {
     wordCloud: wordcloud
   }))
 })
+
+const randomPhone = () => {
+  let str = "1"
+  str += randomInt(9) + ''
+          + randomInt(9)
+          + '****' +
+          + randomInt(9) + ''
+          + randomInt(9) + ''
+          + randomInt(9) + ''
+          + randomInt(9) + ''
+  return str          
+}
+
+// 获取店铺评价列表
+app.get('/shop/:id/evaluation/list', (req, res) => {
+  const userMetadata = ['Cxk', 'Xxl', 'My', 'Tyy', 'Pdd', 'E170D', 'Linus', 'Jack', 'Mary', 'JK', 'Rose']
+  const contentMetadata = [
+    '不错！味道好极了',
+    '店家服务态度不错！！',
+    '没有人比我更懂评论',
+    '分量足 态度优 好评！！！',
+    '菜品很多，很开心',
+    '第一次刷好评，好紧张啊啊啊！！！',
+    '第一次刷好评，好紧张啊啊啊！！！',
+    '太贵了 店家的服务态度也不好',
+    '这家店不咋地 还设有最低消费 太坑爹了'
+  ]
+  const imgMetadata = [
+    'https://p0.meituan.net/shaitu/45db245303e01827bc3aa29601e210261993453.jpg',
+    'https://p0.meituan.net/shaitu/737858962a1107d8b5f8949633cb590e1842248.jpg',
+    'https://p0.meituan.net/shaitu/1e6b0ea57aac00dfac4289911fee089f1859077.jpg',
+    'https://p0.meituan.net/shaitu/fb69315b261c3e359106c7dea74b93b44565738.jpg',
+    'https://p0.meituan.com/mtptimg/be50f88a38ae68a2a24773d7284da425112571.jpg'
+  ]
+  const evalSize = parseInt(req.query.size)
+  const evalList = []
+  for(let i =0;i<evalSize;i++){
+    const evaluation = {
+      evalId: i,
+      nickName: userMetadata[randomInt(userMetadata.length)],
+      phone: randomPhone(),
+      ranking: (Math.random() * 5).toFixed(1),
+      content: contentMetadata[randomInt(contentMetadata.length)],
+      createTime: new Date()
+    }
+    evaluation.imgList = []
+    const n = randomInt(imgMetadata.length) + 1
+    for(let j =0;j<n;j++){
+      evaluation.imgList.push(imgMetadata[randomInt(imgMetadata.length)])
+    }
+    evalList.push(evaluation)
+  }
+  res.send(result({
+    total: 1000,
+    data: evalList
+  }))
+})

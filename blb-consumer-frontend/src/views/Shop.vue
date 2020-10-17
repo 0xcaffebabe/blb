@@ -8,7 +8,7 @@
             <shop-product :shopId="shopId"/>
           </el-tab-pane>
           <el-tab-pane label="评价" name="eval">
-            <shop-eval/>
+            <shop-eval :shopId="shopId"/>
           </el-tab-pane>
           <el-tab-pane label="商家" name="third">商家</el-tab-pane>
         </el-tabs>

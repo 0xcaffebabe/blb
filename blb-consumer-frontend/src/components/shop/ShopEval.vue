@@ -2,40 +2,40 @@
   <el-row :gutter='20'>
     <el-col :span='18'>
       <el-card>
-        <el-tag class="eval-tag" type='primary' :effect='currentEval == -1 ?"dark":""' @click="currentEval = -1">全部评价({{allEvalSum}})</el-tag>
+        <el-tag class="eval-tag" type='primary' :effect='currentEval == -1 ?"dark":""' @click="handleTagClick(-1)">全部评价({{allEvalSum}})</el-tag>
         <el-tag class="eval-tag"
         v-for='item in shopEval.wordCloud'
         :key='item.id'
         :type="!item.positive?'info':'primary'"
         :effect="currentEval === item.id?'dark':''"
-        @click="currentEval = item.id"
+        @click="handleTagClick(item.id)"
         >{{item.content}}({{item.count}})</el-tag>
         <el-divider></el-divider>
         <ul class="eval-list">
-          <li v-for="item in 6" :key="item" class="eval-list-item">
+          <li v-for="item in evalList" :key="item.evalId" class="eval-list-item">
             <el-row>
               <el-col :span="2">
-                <el-avatar>user</el-avatar>
+                <el-avatar>{{item.nickName}}</el-avatar>
               </el-col>
               <el-col :span="22">
-                <span class="eval-date">2020-04-13</span>
-                <h3>173****3770</h3>
-                <el-rate :value="3.7" disabled></el-rate>
-                <p>不错，不错，味道好极了不错，不错，味道好极了不错，不错，味道好极了不错，不错，味道好极了</p>
+                <span class="eval-date">{{item.createTime}}</span>
+                <h3>{{item.phone}}</h3>
+                <el-rate :value="item.ranking" disabled></el-rate>
+                <p>{{item.content}}</p>
               </el-col>
             </el-row>
             <el-divider></el-divider>
           </li>
         </ul>
         <el-pagination
-          @size-change="handleSizeChange"
+          @size-change="handleSizeChanged"
           background
-          @current-change="handlePageChange"
-          :current-page="1"
+          @current-change="handlePageChanged"
+          :current-page="evalPage"
           :page-sizes="[2, 10, 20, 30]"
-          :page-size="2"
+          :page-size="evalPageSize"
           layout="total, sizes, prev, pager, next, jumper"
-          :total="1000">
+          :total="evalTotal">
         </el-pagination>
       </el-card>
     </el-col>
@@ -52,10 +52,15 @@
 <script>
 import shopService from '../../service/ShopService'
 export default {
+  props: ['shopId'],
   data () {
     return {
       shopEval: {},
-      currentEval: -1
+      evalList: [],
+      currentEval: -1,
+      evalPage: 1,
+      evalPageSize: 10,
+      evalTotal: 0
     }
   },
   computed: {
@@ -75,14 +80,42 @@ export default {
       try {
         const shopEval = await shopService.getShopEval(this.shopId)
         this.shopEval = shopEval
-        console.log(this.shopEval)
       } catch (e) {
         this.$message.error(e.message)
       }
+    },
+    async getShopEvalList () {
+      try {
+        const data = await shopService.getShopEvalList({
+          shopId: this.shopId,
+          tagId: this.currentEval,
+          page: this.evalPage,
+          size: this.evalPageSize
+        })
+        this.evalList = data.data
+        this.evalTotal = data.total
+        console.log(this.evalList)
+      } catch (e) {
+        this.$message.error(e.message)
+      }
+    },
+    handlePageChanged (val) {
+      this.evalPage = val
+      this.getShopEvalList()
+    }
+    ,
+    handleSizeChanged (val) {
+      this.evalPageSize = val
+      this.getShopEvalList()
+    },
+    handleTagClick (tagId) {
+      this.currentEval = tagId
+      this.getShopEvalList()
     }
   },
   created () {
     this.getShopEval()
+    this.getShopEvalList()
   }
 }
 </script>

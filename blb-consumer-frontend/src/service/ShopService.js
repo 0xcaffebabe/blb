@@ -64,5 +64,13 @@ class ShopService {
     }
     return data.data
   }
+
+  async getShopEvalList (params) {
+    const data = await repository.getShopEvalList(params)
+    if (!data.success) {
+      throw new Error('获取店铺评价列表失败:' + data.msg)
+    }
+    return data.data
+  }
 }
 export default new ShopService()
