@@ -22,6 +22,15 @@
                 <h3>{{item.phone}}</h3>
                 <el-rate :value="parseFloat(item.ranking)" disabled></el-rate>
                 <p>{{item.content}}</p>
+                <ul class="img-list">
+                  <li v-for="img in item.imgList" :key="img + Math.random()">
+                    <el-image
+                    :src="img"
+                    :preview-src-list="[img]"
+                    fit="cover"
+                    />
+                  </li>
+                </ul>
               </el-col>
             </el-row>
             <el-divider></el-divider>
@@ -159,6 +168,21 @@ export default {
     float: right;
     font-size: 12px;
     color: #666;
+  }
+}
+.img-list {
+  li {
+    display: inline-block;
+    overflow: hidden;
+    padding: 10px 10px;
+    .el-image {
+      box-shadow: 2px 2px 6px #bbb;
+      height: 88px;
+      width: 88px;
+      img {
+        border-radius: 5px;
+      }
+    }
   }
 }
 </style>
