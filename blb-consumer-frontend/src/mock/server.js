@@ -57,6 +57,14 @@ app.get('/category/:level', (req, res) => {
   ))
 })
 
+const randomInt = bound => {
+  return Math.ceil(Math.random() * bound) -1
+}
+
+const clone = origin => {
+  return Object.assign({}, origin)
+}
+
 // 随机生成店铺列表
 const generateShopList = (req, res) => {
   const metadata = [
@@ -70,7 +78,7 @@ const generateShopList = (req, res) => {
   ]
   const shopList = []
   for(let i = 0;i<req.query.size;i++){
-    shopList.push(Object.assign({}, metadata[Math.ceil(Math.random()*metadata.length) -1 ]))
+    shopList.push(Object.assign({}, metadata[randomInt(metadata.length)]))
   }
   for(let i = 0;i<shopList.length;i++){
     shopList[i].shopId = i
@@ -150,4 +158,60 @@ app.get('/shop/info/:id', (req, res) => {
     startingPrice: parseInt(Math.random() * 20),
     shopPhone: '17359561234'
   }))
+})
+
+// 获取店铺商品分类列表
+app.get('/shop/:id/category', (req,res) => {
+  const metadata = [
+    { categoryName: '🥘黄焖系列', categoryDesc: '本店招牌系列菜'},
+    { categoryName: '🍗快餐系列', categoryDesc: '做得快 凉得快'},
+    { categoryName: '🥣炖汤系列', categoryDesc: '美味营养炖汤'},
+    { categoryName: '🥗家常炒菜', categoryDesc: '十分钟内完成的炒菜'},
+    { categoryName: '🍔汉堡可乐', categoryDesc: '美味汉堡 肥宅快乐水'},
+    { categoryName: '🍜面食系列', categoryDesc: '精品小麦制成'},
+    { categoryName: '🍶奶茶饮品', categoryDesc: '美味汉堡 肥宅快乐水'},
+  ]
+  const categoryList = []
+  const n = randomInt(5) + 5
+  for(let i = 0;i<n;i++){
+    const category = clone(metadata[randomInt(metadata.length)])
+    category.categoryId = i
+    categoryList.push(category)
+  }
+  res.send(result(categoryList))
+})
+
+// 获取商品列表
+app.get('/shop/:id/:categoryId/product', (req, res) => {
+  const productMetadata = [
+    { productName: '黄焖鸡米饭', productImg: 'http://www.shang360.com/upload/item/20170829/77643495931503977103_m.jpg', productDesc: '香香甜甜的黄焖鸡米饭'},
+    { productName: '黄焖猪脚米饭', productImg: 'http://n1.itc.cn/img8/wb/smccloud/recom/2015/07/04/143597888154966028.JPEG', productDesc: '香香甜甜的黄焖脚米饭'},
+    { productName: '黄焖鸭米饭', productImg: 'https://cbu01.alicdn.com/img/ibank/2017/879/174/4278471978_452542804.jpg?__r__=1496373886684', productDesc: '香香甜甜的黄焖鸭米饭'},
+    { productName: '豪大大鸡排', productImg: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=414659565,1925804957&fm=26&gp=0.jpg', productDesc: '香喷喷的豪大大鸡排'},
+    { productName: '黄焖腐竹升级版', productImg: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589258470736&di=41b941d408e2c3fc07444825f27f8651&imgtype=0&src=http%3A%2F%2Fcmsimgshow.zhuchao.cc%2F20431%2F20151229025835.jpg%3Fpath%3Dwww.haokeqilu.cn%2Fuploads%2Fcp%2F20151229025835.jpg', productDesc: '升级版黄焖腐竹'},
+    { productName: '黄焖排骨', productImg: 'https://cp1.douguo.com/upload/caiku/5/9/5/690x390_59664ebdda727cb6d0e331851c053355.jpeg', productDesc: '香香甜甜的黄焖排骨'},
+  ]
+  const specMetadata = [
+    { specName: '大份' }, { specName: '小份'}, {specName: '中份'}
+  ]
+  const n = randomInt(5) + 5
+  const productList = []
+  for(let i = 0;i<n;i++){
+    const product = clone(productMetadata[randomInt(productMetadata.length)])
+    product.productId = i
+    product.sales = randomInt(200) + 50
+    product.positiveRate = randomInt(99)
+    product.productSpecList = []
+    const m = randomInt(3) + 1
+    for(let j =0;j<m;j++){
+      const spec = clone(specMetadata[randomInt(specMetadata.length)])
+      spec.specId = j
+      spec.packageFee = randomInt(2) + 3
+      spec.price = randomInt(20) + 5
+      spec.stock = randomInt(100) + 1
+      product.productSpecList.push(spec)
+    }
+    productList.push(product)
+  }
+  res.send(result(productList))
 })

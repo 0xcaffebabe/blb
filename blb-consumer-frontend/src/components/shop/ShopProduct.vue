@@ -51,6 +51,7 @@ export default {
       try {
         this.productList = await shopService.getProductList(this.shopId, categoryId)
       } catch (e) {
+        console.error(e)
         this.$message.error(e.message)
       }
     },
