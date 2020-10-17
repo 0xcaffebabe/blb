@@ -2,8 +2,14 @@
   <el-row :gutter='20'>
     <el-col :span='18'>
       <el-card>
-        <el-tag class="eval-tag" type='primary' effect='dark'>全部评价(473)</el-tag>
-        <el-tag class="eval-tag" v-for='item in tags' :key='item._id' :type="item.unsatisfied?'info':'primary'">{{item.name}}({{item.count}})</el-tag>
+        <el-tag class="eval-tag" type='primary' :effect='currentEval == -1 ?"dark":""' @click="currentEval = -1">全部评价({{allEvalSum}})</el-tag>
+        <el-tag class="eval-tag"
+        v-for='item in shopEval.wordCloud'
+        :key='item.id'
+        :type="!item.positive?'info':'primary'"
+        :effect="currentEval === item.id?'dark':''"
+        @click="currentEval = item.id"
+        >{{item.content}}({{item.count}})</el-tag>
         <el-divider></el-divider>
         <ul class="eval-list">
           <li v-for="item in 6" :key="item" class="eval-list-item">
@@ -21,91 +27,62 @@
             <el-divider></el-divider>
           </li>
         </ul>
+        <el-pagination
+          @size-change="handleSizeChange"
+          background
+          @current-change="handlePageChange"
+          :current-page="1"
+          :page-sizes="[2, 10, 20, 30]"
+          :page-size="2"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="1000">
+        </el-pagination>
       </el-card>
     </el-col>
     <el-col :span='6'>
       <el-card class='eval-info'>
-        <h2>4.1</h2>
+        <h2>{{shopEval.rating}}</h2>
         <p class='eval-avg'>综合评价</p>
-        <p class='rating'>高于周围87%的商家</p>
+        <p class='rating'>高于周围{{shopEval.wingRate}}%的商家</p>
       </el-card>
     </el-col>
   </el-row>
 </template>
 
 <script>
+import shopService from '../../service/ShopService'
 export default {
   data () {
     return {
-      tags: [
-        {
-          name: '全部',
-          _id: '5a22f885ec81ce77ee8449a3',
-          unsatisfied: false,
-          count: 473
-        },
-        {
-          name: '满意',
-          _id: '5a22f885ec81ce77ee8449a2',
-          unsatisfied: false,
-          count: 453
-        },
-        {
-          name: '不满意',
-          _id: '5a22f885ec81ce77ee8449a1',
-          unsatisfied: true,
-          count: 20
-        },
-        {
-          name: '有图',
-          _id: '5a22f885ec81ce77ee8449a0',
-          unsatisfied: false,
-          count: 2
-        },
-        {
-          name: '味道好',
-          _id: '5a22f885ec81ce77ee84499f',
-          unsatisfied: false,
-          count: 47
-        },
-        {
-          name: '送货快',
-          _id: '5a22f885ec81ce77ee84499e',
-          unsatisfied: false,
-          count: 32
-        },
-        {
-          name: '分量足',
-          _id: '5a22f885ec81ce77ee84499d',
-          unsatisfied: false,
-          count: 18
-        },
-        {
-          name: '包装精美',
-          _id: '5a22f885ec81ce77ee84499c',
-          unsatisfied: false,
-          count: 15
-        },
-        {
-          name: '干净卫生',
-          _id: '5a22f885ec81ce77ee84499b',
-          unsatisfied: false,
-          count: 15
-        },
-        {
-          name: '食材新鲜',
-          _id: '5a22f885ec81ce77ee84499a',
-          unsatisfied: false,
-          count: 15
-        },
-        {
-          name: '服务不错',
-          _id: '5a22f885ec81ce77ee844999',
-          unsatisfied: false,
-          count: 11
-        }
-      ]
+      shopEval: {},
+      currentEval: -1
     }
+  },
+  computed: {
+    allEvalSum () {
+      if (!this.shopEval.wordCloud) {
+        return 0
+      }
+      let sum = 0
+      for (let i = 0; i < this.shopEval.wordCloud.length; i++) {
+        sum += this.shopEval.wordCloud[i].count
+      }
+      return sum
+    }
+  },
+  methods: {
+    async getShopEval () {
+      try {
+        const shopEval = await shopService.getShopEval(this.shopId)
+        this.shopEval = shopEval
+        console.log(this.shopEval)
+      } catch (e) {
+        this.$message.error(e.message)
+      }
+    }
+  },
+  created () {
+    this.getShopEval()
   }
 }
 </script>
@@ -131,6 +108,8 @@ export default {
 .eval-tag {
   margin-right: 10px;
   margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.2s;
 }
 .eval-list-item {
   h3 {

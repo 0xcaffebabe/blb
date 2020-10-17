@@ -56,5 +56,13 @@ class ShopService {
     })
     return productList
   }
+
+  async getShopEval (shopId) {
+    const data = await repository.getShopEval(shopId)
+    if (!data.success) {
+      throw new Error('获取店铺评价失败:' + data.msg)
+    }
+    return data.data
+  }
 }
 export default new ShopService()

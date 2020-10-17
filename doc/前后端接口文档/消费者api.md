@@ -294,9 +294,9 @@ id | 店铺ID
   "rating": 4.7, // 店铺评分
   "wingRate": 99,
   "wordCloud": [
-    {"content": "味道好", "positive": true, "count": 100},
-    {"content": "干净卫生", "positive": true, "count": 123},
-    {"content": "价格便宜", "positive": true, "count": 9621}
+    {"id": 1, "content": "味道好", "positive": true, "count": 100},
+    {"id": 2, "content": "干净卫生", "positive": true, "count": 123},
+    {"id": 3, "content": "价格便宜", "positive": true, "count": 9621}
   ]
 }
 ```

@@ -236,6 +236,7 @@ app.get('/shop/:id/evaluation',(req,res) => {
   wordcloud = []
   for(let i = 0;i<n;i++){
     s = clone(metadata[randomInt(metadata.length)])
+    s.id = i
     s.count = randomInt(50) + 10
     wordcloud.push(s)
   }

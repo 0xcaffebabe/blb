@@ -81,6 +81,7 @@ export default {
   },
   created () {
     this.getShopInfo()
+    this.getShopEval()
   }
 }
 </script>
