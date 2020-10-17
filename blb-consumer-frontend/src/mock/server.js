@@ -215,3 +215,33 @@ app.get('/shop/:id/:categoryId/product', (req, res) => {
   }
   res.send(result(productList))
 })
+
+// 获取店铺评价信息
+app.get('/shop/:id/evaluation',(req,res) => {
+  const metadata = [
+    { content: "满意", positive: true},
+    { content: "不满意", positive: false},
+    { content: "有图", positive: true},
+    { content: "味道好", positive: true},
+    { content: "送货快", positive: true},
+    { content: "分量足", positive: true},
+    { content: "包装精美", positive: true},
+    { content: "干净卫生", positive: true},
+    { content: "食材新鲜", positive: true},
+    { content: "服务不错", positive: true},
+    { content: "态度恶劣", positive: false},
+    { content: "以次充好", positive: false},
+  ]
+  const n = randomInt(10) + 5
+  wordcloud = []
+  for(let i = 0;i<n;i++){
+    s = clone(metadata[randomInt(metadata.length)])
+    s.count = randomInt(50) + 10
+    wordcloud.push(s)
+  }
+  res.send(result({
+    rating: (Math.random() * 5).toFixed(2),
+    wingRate: randomInt(80) + 20,
+    wordCloud: wordcloud
+  }))
+})
