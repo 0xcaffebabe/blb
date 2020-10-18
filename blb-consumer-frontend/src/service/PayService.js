@@ -10,13 +10,17 @@ class PayService {
     return data.data
   }
 
-  async getPayQRCode (orderId) {
+  async getPayInfo (orderId) {
     const data = await repository.getPayUrl(orderId)
     if (!data.success) {
-      throw new Error('获取支付链接失败:' + data.msg)
+      throw new Error('获取支付信息失败:' + data.msg)
     }
-    const dataUrl = await qrcode.toDataURL(data.data)
-    return dataUrl
+    const dataUrl = await qrcode.toDataURL(data.data.url)
+    return {
+      url: dataUrl,
+      shopName: data.data.shopName,
+      orderId: data.data.orderId
+    }
   }
 
   async getPayStatus (payId) {

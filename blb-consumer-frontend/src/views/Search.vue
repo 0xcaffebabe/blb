@@ -14,6 +14,18 @@
       <el-button type="primary" style="margin-left:20px" @click="search">搜索</el-button>
     </el-card>
     <shop-list style="margin-top:10px" :title="'搜索结果'" :shopList="shopList"></shop-list>
+    <el-card v-if="shopList.length != 0" style="margin-top:10px">
+      <el-pagination
+      @size-change="handleSizeChange"
+      background
+      @current-change="handlePageChange"
+      :current-page="page"
+      :page-sizes="[5, 12, 20, 30]"
+      :page-size="size"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total">
+    </el-pagination>
+    </el-card>
   </div>
 </template>
 
@@ -24,7 +36,10 @@ export default {
   data () {
     return {
       input: '',
-      shopList: []
+      shopList: [],
+      page: 1,
+      size: 12,
+      total: 0
     }
   },
   components: {
@@ -46,17 +61,29 @@ export default {
       ]
     },
     handleSelect (item) {
-      this.$message.success(item.value)
+      this.search()
     },
     async search () {
       try {
         const data = await shopService.searchShop({
-          kw: this.input
+          kw: this.input,
+          page: this.page,
+          size: this.size
         })
+        console.log(data)
         this.shopList = data.data
+        this.total = data.total
       } catch (e) {
         this.$message.error(e.message)
       }
+    },
+    handleSizeChange (val) {
+      this.size = val
+      this.search()
+    },
+    handlePageChange (val) {
+      this.page = val
+      this.search()
     }
   }
 }

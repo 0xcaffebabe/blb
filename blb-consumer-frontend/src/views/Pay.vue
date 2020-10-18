@@ -2,10 +2,10 @@
   <div>
     <el-card>
       <div slot="header">
-        订单:华莱士(旧镇店)-368 990 455 266
+        订单:{{shopName}} - {{orderId}}
       </div>
       <div style="text-align:center">
-        <el-image :src="qrcode"></el-image>
+        <el-image :src="qrcode" style="width:256px;height:256px"></el-image>
         <p>支付状态:{{payStatus}}</p>
         <el-button type="primary" @click="$router.push('order')">已完成支付?</el-button>
       </div>
@@ -21,6 +21,7 @@ export default {
       orderId: this.$route.params.orderId,
       payId: '',
       qrcode: '',
+      shopName: '',
       timer: null,
       payStatus: '',
       shopInfo: this.$route.params.shopInfo
@@ -31,7 +32,10 @@ export default {
       try {
         this.payId = await payService.generatePay(this.orderId)
         if (this.payId) {
-          this.qrcode = await payService.getPayQRCode(this.payId)
+          const data = await payService.getPayInfo(this.payId)
+          this.qrcode = data.url
+          this.shopName = data.shopName
+          this.orderId = data.orderId
           if (this.qrcode) {
             this.timer = setInterval(async () => {
               const status = await payService.getPayStatus(this.payId)

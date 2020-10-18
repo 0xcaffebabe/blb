@@ -359,7 +359,7 @@ app.get('/delivery/default', (req, res) => {
 
 // 提交订单
 app.post('/shop/order', (req, res) => {
-  res.send(result({}))
+  res.send(result('1'))
 })
 
 // 生成支付
@@ -369,5 +369,23 @@ app.post('/pay/order/:orderId', (req, res) => {
 
 // 获取支付二维码
 app.get('/pay/:payId', (req, res) => {
-  res.send(result('http://baidu.com'))
+  res.send(result({
+    url: 'http://baidu.com',
+    shopName: '黄焖鸡米饭',
+    orderId: '368 990 455 266'
+  }))
+})
+
+// 查询支付状态
+app.get('/pay/status/:payId', (req, res) => {
+  res.send(result({
+    stats: 0,
+    msg: '等待支付'
+  }))
+})
+
+// 搜索店铺
+app.get('/shop/search',(req, res) => {
+  req.query.size = 12
+  generateShopList(req, res)
 })
