@@ -356,3 +356,18 @@ app.get('/delivery/default', (req, res) => {
     phone: "17350561123"
   }))
 })
+
+// 提交订单
+app.post('/shop/order', (req, res) => {
+  res.send(result({}))
+})
+
+// 生成支付
+app.post('/pay/order/:orderId', (req, res) => {
+  res.send(result('1'))
+})
+
+// 获取支付二维码
+app.get('/pay/:payId', (req, res) => {
+  res.send(result('http://baidu.com'))
+})
