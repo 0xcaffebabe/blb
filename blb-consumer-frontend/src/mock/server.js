@@ -283,6 +283,7 @@ app.get('/shop/:id/evaluation/list', (req, res) => {
   const evalSize = parseInt(req.query.size)
   const evalList = []
   for(let i =0;i<evalSize;i++){
+    const date = new Date()
     const evaluation = {
       evalId: i,
       nickName: userMetadata[randomInt(userMetadata.length)],

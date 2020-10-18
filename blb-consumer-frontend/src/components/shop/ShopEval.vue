@@ -18,7 +18,7 @@
                 <el-avatar>{{item.nickName}}</el-avatar>
               </el-col>
               <el-col :span="22">
-                <span class="eval-date">{{item.createTime}}</span>
+                <span class="eval-date">{{calcDate(item.createTime)}}</span>
                 <h3>{{item.phone}}</h3>
                 <el-rate :value="parseFloat(item.ranking)" disabled></el-rate>
                 <p>{{item.content}}</p>
@@ -60,6 +60,7 @@
 
 <script>
 import shopService from '../../service/ShopService'
+import moment from 'moment'
 export default {
   props: ['shopId'],
   data () {
@@ -107,6 +108,9 @@ export default {
       } catch (e) {
         this.$message.error(e.message)
       }
+    },
+    calcDate (date) {
+      return moment(date, 'YYYYMMDD').fromNow()
     },
     handlePageChanged (val) {
       this.evalPage = val
