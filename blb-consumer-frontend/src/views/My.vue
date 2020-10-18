@@ -24,9 +24,7 @@
           </el-card>
         </el-col>
         <el-col :span="16" class="my-right">
-          <el-card>
-            <div slot="header">任务中心</div>
-          </el-card>
+          <task-list/>
         </el-col>
       </el-row>
     </el-card>
@@ -36,6 +34,7 @@
 
 <script>
 import UserEditPane from '../components/my/UserEditPane'
+import TaskList from '../components/my/TaskList'
 import consumerService from '../service/ConsumerService'
 export default {
   data () {
@@ -67,7 +66,7 @@ export default {
     }
   },
   components: {
-    UserEditPane
+    UserEditPane, TaskList
   }
 }
 </script>
