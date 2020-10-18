@@ -17,7 +17,7 @@
         </el-tabs>
     </el-card>
     <!-- 购物车 -->
-    <shop-cart :cartShow="cartShow" :shopId="shopId" ref="shopCart" @loadComplete="handleCartLoadComplete"></shop-cart>
+    <shop-cart :cartShow="cartShow" :shopId="shopId" ref="shopCart" @loadComplete="handleCartLoadComplete" @handle-settlement="handleSettlementClick"></shop-cart>
     <!-- 侧边电梯 -->
     <div class="cart-bar">
       <el-badge :value="cartTotal">

@@ -304,3 +304,44 @@ app.get('/shop/:id/evaluation/list', (req, res) => {
     data: evalList
   }))
 })
+
+// 获取购物车列表
+app.get('/shop/:id/cart', (req, res) => {
+  const productMetadata = [
+    { productName: '黄焖鸡米饭', productImg: 'http://www.shang360.com/upload/item/20170829/77643495931503977103_m.jpg'},
+    { productName: '黄焖猪脚米饭', productImg: 'http://n1.itc.cn/img8/wb/smccloud/recom/2015/07/04/143597888154966028.JPEG'},
+    { productName: '黄焖鸭米饭', productImg: 'https://cbu01.alicdn.com/img/ibank/2017/879/174/4278471978_452542804.jpg?__r__=1496373886684'},
+    { productName: '豪大大鸡排', productImg: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=414659565,1925804957&fm=26&gp=0.jpg'},
+    { productName: '黄焖腐竹升级版', productImg: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589258470736&di=41b941d408e2c3fc07444825f27f8651&imgtype=0&src=http%3A%2F%2Fcmsimgshow.zhuchao.cc%2F20431%2F20151229025835.jpg%3Fpath%3Dwww.haokeqilu.cn%2Fuploads%2Fcp%2F20151229025835.jpg'},
+    { productName: '黄焖排骨', productImg: 'https://cp1.douguo.com/upload/caiku/5/9/5/690x390_59664ebdda727cb6d0e331851c053355.jpeg'},
+  ]
+  const specMetadata = ['大份', '中份', '小份']
+  const n = randomInt(8) + 5
+  const productList = []
+  for(let i = 0;i<n;i++){
+    const product = clone(productMetadata[randomInt(productMetadata.length)])
+    product.productId = i
+    product.specId = i
+    product.specName = specMetadata[randomInt(specMetadata.length)]
+    product.packageFee = randomInt(5) + 2
+    product.productQuantity = randomInt(4) + 1
+    product.productPrice = randomInt(20) + 5
+    productList.push(product)
+  }
+  res.send(result(productList))
+})
+
+// 加入购物车
+app.put('/shop/:id/cart/:productId/:specId', (req, res) => {
+  res.send(result({}))
+})
+
+// 删除购物车商品
+app.delete('/shop/:id/cart/:productId/:specId', (req, res) => {
+  res.send(result({}))
+})
+
+// 清空购物车
+app.delete('/shop/:id/cart', (req, res) => {
+  res.send(result({}))
+})

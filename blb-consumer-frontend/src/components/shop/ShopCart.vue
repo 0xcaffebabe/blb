@@ -7,7 +7,7 @@
     <el-card class="cart-card">
       <div slot="header" class="cart-header">
         <h2>购物车</h2>
-        <span class="amount">￥ 120.00</span>
+        <span class="amount">￥ {{productTotalAmount}} (不含包装费)</span>
         <el-button icon="el-icon-delete" type="danger" size="mini">清空</el-button>
       </div>
       <ul class="cart-list">
@@ -32,13 +32,14 @@
           <el-divider></el-divider>
         </li>
       </ul>
-      <el-button type="success" size="medium" style="margin-bottom:10px">结算</el-button>
+      <el-button type="success" size="medium" style="margin-bottom:10px" @click="handleSettlementClick">结算</el-button>
     </el-card>
   </el-drawer>
 </template>
 
 <script>
 import cartService from '../../service/CartService'
+import productService from '../../service/ProductService'
 export default {
   props: ['cartShow', 'shopId'],
   data () {
@@ -49,6 +50,9 @@ export default {
   computed: {
     lastProductAddTime () {
       return this.$store.state.lastProductAddTime
+    },
+    productTotalAmount () {
+      return productService.calcProductTotalAmount(this.productList)
     }
   },
   watch: {
@@ -71,6 +75,10 @@ export default {
     },
     getProductListLocal () {
       return this.productList
+    },
+    handleSettlementClick () {
+      this.$store.commit('toggleCart')
+      this.$emit('handle-settlement')
     }
   },
   created () {

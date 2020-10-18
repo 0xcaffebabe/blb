@@ -37,5 +37,10 @@ class ProductService {
     total += this.calcTotalPackageFee(productList)
     return total
   }
+
+  // 计算商品总价（不含包装费）
+  calcProductTotalAmount (productList) {
+    return this.calcTotalAmount(productList) - this.calcTotalPackageFee(productList)
+  }
 }
 export default new ProductService()
