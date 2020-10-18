@@ -345,3 +345,14 @@ app.delete('/shop/:id/cart/:productId/:specId', (req, res) => {
 app.delete('/shop/:id/cart', (req, res) => {
   res.send(result({}))
 })
+
+//获取默认收货地址
+app.get('/delivery/default', (req, res) => {
+  res.send(result({
+    deliveryId: 1,
+    building: "泉州师范学院软件学院",
+    detail: "男生宿舍B305",
+    realName: "蔡徐坤",
+    phone: "17350561123"
+  }))
+})

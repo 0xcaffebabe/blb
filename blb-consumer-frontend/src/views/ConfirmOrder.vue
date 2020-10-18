@@ -51,7 +51,7 @@
               </ul>
             </el-card>
             <el-card style="margin-top:10px">
-              <span>待支付:￥ 405.00</span>
+              <span>待支付:￥ {{totalAmount}}</span>
               <el-button type="success" style="margin-left:50px" @click="handleMakeOrder">确认下单</el-button>
             </el-card>
           </el-col>
@@ -65,6 +65,7 @@ import OrderProduct from '../components/order/OrderProduct'
 import consumerService from '../service/ConsumerService'
 import orderService from '../service/OrderService'
 import cartService from '../service/CartService'
+import productService from '../service/ProductService'
 export default {
   data () {
     return {
@@ -91,6 +92,11 @@ export default {
     this.productList = this.$route.params.productList
     this.orderForm.productList = this.productList
     this.getDefaultDelivery()
+  },
+  computed: {
+    totalAmount () {
+      return productService.calcTotalAmount(this.productList)
+    }
   },
   methods: {
     async getDefaultDelivery () {
