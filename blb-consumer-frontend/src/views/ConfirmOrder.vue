@@ -15,7 +15,7 @@
                   <span class="el-icon-location location-icon"></span>
                 </el-col>
                 <el-col :span="18">
-                  <strong>{{delivery.realName}}</strong> <span style="font-size:14px">先生/女士</span> <span class="phone">17359561234</span>
+                  <strong>{{delivery.realName}}</strong> <span style="font-size:14px">先生/女士</span> <span class="phone">{{delivery.phone}}</span>
                   <p class="address">{{delivery.building}} {{delivery.detail}}</p>
                 </el-col>
                 <el-col :span="2">
