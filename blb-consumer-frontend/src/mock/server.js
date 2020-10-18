@@ -305,8 +305,7 @@ app.get('/shop/:id/evaluation/list', (req, res) => {
   }))
 })
 
-// 获取购物车列表
-app.get('/shop/:id/cart', (req, res) => {
+const generateProductList = () => {
   const productMetadata = [
     { productName: '黄焖鸡米饭', productImg: 'http://www.shang360.com/upload/item/20170829/77643495931503977103_m.jpg'},
     { productName: '黄焖猪脚米饭', productImg: 'http://n1.itc.cn/img8/wb/smccloud/recom/2015/07/04/143597888154966028.JPEG'},
@@ -328,7 +327,13 @@ app.get('/shop/:id/cart', (req, res) => {
     product.productPrice = randomInt(20) + 5
     productList.push(product)
   }
-  res.send(result(productList))
+  return productList
+}
+
+// 获取购物车列表
+app.get('/shop/:id/cart', (req, res) => {
+  
+  res.send(result(generateProductList()))
 })
 
 // 加入购物车
@@ -388,4 +393,64 @@ app.get('/pay/status/:payId', (req, res) => {
 app.get('/shop/search',(req, res) => {
   req.query.size = 12
   generateShopList(req, res)
+})
+
+// 获取订单列表
+app.get('/shop/order', (req, res) => {
+  const shopMetadata = [
+    {shopLogo: 'https://p0.meituan.net/bbia/c63505335fd950e3a56d352fe4be41eb138325.jpg@220w_125h_1e_1c', shopName: '米兰西饼生日蛋糕'},
+    {shopLogo: 'https://p1.meituan.net/600.600/shopmainpic/6cb402acf097539bb9f1a9be49a023e3124761.jpg@220w_125h_1e_1c', shopName: 'e+咖啡私人影院'},
+    {shopLogo: 'https://p0.meituan.net/600.600/deal/__12303698__9660676.jpg@220w_125h_1e_1c', shopName: '57°C湘'},
+    {shopLogo: 'https://img.meituan.net/msmerchant/54fb990f3c02532a3255f020c82edc9f1432759.png@220w_125h_1e_1c', shopName: '火锅咖·自选火锅'},
+    {shopLogo: 'https://p0.meituan.net/600.600/bbia/c58ff676ad214e99f39de19e682e96c5606999.jpg@220w_125h_1e_1c', shopName: '元品咖啡'},
+    {shopLogo: 'https://img.meituan.net/600.600/msmerchant/176c18daf749328483e2754a4e898e1443278.jpg@220w_125h_1e_1c', shopName: '哈尼小站'},
+    {shopLogo: 'https://img.meituan.net/600.600/msmerchant/82843020c1277ed2fa7620b2b1c385b9175314.jpg@220w_125h_1e_1c', shopName: '德克士'},
+  ]
+  const productMetadata = [
+    '黄焖鸡米饭','黄焖猪脚米饭','黄焖鸭米饭','豪大大鸡排','黄焖腐竹升级版','黄焖排骨','冰阔乐','菊花茶','红牛','香辣鸡腿堡'
+  ]
+  const n = parseInt(req.query.size)
+  const orderList = []
+  for(let i = 0;i<n;i++){
+    const order = clone(shopMetadata[randomInt(shopMetadata.length)])
+    order.orderId = i
+    order.shopId = i
+    order.orderAmount = randomInt(50) + 10
+    order.orderStatus = randomInt(4)
+    const productCount = randomInt(10) + 1
+    if (productCount == 1) {
+      order.orderDesc = productMetadata[randomInt(productMetadata.length)] + '等 1 件'
+    }else {
+      order.orderDesc = productMetadata[randomInt(productMetadata.length)]
+        + ' + ' + productMetadata[randomInt(productMetadata.length)] + ' 等 ' + productCount + '件'
+    }
+    order.createTime = new Date()
+    orderList.push(order)
+  }
+  res.send(result({
+    total: 1000,
+    data: orderList
+  }))
+})
+
+// 获取订单详情
+app.get('/shop/order/:orderId', (req, res) => {
+  const productList = generateProductList()
+  const order = {
+    orderId: 1,
+    shopId: 1,
+    shopName: '米兰西饼生日蛋糕',
+    shopLogo: 'https://p0.meituan.net/bbia/c63505335fd950e3a56d352fe4be41eb138325.jpg@220w_125h_1e_1c',
+    deliveryFee: randomInt(5) + 2,
+    productList,
+    orderAmount: randomInt(300) + 50,
+    consumerAddress: '泉州软件学院 男生宿舍B305',
+    consumerName: '蔡徐坤',
+    consumerPhone: '173599567123',
+    orderNote: '芋圆波波奶茶不要芋圆不要奶茶',
+    orderStatus: randomInt(4),
+    payStatus: randomInt(4),
+    createTime: new Date()
+  }
+  res.send(result(order))
 })

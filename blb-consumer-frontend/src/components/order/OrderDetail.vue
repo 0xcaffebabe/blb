@@ -6,7 +6,7 @@
     width="80%">
       <el-row :gutter="20">
         <el-col :span="20">
-          <order-product :productList="order.productList" :shopInfo="{shopName: order.shopName}"/>
+          <order-product :productList="order.productList" :shopInfo="{shopName: order.shopName, deliveryFee: order.deliveryFee}"/>
         </el-col>
         <el-col :span="4">
           <el-card class="order-detail-header">

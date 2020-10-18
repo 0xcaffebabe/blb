@@ -523,7 +523,7 @@ size | 每页展示数 | 默认为12
 ## 获取订单列表
 
 - 方式：get
-- url：/order
+- url：/shop/order
 - 请求参数
 
 参数名     | 参数说明   | 备注
@@ -534,19 +534,23 @@ size | 每页展示数 | 默认为10
 - 响应参数
 
 ```json
-[
-  {
-    "orderId":1,
-    "shopId": 1,
-    "shopName": "黄焖鸡米饭",
-    "shopLogo": "blb.com/1.jpg",
-    "orderAmount": 52.5,
-    "payStatus": 0,
-    "orderDesc": "黄焖鸡米饭 + 菊花茶 等 2件",
-    "createTime": "2020-05-05 20:07:06"
-  }
-  //...
-]
+{
+  "total": 1000,
+  "data":
+  [
+    {
+      "orderId":1,
+      "shopId": 1,
+      "shopName": "黄焖鸡米饭",
+      "shopLogo": "blb.com/1.jpg",
+      "orderAmount": 52.5,
+      "payStatus": 0,
+      "orderDesc": "黄焖鸡米饭 + 菊花茶 等 2件",
+      "createTime": "2020-05-05 20:07:06"
+    }
+    //...
+  ]
+}
 ```
 
 ## 获取订单详情
@@ -576,6 +580,7 @@ size | 每页展示数 | 默认为10
   "orderAmount": 305.90,
   "consumerAddress": "泉州软件学院 男生宿舍B305",
   "consumerName":"蔡徐坤",
+  "packageFee": 5,
   "consumerPhone":"173599567123",
   "orderNote": "芋圆波波奶茶不要芋圆不要奶茶",
   "orderStaut":0,
