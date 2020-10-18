@@ -15,12 +15,12 @@
           <div class="food-category-title">
             <img :src="item.categoryImg" alt="" width="20">
             <span> {{item.categoryName}}</span>
-            <el-tag type="info" size="mini">2264</el-tag>
+            <el-tag type="primary" size="mini">{{item.shopCount}}</el-tag>
           </div>
         </template>
         <el-menu-item :index="'/list/' + item1.categoryId" v-for="item1 in item.subCategoryList" :key="item1.categoryId">
           {{item1.categoryName}}
-          <span style="float:right">2075</span>
+          <span style="float:right">{{item1.shopCount}}</span>
         </el-menu-item>
       </el-submenu>
     </el-menu>

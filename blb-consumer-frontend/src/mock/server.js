@@ -42,14 +42,18 @@ app.get('/category/:level', (req, res) => {
       categoryImg: topMenuList[i].categoryImg,
     };
     const subCategoryList = []
+    let shopCount = 0
     for(let j = 0;j < subMenuList[i].length; j++){
       const subCategory = {
         categoryId: i + '' + j,
-        categoryName: subMenuList[i][j]
+        categoryName: subMenuList[i][j],
+        shopCount: randomInt(500) + 50
       }
+      shopCount += subCategory.shopCount
       subCategoryList.push(subCategory)
     }
     category.subCategoryList = subCategoryList
+    category.shopCount = shopCount
     categoryList.push(category)
   }
   res.send(result(

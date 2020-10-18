@@ -10,7 +10,7 @@
       :page-sizes="[5, 10, 20, 30]"
       :page-size="size"
       layout="total, sizes, prev, pager, next, jumper"
-      :total="11">
+      :total="total">
     </el-pagination>
     </el-card>
     <order-detail :show="orderDetailShow" @close="handleDetailClose" :order="orderDetail"></order-detail>

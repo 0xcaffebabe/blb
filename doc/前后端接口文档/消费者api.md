@@ -45,11 +45,13 @@ level | 目录层级 | 可选值 1 2 3
     "categoryId": 1,
     "categoryName": "顶级目录",
     "categoryImg": "blb.com/1.jpg",
+    "shopCount": 2580,
     "subCategoryList": [
       {
         "categoryId": 1,
         "categoryName": "二级目录",
         "categoryImg": "blb.com/1.jpg",
+        "shopCount": 2580,
         "subCategoryList": [...]
       }
       // ...
