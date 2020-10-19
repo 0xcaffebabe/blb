@@ -3,6 +3,7 @@ package wang.ismy.blb.impl.pay;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.RestController;
 import wang.ismy.blb.api.pay.PayApi;
+import wang.ismy.blb.api.pay.pojo.PayInfoDTO;
 import wang.ismy.blb.api.pay.pojo.PayStatusDTO;
 import wang.ismy.blb.common.SystemConstant;
 import wang.ismy.blb.common.result.Result;
@@ -27,7 +28,7 @@ public class PayApiImpl implements PayApi {
     }
 
     @Override
-    public Result<String> pay(Long payId) {
+    public Result<PayInfoDTO> pay(Long payId) {
         return Result.success(payService.pay(payId));
     }
 

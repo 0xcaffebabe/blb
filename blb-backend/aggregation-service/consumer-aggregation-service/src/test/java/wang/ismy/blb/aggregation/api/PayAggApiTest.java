@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import wang.ismy.blb.aggregation.client.PayApiClient;
+import wang.ismy.blb.api.pay.pojo.PayInfoDTO;
 import wang.ismy.blb.api.pay.pojo.PayStatusDTO;
 import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.common.util.JsonUtils;
@@ -41,11 +42,12 @@ class PayAggApiTest {
     @Test
     void pay() throws Exception {
         String payId = "1";
-        when(payApiClient.pay(eq(Long.parseLong(payId)))).thenReturn(Result.success("url"));
+        PayInfoDTO payInfo = MockUtils.create(PayInfoDTO.class);
+        when(payApiClient.pay(eq(Long.parseLong(payId)))).thenReturn(Result.success(payInfo));
         mockMvc.perform(get("/pay/"+payId)
         )
                 .andExpect(status().isOk())
-                .andExpect(content().json(JsonUtils.parse(Result.success("url"))));
+                .andExpect(content().json(JsonUtils.parse(Result.success(payInfo))));
     }
 
     @Test

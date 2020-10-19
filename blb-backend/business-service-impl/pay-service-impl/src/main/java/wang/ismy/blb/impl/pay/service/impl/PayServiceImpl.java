@@ -1,7 +1,6 @@
 package wang.ismy.blb.impl.pay.service.impl;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -9,11 +8,13 @@ import wang.ismy.blb.api.auth.UserTypeEnum;
 import wang.ismy.blb.api.order.enums.PayStatusEnum;
 import wang.ismy.blb.api.pay.enums.PayTypeEnum;
 import wang.ismy.blb.api.pay.pojo.PayDO;
+import wang.ismy.blb.api.pay.pojo.PayInfoDTO;
 import wang.ismy.blb.api.pay.pojo.PayStatusDTO;
 import wang.ismy.blb.common.BlbException;
 import wang.ismy.blb.common.SnowFlake;
 import wang.ismy.blb.impl.pay.client.AuthApiClient;
 import wang.ismy.blb.impl.pay.client.OrderApiClient;
+import wang.ismy.blb.impl.pay.client.ShopApiClient;
 import wang.ismy.blb.impl.pay.pojo.PayResultDTO;
 import wang.ismy.blb.impl.pay.repository.PayRepository;
 import wang.ismy.blb.impl.pay.service.PayService;
@@ -34,6 +35,7 @@ public class PayServiceImpl implements PayService {
     private final PayRepository payRepository;
     private AuthApiClient authApiClient;
     private OrderApiClient orderApiClient;
+    private ShopApiClient shopApiClient;
     private final SnowFlake snowFlake;
     private AliPayService aliPayService;
     @Override
@@ -76,12 +78,26 @@ public class PayServiceImpl implements PayService {
     }
 
     @Override
-    public String pay(Long payId) {
+    public PayInfoDTO pay(Long payId) {
         PayDO payDO = payRepository.findById(payId).orElseThrow(()->new BlbException("支付单不存在"));
         if (!payDO.getPayType().equals(PayTypeEnum.ALI_PAY.getType())){
             throw new BlbException("暂不支持此类型的支付");
         }
-        return aliPayService.generatePay(payDO);
+        String qrCode = aliPayService.generatePay(payDO);
+        PayInfoDTO payInfo = new PayInfoDTO();
+        payInfo.setUrl(qrCode);
+        payInfo.setOrderId(payDO.getOrderId());
+        var orderRes = orderApiClient.getOrder(payDO.getOrderId());
+        if (!orderRes.getSuccess()){
+            log.warn("获取订单 {} 信息失败:{}", payDO.getOrderId(), orderRes);
+        }
+        var shopRes = shopApiClient.getShopInfo(orderRes.getData().getShopId());
+        if (!shopRes.getSuccess()){
+            log.warn("获取订单信息时获取店铺信息失败：{}", shopRes);
+        }else {
+            payInfo.setShopName(shopRes.getData().getShopName());
+        }
+        return payInfo;
     }
 
     @Override

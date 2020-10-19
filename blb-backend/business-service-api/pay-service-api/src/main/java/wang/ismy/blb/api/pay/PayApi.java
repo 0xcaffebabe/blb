@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import wang.ismy.blb.api.pay.pojo.PayInfoDTO;
 import wang.ismy.blb.api.pay.pojo.PayStatusDTO;
 import wang.ismy.blb.common.enums.ResultCode;
 import wang.ismy.blb.common.result.Result;
@@ -42,10 +43,10 @@ public interface PayApi {
      * @param payId
      * @return 支付页面URL
      */
-    @ApiOperation("根据支付ID获取支付URL")
+    @ApiOperation("根据支付ID获取支付信息")
     @ApiImplicitParam(paramType = "path", name = "payId", dataType = "Long", required = true, value = "支付ID")
     @GetMapping("/{payId}")
-    Result<String> pay(@PathVariable("payId") Long payId);
+    Result<PayInfoDTO> pay(@PathVariable("payId") Long payId);
 
     /**
      * 获取支付单支付状态
@@ -84,7 +85,7 @@ public interface PayApi {
         }
 
         @Override
-        public Result<String> pay(Long payId) {
+        public Result<PayInfoDTO> pay(Long payId) {
             return Result.failure(ResultCode.INTERFACE_INNER_INVOKE_ERROR.getCode(),"调用 支付服务 支付接口失败");
         }
 

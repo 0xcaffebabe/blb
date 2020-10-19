@@ -1,5 +1,6 @@
 package wang.ismy.blb.impl.pay.service;
 
+import wang.ismy.blb.api.pay.pojo.PayInfoDTO;
 import wang.ismy.blb.api.pay.pojo.PayStatusDTO;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,11 +21,11 @@ public interface PayService {
     Long generatePay(String token, Long orderId, Integer type);
 
     /**
-     * 支付
+     * 获取支付信息
      * @param payId
-     * @return 二维码或者跳转地址
+     * @return 支付信息
      */
-    String pay(Long payId);
+    PayInfoDTO pay(Long payId);
 
     /**
      * 第三方支付机构回调接口

@@ -7,6 +7,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import wang.ismy.blb.aggregation.client.PayApiClient;
 import wang.ismy.blb.api.pay.enums.PayTypeEnum;
+import wang.ismy.blb.api.pay.pojo.PayInfoDTO;
 import wang.ismy.blb.api.pay.pojo.PayStatusDTO;
 import wang.ismy.blb.common.result.Result;
 
@@ -29,7 +30,7 @@ public class PayAggApi {
 
     @ApiOperation("获取支付二维码")
     @GetMapping("{payId}")
-    public Result<String> pay(@PathVariable Long payId){
+    public Result<PayInfoDTO> pay(@PathVariable Long payId){
         return payApiClient.pay(payId);
     }
 

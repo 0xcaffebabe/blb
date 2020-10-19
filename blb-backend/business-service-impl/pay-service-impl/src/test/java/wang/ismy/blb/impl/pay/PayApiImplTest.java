@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import wang.ismy.blb.api.pay.enums.PayTypeEnum;
+import wang.ismy.blb.api.pay.pojo.PayInfoDTO;
 import wang.ismy.blb.api.pay.pojo.PayStatusDTO;
 import wang.ismy.blb.common.SystemConstant;
 import wang.ismy.blb.common.result.Result;
@@ -51,13 +52,13 @@ class PayApiImplTest {
     @Test
     void pay() throws Exception {
         Long payId = 1L;
-        String ret = "pay string";
-        when(payService.pay(eq(payId))).thenReturn(ret);
+        PayInfoDTO payInfo = MockUtils.create(PayInfoDTO.class);
+        when(payService.pay(eq(payId))).thenReturn(payInfo);
 
         mockMvc.perform(get("/v1/api/" + payId)
         )
                 .andExpect(status().isOk())
-                .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.success(ret))));
+                .andExpect(content().json(new ObjectMapper().writeValueAsString(Result.success(payInfo))));
     }
 
     @Test

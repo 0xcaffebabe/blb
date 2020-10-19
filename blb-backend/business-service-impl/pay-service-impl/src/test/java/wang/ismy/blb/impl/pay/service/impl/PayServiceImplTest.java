@@ -11,10 +11,13 @@ import wang.ismy.blb.api.auth.UserTypeEnum;
 import wang.ismy.blb.api.order.pojo.dto.OrderResultDTO;
 import wang.ismy.blb.api.order.pojo.entity.OrderDO;
 import wang.ismy.blb.api.pay.pojo.PayDO;
+import wang.ismy.blb.api.pay.pojo.PayInfoDTO;
 import wang.ismy.blb.api.pay.pojo.PayStatusDTO;
+import wang.ismy.blb.api.shop.pojo.dto.ShopInfoDTO;
 import wang.ismy.blb.common.result.Result;
 import wang.ismy.blb.impl.pay.client.AuthApiClient;
 import wang.ismy.blb.impl.pay.client.OrderApiClient;
+import wang.ismy.blb.impl.pay.client.ShopApiClient;
 import wang.ismy.blb.impl.pay.pojo.PayResultDTO;
 import wang.ismy.blb.impl.pay.repository.PayRepository;
 
@@ -69,10 +72,22 @@ class PayServiceImplTest {
     void pay() {
         Long payId = 1L;
         AliPayService aliPayService = mock(AliPayService.class);
+        ShopApiClient shopApiClient = mock(ShopApiClient.class);
+        OrderApiClient orderApiClient = mock(OrderApiClient.class);
         when(aliPayService.generatePay(any())).thenReturn("qr code");
+        OrderResultDTO order = new OrderResultDTO();
+        order.setShopId(1L);
+        when(orderApiClient.getOrder(eq(1L))).thenReturn(Result.success(order));
+        ShopInfoDTO shop = new ShopInfoDTO();
+        shop.setShopName("黄焖鸡米饭");
+        when(shopApiClient.getShopInfo(eq(1L))).thenReturn(Result.success(shop));
         payService.setAliPayService(aliPayService);
-        String code = payService.pay(payId);
-        assertEquals("qr code",code);
+        payService.setShopApiClient(shopApiClient);
+        payService.setOrderApiClient(orderApiClient);
+        PayInfoDTO payInfo = payService.pay(payId);
+        assertEquals("黄焖鸡米饭", payInfo.getShopName());
+        assertEquals("qr code", payInfo.getUrl());
+        assertEquals(1L, payInfo.getOrderId());
     }
 
     @Test
