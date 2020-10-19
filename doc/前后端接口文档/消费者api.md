@@ -623,13 +623,15 @@ newPassword | 新密码
 - 响应参数
 
 ```json
-{
-  "deliveryId": 1,
-  "building": "泉州软件学院",
-  "detail": "男生宿舍B305",
-  "realName": "蔡徐坤",
-  "phone": "173956173456"
-}
+[
+  {
+    "deliveryId": 1,
+    "building": "泉州软件学院",
+    "detail": "男生宿舍B305",
+    "realName": "蔡徐坤",
+    "phone": "173956173456"
+  }
+]
 ```
 
 ## 更新收货信息

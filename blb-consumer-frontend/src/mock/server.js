@@ -458,3 +458,58 @@ app.get('/shop/order/:orderId', (req, res) => {
   }
   res.send(result(order))
 })
+
+// 更新用户信息
+app.post('/info', (req, res) => {
+  res.send(result({}))
+})
+
+// 修改用户密码
+app.post('/info/password', (req, res) => {
+  res.send(result({}))
+})
+
+// 拉取收货信息列表
+app.get('/delivery', (req, res) => {
+  const addressMetadata = [
+    { building: '泉州师范学院软件学院', detail: '男生宿舍B306'},
+    { building: '鲤城区媒人桥路2号', detail: '男生宿舍B305'},
+    { building: '南环路媒人桥河', detail: '马路边第13根柱子'},
+  ]
+  const personMetadata = [
+    { realName: '蔡徐坤', phone: '1731231234'},
+    { realName: '徐雪莉', phone: '1731238888'},
+    { realName: '刘云峰', phone: '1731239876'},
+  ]
+  const n = randomInt(5) + 3
+  const deliveryList = []
+  for(let i = 0;i<n;i++){
+    const delivery = clone(addressMetadata[randomInt(addressMetadata.length)])
+    const person = clone(personMetadata[randomInt(personMetadata.length)])
+    delivery.deliveryId = i
+    delivery.realName = person.realName
+    delivery.phone = person.phone
+    deliveryList.push(delivery)
+  }
+  res.send(result(deliveryList))
+})
+
+// 更新收货信息
+app.put('/delivery/:deliveryId', (req, res) => {
+  res.send(result({}))
+})
+
+// 新增收货信息
+app.post('/delivery', (req, res) => {
+  res.send(result({}))
+})
+
+// 删除收货信息
+app.delete('/delivery/:deliveryId', (req, res) => {
+  res.send(result({}))
+})
+
+// 头像上传
+app.post('/avatar', (req, res) => {
+  res.send(result({}))
+})
