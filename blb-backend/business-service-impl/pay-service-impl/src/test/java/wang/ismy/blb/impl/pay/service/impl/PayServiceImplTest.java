@@ -24,6 +24,7 @@ import wang.ismy.blb.impl.pay.repository.PayRepository;
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -77,6 +78,7 @@ class PayServiceImplTest {
         when(aliPayService.generatePay(any())).thenReturn("qr code");
         OrderResultDTO order = new OrderResultDTO();
         order.setShopId(1L);
+        order.setOrderDetailList(new ArrayList<>());
         when(orderApiClient.getOrder(eq(1L))).thenReturn(Result.success(order));
         ShopInfoDTO shop = new ShopInfoDTO();
         shop.setShopName("黄焖鸡米饭");
