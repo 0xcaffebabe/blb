@@ -9,13 +9,13 @@ import org.springframework.test.context.junit4.SpringRunner;
 import wang.ismy.blb.api.auth.User;
 import wang.ismy.blb.api.auth.UserTypeEnum;
 import wang.ismy.blb.api.cache.CacheService;
-import wang.ismy.blb.api.consumer.ConsumerApi;
 import wang.ismy.blb.api.consumer.pojo.dto.ConsumerDTO;
 import wang.ismy.blb.api.order.enums.OrderStatusEnum;
 import wang.ismy.blb.api.order.pojo.dto.OrderDetailItemDTO;
 import wang.ismy.blb.api.order.pojo.dto.OrderResultDTO;
 import wang.ismy.blb.api.product.pojo.dto.eval.EvalCreateDTO;
 import wang.ismy.blb.api.product.pojo.dto.eval.ShopEvalInfo;
+import wang.ismy.blb.api.product.pojo.dto.eval.WordCloudEntry;
 import wang.ismy.blb.common.SnowFlake;
 import wang.ismy.blb.common.result.Pageable;
 import wang.ismy.blb.common.result.Result;
@@ -29,7 +29,6 @@ import wang.ismy.blb.impl.product.repository.ProductRepository;
 import wang.ismy.blb.impl.product.service.ElasticsearchService;
 import wang.ismy.blb.impl.product.service.ProductEvalService;
 
-import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -83,8 +82,8 @@ class ProductEvalServiceImplTest {
         Long shopId = 1L;
         CacheService cacheService = mock(CacheService.class);
         ShopEvalInfo info = new ShopEvalInfo();
-        info.setWordCloud(List.of("好吃","垃圾"));
-        info.setRanking(new BigDecimal("3.5"));
+        info.setWordCloud(MockUtils.create(WordCloudEntry.class,10));
+        info.setRating(new BigDecimal("3.5"));
 
         ElasticsearchService elasticsearchService = mock(ElasticsearchService.class);
         ProductEvalServiceImpl productEvalService = new ProductEvalServiceImpl(evaluationRepository, cacheService,elasticsearchService,null,null,null,null,null);
@@ -99,11 +98,10 @@ class ProductEvalServiceImplTest {
         CacheService cacheService = mock(CacheService.class);
 
         ElasticsearchService elasticsearchService = mock(ElasticsearchService.class);
-        ProductEvalServiceImpl productEvalService = new ProductEvalServiceImpl(evaluationRepository, cacheService,elasticsearchService,null,null,null,null,null);
+        ProductEvalServiceImpl productEvalService = new ProductEvalServiceImpl(evaluationRepository, cacheService,elasticsearchService,null,null,null,null,new SnowFlake(1,1));
         when(elasticsearchService.getWordCloud(anyString())).thenReturn(List.of("满意","难吃"));
         var info = productEvalService.getShopEvalInfo(shopId);
-        assertEquals(new BigDecimal("3.5"),info.getRanking());
-        assertEquals(List.of("满意","难吃"),info.getWordCloud());
+        assertEquals(new BigDecimal("3.5"),info.getRating());
 
     }
 

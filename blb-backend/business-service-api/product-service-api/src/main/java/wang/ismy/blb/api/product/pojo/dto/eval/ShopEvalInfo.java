@@ -15,7 +15,10 @@ import java.util.List;
 @ApiModel("店铺评价信息")
 public class ShopEvalInfo {
     @ApiModelProperty("综合评价分数")
-    private BigDecimal ranking;
+    private BigDecimal rating;
+
+    private Double winningRate;
+
     @ApiModelProperty("词云列表")
-    private List<String> wordCloud;
+    private List<WordCloudEntry> wordCloud;
 }

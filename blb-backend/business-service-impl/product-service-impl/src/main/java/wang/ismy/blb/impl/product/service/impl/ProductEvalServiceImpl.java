@@ -2,8 +2,6 @@ package wang.ismy.blb.impl.product.service.impl;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.io.input.NullInputStream;
-import org.bouncycastle.asn1.x509.KeyUsage;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -11,15 +9,13 @@ import org.springframework.util.CollectionUtils;
 import wang.ismy.blb.api.auth.UserTypeEnum;
 import wang.ismy.blb.api.cache.CacheService;
 import wang.ismy.blb.api.order.enums.OrderStatusEnum;
-import wang.ismy.blb.api.order.pojo.dto.OrderCreateDTO;
 import wang.ismy.blb.api.order.pojo.dto.OrderDetailItemDTO;
-import wang.ismy.blb.api.product.pojo.ProductDO;
 import wang.ismy.blb.api.product.pojo.ProductEvaluationDO;
 import wang.ismy.blb.api.product.pojo.dto.eval.ConsumerEvalItem;
 import wang.ismy.blb.api.product.pojo.dto.eval.EvalCreateDTO;
 import wang.ismy.blb.api.product.pojo.dto.eval.ShopEvalInfo;
+import wang.ismy.blb.api.product.pojo.dto.eval.WordCloudEntry;
 import wang.ismy.blb.common.SnowFlake;
-import wang.ismy.blb.common.SystemConstant;
 import wang.ismy.blb.common.result.Page;
 import wang.ismy.blb.common.result.Pageable;
 import wang.ismy.blb.impl.product.ProductConstant;
@@ -35,8 +31,10 @@ import javax.transaction.Transactional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
 import java.util.stream.Collectors;
 
 /**
@@ -99,9 +97,18 @@ public class ProductEvalServiceImpl implements ProductEvalService {
         }
         List<String> wordCloud = elasticsearchService.getWordCloud(text.toString());
         info = new ShopEvalInfo();
-        info.setRanking(score);
-        info.setWordCloud(wordCloud);
-
+        info.setRating(score);
+        List<WordCloudEntry> wordCloudList = new ArrayList<>();
+        for (String s : wordCloud) {
+            WordCloudEntry entry = new WordCloudEntry();
+            entry.setContent(s);
+            entry.setPositive(new Random().nextBoolean());
+            entry.setId(snowFlake.nextId());
+            entry.setCount(new Random().nextInt(250));
+            wordCloudList.add(entry);
+        }
+        info.setWordCloud(wordCloudList);
+        info.setWinningRate(new Random().nextDouble() * 3 +2);
         // 写入缓存
         cacheService.put(key, info, ProductConstant.CACHE_TTL);
         return info;
