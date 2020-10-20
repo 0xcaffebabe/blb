@@ -56,6 +56,7 @@ class PayServiceImplTest {
         OrderResultDTO orderDO = new OrderResultDTO();
         orderDO.setOrderId(10L);
         orderDO.setOrderAmount(new BigDecimal("100"));
+        orderDO.setOrderDetailList(new ArrayList<>());
         OrderApiClient orderApiClient = mock(OrderApiClient.class);
         when(orderApiClient.getOrder(eq(orderId))).thenReturn(Result.success(orderDO));
         payService.setOrderApiClient(orderApiClient);
