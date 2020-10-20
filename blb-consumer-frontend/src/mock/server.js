@@ -425,7 +425,7 @@ app.get('/shop/order', (req, res) => {
     if (productCount == 1) {
       order.orderDesc = productMetadata[randomInt(productMetadata.length)] + '等 1 件'
     }else {
-      order.orderDesc = productMetadata[randomInt(productMetadata.length)]
+      order.orderName = productMetadata[randomInt(productMetadata.length)]
         + ' + ' + productMetadata[randomInt(productMetadata.length)] + ' 等 ' + productCount + '件'
     }
     order.createTime = new Date()
