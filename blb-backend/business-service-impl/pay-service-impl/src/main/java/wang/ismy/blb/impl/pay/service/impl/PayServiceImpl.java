@@ -70,7 +70,7 @@ public class PayServiceImpl implements PayService {
         String payTitle = consumer.getUsername()+"的点餐订单：";
         for(int i = 0;i<Math.min(2,order.getOrderDetailList().size());i++){
             payTitle += order.getOrderDetailList().get(i).getProductName() + " ";
-            if (i != 1) {
+            if (i != 1 && i !=order.getOrderDetailList().size()-1) {
                 payTitle += "+";
             }
         }
