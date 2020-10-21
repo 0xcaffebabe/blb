@@ -34,8 +34,8 @@ password | 密码 |
 ```json
 {
   "greeting": "注册欢迎语",
-   "token":"xxx",
-    "status": 0
+  "token":"xxx",
+  "status": 0
 }
 ```
 

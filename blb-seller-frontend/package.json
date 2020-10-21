@@ -5,12 +5,14 @@
   "scripts": {
     "serve": "vue-cli-service serve --model development",
     "build": "vue-cli-service build",
+    "mock": "nodemon ./src/mock/server",
     "lint": "vue-cli-service lint"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "element-ui": "^2.13.1",
+    "express": "^4.17.1",
     "moment": "^2.26.0",
     "vue": "^2.6.11",
     "vue-amap": "^0.5.10",
