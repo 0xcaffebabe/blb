@@ -60,6 +60,8 @@ startingPrice | 起送价
 businessLicense | 营业执照
 foodServiceLicense | 食品服务许可证
 
+- 响应：注册店铺ID
+
 ## 图片上传
 
 - 方式：POST
@@ -67,6 +69,8 @@ foodServiceLicense | 食品服务许可证
 - 请求参数
 
 file: 文件内容
+
+- 响应：图片URL
 
 ## 获取店铺分类
 
