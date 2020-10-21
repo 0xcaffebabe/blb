@@ -5,7 +5,9 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import wang.ismy.blb.api.location.pojo.Location;
+import wang.ismy.blb.api.location.pojo.LocationInfoDTO;
 import wang.ismy.blb.common.result.Result;
 
 import java.util.List;
@@ -48,4 +50,13 @@ public interface LocationApi {
     @GetMapping("distance/list/{location}")
     Result<List<Map<Long,String>>> calcDistanceBatch(@RequestBody Map<Long,Location> locationMap,
                                                      @PathVariable("location") String location);
+
+    /**
+     * 获取位置信息
+     * @param ip 客户端IP
+     * @return
+     */
+    @ApiOperation("获取位置信息")
+    @GetMapping("location/info")
+    Result<LocationInfoDTO> getLocationInfo(@RequestHeader("X-IP") String ip);
 }
