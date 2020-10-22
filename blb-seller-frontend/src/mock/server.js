@@ -161,7 +161,13 @@ app.get('/shop/order/new', (req, res) => {
     order.orderId = i,
     order.orderStatus = randomInt(3)
     order.productList = generateProductList()
+    order.dinnerOutCode = randomInt() + '' + randomInt() + '' + randomInt() + '' + randomInt()
     orderList.push(order)
   }
   res.send(result(orderList))
+})
+
+// 出餐
+app.put('/shop/order/:orderId/out', (req, res) => {
+  res.send(result({}))
 })
