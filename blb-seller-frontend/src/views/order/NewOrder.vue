@@ -37,6 +37,11 @@ export default {
       expand: '1'
     }
   },
+  methods: {
+    getNewOrder () {
+      this.$emit('refreshOrder')
+    }
+  },
   components: {
     OrderItem
   }

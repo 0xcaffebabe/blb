@@ -12,7 +12,7 @@
         </el-badge>
       </el-menu-item>
     </el-menu>
-    <router-view :orderList="orderList"/>
+    <router-view :orderList="orderList" @refreshOrder="getNewOrder"/>
   </div>
 </template>
 
