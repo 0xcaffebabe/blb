@@ -171,3 +171,32 @@ app.get('/shop/order/new', (req, res) => {
 app.put('/shop/order/:orderId/out', (req, res) => {
   res.send(result({}))
 })
+
+// 获取订单列表
+app.get('/shop/order/list', (req, res) => {
+  const productMetadata = [
+    '黄焖鸡米饭','黄焖猪脚米饭','黄焖鸭米饭','豪大大鸡排','黄焖腐竹升级版','黄焖排骨','冰阔乐','菊花茶','红牛','香辣鸡腿堡'
+  ]
+  const n = req.query.size
+  const orderList = []
+  for(let i = 0;i<n;i++){
+    const order = {
+      orderId: i
+    }
+    const productCount = randomInt(10) + 1
+    if (productCount == 1) {
+      order.orderName = productMetadata[randomInt(productMetadata.length)] + '等 1 件'
+    }else {
+      order.orderName = productMetadata[randomInt(productMetadata.length)]
+        + ' + ' + productMetadata[randomInt(productMetadata.length)] + ' 等 ' + productCount + '件'
+    }
+    order.orderAmount = randomInt(20) + 10
+    order.orderStatus = randomInt(3)
+    order.payStatus = randomInt(3)
+    orderList.push(order)
+  }
+  res.send(result({
+    total: 1000,
+    data: orderList
+  }))
+})
