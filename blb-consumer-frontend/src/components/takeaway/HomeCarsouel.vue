@@ -16,9 +16,9 @@ export default {
   data () {
     return {
       imgList: [
-        'http://img1.qunarzz.com/sight/p0/1705/c2/c2249cf7d5ae5b71a3.img.jpg_600x330_2dd75e54.jpg',
-        'http://img1.qunarzz.com/sight/p0/1610/23/235cd9aa750eb531a3.water.jpg_600x330_c3104644.jpg',
-        'http://img1.qunarzz.com/sight/p0/1501/18/181cff1e8af11041.water.jpg_600x330_40b06d15.jpg',
+        'https://img.meituan.net/600.600/msmerchant/5b3b70487ed684fea84ed4a906272c2e831841.jpg',
+        'https://img.meituan.net/msmerchant/d53e16698a2121f46e8fc4530acdabdc6026232.jpg',
+        'https://p1.meituan.net/600.600/deal/58570ab465c2177bbf7e40cd9e21d9f0206194.jpg',
         'https://img.meituan.net/msmerchant/463762bddd19dbf45fc8ce189303e4031695926.png@600w_600h_1l'
       ]
     }
@@ -27,5 +27,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-
 </style>
