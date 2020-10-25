@@ -3,7 +3,7 @@
   <div>
       <el-carousel :interval="4000" type="card" height="430px">
           <el-carousel-item v-for="item in imgList" :key="item">
-          <h3 class="medium">
+          <h3 class="medium" style="height:100%;width:100%">
             <img :src="item" alt="" >
           </h3>
           </el-carousel-item>
@@ -29,5 +29,7 @@ export default {
 <style lang="less" scoped>
   img {
     border-radius: 10px;
+    height: 100%;
+    width: 100%;
   }
 </style>
