@@ -26,7 +26,6 @@
             <div class="bottom-btns">
                 <el-button circle icon="el-icon-camera-solid"></el-button>
                 <el-button circle icon="el-icon-star-off"></el-button>
-                <el-button circle icon="el-icon-shopping-bag-1"></el-button>
                 <el-button circle icon="el-icon-chat-line-square"></el-button>
             </div>
           </div>
@@ -107,8 +106,6 @@ export default {
   .bottom-btns {
     text-align:center;
     padding: 10px 0 20px 0;
-    .el-button {
-      flex: 0 0 25%;
-    }
+    flex: 0 0 33.333%;
   }
 </style>
