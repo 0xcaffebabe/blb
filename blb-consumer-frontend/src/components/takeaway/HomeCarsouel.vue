@@ -27,4 +27,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  img {
+    border-radius: 10px;
+  }
 </style>
