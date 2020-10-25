@@ -23,7 +23,6 @@
     </el-container>
     <login/>
     <el-footer class="footer">
-      BLB © 2020 版权所有
     </el-footer>
   </el-container>
 </template>
@@ -64,11 +63,15 @@ export default {
     margin: auto;
   }
   .footer {
+    display: inline-block;
     bottom: 0;
     font-size: 18px;
     color: #ccc;
     width: 100%;
     text-align: center;
+    color: #fff;
+    padding: 0;
+    background-color: #3190e8;
   }
   .side-menu {
     position: fixed;
