@@ -8,8 +8,7 @@
       <ul class="shop-list">
         <li class="shop-item-wrapper" v-for="item in shopList" :key="item.shopId">
           <div class="shop-item" @click="handleShopItemClick(item)">
-            <el-image fit="cover" :src="item.shopLogo" class="shop-logo">
-            </el-image>
+            <el-image fit="cover" :src="item.shopLogo" class="shop-logo"/>
             <h1>{{item.shopName}}</h1>
             <el-rate style="text-align:center"
               :value="item.ranking"
@@ -69,6 +68,9 @@ export default {
         border-radius:128px;
         left: 50%;
         margin-left: -64px;
+        img {
+          transition: all 0.8s;
+        }
       }
     }
     .shop-item:hover {
@@ -77,6 +79,10 @@ export default {
       cursor: pointer;
       .shop-logo{
         box-shadow: 2px 2px 13px #bbb;
+        img {
+          width: 110%;
+          height: 110%;
+        }
       }
     }
     li img {
