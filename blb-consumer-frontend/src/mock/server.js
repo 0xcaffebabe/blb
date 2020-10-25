@@ -423,7 +423,7 @@ app.get('/shop/order', (req, res) => {
     order.orderStatus = randomInt(4)
     const productCount = randomInt(10) + 1
     if (productCount == 1) {
-      order.orderDesc = productMetadata[randomInt(productMetadata.length)] + '等 1 件'
+      order.orderName = productMetadata[randomInt(productMetadata.length)] + '等 1 件'
     }else {
       order.orderName = productMetadata[randomInt(productMetadata.length)]
         + ' + ' + productMetadata[randomInt(productMetadata.length)] + ' 等 ' + productCount + '件'
