@@ -2,7 +2,7 @@
   <div>
     <shop-header :info="shopInfo"/>
     <!-- 菜单选项栏 -->
-    <el-card>
+    <el-card style="margin-top:50px">
         <el-tabs v-model="activeName">
           <el-tab-pane label="商品" name="product">
             <shop-product :shopId="shopId"/>
