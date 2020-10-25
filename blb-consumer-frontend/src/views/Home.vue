@@ -57,10 +57,10 @@ export default {
 
 <style lang="less" scoped>
   .container {
-    min-width: 1320px;
+    min-width: 1400px;
   }
   .main {
-    width: 1320px;
+    width: 1400px;
     margin: auto;
   }
   .footer {
