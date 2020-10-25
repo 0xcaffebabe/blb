@@ -22,8 +22,6 @@
       </div>
     </el-container>
     <login/>
-    <el-footer class="footer">
-    </el-footer>
   </el-container>
 </template>
 
