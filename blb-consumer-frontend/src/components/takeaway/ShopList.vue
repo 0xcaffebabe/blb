@@ -11,7 +11,7 @@
             <el-image fit="cover" :src="item.shopLogo" class="shop-logo">
             </el-image>
             <h1>{{item.shopName}}</h1>
-            <el-rate
+            <el-rate style="text-align:center"
               :value="item.ranking"
               disabled
               show-score
@@ -23,6 +23,12 @@
               <span class="shop-price">起送: <strong>{{item.startingPrice}}</strong> / 配送费: <strong>{{item.deliveryFee}}</strong></span>
             </div>
             <p class="distance el-icon-time"> {{item.distance}} km / <span>{{item.deliveryTime}}送达</span></p>
+            <div class="bottom-btns">
+                <el-button circle icon="el-icon-camera-solid"></el-button>
+                <el-button circle icon="el-icon-star-off"></el-button>
+                <el-button circle icon="el-icon-shopping-bag-1"></el-button>
+                <el-button circle icon="el-icon-chat-line-square"></el-button>
+            </div>
           </div>
         </li>
       </ul>
@@ -54,14 +60,13 @@ export default {
     }
     .shop-item {
       padding: 20px 20px 0 20px;
-      width: 208px;
+      width: 100%;
       transition: all 0.2s;
       box-sizing: border-box;
-      border-bottom: 1px solid #ccc;
       .shop-logo {
         position: relative;
-        height:128px;
-        width:128px;
+        height:144px;
+        width:144px;
         border-radius:128px;
         left: 50%;
         margin-left: -64px;
@@ -97,6 +102,13 @@ export default {
         color: #3190e8;
         font-weight: 550;
       }
+    }
+  }
+  .bottom-btns {
+    text-align:center;
+    padding: 10px 0 20px 0;
+    .el-button {
+      flex: 0 0 25%;
     }
   }
 </style>
