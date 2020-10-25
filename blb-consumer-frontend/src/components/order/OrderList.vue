@@ -15,7 +15,7 @@
                 <h4 class="shop-name" @click="$router.push('/shop/' + item.shopId)">{{item.shopName}} <span class="el-icon-arrow-right"></span></h4>
                 <p class="order-date">{{item.createTime}}</p>
                 <el-divider></el-divider>
-                <span style="float:right">￥{{item.orderAmount}}</span>
+                <span style="float:right;color:#f60">￥{{item.orderAmount}}</span>
                 <p class="order-detail">{{item.orderName}}</p>
                 <el-button size="mini" type="primary" style="float:right;margin-top:5px;margin-left:15px" @click="$router.push('/shop/' + item.shopId)">再来一单</el-button>
                 <el-button size="mini" type="success" style="float:right;margin-top:5px" @click="showOrderDetail(item.orderId)">订单详情</el-button>
