@@ -2,7 +2,7 @@
   <div>
     <el-menu :default-active="'/order/new'" mode="horizontal" router>
       <el-menu-item index="/order/new">
-        <el-badge :value="12">
+        <el-badge :value="orderList.length">
           新订单
         </el-badge>
       </el-menu-item>
@@ -12,14 +12,29 @@
         </el-badge>
       </el-menu-item>
     </el-menu>
-    <router-view/>
+    <router-view :orderList="orderList" @refreshOrder="getNewOrder"/>
   </div>
 </template>
 
 <script>
+import orderService from '../../service/OrderService'
 export default {
   data () {
-    return { }
+    return {
+      orderList: []
+    }
+  },
+  methods: {
+    async getNewOrder () {
+      try {
+        this.orderList = await orderService.getNewOrderList()
+      } catch (e) {
+        this.$message.error(e.message)
+      }
+    }
+  },
+  created () {
+    this.getNewOrder()
   }
 }
 </script>

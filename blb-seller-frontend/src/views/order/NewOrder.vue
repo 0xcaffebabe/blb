@@ -30,28 +30,20 @@
 
 <script>
 import OrderItem from '../../components/order/OrderItem'
-import orderService from '../../service/OrderService'
 export default {
+  props: ['orderList'],
   data () {
     return {
-      expand: '1',
-      orderList: []
+      expand: '1'
+    }
+  },
+  methods: {
+    getNewOrder () {
+      this.$emit('refreshOrder')
     }
   },
   components: {
     OrderItem
-  },
-  methods: {
-    async getNewOrder () {
-      try {
-        this.orderList = await orderService.getNewOrderList()
-      } catch (e) {
-        this.$message.error(e.message)
-      }
-    }
-  },
-  created () {
-    this.getNewOrder()
   }
 }
 </script>
