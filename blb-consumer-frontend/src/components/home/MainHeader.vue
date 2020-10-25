@@ -21,7 +21,23 @@
         </el-col>
         <el-col :span="4">
             <span class="login-tip" @click="$store.commit('toggleLoginPanel')" v-if="!$store.state.user.login">登录/注册</span>
-            <el-avatar :src="$store.state.user.info.avatar" v-else class="avatar"></el-avatar>
+            <el-popover
+              v-else
+              placement="bottom"
+              title="设置"
+              width="200"
+              trigger="click">
+              <div style="text-align:center">
+                <el-avatar :src="$store.state.user.info.avatar"></el-avatar>
+                <p>蔡徐坤</p>
+                <p>您有 <a href="#">1</a> 条新消息</p>
+                <div>
+                  <el-button type="primary" size="mini">切换账号</el-button>
+                  <el-button type="warning" size="mini">注销</el-button>
+                </div>
+              </div>
+              <el-avatar :src="$store.state.user.info.avatar" class="avatar" slot="reference"></el-avatar>
+            </el-popover>
             <span class="el-icon-location location" @click="$store.commit('toggleLocationChooser')"> {{$store.state.location}}
               <span class="el-icon-caret-bottom" v-if="!$store.state.locationChooserShow"></span>
               <span class="el-icon-caret-top" v-else></span>
