@@ -11,6 +11,8 @@ import Login from '../views/Login'
 import Register from '../views/Register'
 import Shop from '../views/Shop'
 import Category from '../views/Category'
+import Consumers from '../views/Consumers'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -23,6 +25,7 @@ const routes = [
       { path: 'product', component: Product },
       { path: 'shop', component: Shop },
       { path: 'category', component: Category },
+      { path: 'consumers', component: Consumers },
       {
         path: 'order',
         component: Order,

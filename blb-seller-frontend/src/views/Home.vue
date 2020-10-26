@@ -27,7 +27,7 @@
               <i class="el-icon-goods"></i>
               <span slot="title">商品</span>
             </el-menu-item>
-            <el-menu-item index="4">
+            <el-menu-item index="/consumers">
               <i class="el-icon-user"></i>
               <span slot="title">顾客</span>
             </el-menu-item>
