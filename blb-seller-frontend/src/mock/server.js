@@ -271,3 +271,35 @@ app.get('/shop/category/:id/product', (req, res) => {
   }
   res.send(result(productList))
 })
+
+// 新增商品
+app.post('/shop/category/:id/product', (req, res) => {
+  res.send(result({}))
+})
+
+// 更新商品
+app.post('/shop/category/:id/product', (req, res) => {
+  res.send(result({}))
+})
+
+// 下架商品
+app.delete('/shop/category/:id/product', (req, res) => {
+  res.send(result({}))
+})
+
+// 更新库存
+app.put('shop/category/:id/product/:productId/:specId/stock', (req, res) => {
+  res.send(result({}))
+})
+
+// 更新店铺信息
+app.put('/shop/info',(req, res) => {
+  res.send(result({}))
+})
+
+// 获取商家信息
+app.get('/seller/info', (req, res) => {
+  res.send(result({
+    sellerName: '蔡徐坤'
+  }))
+})
