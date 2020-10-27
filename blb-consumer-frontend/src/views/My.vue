@@ -13,18 +13,46 @@
             <el-col :span="18">
               <h3 v-show="nickNameShow" @click="nickNameShow = !nickNameShow">{{userInfo.username}}</h3>
               <el-input clearable v-show="!nickNameShow" style="width:200px" @blur="nickNameShow = !nickNameShow" :value="userInfo.username"></el-input>
+              <p style="margin-top:-10px"> <span class="el-icon el-icon-phone"></span> {{userInfo.phone}}</p>
             </el-col>
           </el-row>
           <el-card class="info-card">
-            <div @click="showUserEditPanel('delivery')"><span class="el-icon-arrow-right" style="float:right"></span> 收货地址</div>
+            <div @click="showUserEditPanel('delivery')"><span class="el-icon el-icon-place"></span>  <span class="el-icon-arrow-right" style="float:right"></span> 收货地址</div>
             <el-divider></el-divider>
-            <div @click="showUserEditPanel('password')"><span class="el-icon-arrow-right" style="float:right"></span> 登录密码</div>
+            <div @click="showUserEditPanel('password')"><span class="el-icon el-icon-lock"></span> <span class="el-icon-arrow-right" style="float:right"></span> 登录密码</div>
             <el-divider></el-divider>
-            <div @click="showUserEditPanel('info')"><span class="el-icon-arrow-right" style="float:right"></span> 手机号码</div>
+            <div @click="showUserEditPanel('info')"><span class="el-icon el-icon-phone-outline"></span> <span class="el-icon-arrow-right" style="float:right"></span> 手机号码</div>
+            <el-divider></el-divider>
+            <div @click="showUserEditPanel('info')"><span class="el-icon el-icon-sugar"></span> <span class="el-icon-arrow-right" style="float:right"></span> 饱了吧会员</div>
+            <el-divider></el-divider>
+            <div @click="showUserEditPanel('info')"><span class="el-icon el-icon-service"></span>  <span class="el-icon-arrow-right" style="float:right"></span> 客服中心</div>
           </el-card>
         </el-col>
         <el-col :span="16" class="my-right">
-          <task-list/>
+          <el-card>
+            <div slot="header">账户</div>
+            <el-row :gutter="20">
+              <el-col :span="8">
+                <div class="account-item">
+                  <span style="color:#ff9900">123.18</span><span> 元</span>
+                  <p>账户余额</p>
+                </div>
+              </el-col>
+              <el-col :span="8">
+                <div class="account-item">
+                  <span style="color:#ff5f3e">18</span><span> 张</span>
+                  <p>优惠券</p>
+                </div>
+              </el-col>
+              <el-col :span="8">
+                <div class="account-item" style="border-right:none">
+                  <span style="color:#6ac20b">58</span><span> 分</span>
+                  <p>积分</p>
+                </div>
+              </el-col>
+            </el-row>
+          </el-card>
+          <task-list style="margin-top:20px"/>
         </el-col>
       </el-row>
     </el-card>
@@ -82,6 +110,15 @@ export default {
     margin-top: 10px;
     font-size: 14px;
     div {
+      cursor: pointer;
+    }
+  }
+  .account-item {
+    text-align:center;
+    border-right:1px solid #ccc;
+    span:first-child {
+      font-size:32px;
+      font-weight:700;
       cursor: pointer;
     }
   }
