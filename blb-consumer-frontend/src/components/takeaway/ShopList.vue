@@ -3,6 +3,42 @@
     <el-card>
       <div slot="header">
         {{title}}
+        <div style="float:right">
+          排序：
+          <el-select v-model="value" placeholder="请选择">
+            <el-option
+              v-for="item in 4"
+              :key="item"
+              :label="item"
+              :value="item">
+              <span style="float: left">{{ item }}</span>
+              <span style="float: right; color: #8492a6; font-size: 13px">{{ item }}</span>
+            </el-option>
+          </el-select>
+          &nbsp;筛选：
+          <el-select v-model="value" placeholder="请选择">
+            <el-option-group label="配送方式">
+              <el-option
+                v-for="item in 4"
+                :key="item"
+                :label="item"
+                :value="item">
+                <span style="float: left">{{ item }}</span>
+                <span style="float: right; color: #8492a6; font-size: 13px">{{ item }}</span>
+              </el-option>
+            </el-option-group>
+            <el-option-group label="商家属性">
+              <el-option
+                v-for="item in 4"
+                :key="item"
+                :label="item"
+                :value="item">
+                <span style="float: left">{{ item }}</span>
+                <span style="float: right; color: #8492a6; font-size: 13px">{{ item }}</span>
+              </el-option>
+            </el-option-group>
+          </el-select>
+        </div>
       </div>
       <el-alert v-if="shopList.length == 0" title="没有数据"></el-alert>
       <ul class="shop-list">
