@@ -7,7 +7,7 @@
       background
       @current-change="handlePageChange"
       :current-page="page"
-      :page-sizes="[2, 10, 20, 30]"
+      :page-sizes="[4, 12, 20, 30]"
       :page-size="size"
       layout="total, sizes, prev, pager, next, jumper"
       :total="shopData.total">
@@ -25,7 +25,7 @@ export default {
       shopData: {},
       categoryId: this.$route.params.categoryId,
       page: 1,
-      size: 2
+      size: 12
     }
   },
   created () {
