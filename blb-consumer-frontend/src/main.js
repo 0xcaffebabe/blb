@@ -10,9 +10,10 @@ import VueAMap from 'vue-amap'
 import axios from 'axios'
 import NProgress from 'nprogress'
 import 'nprogress/nprogress.css'
-
+import Chat from 'jwchat'
 Vue.use(VueAMap)
 Vue.use(ElementUI)
+Vue.use(Chat)
 Vue.config.productionTip = false
 
 // 初始化vue-amap

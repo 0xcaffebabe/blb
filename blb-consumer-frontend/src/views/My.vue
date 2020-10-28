@@ -25,7 +25,7 @@
             <el-divider></el-divider>
             <div @click="showUserEditPanel('info')"><span class="el-icon el-icon-sugar"></span> <span class="el-icon-arrow-right" style="float:right"></span> 饱了吧会员</div>
             <el-divider></el-divider>
-            <div @click="showUserEditPanel('info')"><span class="el-icon el-icon-service"></span>  <span class="el-icon-arrow-right" style="float:right"></span> 客服中心</div>
+            <div @click="$router.push('/service')"><span class="el-icon el-icon-service"></span>  <span class="el-icon-arrow-right" style="float:right"></span> 客服中心</div>
           </el-card>
         </el-col>
         <el-col :span="16" class="my-right">

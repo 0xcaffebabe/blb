@@ -9,6 +9,7 @@ import My from '../views/My'
 import Pay from '../views/Pay'
 import ConfirmOrder from '../views/ConfirmOrder'
 import List from '../views/List'
+import Service from '../views/Service'
 Vue.use(VueRouter)
 
 const routes = [
@@ -24,6 +25,7 @@ const routes = [
       { path: 'my', component: My },
       { name: 'pay', path: 'pay/:orderId', component: Pay },
       { name: 'confirmOrder', path: 'confirmOrder', component: ConfirmOrder },
+      { name: 'service', path: 'service', component: Service },
       { path: 'list/:categoryId', component: List }
     ]
   }
