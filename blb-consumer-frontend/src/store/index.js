@@ -10,6 +10,7 @@ export default new Vuex.Store({
     locationChooserShow: false,
     loginPanelShow: false,
     userEditPanelShow: false,
+    vipPanelShow: false,
     user: {
       login: false,
       info: {}
@@ -44,6 +45,9 @@ export default new Vuex.Store({
     },
     updateLastProductAddTime () {
       this.state.lastProductAddTime = this.state.lastProductAddTime + 1
+    },
+    toggleVipPanel () {
+      this.state.vipPanelShow = !this.state.vipPanelShow
     }
   },
   actions: {

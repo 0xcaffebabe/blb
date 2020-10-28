@@ -23,7 +23,7 @@
             <el-divider></el-divider>
             <div @click="showUserEditPanel('info')"><span class="el-icon el-icon-phone-outline"></span> <span class="el-icon-arrow-right" style="float:right"></span> 手机号码</div>
             <el-divider></el-divider>
-            <div @click="showUserEditPanel('info')"><span class="el-icon el-icon-sugar"></span> <span class="el-icon-arrow-right" style="float:right"></span> 饱了吧会员</div>
+            <div @click="showVipPanel"><span class="el-icon el-icon-sugar"></span> <span class="el-icon-arrow-right" style="float:right"></span> 饱了吧会员</div>
             <el-divider></el-divider>
             <div @click="$router.push('/service')"><span class="el-icon el-icon-service"></span>  <span class="el-icon-arrow-right" style="float:right"></span> 客服中心</div>
           </el-card>
@@ -57,11 +57,13 @@
       </el-row>
     </el-card>
     <user-edit-pane :currentTab="currentTab"></user-edit-pane>
+    <vip-pane></vip-pane>
   </div>
 </template>
 
 <script>
 import UserEditPane from '../components/my/UserEditPane'
+import VipPane from '../components/my/VipPane'
 import TaskList from '../components/my/TaskList'
 import consumerService from '../service/ConsumerService'
 export default {
@@ -91,10 +93,13 @@ export default {
     showUserEditPanel (tab) {
       this.currentTab = tab
       this.$store.commit('toggleUserEditPanel')
+    },
+    showVipPanel () {
+      this.$store.commit('toggleVipPanel')
     }
   },
   components: {
-    UserEditPane, TaskList
+    UserEditPane, TaskList, VipPane
   }
 }
 </script>
