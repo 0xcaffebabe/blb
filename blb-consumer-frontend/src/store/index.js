@@ -11,7 +11,7 @@ export default new Vuex.Store({
     loginPanelShow: false,
     userEditPanelShow: false,
     vipPanelShow: false,
-    balancePaneShow: true,
+    balancePaneShow: false,
     user: {
       login: false,
       info: {}

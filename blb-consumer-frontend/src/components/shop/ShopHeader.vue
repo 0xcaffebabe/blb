@@ -2,7 +2,7 @@
   <div>
     <el-card class="shop-header" :body-style="{padding:0}">
       <el-row class="shop-detail" :gutter="20">
-        <el-col :span="8">
+        <el-col :span="9">
           <el-image
             class="shop-logo"
             style="width: 400px; height: 200px"
@@ -20,7 +20,7 @@
               </li>
             </ul>
         </el-col>
-        <el-col :span="16">
+        <el-col :span="15">
           <h2 class="shop-name">{{info.shopName}}</h2>
           <el-rate
             v-model="rate"
