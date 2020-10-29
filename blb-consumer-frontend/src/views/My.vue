@@ -34,7 +34,7 @@
             <el-row :gutter="20">
               <el-col :span="8">
                 <div class="account-item">
-                  <span style="color:#ff9900">123.18</span><span> 元</span>
+                  <span style="color:#ff9900" @click="$store.commit('toggleBalancePane')">123.18</span><span> 元</span>
                   <p>账户余额</p>
                 </div>
               </el-col>
@@ -58,12 +58,14 @@
     </el-card>
     <user-edit-pane :currentTab="currentTab"></user-edit-pane>
     <vip-pane></vip-pane>
+    <balance-pane/>
   </div>
 </template>
 
 <script>
 import UserEditPane from '../components/my/UserEditPane'
 import VipPane from '../components/my/VipPane'
+import BalancePane from '../components/my/BalancePane'
 import TaskList from '../components/my/TaskList'
 import consumerService from '../service/ConsumerService'
 export default {
@@ -99,7 +101,7 @@ export default {
     }
   },
   components: {
-    UserEditPane, TaskList, VipPane
+    UserEditPane, TaskList, VipPane, BalancePane
   }
 }
 </script>
