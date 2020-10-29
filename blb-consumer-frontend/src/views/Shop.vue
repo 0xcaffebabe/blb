@@ -23,6 +23,9 @@
       <el-badge :value="cartTotal">
         <el-button icon="el-icon-shopping-cart-2" circle class="cart-button" @click="$store.commit('toggleCart')"></el-button>
       </el-badge>
+      <el-badge :value="28" class="chat-badge">
+        <el-button icon="el-icon-headset" circle class="chat-button" @click="$store.commit('toggleCart')"></el-button>
+      </el-badge>
       <el-button type="success" class="pay-button" @click="handleSettlementClick">结算</el-button>
     </div>
   </div>
@@ -96,18 +99,30 @@ export default {
     top: 50%;
     transform: translateY(-50%);
     right: 0;
-    height: 150px;
+    height: 210px;
     width: 40px;
     background-color: #3d3d3f;
     border-top-left-radius: 5px;
     border-bottom-left-radius: 5px;
     .cart-button {
       font-size: 24px;
-      margin-top: 20px;
+      margin-top: -5px;
       position: absolute;
-      left: -20px;
+      left: -30px;
       border: 4px solid #3d3d3f;
       background-color: #3190e8;
+      color: white;
+    }
+    .chat-badge {
+      position: relative;
+      top: 80px;
+    }
+    .chat-button {
+      font-size: 24px;
+      position: absolute;
+      left: -30px;
+      border: 4px solid #3d3d3f;
+      background-color: #E6A23C;
       color: white;
     }
     .pay-button {
