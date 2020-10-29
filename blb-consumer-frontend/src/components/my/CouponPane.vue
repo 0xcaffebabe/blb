@@ -54,8 +54,6 @@ export default {
       border-right: 1px solid #ccc;
       text-align: center;
     }
-    .red-env-right {
-    }
     h2 {
       color: #ff5340;
       font-size: 30px;
