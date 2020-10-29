@@ -12,6 +12,7 @@ export default new Vuex.Store({
     userEditPanelShow: false,
     vipPanelShow: false,
     balancePaneShow: false,
+    couponPaneShow: true,
     user: {
       login: false,
       info: {}
@@ -52,6 +53,9 @@ export default new Vuex.Store({
     },
     toggleBalancePane () {
       this.state.balancePaneShow = !this.state.balancePaneShow
+    },
+    toggleCouponPaneShow () {
+      this.state.couponPaneShow = !this.state.couponPaneShow
     }
   },
   actions: {

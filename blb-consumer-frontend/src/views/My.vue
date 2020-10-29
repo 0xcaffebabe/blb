@@ -40,7 +40,7 @@
               </el-col>
               <el-col :span="8">
                 <div class="account-item">
-                  <span style="color:#ff5f3e">18</span><span> 张</span>
+                  <span style="color:#ff5f3e" @click="$store.commit('toggleCouponPaneShow')">18</span><span> 张</span>
                   <p>优惠券</p>
                 </div>
               </el-col>
@@ -59,6 +59,7 @@
     <user-edit-pane :currentTab="currentTab"></user-edit-pane>
     <vip-pane></vip-pane>
     <balance-pane/>
+    <coupon-pane/>
   </div>
 </template>
 
@@ -66,6 +67,7 @@
 import UserEditPane from '../components/my/UserEditPane'
 import VipPane from '../components/my/VipPane'
 import BalancePane from '../components/my/BalancePane'
+import CouponPane from '../components/my/CouponPane'
 import TaskList from '../components/my/TaskList'
 import consumerService from '../service/ConsumerService'
 export default {
@@ -101,7 +103,7 @@ export default {
     }
   },
   components: {
-    UserEditPane, TaskList, VipPane, BalancePane
+    UserEditPane, TaskList, VipPane, BalancePane, CouponPane
   }
 }
 </script>
