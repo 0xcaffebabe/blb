@@ -10,12 +10,13 @@
             :preview-src-list="[info.shopLogo]"
             fit="cover"/>
             <ul class="img-list">
-              <li v-for="item in 4" :key="item + '1'">
+              <li v-for="(item,index) in 4" :key="item + '1'">
                 <el-image
                 class="shop-logo"
-                style="width: 92px; height: 50px"
+                style="width: 90px; height: 50px;cursor:pointer"
+                :class="{'img-active': imgActive == index}"
+                @click="handleImgClick(index)"
                 :src="info.shopLogo"
-                :preview-src-list="[info.shopLogo]"
                 fit="cover"/>
               </li>
             </ul>
@@ -52,7 +53,14 @@ export default {
   props: ['info'],
   data () {
     return {
-      rate: 3.7
+      rate: 3.7,
+      imgActive: 0
+    }
+  },
+  methods: {
+    handleImgClick (index, e) {
+      this.imgActive = index
+      e.preventDefault()
     }
   }
 }
@@ -95,5 +103,9 @@ export default {
     li {
       flex: 0 0 25%;
     }
+  }
+  .img-active {
+    border: 3px solid rgb(49,144,232);
+    transition: all 0.2s;
   }
 </style>
