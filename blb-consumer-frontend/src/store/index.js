@@ -12,7 +12,7 @@ export default new Vuex.Store({
     userEditPanelShow: false,
     vipPanelShow: false,
     balancePaneShow: false,
-    couponPaneShow: true,
+    couponPaneShow: false,
     user: {
       login: false,
       info: {}
