@@ -57,7 +57,7 @@ export default {
     min-width: 1400px;
   }
   .main {
-    width: 1400px;
+    width: 1280px;
     margin: auto;
   }
   .footer {
