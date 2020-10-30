@@ -69,7 +69,7 @@ export default {
 }
 </script>
 
-<style lang="less" slot-scope>
+<style lang="less" scoped>
   .el-dialog {
     margin: 0 auto;
   }
