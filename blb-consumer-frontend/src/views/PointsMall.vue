@@ -64,7 +64,7 @@ export default {
 }
 </script>
 
-<style lang="less" slot-scope>
+<style lang="less" scoped>
   .my-info {
     h3 {
       padding: 0;
