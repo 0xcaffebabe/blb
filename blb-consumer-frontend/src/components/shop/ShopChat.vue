@@ -16,7 +16,7 @@
           <div slot="header" style="margin-left:460px">
             <el-button type="primary" size="small" icon="el-icon-close" @click="closeDialog"></el-button>
           </div>
-            <JwChat-rightbox :config="rightConfig" @click="rightClick" />
+            <JwChat-rightbox :config="rightConfig"/>
     </JwChat-index>
   </el-dialog>
   </div>
