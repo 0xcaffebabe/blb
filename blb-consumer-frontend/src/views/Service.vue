@@ -14,7 +14,7 @@
           :config="config"
           scrollType="scroll"
           >
-            <JwChat-rightbox :config="rightConfig" @click="rightClick" />
+            <JwChat-rightbox :config="rightConfig"/>
           </JwChat-index>
         </el-card>
       </el-col>
