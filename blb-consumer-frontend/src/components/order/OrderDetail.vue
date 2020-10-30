@@ -47,7 +47,10 @@
           <el-card style="margin-top:10px">
             <div slot="header">地图</div>
             <el-amap class="amap-box" :vid="'amap-vue'" :zoom="10" :center="[117.5,24]">
-              <el-amap-marker vid="component-marker" :position="[117.5,24]"></el-amap-marker>
+              <el-amap-marker vid="component-shop-marker" :position="[117.5,24]"></el-amap-marker>
+              <el-amap-text vid="component-shop-text" :position="[117.5,24]" :text="'店铺位置'"></el-amap-text>
+              <el-amap-marker vid="component-rider-marker" :position="[117.5,24.1]"></el-amap-marker>
+              <el-amap-text vid="component-rider-text" :position="[117.5,24.1]" :text="'骑手位置'"></el-amap-text>
             </el-amap>
           </el-card>
         </el-col>
