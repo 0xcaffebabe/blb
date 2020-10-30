@@ -18,13 +18,14 @@
     </el-card>
     <!-- 购物车 -->
     <shop-cart :cartShow="cartShow" :shopId="shopId" ref="shopCart" @loadComplete="handleCartLoadComplete" @handle-settlement="handleSettlementClick"></shop-cart>
+    <shop-chat/>
     <!-- 侧边电梯 -->
     <div class="cart-bar">
       <el-badge :value="cartTotal">
         <el-button icon="el-icon-shopping-cart-2" circle class="cart-button" @click="$store.commit('toggleCart')"></el-button>
       </el-badge>
       <el-badge :value="28" class="chat-badge">
-        <el-button icon="el-icon-headset" circle class="chat-button" @click="$store.commit('toggleCart')"></el-button>
+        <el-button icon="el-icon-headset" circle class="chat-button" @click="$store.commit('toggleShopChatShow')"></el-button>
       </el-badge>
       <el-button type="success" class="pay-button" @click="handleSettlementClick">结算</el-button>
     </div>
@@ -34,6 +35,7 @@
 <script>
 import ShopHeader from '../components/shop/ShopHeader'
 import ShopProduct from '../components/shop/ShopProduct'
+import ShopChat from '../components/shop/ShopChat'
 import ShopCart from '../components/shop/ShopCart'
 import ShopEval from '../components/shop/ShopEval'
 
@@ -50,7 +52,7 @@ export default {
     }
   },
   components: {
-    ShopHeader, ShopProduct, ShopCart, ShopEval
+    ShopHeader, ShopProduct, ShopCart, ShopEval, ShopChat
   },
   computed: {
     lastProductAddTime () {
