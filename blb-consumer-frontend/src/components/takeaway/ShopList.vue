@@ -55,12 +55,12 @@
             </el-rate>
             <span class="shop-sales">月销量: <strong>{{item.sales}}</strong></span>
             <div>
-              <span class="shop-price">起送: <strong>{{item.startingPrice}}</strong> / 配送费: <strong>{{item.deliveryFee}}</strong></span>
+              <span class="shop-price">起送: <strong style="color:#ff6600">{{item.startingPrice}}</strong> / 配送费: <strong style="color:#ff6600">{{item.deliveryFee}}</strong></span>
             </div>
             <p class="distance el-icon-time"> {{item.distance}} km / <span>{{item.deliveryTime}}送达</span></p>
             <div class="bottom-btns">
                 <el-button circle icon="el-icon-camera-solid"></el-button>
-                <el-button circle icon="el-icon-star-off"></el-button>
+                <el-button circle icon="el-icon-star-off" @click="starShop(item, $event)"></el-button>
                 <el-button circle icon="el-icon-chat-line-square"></el-button>
             </div>
           </div>
@@ -79,6 +79,14 @@ export default {
   methods: {
     handleShopItemClick (shop) {
       this.$router.push('/shop/' + shop.shopId)
+    },
+    starShop (item, e) {
+      this.$notify({
+        title: '收藏店铺成功',
+        message: `收藏店铺 ${item.shopName} 成功`,
+        type: 'success'
+      })
+      e.stopPropagation()
     }
   }
 }
