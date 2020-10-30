@@ -1,7 +1,7 @@
 <template>
   <div>
     <shop-list style="margin-top:10px" :title="'分类结果'" :shopList="shopData.data"></shop-list>
-    <el-card v-if="shopData.data.length != 0" style="margin-top:10px">
+    <el-card v-if="shopData.data" style="margin-top:10px">
       <el-pagination
       @size-change="handleSizeChange"
       background
