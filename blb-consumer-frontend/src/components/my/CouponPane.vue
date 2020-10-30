@@ -5,7 +5,7 @@
     width="50%"
     @close="$store.commit('toggleCouponPaneShow')"
     >
-  <el-tabs v-model="activeName" @tab-click="handleClick">
+  <el-tabs v-model="activeName">
     <el-tab-pane label="红包" name="redEnv">
       有 <span style="color:#ff5340">3</span> 个红包即将过期
       <ul class="red-env-list">
