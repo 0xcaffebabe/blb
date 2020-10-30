@@ -5,7 +5,7 @@
         {{title}}
         <div style="float:right">
           排序：
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-model="orderValue" placeholder="请选择">
             <el-option
               v-for="item in 4"
               :key="item"
@@ -16,7 +16,7 @@
             </el-option>
           </el-select>
           &nbsp;筛选：
-          <el-select v-model="value" placeholder="请选择">
+          <el-select v-model="whereValue" placeholder="请选择">
             <el-option-group label="配送方式">
               <el-option
                 v-for="item in 4"
@@ -74,7 +74,10 @@
 export default {
   props: ['title', 'shopList'],
   data () {
-    return {}
+    return {
+      orderValue: '',
+      whereValue: ''
+    }
   },
   methods: {
     handleShopItemClick (shop) {
