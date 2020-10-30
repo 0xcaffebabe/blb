@@ -46,7 +46,7 @@
               </el-col>
               <el-col :span="8">
                 <div class="account-item" style="border-right:none">
-                  <span style="color:#6ac20b">58</span><span> 分</span>
+                  <span style="color:#6ac20b" @click="$router.push('/pointsMall')">58</span><span> 分</span>
                   <p>积分</p>
                 </div>
               </el-col>
