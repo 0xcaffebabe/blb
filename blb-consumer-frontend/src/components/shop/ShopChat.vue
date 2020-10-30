@@ -1,5 +1,6 @@
 <template>
-  <el-dialog
+  <div class="shop-chat">
+    <el-dialog
     :visible="$store.state.shopChatShow"
     width="570px"
     @close="closeDialog"
@@ -18,6 +19,7 @@
             <JwChat-rightbox :config="rightConfig" @click="rightClick" />
     </JwChat-index>
   </el-dialog>
+  </div>
 </template>
 
 <script>
@@ -69,14 +71,14 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
-  .el-dialog {
+<style lang="less">
+  .shop-chat .el-dialog {
     margin: 0 auto;
   }
-  .el-dialog__header, .el-dialog__title {
+  .shop-chat .el-dialog__header, .shop-chat  .el-dialog__title {
     display: none;
   }
-  .el-dialog__body {
+  .shop-chat .el-dialog__body {
     padding: 0;
   }
 </style>
