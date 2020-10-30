@@ -13,7 +13,6 @@
               <li v-for="(item,index) in 4" :key="item + '1'">
                 <el-image
                 class="shop-logo"
-                style="width: 90px; height: 50px;cursor:pointer"
                 :class="{'img-active': imgActive == index}"
                 @click="handleImgClick(index)"
                 :src="info.shopLogo"
@@ -102,6 +101,12 @@ export default {
     width: 400px;
     li {
       flex: 0 0 25%;
+    }
+    .shop-logo {
+      box-sizing: border-box;
+      width: 90px;
+      height: 50px;
+      cursor:pointer
     }
   }
   .img-active {
