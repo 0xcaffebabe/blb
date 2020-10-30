@@ -26,6 +26,7 @@
 export default {
   data () {
     return {
+      msg: '',
       list: [
         {
           date: new Date().toISOString(),
@@ -66,6 +67,15 @@ export default {
       if (this.$store.state.shopChatShow) {
         this.$store.commit('toggleShopChatShow')
       }
+    },
+    handleEnter () {
+      this.list.push({
+        date: new Date().toISOString(),
+        img: this.$store.state.user.info.avatar,
+        name: this.$store.state.user.info.username,
+        mine: true,
+        text: { text: this.msg }
+      })
     }
   }
 }
