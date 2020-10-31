@@ -7,8 +7,8 @@
           <el-row>
             <el-col :span="6" style="text-align:center">
               <el-avatar circle :size="64" :src="userInfo.avatar"></el-avatar>
-              <input type="file" ref="fileUploader">
-              <el-button size="small" type="primary" @click="handleUpload">点击上传头像</el-button>
+              <!-- <input type="file" ref="fileUploader"> -->
+              <el-button size="small" type="primary" @click="handleUpload">上传头像</el-button>
             </el-col>
             <el-col :span="18">
               <h3 v-show="nickNameShow" @click="nickNameShow = !nickNameShow">{{userInfo.username}}</h3>
@@ -29,45 +29,20 @@
           </el-card>
         </el-col>
         <el-col :span="16" class="my-right">
-          <el-card>
-            <div slot="header">账户</div>
-            <el-row :gutter="20">
-              <el-col :span="8">
-                <div class="account-item">
-                  <span style="color:#ff9900" @click="$store.commit('toggleBalancePane')">123.18</span><span> 元</span>
-                  <p>账户余额</p>
-                </div>
-              </el-col>
-              <el-col :span="8">
-                <div class="account-item">
-                  <span style="color:#ff5f3e" @click="$store.commit('toggleCouponPaneShow')">18</span><span> 张</span>
-                  <p>优惠券</p>
-                </div>
-              </el-col>
-              <el-col :span="8">
-                <div class="account-item" style="border-right:none">
-                  <span style="color:#6ac20b" @click="$router.push('/pointsMall')">58</span><span> 分</span>
-                  <p>积分</p>
-                </div>
-              </el-col>
-            </el-row>
-          </el-card>
+          <account/>
           <task-list style="margin-top:20px"/>
         </el-col>
       </el-row>
     </el-card>
     <user-edit-pane :currentTab="currentTab"></user-edit-pane>
     <vip-pane></vip-pane>
-    <balance-pane/>
-    <coupon-pane/>
   </div>
 </template>
 
 <script>
 import UserEditPane from '../components/my/UserEditPane'
 import VipPane from '../components/my/VipPane'
-import BalancePane from '../components/my/BalancePane'
-import CouponPane from '../components/my/CouponPane'
+import Account from '../components/my/Account'
 import TaskList from '../components/my/TaskList'
 import consumerService from '../service/ConsumerService'
 export default {
@@ -103,7 +78,7 @@ export default {
     }
   },
   components: {
-    UserEditPane, TaskList, VipPane, BalancePane, CouponPane
+    UserEditPane, TaskList, VipPane, Account
   }
 }
 </script>
@@ -119,15 +94,6 @@ export default {
     margin-top: 10px;
     font-size: 14px;
     div {
-      cursor: pointer;
-    }
-  }
-  .account-item {
-    text-align:center;
-    border-right:1px solid #ccc;
-    span:first-child {
-      font-size:32px;
-      font-weight:700;
       cursor: pointer;
     }
   }
