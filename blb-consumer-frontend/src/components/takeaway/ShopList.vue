@@ -11,8 +11,9 @@
               :key="item"
               :label="item"
               :value="item">
-              <span style="float: left">{{ item }}</span>
-              <span style="float: right; color: #8492a6; font-size: 13px">{{ item }}</span>
+              <div>
+                {{item}}
+              </div>
             </el-option>
           </el-select>
           &nbsp;筛选：
