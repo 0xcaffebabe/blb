@@ -151,7 +151,7 @@ app.get('/shop/vicinity', (req, res) => {
 // 获取店铺信息
 app.get('/shop/info/:id', (req, res) => {
   res.send(result({
-    shopLogo: 'https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=3174175902,1222382505&fm=26&gp=0.jpg',
+    shopLogo: '/imgs/huangmenji.jpg',
     shopName: '黄焖鸡米饭',
     deliveryMethod: '蜂鸟专送',
     deliveryTime: parseInt(Math.random() * 60) + '分钟',
