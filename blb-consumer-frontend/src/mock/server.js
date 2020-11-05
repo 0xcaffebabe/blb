@@ -69,20 +69,21 @@ const clone = origin => {
   return Object.assign({}, origin)
 }
 
+const shopMetadata = [
+  {shopLogo: '/imgs/shop_logos/mixilan.jpg', shopName: '米兰西饼生日蛋糕'},
+  {shopLogo: '/imgs/shop_logos/yingyuan.jpg', shopName: 'e+咖啡私人影院'},
+  {shopLogo: '/imgs/shop_logos/xiang.jpg', shopName: '57°C湘'},
+  {shopLogo: '/imgs/shop_logos/huoguo.jpg', shopName: '火锅咖·自选火锅'},
+  {shopLogo: '/imgs/shop_logos/kafei.jpg', shopName: '元品咖啡'},
+  {shopLogo: '/imgs/shop_logos/hani.jpg', shopName: '哈尼小站'},
+  {shopLogo: '/imgs/shop_logos/dekeshi.jpg', shopName: '德克士'},
+]
+
 // 随机生成店铺列表
 const generateShopList = (req, res) => {
-  const metadata = [
-    {shopLogo: '/imgs/mixilan.jpg', shopName: '米兰西饼生日蛋糕'},
-    {shopLogo: '/imgs/yingyuan.jpg', shopName: 'e+咖啡私人影院'},
-    {shopLogo: '/imgs/xiang.jpg', shopName: '57°C湘'},
-    {shopLogo: '/imgs/huoguo.jpg', shopName: '火锅咖·自选火锅'},
-    {shopLogo: '/imgs/kafei.jpg', shopName: '元品咖啡'},
-    {shopLogo: '/imgs/hani.jpg', shopName: '哈尼小站'},
-    {shopLogo: '/imgs/dekeshi.jpg', shopName: '德克士'},
-  ]
   const shopList = []
   for(let i = 0;i<req.query.size;i++){
-    shopList.push(Object.assign({}, metadata[randomInt(metadata.length)]))
+    shopList.push(Object.assign({}, shopMetadata[randomInt(shopMetadata.length)]))
   }
   for(let i = 0;i<shopList.length;i++){
     shopList[i].shopId = i
@@ -112,7 +113,7 @@ app.post('/login', (req, res) => {
     token: 'fake-token',
     greeting: '欢迎登录',
     username: req.query.username,
-    avatar: 'https://pic1.zhimg.com/v2-89b980f785a7d9dd1068fb9d171ed6cd_is.jpg'
+    avatar: '/imgs/avatar.jpg'
   }))
 })
 
@@ -121,7 +122,7 @@ app.get('/info', (req, res) => {
   const token = req.headers.token
   if (token === 'fake-token') {
     res.send(result({
-      avatar: 'https://pic1.zhimg.com/v2-89b980f785a7d9dd1068fb9d171ed6cd_is.jpg',
+      avatar: '/imgs/avatar.jpg',
       username: 'My',
       realName: '蔡徐坤',
       phone: '17359561234',
@@ -151,7 +152,7 @@ app.get('/shop/vicinity', (req, res) => {
 // 获取店铺信息
 app.get('/shop/info/:id', (req, res) => {
   res.send(result({
-    shopLogo: '/imgs/huangmenji.jpg',
+    shopLogo: '/imgs/shop_logos/huangmenji.jpg',
     shopName: '黄焖鸡米饭',
     deliveryMethod: '蜂鸟专送',
     deliveryTime: parseInt(Math.random() * 60) + '分钟',
@@ -185,16 +186,17 @@ app.get('/shop/:id/category', (req,res) => {
   res.send(result(categoryList))
 })
 
+const productMetadata = [
+  { productName: '黄焖鸡米饭', productImg: '/imgs/foods/huangmenji.jpg', productDesc: '香香甜甜的黄焖鸡米饭'},
+  { productName: '黄焖猪脚米饭', productImg: '/imgs/foods/huangmenzhujiao.jpg', productDesc: '香香甜甜的黄焖脚米饭'},
+  { productName: '黄焖鸭米饭', productImg: '/imgs/foods/huangmenya.jpg', productDesc: '香香甜甜的黄焖鸭米饭'},
+  { productName: '豪大大鸡排', productImg: '/imgs/foods/jipai.jpg', productDesc: '香喷喷的豪大大鸡排'},
+  { productName: '黄焖腐竹升级版', productImg: '/imgs/foods/huangmenfuzhu.jpg', productDesc: '升级版黄焖腐竹'},
+  { productName: '黄焖排骨', productImg: '/imgs/foods/huangmenpaigu.jpeg', productDesc: '香香甜甜的黄焖排骨'},
+]
+
 // 获取商品列表
 app.get('/shop/:id/:categoryId/product', (req, res) => {
-  const productMetadata = [
-    { productName: '黄焖鸡米饭', productImg: 'http://www.shang360.com/upload/item/20170829/77643495931503977103_m.jpg', productDesc: '香香甜甜的黄焖鸡米饭'},
-    { productName: '黄焖猪脚米饭', productImg: 'http://n1.itc.cn/img8/wb/smccloud/recom/2015/07/04/143597888154966028.JPEG', productDesc: '香香甜甜的黄焖脚米饭'},
-    { productName: '黄焖鸭米饭', productImg: 'https://cbu01.alicdn.com/img/ibank/2017/879/174/4278471978_452542804.jpg?__r__=1496373886684', productDesc: '香香甜甜的黄焖鸭米饭'},
-    { productName: '豪大大鸡排', productImg: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=414659565,1925804957&fm=26&gp=0.jpg', productDesc: '香喷喷的豪大大鸡排'},
-    { productName: '黄焖腐竹升级版', productImg: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589258470736&di=41b941d408e2c3fc07444825f27f8651&imgtype=0&src=http%3A%2F%2Fcmsimgshow.zhuchao.cc%2F20431%2F20151229025835.jpg%3Fpath%3Dwww.haokeqilu.cn%2Fuploads%2Fcp%2F20151229025835.jpg', productDesc: '升级版黄焖腐竹'},
-    { productName: '黄焖排骨', productImg: 'https://cp1.douguo.com/upload/caiku/5/9/5/690x390_59664ebdda727cb6d0e331851c053355.jpeg', productDesc: '香香甜甜的黄焖排骨'},
-  ]
   const specMetadata = [
     { specName: '大份' }, { specName: '小份'}, {specName: '中份'}
   ]
@@ -310,14 +312,6 @@ app.get('/shop/:id/evaluation/list', (req, res) => {
 })
 
 const generateProductList = () => {
-  const productMetadata = [
-    { productName: '黄焖鸡米饭', productImg: 'http://www.shang360.com/upload/item/20170829/77643495931503977103_m.jpg'},
-    { productName: '黄焖猪脚米饭', productImg: 'http://n1.itc.cn/img8/wb/smccloud/recom/2015/07/04/143597888154966028.JPEG'},
-    { productName: '黄焖鸭米饭', productImg: 'https://cbu01.alicdn.com/img/ibank/2017/879/174/4278471978_452542804.jpg?__r__=1496373886684'},
-    { productName: '豪大大鸡排', productImg: 'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=414659565,1925804957&fm=26&gp=0.jpg'},
-    { productName: '黄焖腐竹升级版', productImg: 'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1589258470736&di=41b941d408e2c3fc07444825f27f8651&imgtype=0&src=http%3A%2F%2Fcmsimgshow.zhuchao.cc%2F20431%2F20151229025835.jpg%3Fpath%3Dwww.haokeqilu.cn%2Fuploads%2Fcp%2F20151229025835.jpg'},
-    { productName: '黄焖排骨', productImg: 'https://cp1.douguo.com/upload/caiku/5/9/5/690x390_59664ebdda727cb6d0e331851c053355.jpeg'},
-  ]
   const specMetadata = ['大份', '中份', '小份']
   const n = randomInt(8) + 5
   const productList = []
@@ -401,15 +395,6 @@ app.get('/shop/search',(req, res) => {
 
 // 获取订单列表
 app.get('/shop/order', (req, res) => {
-  const shopMetadata = [
-    {shopLogo: 'https://p0.meituan.net/bbia/c63505335fd950e3a56d352fe4be41eb138325.jpg@220w_125h_1e_1c', shopName: '米兰西饼生日蛋糕'},
-    {shopLogo: 'https://p1.meituan.net/600.600/shopmainpic/6cb402acf097539bb9f1a9be49a023e3124761.jpg@220w_125h_1e_1c', shopName: 'e+咖啡私人影院'},
-    {shopLogo: 'https://p0.meituan.net/600.600/deal/__12303698__9660676.jpg@220w_125h_1e_1c', shopName: '57°C湘'},
-    {shopLogo: 'https://img.meituan.net/msmerchant/54fb990f3c02532a3255f020c82edc9f1432759.png@220w_125h_1e_1c', shopName: '火锅咖·自选火锅'},
-    {shopLogo: 'https://p0.meituan.net/600.600/bbia/c58ff676ad214e99f39de19e682e96c5606999.jpg@220w_125h_1e_1c', shopName: '元品咖啡'},
-    {shopLogo: 'https://img.meituan.net/600.600/msmerchant/176c18daf749328483e2754a4e898e1443278.jpg@220w_125h_1e_1c', shopName: '哈尼小站'},
-    {shopLogo: 'https://img.meituan.net/600.600/msmerchant/82843020c1277ed2fa7620b2b1c385b9175314.jpg@220w_125h_1e_1c', shopName: '德克士'},
-  ]
   const productMetadata = [
     '黄焖鸡米饭','黄焖猪脚米饭','黄焖鸭米饭','豪大大鸡排','黄焖腐竹升级版','黄焖排骨','冰阔乐','菊花茶','红牛','香辣鸡腿堡'
   ]
@@ -444,7 +429,7 @@ app.get('/shop/order/:orderId', (req, res) => {
     orderId: 1,
     shopId: 1,
     shopName: '米兰西饼生日蛋糕',
-    shopLogo: 'https://p0.meituan.net/bbia/c63505335fd950e3a56d352fe4be41eb138325.jpg@220w_125h_1e_1c',
+    shopLogo: '/imgs/shop_logos/mixilan.jpg',
     deliveryFee: randomInt(5) + 2,
     productList,
     orderAmount: randomInt(300) + 50,
