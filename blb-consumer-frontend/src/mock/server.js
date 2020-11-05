@@ -17,13 +17,13 @@ app.get('/',(req,res)=>{
 // 获取目录
 app.get('/category/:level', (req, res) => {
   const topMenuList = [
-    {categoryName: '快餐便当', categoryImg: 'https://fuss10.elemecdn.com/b/ff/533cf9617bd57fe1dfb05603bebcfpng.png'},
-    {categoryName: '小吃夜宵', categoryImg: 'https://fuss10.elemecdn.com/4/35/a7eda7659bac613e524ca7c1ae12epng.png'},
-    {categoryName: '果蔬生鲜', categoryImg: 'https://fuss10.elemecdn.com/6/23/5a6fce94bed63a21508f68a72c158png.png'},
-    {categoryName: '特色菜系', categoryImg: 'https://fuss10.elemecdn.com/6/55/ac1bfd1e818013a9f099e964f1e9djpeg.jpeg'},
-    {categoryName: '商店超市', categoryImg: 'https://fuss10.elemecdn.com/a/c1/5c5dd59b641bdfdeb822362547fb4png.png'},
-    {categoryName: '鲜花蛋糕', categoryImg: 'https://fuss10.elemecdn.com/0/e0/7558e305abfb2618ae760142222f9png.png'},
-    {categoryName: '甜品音频', categoryImg: 'https://fuss10.elemecdn.com/4/82/43703799592368585b23589cf3ba8png.png'}
+    {categoryName: '快餐便当', categoryImg: '/imgs/hamburg.png'},
+    {categoryName: '小吃夜宵', categoryImg: '/imgs/street_food.png'},
+    {categoryName: '果蔬生鲜', categoryImg: '/imgs/fruit_vegetable.png'},
+    {categoryName: '特色菜系', categoryImg: '/imgs/special.jpeg'},
+    {categoryName: '商店超市', categoryImg: '/imgs/supermarket.png'},
+    {categoryName: '鲜花蛋糕', categoryImg: '/imgs/cake.png'},
+    {categoryName: '甜品饮品', categoryImg: '/imgs/juice.png'}
   ]
   const subMenuList = [
     ['简餐', '盖浇饭', '米粉面馆', '包子粥店', '香锅砂锅', '麻辣烫', '饺子混沌', '汉堡'],
