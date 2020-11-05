@@ -72,13 +72,13 @@ const clone = origin => {
 // 随机生成店铺列表
 const generateShopList = (req, res) => {
   const metadata = [
-    {shopLogo: 'https://p0.meituan.net/bbia/c63505335fd950e3a56d352fe4be41eb138325.jpg@220w_125h_1e_1c', shopName: '米兰西饼生日蛋糕'},
-    {shopLogo: 'https://p1.meituan.net/600.600/shopmainpic/6cb402acf097539bb9f1a9be49a023e3124761.jpg@220w_125h_1e_1c', shopName: 'e+咖啡私人影院'},
-    {shopLogo: 'https://p0.meituan.net/600.600/deal/__12303698__9660676.jpg@220w_125h_1e_1c', shopName: '57°C湘'},
-    {shopLogo: 'https://img.meituan.net/msmerchant/54fb990f3c02532a3255f020c82edc9f1432759.png@220w_125h_1e_1c', shopName: '火锅咖·自选火锅'},
-    {shopLogo: 'https://p0.meituan.net/600.600/bbia/c58ff676ad214e99f39de19e682e96c5606999.jpg@220w_125h_1e_1c', shopName: '元品咖啡'},
-    {shopLogo: 'https://img.meituan.net/600.600/msmerchant/176c18daf749328483e2754a4e898e1443278.jpg@220w_125h_1e_1c', shopName: '哈尼小站'},
-    {shopLogo: 'https://img.meituan.net/600.600/msmerchant/82843020c1277ed2fa7620b2b1c385b9175314.jpg@220w_125h_1e_1c', shopName: '德克士'},
+    {shopLogo: '/imgs/mixilan.jpg', shopName: '米兰西饼生日蛋糕'},
+    {shopLogo: '/imgs/yingyuan.jpg', shopName: 'e+咖啡私人影院'},
+    {shopLogo: '/imgs/xiang.jpg', shopName: '57°C湘'},
+    {shopLogo: '/imgs/huoguo.jpg', shopName: '火锅咖·自选火锅'},
+    {shopLogo: '/imgs/kafei.jpg', shopName: '元品咖啡'},
+    {shopLogo: '/imgs/hani.jpg', shopName: '哈尼小站'},
+    {shopLogo: '/imgs/dekeshi.jpg', shopName: '德克士'},
   ]
   const shopList = []
   for(let i = 0;i<req.query.size;i++){
