@@ -1,5 +1,9 @@
 <template>
   <div>
+    <el-breadcrumb separator="/" style="margin-bottom:20px">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>搜索</el-breadcrumb-item>
+    </el-breadcrumb>
     <el-card style="text-align:center">
       <el-autocomplete
         style="width:800px"
