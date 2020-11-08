@@ -7,35 +7,25 @@
           排序：
           <el-select v-model="orderValue" placeholder="请选择">
             <el-option
-              v-for="item in 4"
+              v-for="item in orderSelectItems"
               :key="item"
-              :label="item"
-              :value="item">
-              <div>
-                {{item}}
+              :label="item.text"
+              :value="item.text">
+              <div class="order-select-item">
+                <i :class="item.icon" :style="{'color': item.color}"></i><span style="margin-left:16px">{{item.text}}</span>
               </div>
             </el-option>
           </el-select>
           &nbsp;筛选：
-          <el-select v-model="whereValue" placeholder="请选择">
-            <el-option-group label="配送方式">
+          <el-select v-model="filterValue" placeholder="请选择" multiple :style="{'width': calcFilterSelectWidth() + 'px'}" class="filter-select">
+            <el-option-group :label="group.group" v-for="group in filterSelectItems" :key="group.group">
               <el-option
-                v-for="item in 4"
-                :key="item"
-                :label="item"
-                :value="item">
-                <span style="float: left">{{ item }}</span>
-                <span style="float: right; color: #8492a6; font-size: 13px">{{ item }}</span>
-              </el-option>
-            </el-option-group>
-            <el-option-group label="商家属性">
-              <el-option
-                v-for="item in 4"
-                :key="item"
-                :label="item"
-                :value="item">
-                <span style="float: left">{{ item }}</span>
-                <span style="float: right; color: #8492a6; font-size: 13px">{{ item }}</span>
+                v-for="item in group.selectList"
+                :key="group.group + item.name"
+                :label="item.name"
+                :value="item.name">
+                <span :style="{'color': item.color, 'border': '2px solid ' + item.color}" style="padding:2px;border-radius:5px">{{getFirstLetter(item.name)}}</span>
+                <span style="font-size: 16px;margin-left:15px">{{ item.name }}</span>
               </el-option>
             </el-option-group>
           </el-select>
@@ -77,7 +67,35 @@ export default {
   data () {
     return {
       orderValue: '',
-      whereValue: ''
+      filterValue: [],
+      orderSelectItems: [
+        { icon: 'el-icon-sort', color: '#3b87c8', text: '智能排序' },
+        { icon: 'el-icon-location-outline', color: '#2a9bd3', text: '距离最近' },
+        { icon: 'el-icon-s-order', color: '#f07373', text: '销量最高' },
+        { icon: 'el-icon-money', color: '#e6b61a', text: '起送价最低' },
+        { icon: 'el-icon-time', color: '#37c7b7', text: '配送速度最快' },
+        { icon: 'el-icon-star-off', color: '#eba53b', text: '评分最高' }
+      ],
+      filterSelectItems: [
+        {
+          group: '配送方式',
+          selectList: [
+            { name: '蜂鸟专送', color: '#0089cf' },
+            { name: '商家自送', color: 'rgb(232, 132, 45)' }
+          ]
+        },
+        {
+          group: '商家属性',
+          selectList: [
+            { name: '品牌商家', color: 'rgb(63, 189, 230)' },
+            { name: '外卖保', color: 'rgb(153, 153, 153)' },
+            { name: '准时达', color: 'rgb(87, 169, 255)' },
+            { name: '新店', color: 'rgb(232, 132, 45)' },
+            { name: '在线支付', color: 'rgb(255, 78, 0)' },
+            { name: '开发票', color: 'rgb(153, 153, 153)' }
+          ]
+        }
+      ]
     }
   },
   methods: {
@@ -91,6 +109,16 @@ export default {
         type: 'success'
       })
       e.stopPropagation()
+    },
+    getFirstLetter (val) {
+      if (!val) {
+        return ''
+      }
+      return val.charAt(0)
+    },
+    calcFilterSelectWidth () {
+      const width = 90 * (this.filterValue.length + 1) + 40
+      return width > 200 ? width : 200
     }
   }
 }
@@ -161,5 +189,11 @@ export default {
     text-align:center;
     padding: 10px 0 20px 0;
     flex: 0 0 33.333%;
+  }
+  .order-select-item {
+    font-size: 16px;
+  }
+  .filter-select {
+    transition: width 0.3s;
   }
 </style>
