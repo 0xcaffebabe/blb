@@ -17,6 +17,14 @@
                 <el-divider></el-divider>
                 <span style="float:right;color:#f60">￥{{item.orderAmount}}</span>
                 <p class="order-detail">{{item.orderName}}</p>
+                <div v-if="getOrderStatus(item) === '配送中'" class="amap-box-wrapper">
+                  <el-amap class="amap-box" :zoom="10" :center="[117.5,24]" >
+                    <el-amap-marker vid="component-shop-marker" :position="[117.5,24]"></el-amap-marker>
+                    <el-amap-text vid="component-shop-text" :position="[117.5,24]" :text="'店铺位置'"></el-amap-text>
+                    <el-amap-marker vid="component-rider-marker" :position="[117.5,24.1]"></el-amap-marker>
+                    <el-amap-text vid="component-rider-text" :position="[117.5,24.1]" :text="'骑手位置'"></el-amap-text>
+                  </el-amap>
+                </div>
                 <el-button size="mini" type="primary" style="float:right;margin-top:5px;margin-left:15px" @click="$router.push('/shop/' + item.shopId)">再来一单</el-button>
                 <el-button size="mini" type="success" style="float:right;margin-top:5px" @click="showOrderDetail(item.orderId)">订单详情</el-button>
               </el-col>
@@ -69,5 +77,11 @@ export default {
     .order-detail {
       font-size: 14px;
     }
+  }
+  .amap-box {
+    width: 100%;
+    height: 400px;
+    border: 2px solid #409EFF;
+    box-sizing: border-box;
   }
 </style>
