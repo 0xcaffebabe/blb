@@ -8,7 +8,7 @@
           <el-select v-model="orderValue" placeholder="请选择">
             <el-option
               v-for="item in orderSelectItems"
-              :key="item"
+              :key="item.text"
               :label="item.text"
               :value="item.text">
               <div class="order-select-item">
