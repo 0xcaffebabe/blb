@@ -1,18 +1,18 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Takeaway from '../views/Takeaway'
-import Shop from '../views/Shop'
-import Search from '../views/Search'
-import Order from '../views/Order'
-import My from '../views/My'
-import Pay from '../views/Pay'
-import ConfirmOrder from '../views/ConfirmOrder'
-import List from '../views/List'
-import Service from '../views/Service'
-import PointsMall from '../views/PointsMall'
 Vue.use(VueRouter)
 
+const Home = () => import('../views/Home.vue')
+const Takeaway = () => import('../views/Takeaway')
+const Shop = () => import('../views/Shop')
+const Search = () => import('../views/Search')
+const Order = () => import('../views/Order')
+const My = () => import('../views/My')
+const Pay = () => import('../views/Pay')
+const ConfirmOrder = () => import('../views/ConfirmOrder')
+const List = () => import('../views/List')
+const Service = () => import('../views/Service')
+const PointsMall = () => import('../views/PointsMall')
 const routes = [
   {
     path: '/',
