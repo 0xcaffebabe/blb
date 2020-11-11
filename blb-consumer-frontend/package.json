@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve --model development",
-    "build": "vue-cli-service build --model production",
+    "build": "vue-cli-service build --model production --report",
     "mock": "nodemon ./src/mock/server",
     "lint": "vue-cli-service lint",
     "test": "jest"
