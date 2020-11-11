@@ -3,7 +3,7 @@
     <el-card>
       <div slot="header">
         {{title}}
-        <div style="float:right">
+        <div style="float:right" class="select-options">
           排序：
           <el-select v-model="orderValue" placeholder="请选择">
             <el-option
@@ -16,7 +16,7 @@
               </div>
             </el-option>
           </el-select>
-          &nbsp;筛选：
+          <span style="margin-left:10px">筛选：</span>
           <el-select v-model="filterValue" placeholder="请选择" multiple :style="{'width': calcFilterSelectWidth() + 'px'}" class="filter-select">
             <el-option-group :label="group.group" v-for="group in filterSelectItems" :key="group.group">
               <el-option
@@ -118,13 +118,16 @@ export default {
     },
     calcFilterSelectWidth () {
       const width = 90 * (this.filterValue.length + 1) + 40
+      if (width > 700) {
+        return 700
+      }
       return width > 200 ? width : 200
     }
   }
 }
 </script>
 
-<style lang="less" scoped]>
+<style lang="less" scoped>
     .shop-list {
     display: flex;
     flex-flow: row wrap;
@@ -195,5 +198,9 @@ export default {
   }
   .filter-select {
     transition: width 0.3s;
+  }
+  .select-options {
+    position: relative;
+    top: -10px;
   }
 </style>
