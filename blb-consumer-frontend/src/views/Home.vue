@@ -26,9 +26,9 @@
 </template>
 
 <script>
-import MainHeader from '../components/home/MainHeader'
-import MainAside from '../components/home/MainAside'
-import Login from '../components/Login'
+const MainHeader = () => import('../components/home/MainHeader')
+const MainAside = () => import('../components/home/MainAside')
+const Login = () => import('../components/Login')
 export default {
   data () {
     return {
