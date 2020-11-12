@@ -1,11 +1,9 @@
 <template>
   <!-- 首页轮播广告组件 -->
   <div>
-      <el-carousel :interval="4000" type="card" height="430px">
+      <el-carousel :interval="4000" height="500px">
           <el-carousel-item v-for="item in imgList" :key="item">
-          <h3 class="medium" style="height:100%;width:100%">
-            <img :src="item" alt="" >
-          </h3>
+            <el-image :src="item" alt="" fit="cover"/>
           </el-carousel-item>
       </el-carousel>
   </div>
@@ -16,10 +14,10 @@ export default {
   data () {
     return {
       imgList: [
-        'https://img.meituan.net/600.600/msmerchant/5b3b70487ed684fea84ed4a906272c2e831841.jpg',
-        'https://img.meituan.net/msmerchant/d53e16698a2121f46e8fc4530acdabdc6026232.jpg',
-        'https://p1.meituan.net/600.600/deal/58570ab465c2177bbf7e40cd9e21d9f0206194.jpg',
-        'https://img.meituan.net/msmerchant/463762bddd19dbf45fc8ce189303e4031695926.png@600w_600h_1l'
+        'https://imgcache.dealmoon.com/fsvrugc.dealmoon.com/ugc/fbc/9c2/b75/1ba7fee879eb81c006bb991.jpg_1280_1280_3_af99.jpg',
+        'https://tu1.whhost.net/uploads/20181130/23/1543592588-BeXSZyILvU.jpg',
+        'https://imgcp.aacdn.jp/img-a/1720/auto/global-aaj-front/article/2018/02/5a96955e67d36_5a96954e14a47_33320052.jpg',
+        'https://cf.dtcj.com/879b495e-feb2-4191-bedb-d3b7fba1702c.jpg?imageslim'
       ]
     }
   }
@@ -27,9 +25,4 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  img {
-    border-radius: 10px;
-    height: 100%;
-    width: 100%;
-  }
 </style>
