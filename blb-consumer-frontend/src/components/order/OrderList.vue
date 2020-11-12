@@ -29,6 +29,7 @@
                   <el-amap-text vid="component-rider-text" :position="[117.5,24.1]" :text="'骑手位置'"></el-amap-text>
                 </el-amap>
               </div>
+              <el-button v-if="getOrderStatus(item) === '已完结'" size="mini" type="warning" style="float:right;margin-top:5px;margin-left:15px">评价订单</el-button>
               <el-button size="mini" type="primary" style="float:right;margin-top:5px;margin-left:15px" @click="$router.push('/shop/' + item.shopId)">再来一单</el-button>
               <el-button size="mini" type="success" style="float:right;margin-top:5px" @click="showOrderDetail(item.orderId)">订单详情</el-button>
             </el-col>
