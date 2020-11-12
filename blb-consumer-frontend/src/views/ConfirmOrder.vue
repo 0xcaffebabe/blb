@@ -1,10 +1,13 @@
 <template>
-  <div>
-    <el-card>
-      <div slot="header">
-        确认下单
+    <div>
+      <div style="margin-bottom:20px">
+        <el-breadcrumb separator="/">
+          <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+          <el-breadcrumb-item :to="{ path: '/shop/1' }">{{shopInfo.shopName}}</el-breadcrumb-item>
+          <el-breadcrumb-item>确认下单</el-breadcrumb-item>
+        </el-breadcrumb>
       </div>
-        <el-row :gutter="10">
+      <el-row :gutter="10">
           <el-col :span="16">
             <order-product :shopInfo="shopInfo" :productList="productList"/>
           </el-col>
@@ -56,8 +59,7 @@
             </el-card>
           </el-col>
         </el-row>
-    </el-card>
-  </div>
+    </div>
 </template>
 
 <script>
