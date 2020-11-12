@@ -395,9 +395,6 @@ app.get('/shop/search',(req, res) => {
 
 // 获取订单列表
 app.get('/shop/order', (req, res) => {
-  const productMetadata = [
-    '黄焖鸡米饭','黄焖猪脚米饭','黄焖鸭米饭','豪大大鸡排','黄焖腐竹升级版','黄焖排骨','冰阔乐','菊花茶','红牛','香辣鸡腿堡'
-  ]
   const n = parseInt(req.query.size)
   const orderList = []
   for(let i = 0;i<n;i++){
@@ -408,10 +405,15 @@ app.get('/shop/order', (req, res) => {
     order.orderStatus = randomInt(4)
     const productCount = randomInt(10) + 1
     if (productCount == 1) {
-      order.orderName = productMetadata[randomInt(productMetadata.length)] + '等 1 件'
+      order.orderName = productMetadata[randomInt(productMetadata.length)].productName + '等 1 件'
     }else {
-      order.orderName = productMetadata[randomInt(productMetadata.length)]
-        + ' + ' + productMetadata[randomInt(productMetadata.length)] + ' 等 ' + productCount + '件'
+      order.orderName = productMetadata[randomInt(productMetadata.length)].productName
+        + ' + ' + productMetadata[randomInt(productMetadata.length)].productName + ' 等 ' + productCount + '件'
+    }
+    const imgSize = randomInt(4) + 1
+    order.imgList = []
+    for(let i = 0;i<imgSize;i++){
+      order.imgList.push(productMetadata[randomInt(productMetadata.length)].productImg)
     }
     order.createTime = new Date()
     orderList.push(order)

@@ -19,8 +19,19 @@
               <h4 class="shop-name" @click="$router.push('/shop/' + item.shopId)">{{item.shopName}} <span class="el-icon-arrow-right"></span></h4>
               <p class="order-date">{{item.createTime}}</p>
               <el-divider></el-divider>
-              <span style="float:right;color:#f60">￥{{item.orderAmount}}</span>
-              <p class="order-detail">{{item.orderName}}</p>
+              <el-row>
+                <el-col :span="18" class="order-detail">
+                  <ul class="order-img-list">
+                    <li v-for="img in item.imgList" :key="img" class="order-img-item">
+                      <el-image fit="cover" :src="img" :preview-src-list="[img]"/>
+                    </li>
+                  </ul>
+                </el-col>
+                <el-col :span="6">
+                  <p class="order-price">￥{{item.orderAmount}}</p>
+                  <p class="order-name">{{item.orderName}}</p>
+                </el-col>
+              </el-row>
               <div v-if="getOrderStatus(item) === '配送中'" class="amap-box-wrapper">
                 <el-amap class="amap-box" :zoom="10" :center="[117.5,24]" >
                   <el-amap-marker vid="component-shop-marker" :position="[117.5,24]"></el-amap-marker>
@@ -74,12 +85,34 @@ export default {
       font-size: 12px;
       color: #666;
     }
+    .order-price {
+      color:#f60;
+      font-size: 20px;
+      padding: 0;
+      margin: 0;
+      text-align: right;
+    }
+    .order-name {
+      text-align: right;
+      margin-top: 32px;
+      margin-bottom: 0;
+      color: #666;
+    }
     .order-status {
       font-size: 14px;
       float: right;
     }
-    .order-detail {
-      font-size: 14px;
+  }
+  .order-img-list {
+    margin: 0;
+  }
+  .order-img-item {
+    display: inline-block;
+    padding: 0 5px;
+    .el-image {
+      height: 100px;
+      width: 144px;
+      border-radius: 5px;
     }
   }
   .amap-box {
