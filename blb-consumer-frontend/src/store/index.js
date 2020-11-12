@@ -14,6 +14,7 @@ export default new Vuex.Store({
     balancePaneShow: false,
     couponPaneShow: false,
     shopChatShow: false,
+    evalPaneShow: false,
     user: {
       login: false,
       info: {}
@@ -60,6 +61,9 @@ export default new Vuex.Store({
     },
     toggleShopChatShow () {
       this.state.shopChatShow = !this.state.shopChatShow
+    },
+    toogleEvalPaneShow () {
+      this.state.evalPaneShow = !this.state.evalPaneShow
     }
   },
   actions: {
