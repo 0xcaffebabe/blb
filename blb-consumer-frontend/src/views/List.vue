@@ -54,7 +54,6 @@ export default {
           size: this.size
         })
         this.shopData = shopData
-        console.log(this.shopData)
       } catch (e) {
         this.$message.error(e.message)
       }

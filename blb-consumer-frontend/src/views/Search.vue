@@ -74,7 +74,6 @@ export default {
           page: this.page,
           size: this.size
         })
-        console.log(data)
         this.shopList = data.data
         this.total = data.total
       } catch (e) {

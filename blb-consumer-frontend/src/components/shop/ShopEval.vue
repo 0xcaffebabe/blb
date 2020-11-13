@@ -104,7 +104,6 @@ export default {
         })
         this.evalList = data.data
         this.evalTotal = data.total
-        console.log(this.evalList)
       } catch (e) {
         this.$message.error(e.message)
       }

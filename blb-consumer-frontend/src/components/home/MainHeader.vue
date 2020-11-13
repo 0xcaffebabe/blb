@@ -65,7 +65,6 @@ export default {
       this.$store.commit('setUserInfo', userInfo)
     }
     const location = await locationService.getLocation()
-    console.log(location)
   },
   components: {
     LocationChooser
@@ -73,7 +72,6 @@ export default {
   methods: {
     async test () {
       const data = await categoryService.getShopCategory()
-      console.log(data)
     }
   }
 }

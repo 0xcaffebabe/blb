@@ -74,9 +74,7 @@ export default {
       return payService.getPayStatusStr(status)
     }
   },
-  created () {
-    console.log(this.order)
-  }
+  created () { }
 }
 </script>
 

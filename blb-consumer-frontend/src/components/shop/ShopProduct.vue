@@ -57,7 +57,6 @@ export default {
       }
     },
     refreshProductList () {
-      console.log(this.categoryList)
       if (this.categoryActiveName) {
         this.getProductList(this.categoryActiveName)
       }

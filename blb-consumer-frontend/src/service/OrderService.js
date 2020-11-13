@@ -9,7 +9,6 @@ class OrderService {
 
   async makeOrder (params) {
     params = JSON.parse(JSON.stringify(params))
-    console.log(params)
     if (!params.deliveryId) {
       throw new Error('下单失败:收货信息ID为空')
     }
@@ -23,7 +22,6 @@ class OrderService {
         quantity: v.productQuantity
       }
     })
-    console.log(params)
     const data = await repository.makeOrder(params)
     if (!data.success) {
       throw new Error('下单失败:' + data.msg)

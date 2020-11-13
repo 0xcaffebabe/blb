@@ -107,7 +107,6 @@ export default {
   },
   methods: {
     handleEnter () {
-      console.log(this.$store)
       this.list.push({
         date: new Date().toISOString(),
         img: this.$store.state.user.info.avatar,

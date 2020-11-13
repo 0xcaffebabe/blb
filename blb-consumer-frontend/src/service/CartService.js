@@ -21,7 +21,6 @@ class CartService {
       return 0
     }
     let total = 0
-    console.log(productList)
     productList.forEach(v => {
       total += v.productQuantity
     })
