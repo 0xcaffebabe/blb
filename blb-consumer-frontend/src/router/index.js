@@ -20,7 +20,7 @@ const routes = [
     redirect: 'takeaway',
     children: [
       { path: 'takeaway', component: Takeaway },
-      { path: 'shop/:shopId', component: Shop },
+      { name: 'shop', path: 'shop/:shopId', component: Shop },
       { path: 'search', component: Search },
       { path: 'order', component: Order },
       { path: 'my', component: My },

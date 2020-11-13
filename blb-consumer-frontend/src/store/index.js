@@ -20,9 +20,17 @@ export default new Vuex.Store({
       info: {}
     },
     location: city,
-    lastProductAddTime: 1
+    lastProductAddTime: 1,
+    confirmOrderData: { // 订单确认页需要用到的数据
+      shopInfo: {},
+      productList: []
+    }
   },
   mutations: {
+    setConfirmOrderData (state, data) {
+      this.state.confirmOrderData.shopInfo = data.shopInfo
+      this.state.confirmOrderData.productList = data.productList
+    },
     toggleCart () {
       this.state.cartShow = !this.state.cartShow
     },

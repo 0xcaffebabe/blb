@@ -90,8 +90,9 @@ export default {
     OrderProduct
   },
   created () {
-    this.shopInfo = this.$route.params.shopInfo
-    this.productList = this.$route.params.productList
+    this.shopInfo = this.$store.state.confirmOrderData.shopInfo
+    console.log(this.$store.state.confirmOrderData)
+    this.productList = this.$store.state.confirmOrderData.productList
     this.orderForm.productList = this.productList
     this.getDefaultDelivery()
   },

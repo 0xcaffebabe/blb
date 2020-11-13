@@ -77,13 +77,12 @@ export default {
       this.cartTotal = this.$refs.shopCart.getCartTotal()
     },
     handleSettlementClick () {
-      console.log(this.shopInfo)
+      this.$store.commit('setConfirmOrderData', {
+        shopInfo: this.shopInfo,
+        productList: this.$refs.shopCart.getProductListLocal()
+      })
       this.$router.push({
-        name: 'confirmOrder',
-        params: {
-          shopInfo: this.shopInfo,
-          productList: this.$refs.shopCart.getProductListLocal()
-        }
+        name: 'confirmOrder'
       })
     }
   },
