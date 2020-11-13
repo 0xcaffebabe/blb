@@ -2,7 +2,7 @@
     <div class="container">
         <el-row>
         <el-col :span="4">
-          <span class="logo" @click="test">饱了吧
+          <span class="logo">饱了吧
           </span>
         </el-col>
         <el-col :span="16">
@@ -50,9 +50,7 @@
 
 <script>
 import LocationChooser from './LocationChooser'
-import categoryService from '../../service/CategoryService'
 import consumerService from '../../service/ConsumerService'
-import locationService from '../../service/LocationService'
 export default {
   data () {
     return { }
@@ -64,15 +62,9 @@ export default {
       const userInfo = await consumerService.getConsumerInfo()
       this.$store.commit('setUserInfo', userInfo)
     }
-    const location = await locationService.getLocation()
   },
   components: {
     LocationChooser
-  },
-  methods: {
-    async test () {
-      const data = await categoryService.getShopCategory()
-    }
   }
 }
 </script>
