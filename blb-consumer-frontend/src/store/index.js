@@ -70,6 +70,9 @@ export default new Vuex.Store({
     toggleShopChatShow () {
       this.state.shopChatShow = !this.state.shopChatShow
     },
+    closeEvalPaneShow () {
+      this.state.evalPaneShow = false
+    },
     toogleEvalPaneShow () {
       this.state.evalPaneShow = !this.state.evalPaneShow
     }

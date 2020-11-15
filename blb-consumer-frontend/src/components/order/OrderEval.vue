@@ -3,7 +3,7 @@
     title="订单评价"
     :visible="$store.state.evalPaneShow"
     width="35%"
-    @close="$store.commit('toogleEvalPaneShow')"
+    @close="$store.commit('closeEvalPaneShow')"
     >
     <el-row>
       <el-col :span="4">
@@ -86,7 +86,7 @@
         <p>超赞</p>
       </li>
     </ul>
-    <el-button type="primary" style="width:100%">提交评价</el-button>
+    <el-button type="primary" style="width:100%" @click="submitEval">提交评价</el-button>
   </el-dialog>
 </template>
 
@@ -105,6 +105,14 @@ export default {
   methods: {
     beforeUpload () {
       return false
+    },
+    submitEval () {
+      this.$notify({
+        title: '成功',
+        message: '提交评价成功',
+        type: 'success'
+      })
+      this.$store.commit('closeEvalPaneShow')
     }
   },
   computed: {
