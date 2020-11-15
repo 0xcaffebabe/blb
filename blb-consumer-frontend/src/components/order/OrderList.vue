@@ -10,7 +10,7 @@
       <el-card v-for="item in orderList" :key="item.orderId" class="order-list-item">
           <el-row>
             <el-col :span="2">
-              <div class="shop-img" @click="$store.commit('toggleOrderDetail')">
+              <div class="shop-img" @click="$router.push('/shop/1')">
                 <el-avatar :src="item.shopLogo" fit="cover" shape="square"  :size="64"></el-avatar>
               </div>
             </el-col>
