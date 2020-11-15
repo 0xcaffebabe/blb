@@ -80,6 +80,7 @@ export default {
   .order-list-item {
     margin-bottom: 20px;
     .shop-name {
+      display: inline-block;
       margin: 0;
       padding: 0;
       vertical-align: middle;
