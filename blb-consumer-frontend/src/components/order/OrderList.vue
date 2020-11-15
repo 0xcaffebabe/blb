@@ -22,7 +22,7 @@
               <el-row>
                 <el-col :span="18" class="order-detail">
                   <ul class="order-img-list">
-                    <li v-for="img in item.imgList" :key="img" class="order-img-item">
+                    <li v-for="img in item.imgList" :key="img + Math.random()" class="order-img-item">
                       <el-image fit="cover" :src="img" :preview-src-list="[img]"/>
                     </li>
                   </ul>

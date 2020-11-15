@@ -51,6 +51,7 @@
         placeholder="满意你就夸一夸"/>
       <el-upload
         class="upload"
+        action="/upload"
         :auto-upload="false"
         :file-list="fileList"
         list-type="picture">
