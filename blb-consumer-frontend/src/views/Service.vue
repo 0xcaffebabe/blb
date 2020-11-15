@@ -28,22 +28,22 @@
           </div>
           <ul>
             <li>
-              <el-tag effect="dark" type="info" size="medium" style="float:right">未处理</el-tag>
+              <el-button effect="dark" type="info" size="small" style="float:right">未处理</el-button>
               <h4>关于店铺 黄焖鸡米饭 的投诉</h4>
               <el-divider/>
             </li>
             <li>
-              <el-tag effect="dark" type="success" size="medium" style="float:right">处理中</el-tag>
+              <el-button effect="dark" type="success" size="small" style="float:right">处理中</el-button>
               <h4>关于店铺 阿牛很芒 的投诉</h4>
               <el-divider/>
             </li>
             <li>
-              <el-tag effect="dark" type="primary" size="medium" style="float:right">已处理</el-tag>
+              <el-button effect="dark" type="primary" size="small" style="float:right">已处理</el-button>
               <h4>关于店铺 网红奶茶店 的投诉</h4>
               <el-divider/>
             </li>
             <li>
-              <el-tag effect="dark" type="danger" size="medium" style="float:right">被驳回</el-tag>
+              <el-button effect="dark" type="danger" size="small" style="float:right">被驳回</el-button>
               <h4>关于店铺 黄焖鸡米饭 的投诉</h4>
             </li>
           </ul>
