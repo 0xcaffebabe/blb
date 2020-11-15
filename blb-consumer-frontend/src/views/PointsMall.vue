@@ -35,7 +35,7 @@
         <el-card style="margin-top:20px" class="others-buys">
           <div slot="header">TA门在买</div>
           <ul>
-            <li v-for="item in customerList" :key="item.id" class="others-item">
+            <li v-for="(item, index) in customerList" :key="item.id" class="others-item">
               <el-row :gutter="20">
                 <el-col :span="6">
                   <el-avatar :src="item.avatar" style="width:48px;height:48px">user</el-avatar>
@@ -45,7 +45,9 @@
                   <p>兑换了 {{item.product}}</p>
                 </el-col>
               </el-row>
-              <el-divider/>
+              <div :class="{ hide : isLast(index, customerList) }">
+                <el-divider/>
+              </div>
             </li>
           </ul>
         </el-card>
@@ -113,12 +115,21 @@ export default {
           product: productMetadata[this.randomInt(productMetadata.length)].name
         })
       }
+    },
+    isLast (index, list) {
+      if (!list) {
+        return false
+      }
+      return index === list.length - 1
     }
   }
 }
 </script>
 
 <style lang="less" scoped>
+  .hide {
+    display: none;
+  }
   .my-info {
     h3 {
       padding: 0;
