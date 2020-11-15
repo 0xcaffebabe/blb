@@ -1,22 +1,24 @@
 <template>
   <div>
+    <div style="margin-bottom:20px">
+      <el-breadcrumb separator="/">
+        <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+        <el-breadcrumb-item :to="{ path: '/my' }">我的</el-breadcrumb-item>
+        <el-breadcrumb-item>客服中心</el-breadcrumb-item>
+      </el-breadcrumb>
+    </div>
     <el-row :gutter="20">
       <el-col :span="16">
-        <el-card>
-          <div slot='header'>
-            客服中心
-          </div>
-          <JwChat-index
-          :taleList='list'
-          @enter='handleEnter'
-          v-model='msg'
-          :toolConfig='config'
-          :config="config"
-          scrollType="scroll"
-          >
-            <JwChat-rightbox :config="rightConfig"/>
-          </JwChat-index>
-        </el-card>
+        <JwChat-index
+        :taleList='list'
+        @enter='handleEnter'
+        v-model='msg'
+        :toolConfig='config'
+        :config="config"
+        scrollType="scroll"
+        >
+          <JwChat-rightbox :config="rightConfig"/>
+        </JwChat-index>
       </el-col>
       <el-col :span="8">
         <el-card>
@@ -120,5 +122,7 @@ export default {
 </script>
 
 <style lang='less' scoped>
-
+  .ChatPage {
+    margin-left: 0;
+  }
 </style>
