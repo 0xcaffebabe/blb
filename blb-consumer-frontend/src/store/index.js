@@ -15,6 +15,7 @@ export default new Vuex.Store({
     couponPaneShow: false,
     shopChatShow: false,
     evalPaneShow: false,
+    complaintPaneShow: true,
     user: {
       login: false,
       info: {}
@@ -75,6 +76,9 @@ export default new Vuex.Store({
     },
     toogleEvalPaneShow () {
       this.state.evalPaneShow = !this.state.evalPaneShow
+    },
+    toggleComplaintPane () {
+      this.state.complaintPaneShow = !this.state.complaintPaneShow
     }
   },
   actions: {

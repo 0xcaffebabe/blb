@@ -50,10 +50,12 @@
         </el-card>
       </el-col>
     </el-row>
+    <complaint-pane/>
   </div>
 </template>
 
 <script>
+import ComplaintPane from '../components/service/ComplaintPane'
 export default {
   data () {
     return {
@@ -117,6 +119,9 @@ export default {
         text: { text: this.msg }
       })
     }
+  },
+  components: {
+    ComplaintPane
   }
 }
 </script>
