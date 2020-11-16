@@ -14,7 +14,7 @@
                 <el-image
                 class="shop-logo"
                 :class="{'img-active': imgActive == index}"
-                @click="handleImgClick(index)"
+                @click="handleImgClick(index, $event)"
                 :src="info.shopLogo"
                 fit="cover"/>
               </li>
