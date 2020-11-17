@@ -1,6 +1,6 @@
 <template>
   <div>
-    <order-list :orderList="orderList" @showOrderDetail="handleShowOrderDetail"/>
+    <order-list :orderList="orderList" @show-order-detail="handleShowOrderDetail"/>
     <el-card>
        <el-pagination
       @size-change="handleSizeChange"
