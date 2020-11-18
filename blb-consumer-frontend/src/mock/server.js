@@ -1,6 +1,8 @@
 const { response } = require('express')
 const express = require('express')
 const result = require('./result')
+const { v4: uuidv4 } = require('uuid');
+
 const app = express()
 app.listen(8001)
 app.use(function(req, res, next) {
@@ -399,7 +401,7 @@ app.get('/shop/order', (req, res) => {
   const orderList = []
   for(let i = 0;i<n;i++){
     const order = clone(shopMetadata[randomInt(shopMetadata.length)])
-    order.orderId = i
+    order.orderId = uuidv4()
     order.shopId = i
     order.orderAmount = randomInt(50) + 10
     order.orderStatus = randomInt(4)
