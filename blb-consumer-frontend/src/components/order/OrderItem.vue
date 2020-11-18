@@ -37,7 +37,7 @@
         <el-button v-if="editable" size="mini" type="success" style="float:right;margin-top:5px" @click="showOrderDetail(order.orderId)">订单详情</el-button>
       </el-col>
     </el-row>
-    <order-eval/>
+    <order-eval v-if="editable"/>
   </el-card>
 </template>
 
