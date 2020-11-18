@@ -24,7 +24,7 @@
             <p class="order-name">{{order.orderName}}</p>
           </el-col>
         </el-row>
-        <div v-if="getOrderStatus(order) === '配送中'" class="amap-box-wrapper">
+        <div v-if="getOrderStatus(order) === '配送中' && showMap" class="amap-box-wrapper">
           <el-amap class="amap-box" :zoom="10" :center="[117.5,24]" >
             <el-amap-marker vid="component-shop-marker" :position="[117.5,24]"></el-amap-marker>
             <el-amap-text vid="component-shop-text" :position="[117.5,24]" :text="'店铺位置'"></el-amap-text>
@@ -45,7 +45,17 @@
 import orderService from '../../service/OrderService'
 import OrderEval from './OrderEval'
 export default {
-  props: ['order'],
+  props: {
+    order: {
+      type: Object,
+      required: true
+    },
+    showMap: {
+      type: Boolean,
+      required: false,
+      default: false
+    }
+  },
   data () {
     return {}
   },

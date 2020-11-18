@@ -15,9 +15,9 @@
     <el-divider>投诉详情</el-divider>
     <div class="order-id">
       投诉订单号:
-      <el-tooltip placement="top">
+      <el-tooltip placement="bottom-end" effect="light">
         <template #content>
-          多行信息<br/>第二行信息
+            <order-item :order="order" style="height:288px;width:1000px"/>
         </template>
         <el-link type="primary"> 399 288 600 456</el-link>
       </el-tooltip>
@@ -26,9 +26,20 @@
 </template>
 
 <script>
+import OrderItem from '@/components/order/OrderItem'
+import orderService from '@/service/OrderService'
 export default {
   data () {
-    return {}
+    return {
+      order: {}
+    }
+  },
+  components: {
+    OrderItem
+  },
+  async created () {
+    const data = await orderService.getOrderList(1, 1)
+    this.order = data.data[0]
   }
 }
 </script>
