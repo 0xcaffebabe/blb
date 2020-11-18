@@ -28,22 +28,22 @@
           </div>
           <ul>
             <li>
-              <el-button effect="dark" type="info" size="mini" style="float:right">未处理</el-button>
+              <el-button effect="dark" type="info" size="mini" style="float:right" @click="showComplaintPane">未处理</el-button>
               <h4>关于店铺 黄焖鸡米饭 的投诉</h4>
               <el-divider/>
             </li>
             <li>
-              <el-button effect="dark" type="success" size="mini" style="float:right">处理中</el-button>
+              <el-button effect="dark" type="success" size="mini" style="float:right" @click="showComplaintPane">处理中</el-button>
               <h4>关于店铺 阿牛很芒 的投诉</h4>
               <el-divider/>
             </li>
             <li>
-              <el-button effect="dark" type="primary" size="mini" style="float:right">已处理</el-button>
+              <el-button effect="dark" type="primary" size="mini" style="float:right" @click="showComplaintPane">已处理</el-button>
               <h4>关于店铺 网红奶茶店 的投诉</h4>
               <el-divider/>
             </li>
             <li>
-              <el-button effect="dark" type="danger" size="mini" style="float:right">被驳回</el-button>
+              <el-button effect="dark" type="danger" size="mini" style="float:right" @click="showComplaintPane">被驳回</el-button>
               <h4>关于店铺 黄焖鸡米饭 的投诉</h4>
             </li>
           </ul>
@@ -118,6 +118,9 @@ export default {
         mine: true,
         text: { text: this.msg }
       })
+    },
+    showComplaintPane () {
+      this.$store.commit('toggleComplaintPane')
     }
   },
   components: {

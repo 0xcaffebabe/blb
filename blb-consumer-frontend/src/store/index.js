@@ -15,7 +15,7 @@ export default new Vuex.Store({
     couponPaneShow: false,
     shopChatShow: false,
     evalPaneShow: false,
-    complaintPaneShow: true,
+    complaintPaneShow: false,
     user: {
       login: false,
       info: {}
