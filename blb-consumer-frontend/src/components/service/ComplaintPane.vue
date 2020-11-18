@@ -17,7 +17,7 @@
       投诉订单号:
       <el-tooltip placement="bottom-end" effect="light">
         <template #content>
-            <order-item :order="order" style="height:288px;width:1000px"/>
+            <order-item :order="order" :editable="false" style="height:288px;width:1000px"/>
         </template>
         <el-link type="primary"> 399 288 600 456</el-link>
       </el-tooltip>

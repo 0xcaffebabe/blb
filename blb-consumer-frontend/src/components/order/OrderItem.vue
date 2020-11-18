@@ -24,7 +24,7 @@
             <p class="order-name">{{order.orderName}}</p>
           </el-col>
         </el-row>
-        <div v-if="getOrderStatus(order) === '配送中' && showMap" class="amap-box-wrapper">
+        <div v-if="getOrderStatus(order) === '配送中' && editable" class="amap-box-wrapper">
           <el-amap class="amap-box" :zoom="10" :center="[117.5,24]" >
             <el-amap-marker vid="component-shop-marker" :position="[117.5,24]"></el-amap-marker>
             <el-amap-text vid="component-shop-text" :position="[117.5,24]" :text="'店铺位置'"></el-amap-text>
@@ -32,9 +32,9 @@
             <el-amap-text vid="component-rider-text" :position="[117.5,24.1]" :text="'骑手位置'"></el-amap-text>
           </el-amap>
         </div>
-        <el-button v-if="getOrderStatus(order) === '已完结'" @click="showOrderEval" size="mini" type="warning" style="float:right;margin-top:5px;margin-left:15px">评价订单</el-button>
-        <el-button size="mini" type="primary" style="float:right;margin-top:5px;margin-left:15px" @click="$router.push('/shop/' + order.shopId)">再来一单</el-button>
-        <el-button size="mini" type="success" style="float:right;margin-top:5px" @click="showOrderDetail(order.orderId)">订单详情</el-button>
+        <el-button v-if="getOrderStatus(order) === '已完结' && editable" @click="showOrderEval" size="mini" type="warning" style="float:right;margin-top:5px;margin-left:15px">评价订单</el-button>
+        <el-button v-if="editable" size="mini" type="primary" style="float:right;margin-top:5px;margin-left:15px" @click="$router.push('/shop/' + order.shopId)">再来一单</el-button>
+        <el-button v-if="editable" size="mini" type="success" style="float:right;margin-top:5px" @click="showOrderDetail(order.orderId)">订单详情</el-button>
       </el-col>
     </el-row>
     <order-eval/>
@@ -50,10 +50,10 @@ export default {
       type: Object,
       required: true
     },
-    showMap: {
+    editable: {
       type: Boolean,
       required: false,
-      default: false
+      default: true
     }
   },
   data () {
