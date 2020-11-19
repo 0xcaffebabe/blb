@@ -4,20 +4,25 @@
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>搜索</el-breadcrumb-item>
     </el-breadcrumb>
-    <el-card style="text-align:center">
+    <div style="text-align:center" class="search-box-container">
       <el-autocomplete
-        style="width:800px"
-        class='inline-input'
+        style="width:600px"
+        class='search-input'
         v-model='input'
         :fetch-suggestions='querySearch'
         placeholder='请输入内容'
+        suffix-icon="el-icon-search"
         @select='handleSelect'
         @keyup.enter="search"
-        clearable
-      ></el-autocomplete>
-      <el-button type="primary" style="margin-left:20px" @click="search">搜索</el-button>
-    </el-card>
-    <shop-list style="margin-top:10px" :title="'搜索结果'" :shopList="shopList"></shop-list>
+      >
+        <template v-slot="{ item }">
+          <div class="shop-name">{{ item.value }}</div>
+          <div class="shop-addr"> <span class="el-icon-location"></span> {{ item.address }}</div>
+        </template>
+      </el-autocomplete>
+      <!-- <el-button type="primary" style="margin-left:20px" @click="search">搜索</el-button> -->
+    </div>
+    <shop-list v-if="shopList.length != 0" style="margin-top:10px" :title="'搜索结果'" :shopList="shopList"></shop-list>
     <el-card v-if="shopList.length != 0" style="margin-top:10px">
       <el-pagination
       @size-change="handleSizeChange"
@@ -55,12 +60,17 @@ export default {
     },
     loadAll () {
       return [
-        { value: '黄焖鸡米饭' },
         {
-          value: '沙县小吃'
+          value: '黄焖鸡米饭',
+          address: '鲤城区媒人桥路2号店'
         },
         {
-          value: '饿点外卖'
+          value: '沙县小吃',
+          address: '丰泽区泰禾广场3号店'
+        },
+        {
+          value: '饿点外卖',
+          address: '客运中心站4号店'
         }
       ]
     },
@@ -93,4 +103,20 @@ export default {
 </script>
 
 <style lang='less' scoped>
+  .el-autocomplete /deep/ .el-input__inner {
+    padding: 15px;
+    font-size: 16px;
+    height: 60px;
+  }
+  .el-autocomplete /deep/ .el-icon-search {
+    font-size: 16px;
+    color: #333;
+    margin-right: 10px;
+  }
+  .shop-name {
+    font-size: 16px;
+  }
+  .shop-addr {
+    color: #999;
+  }
 </style>
