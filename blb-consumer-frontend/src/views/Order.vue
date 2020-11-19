@@ -1,7 +1,7 @@
 <template>
   <div>
     <order-list :orderList="orderList" @show-order-detail="handleShowOrderDetail"/>
-    <el-card>
+    <el-card style="text-align:center">
        <el-pagination
       @size-change="handleSizeChange"
       background
@@ -9,7 +9,7 @@
       :current-page="page"
       :page-sizes="[5, 10, 20, 30]"
       :page-size="size"
-      layout="total, sizes, prev, pager, next, jumper"
+      layout="prev, pager, next"
       :total="total">
     </el-pagination>
     </el-card>
@@ -26,7 +26,7 @@ export default {
     return {
       orderDetailShow: true,
       page: 1,
-      size: 5,
+      size: 10,
       total: 0,
       orderList: [],
       orderDetail: {}
@@ -48,13 +48,18 @@ export default {
         this.$message.error(e.message)
       }
     },
-    handleSizeChange (val) {
+    async handleSizeChange (val) {
       this.size = val
-      this.getOrderList()
+      await this.getOrderList()
+      this.scrollToTop()
     },
-    handlePageChange (val) {
+    scrollToTop () {
+      window.scrollTo({ top: 0 })
+    },
+    async handlePageChange (val) {
       this.page = val
-      this.getOrderList()
+      await this.getOrderList()
+      this.scrollToTop()
     },
     handleShowOrderDetail (orderId) {
       this.getOrderDetail(orderId)
