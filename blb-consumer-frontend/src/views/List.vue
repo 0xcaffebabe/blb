@@ -1,7 +1,7 @@
 <template>
   <div>
     <shop-list style="margin-top:10px" :title="'分类结果'" :shopList="shopData.data"></shop-list>
-    <el-card v-if="shopData.data" style="margin-top:10px">
+    <el-card v-if="shopData.data" style="margin-top:10px;text-align:center">
       <el-pagination
       @size-change="handleSizeChange"
       background
@@ -9,7 +9,7 @@
       :current-page="page"
       :page-sizes="[4, 12, 20, 30]"
       :page-size="size"
-      layout="total, sizes, prev, pager, next, jumper"
+      layout="prev, pager, next"
       :total="shopData.total">
     </el-pagination>
     </el-card>
@@ -58,13 +58,18 @@ export default {
         this.$message.error(e.message)
       }
     },
-    handlePageChange (val) {
+    async handlePageChange (val) {
       this.page = val
-      this.getShopData()
+      await this.getShopData()
+      this.scrollToTop()
     },
-    handleSizeChange (val) {
+    async handleSizeChange (val) {
       this.size = val
-      this.getShopData()
+      await this.getShopData()
+      this.scrollToTop()
+    },
+    scrollToTop () {
+      window.scrollTo({ top: 0 })
     }
   }
 }
