@@ -22,6 +22,14 @@
       </div>
     </el-container>
     <login/>
+    <el-footer height="108px" class="footer">
+      <ul class="footer-link-list">
+            <li v-for="item in linkList" :key="item">
+              <el-link>{{item}}</el-link>
+            </li>
+          </ul>
+          <p class="copyright">Copyright © 2020 blb.ismy.wang All Rights Reserved | 闽ICP备17018216号 </p>
+    </el-footer>
   </el-container>
 </template>
 
@@ -32,7 +40,10 @@ const Login = () => import('../components/Login')
 export default {
   data () {
     return {
-      isCollapse: true
+      isCollapse: true,
+      linkList: [
+        '网站首页', '企业服务', '人才招聘', '联系我们', '帮助中心', '意见反馈', '友情链接'
+      ]
     }
   },
   methods: {
@@ -58,18 +69,37 @@ export default {
   }
   .main {
     width: 1280px;
+    min-height: 800px;
     margin: auto;
   }
   .footer {
-    display: inline-block;
+    box-sizing: border-box;
     bottom: 0;
+    padding: 10px 100px;
     font-size: 18px;
-    color: #ccc;
-    width: 100%;
     text-align: center;
+    width: 100%;
     color: #fff;
-    padding: 0;
     background-color: #3190e8;
+    .footer-link-list {
+      li {
+        display: inline;
+        margin-right: 10px;
+      }
+    }
+    .copyright {
+      padding: 0;
+      margin: 0;
+      font-size: 14px;
+      color: #ccc;
+    }
+    .el-link {
+      color: #eee;
+      text-decoration: none;
+    }
+    .el-link:hover {
+      color: #fff;
+    }
   }
   .side-menu {
     position: fixed;
