@@ -282,11 +282,11 @@ app.get('/shop/:id/evaluation/list', (req, res) => {
     '这家店不咋地 还设有最低消费 太坑爹了'
   ]
   const imgMetadata = [
-    'https://p0.meituan.net/shaitu/45db245303e01827bc3aa29601e210261993453.jpg',
-    'https://p0.meituan.net/shaitu/737858962a1107d8b5f8949633cb590e1842248.jpg',
-    'https://p0.meituan.net/shaitu/1e6b0ea57aac00dfac4289911fee089f1859077.jpg',
-    'https://p0.meituan.net/shaitu/fb69315b261c3e359106c7dea74b93b44565738.jpg',
-    'https://p0.meituan.com/mtptimg/be50f88a38ae68a2a24773d7284da425112571.jpg'
+    '/imgs/eval/1.jpg',
+    '/imgs/eval/2.jpg',
+    '/imgs/eval/3.jpg',
+    '/imgs/eval/4.jpg',
+    '/imgs/eval/5.jpg'
   ]
   const evalSize = parseInt(req.query.size)
   const evalList = []
