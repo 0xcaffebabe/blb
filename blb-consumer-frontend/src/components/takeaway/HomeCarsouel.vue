@@ -14,10 +14,10 @@ export default {
   data () {
     return {
       imgList: [
-        'https://imgcache.dealmoon.com/fsvrugc.dealmoon.com/ugc/fbc/9c2/b75/1ba7fee879eb81c006bb991.jpg_1280_1280_3_af99.jpg',
-        'https://tu1.whhost.net/uploads/20181130/23/1543592588-BeXSZyILvU.jpg',
-        'https://imgcp.aacdn.jp/img-a/1720/auto/global-aaj-front/article/2018/02/5a96955e67d36_5a96954e14a47_33320052.jpg',
-        'https://cf.dtcj.com/879b495e-feb2-4191-bedb-d3b7fba1702c.jpg?imageslim'
+        '/imgs/banner/1.webp',
+        '/imgs/banner/2.jpg',
+        '/imgs/banner/3.jpg',
+        '/imgs/banner/4.jpg'
       ]
     }
   }
