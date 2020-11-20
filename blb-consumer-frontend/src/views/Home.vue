@@ -84,6 +84,7 @@ export default {
     float: right;
     top: 75%;
     right: 20px;
+    z-index: 999;
     .el-button{
       box-shadow: 2px 7px 13px #ccc;
     }
