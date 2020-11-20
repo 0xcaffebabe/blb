@@ -3,7 +3,7 @@
   <div>
       <el-carousel :interval="4000" height="500px">
           <el-carousel-item v-for="item in imgList" :key="item">
-            <el-image :src="item" alt="" fit="cover"/>
+            <el-image :src="item" alt="" fit="cover" style="width:100%"/>
           </el-carousel-item>
       </el-carousel>
   </div>
