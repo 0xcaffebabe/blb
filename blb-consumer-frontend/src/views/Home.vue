@@ -14,12 +14,6 @@
           </el-collapse-transition>
         </el-main>
       </el-container>
-      <div class="nav-btns">
-        <el-button-group>
-          <el-button type="primary" icon="el-icon-back" circle @click="handleRouterBack"></el-button>
-          <el-button type="primary" icon="el-icon-right" circle @click="handleRouterGo"></el-button>
-        </el-button-group>
-      </div>
     </el-container>
     <login/>
   </el-container>
@@ -38,12 +32,6 @@ export default {
   methods: {
     handleSideToggle () {
       this.isCollapse = !this.isCollapse
-    },
-    handleRouterBack () {
-      this.$router.go(-1)
-    },
-    handleRouterGo () {
-      this.$router.go(1)
     }
   },
   components: {
