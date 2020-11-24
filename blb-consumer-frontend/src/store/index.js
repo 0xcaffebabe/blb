@@ -65,6 +65,9 @@ export default new Vuex.Store({
     toggleBalancePane () {
       this.state.balancePaneShow = !this.state.balancePaneShow
     },
+    closeBalancePane () {
+      this.state.balancePaneShow = false
+    },
     toggleCouponPaneShow () {
       this.state.couponPaneShow = !this.state.couponPaneShow
     },
