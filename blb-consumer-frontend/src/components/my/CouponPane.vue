@@ -3,7 +3,7 @@
     title="优惠券"
     :visible="$store.state.couponPaneShow"
     width="50%"
-    @close="$store.commit('toggleCouponPaneShow')"
+    @close="$store.commit('closeCouponPane')"
     >
   <el-tabs v-model="activeName">
     <el-tab-pane label="红包" name="redEnv">
@@ -25,7 +25,7 @@
               </div>
             </el-col>
             <el-col :span="4">
-              <el-button type="primary" size="medium" style="margin-top:50%">去使用</el-button>
+              <el-button type="primary" size="medium" style="margin-top:50%" @click="useCoupon">去使用</el-button>
             </el-col>
           </el-row>
           <el-divider></el-divider>
@@ -51,7 +51,7 @@
               </div>
             </el-col>
             <el-col :span="4">
-              <el-button type="primary" size="medium" style="margin-top:50%">去使用</el-button>
+              <el-button type="primary" size="medium" style="margin-top:50%" @click="useCoupon">去使用</el-button>
             </el-col>
           </el-row>
           <el-divider></el-divider>
@@ -133,6 +133,12 @@ export default {
           }
         ]
       }
+    }
+  },
+  methods: {
+    useCoupon () {
+      this.$store.commit('closeCouponPane')
+      this.$router.push('/shop/1')
     }
   }
 }

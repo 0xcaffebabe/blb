@@ -71,6 +71,9 @@ export default new Vuex.Store({
     toggleCouponPaneShow () {
       this.state.couponPaneShow = !this.state.couponPaneShow
     },
+    closeCouponPane () {
+      this.state.couponPaneShow = false
+    },
     toggleShopChatShow () {
       this.state.shopChatShow = !this.state.shopChatShow
     },
