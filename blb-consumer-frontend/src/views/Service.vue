@@ -24,7 +24,7 @@
         <el-card>
           <div slot="header">
             投诉列表
-            <el-button type="primary" size="mini" style="float:right">发起投诉</el-button>
+            <el-button type="primary" size="mini" style="float:right" @click="$store.commit('toggleSubmitComplaintPane')">发起投诉</el-button>
           </div>
           <ul>
             <li>
@@ -51,11 +51,13 @@
       </el-col>
     </el-row>
     <complaint-pane/>
+    <submit-complaint-pane/>
   </div>
 </template>
 
 <script>
 import ComplaintPane from '../components/service/ComplaintPane'
+import SubmitComplaintPane from '../components/service/SubmitComplaintPane'
 export default {
   data () {
     return {
@@ -124,7 +126,7 @@ export default {
     }
   },
   components: {
-    ComplaintPane
+    ComplaintPane, SubmitComplaintPane
   }
 }
 </script>

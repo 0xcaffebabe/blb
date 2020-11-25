@@ -33,6 +33,24 @@
                 <el-tag effect="dark" type="primary" size="mini">蜂鸟专送</el-tag>
               </el-col>
             </el-card>
+            <el-card class="coupon-list">
+              <div slot="header">红包卡券</div>
+              <ul>
+                <li v-for="item in couponList" :key="item">
+                  <el-row>
+                    <el-col :span="4">
+                      <span class="el-icon-s-cooperation"></span>
+                    </el-col>
+                    <el-col :span="18">
+                      <p>{{item}}</p>
+                    </el-col>
+                    <el-col :span="2">
+                      <span class="el-icon-arrow-right"></span>
+                    </el-col>
+                  </el-row>
+                </li>
+              </ul>
+            </el-card>
             <el-card style="margin-top:10px">
               <ul>
                 <li>
@@ -83,7 +101,12 @@ export default {
         deliveryId: '',
         orderNote: '',
         productList: []
-      }
+      },
+      couponList: [
+        '店铺红包 | 满 20-20',
+        '超值联盟红包 | 满 20-3',
+        '新人首单红包 | 满 20-15'
+      ]
     }
   },
   components: {
@@ -176,6 +199,15 @@ export default {
     .el-tag {
       float: right;
       margin-top: 10px;
+    }
+  }
+  .coupon-list {
+    margin-top: 10px;
+    .el-icon-s-cooperation {
+      font-size: 32px;
+      line-height:48px;
+      height:48px;
+      color: red;
     }
   }
 </style>

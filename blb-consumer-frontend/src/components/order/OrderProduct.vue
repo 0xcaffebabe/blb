@@ -22,7 +22,7 @@
               <li class="order-detail-item">
                 <el-row>
                   <el-col :span="2">
-                    <el-tag size="medium" effect="dark">配送费</el-tag>
+                    <el-tag size="medium" effect="dark"> <span class="el-icon-truck"></span> 配送费</el-tag>
                   </el-col>
                   <el-col :span="22">
                     <span style="float:right">￥{{shopInfo.deliveryFee}}</span>
@@ -33,7 +33,7 @@
               <li class="order-detail-item">
                 <el-row>
                   <el-col :span="2">
-                    <el-tag size="medium">包装费</el-tag>
+                    <el-tag size="medium"> <span class="el-icon-tableware"></span> 包装费</el-tag>
                   </el-col>
                   <el-col :span="22">
                     <span style="float:right">￥{{getTotalPackageFee()}}</span>
@@ -42,9 +42,20 @@
                 </el-row>
               </li>
               <li class="order-detail-item">
+                <el-row>
+                  <el-col :span="2">
+                    <el-tag size="medium" type="danger"> <span class="el-icon-s-goods"></span> 红包折扣</el-tag>
+                  </el-col>
+                  <el-col :span="22">
+                    <span class="el-icon"></span>
+                    <span style="float:right">-￥20</span>
+                  </el-col>
+                </el-row>
+              </li>
+              <li class="order-detail-item">
                <el-row>
                   <el-col :span="2">
-                    <el-tag size="medium" type="danger">实付</el-tag>
+                    <el-tag size="medium" type="warning"> <span class="el-icon-money"></span> 实付</el-tag>
                   </el-col>
                   <el-col :span="22">
                     <span style="float:right">￥{{getTotalAmount()}}</span>

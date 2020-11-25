@@ -20,7 +20,7 @@
       <el-card style="margin-top:20px" v-if="showQrCode">
       <div slot="header">支付二维码</div>
       <div style="text-align:center">
-        <img width="256px;height:256px" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1603903453040&di=d477656a6577e08cb298e8b7ca73d1dc&imgtype=0&src=http%3A%2F%2Fbpic.588ku.com%2Felement_origin_min_pic%2F01%2F42%2F51%2F90573d7eb6115f6.jpg" alt="">
+        <img width="256px;height:256px" src="/imgs/qrcode.png" alt="">
       </div>
     </el-card>
     </el-collapse-transition>
