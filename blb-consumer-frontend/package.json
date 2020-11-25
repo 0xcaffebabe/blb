@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve --model development",
+    "dev": "vue-cli-service serve --model development",
     "build": "vue-cli-service build --model production --report",
     "mock": "nodemon ./src/mock/server",
     "lint": "vue-cli-service lint",
