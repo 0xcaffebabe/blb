@@ -16,6 +16,7 @@ export default new Vuex.Store({
     shopChatShow: false,
     evalPaneShow: false,
     complaintPaneShow: false,
+    submitComplaintPaneShow: true,
     user: {
       login: false,
       info: {}
@@ -85,6 +86,12 @@ export default new Vuex.Store({
     },
     toggleComplaintPane () {
       this.state.complaintPaneShow = !this.state.complaintPaneShow
+    },
+    toggleSubmitComplaintPane () {
+      this.state.submitComplaintPaneShow = !this.state.submitComplaintPaneShow
+    },
+    closeSubmitComplaintPane () {
+      this.state.submitComplaintPaneShow = false
     }
   },
   actions: {
