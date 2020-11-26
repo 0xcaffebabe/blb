@@ -1,0 +1,3 @@
+[submodule "blb-consumer-frontend"]
+	path = blb-consumer-frontend
+	url = https://github.com/0xcaffebabe/blb-consumer-frontend
